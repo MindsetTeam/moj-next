@@ -20,7 +20,6 @@ const Login = () => {
         username: dataInput.username.trim(),
         password: dataInput.password.trim(),
       });
-      console.log(result);
       if(result.error){
         dispatch({
           type: "ERROR",

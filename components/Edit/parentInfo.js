@@ -29,7 +29,6 @@ const ParentInfo = ({ userData }) => {
                ...dadDataInput,
                ...momDataInput,
             });
-            console.log(res);
          }
       );
    };

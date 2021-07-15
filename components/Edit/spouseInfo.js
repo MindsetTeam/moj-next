@@ -17,10 +17,8 @@ const SpouseInfo = ({ userData }) => {
 
    const onSave = () => {
       const dataInput = form.getFieldsValue(true);
-      console.log(dataInput);
       form.validateFields().then(async () => {
          const res = await api.put(`/api/users/${userData.id}`, dataInput);
-         console.log(res);
       });
    };
 

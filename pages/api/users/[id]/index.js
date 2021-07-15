@@ -21,7 +21,6 @@ handler.put(updateEmployee);
 handler.get(
   "/role",
   async (req, res, next) => {
-    console.log("object");
     // const session = getSession();
     // if (!session.user) {
     //   throw new ErrorResponse("Not Authorized", 401);

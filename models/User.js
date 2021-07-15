@@ -17,9 +17,6 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin", "editor"],
       default: "user",
     },
-    departmentRole: {
-      type: String
-    },
     photo: {
       type: String,
       default: "/noImg.jpg",

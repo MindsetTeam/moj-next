@@ -62,9 +62,9 @@ export const getEmployees = async (req, res) => {
       ],
     };
   }
-  // if (req.user.role !== "admin") {
-  //   reqQuery = { ...req.query, editor: req.user.departmentRole };
-  // }
+  if (req.user.role !== "admin") {
+    reqQuery = { ...req.query, department: req.user.department };
+  }
   const users = await User.find(reqQuery); 
   
   res.status(200).json({

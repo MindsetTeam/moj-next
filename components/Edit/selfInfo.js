@@ -37,7 +37,6 @@ const SelfInfo = ({ userData }) => {
    const onSave = () => {
       const dataInput = form.getFieldsValue(true);
       form.validateFields().then(async () => {
-         console.log(fileList.length);
          if (fileList.length > 0) {
             const formData = new FormData();
             formData.append("img-profile", fileList[0]);
