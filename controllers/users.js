@@ -6,11 +6,14 @@ export const createUser = async (req, res, next) => {
   if (!req.body.nationalityIDNum) {
     throw new ErrorResponse("Please provide a nationality ID", 400);
   }
+  if (req.body.role) {
+    delete req.body.role;
+  }
   const password = await bcrypt.hash(req.body.nationalityIDNum, 10);
   const user = await User.create({
     ...req.body,
     password,
-    editor: req.user.id,
+    addBy: req.user.id,
   });
   res
     .status(201)

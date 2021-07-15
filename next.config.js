@@ -10,8 +10,9 @@ module.exports = (phase, { defaultConfig }) => {
   }
 
   return {
-    distDir: 'build',
+    distDir: "build",
     env: {
+      NEXTAUTH_URL: "https://test.khambodiahr.com",
       baseURL: "https://test.khambodiahr.com",
     },
   };

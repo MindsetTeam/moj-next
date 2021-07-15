@@ -17,6 +17,9 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin", "editor"],
       default: "user",
     },
+    departmentRole: {
+      type: String
+    },
     photo: {
       type: String,
       default: "/noImg.jpg",
@@ -29,7 +32,7 @@ const UserSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    editor: {
+    addBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,

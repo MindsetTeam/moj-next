@@ -41,12 +41,7 @@ export const getOverviewEmployees = async (req, res) => {
   provinceInstitutionRawData.forEach((v) => {
     provinceInstitution[v._id] = v.total;
   });
-  console.log({
-    centerInstitution,
-    provinceInstitution,
-    provinceInstitutionRawData,
-    centerInstitutionRawData,
-  });
+  
   res.status(200).json({
     success: true,
     msg: "Employees overview",
@@ -68,11 +63,10 @@ export const getEmployees = async (req, res) => {
     };
   }
   // if (req.user.role !== "admin") {
-  //   reqQuery = { ...req.query, editor: req.user.id };
+  //   reqQuery = { ...req.query, editor: req.user.departmentRole };
   // }
-  const users = await User.find(reqQuery);
-  console.log(reqQuery);
-
+  const users = await User.find(reqQuery); 
+  
   res.status(200).json({
     success: true,
     msg: searchTerm ? `User with ${searchTerm}` : "Find all user",
