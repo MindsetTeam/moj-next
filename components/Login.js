@@ -21,13 +21,14 @@ const Login = () => {
         password: dataInput.password.trim(),
       });
       if(result.error){
-        dispatch({
-          type: "ERROR",
-          payload: {
-             message: "Password not match",
-             description: "Password should be the same as username (អត្តលេខ)",
-          },  
-       });
+        alert(result.error)
+      //   dispatch({
+      //     type: "ERROR",
+      //     payload: {
+      //        message: "Password not match",
+      //        description: "Password should be the same as username (អត្តលេខ)",
+      //     },  
+      //  });
       }
       if(!result.error){
         router.replace(decodeURIComponent(referer||"")||'/')

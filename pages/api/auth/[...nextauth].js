@@ -19,6 +19,9 @@ handler.use(
           if (!user) {
             throw new Error("No user found");
           }
+          if(!user.approval || user.suspended){
+            throw new Error("Please ask for approval")
+          }
           const isValid = await compare(credentials.password, user.password);
           if (!isValid) {
             throw new Error("Password not match");

@@ -359,22 +359,20 @@ const Index = () => {
           justifyContent: "flex-end",
         }}
       >
-        {session?.user.role === "admin" && (
-          <div>
-            <Button
-              onClick={toggleModalAdd}
-              icon={
-                <img
-                  src="/follow.png"
-                  style={{ width: 18, height: 18, marginRight: 7 }}
-                />
-              }
-              style={{ marginLeft: 10 }}
-            >
-              បញ្ចូលមន្រ្ដីរាជការ
-            </Button>
-          </div>
-        )}
+        <div>
+          <Button
+            onClick={toggleModalAdd}
+            icon={
+              <img
+                src="/follow.png"
+                style={{ width: 18, height: 18, marginRight: 7 }}
+              />
+            }
+            style={{ marginLeft: 10 }}
+          >
+            បញ្ចូលមន្រ្ដីរាជការ
+          </Button>
+        </div>
       </div>
       <div style={{ marginTop: 20 }}>
         <Table columns={columns} dataSource={employees}></Table>
@@ -420,57 +418,61 @@ const Index = () => {
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                style={{ marginBottom: 10 }}
-                label="អគ្គនាយកដ្ឋាន"
-                name="generalDepartment"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select
-                  placeholder="ជ្រើសរើស"
-                  onChange={setSelectedGeneralDepartment}
-                >
-                  {generalDepartment.map((v, i) => {
-                    return (
-                      <Option value={v} key={i}>
-                        {v}
-                      </Option>
-                    );
-                  })}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                style={{ marginBottom: 10 }}
-                label="Department"
-                name="department"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select placeholder="ជ្រើសរើស">
-                  {department.map((v, i) => {
-                    return (
-                      <Option key={i} value={v}>
-                        {v}
-                      </Option>
-                    );
-                  })}
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
+          {session?.user.role === "admin" && (
+            <>
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Form.Item
+                    style={{ marginBottom: 10 }}
+                    label="អគ្គនាយកដ្ឋាន"
+                    name="generalDepartment"
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <Select
+                      placeholder="ជ្រើសរើស"
+                      onChange={setSelectedGeneralDepartment}
+                    >
+                      {generalDepartment.map((v, i) => {
+                        return (
+                          <Option value={v} key={i}>
+                            {v}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={24}>
+                  <Form.Item
+                    style={{ marginBottom: 10 }}
+                    label="Department"
+                    name="department"
+                    rules={[
+                      {
+                        required: true,
+                      },
+                    ]}
+                  >
+                    <Select placeholder="ជ្រើសរើស">
+                      {department.map((v, i) => {
+                        return (
+                          <Option key={i} value={v}>
+                            {v}
+                          </Option>
+                        );
+                      })}
+                    </Select>
+                  </Form.Item>
+                </Col>
+              </Row>
+            </>
+          )}
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item
