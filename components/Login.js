@@ -1,9 +1,19 @@
-import { Form, Button, Col, Row, Input } from "antd";
+import { Form, Button, Col, Row, Input, Alert } from "antd";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
 import { AlertDispatch } from "contexts/alert.context";
 import { useContext } from "react";
+import Image from 'next/image';
+import Hello from "@/public/hello.png";
 
+const layout = {
+  labelCol: {
+    span: 6,
+  },
+  wrapperCol: {
+    span: 16,
+  },
+};
 
 const Login = () => {
   const router = useRouter()
@@ -37,9 +47,17 @@ const Login = () => {
   };
   return (
     <div>
-      <Form layout="vertical" hideRequiredMark form={form}>
-        <Row gutter={16}>
-          <Col span={6}>
+      <div style={{textAlign:"center"}}>
+        <Image
+          src={Hello}
+          alt="Typer"
+          placeholder="blur"
+          width={200}
+          height={200}
+        />
+      </div>
+      <Form hideRequiredMark form={form} {...layout}>
+      
             <Form.Item
               style={{ marginBottom: 10, width:'300px' }}
               label="អត្តលេខ"
@@ -50,12 +68,10 @@ const Login = () => {
                 },
               ]}
             >
-              <Input placeholder="username" />
+              <Input placeholder="អត្តលេខ" />
             </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={6}>
+       
+       
             <Form.Item
               style={{ marginBottom: 10,width:'300px' }}
               label="Password"
@@ -68,9 +84,8 @@ const Login = () => {
             >
               <Input placeholder="password" />
             </Form.Item>
-          </Col>
-        </Row>
-        <Button style={{ marginRight: 8 }} onClick={login}>Login</Button>
+       
+        <Button onClick={login} >Login</Button>
       </Form>
     </div>
   );
