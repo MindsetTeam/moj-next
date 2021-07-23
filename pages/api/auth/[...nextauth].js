@@ -1,4 +1,4 @@
-import all from "@/middlewares/all";
+import database from "@/middlewares/database";
 import User from "@/models/User";
 import { compare } from "bcryptjs";
 import NextAuth from "next-auth";
@@ -6,7 +6,7 @@ import Providers from "next-auth/providers";
 import nc from "next-connect";
 
 const handler = nc();
-handler.use(all);
+handler.use(database);
 handler.use(
   NextAuth({
     providers: [
@@ -19,15 +19,15 @@ handler.use(
           if (!user) {
             throw new Error("No user found");
           }
-          if(!user.approval || user.suspended){
-            throw new Error("Please ask for approval")
+          if (!user.approval || user.suspended) {
+            throw new Error("Please ask for approval");
           }
           const isValid = await compare(credentials.password, user.password);
           if (!isValid) {
             throw new Error("Password not match");
           }
-          const {id, firstName, lastName, role, department} = user
-          return {id,firstName,lastName, role, department};
+          const { id, firstName, lastName, role, department } = user;
+          return { id, firstName, lastName, role, department };
         },
       }),
     ],

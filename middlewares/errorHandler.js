@@ -18,7 +18,7 @@ export default (err, req, res, next) => {
     err = new ErrorResponse("Duplication field value entered", 400);
   }
 
-  res.status(err.statusCode || 500).json({
+  return res.status(err.statusCode || 500).json({
     success: false,
     msg: err.message || "Server Error",
   });
