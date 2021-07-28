@@ -4,9 +4,9 @@ import path from "path";
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (file.fieldname === "img-profile") {
-      return cb(null, "./public/uploads/img-profile");
+      return cb(null, "./tmp/uploads/img-profile");
     }
-    cb(null, "./public/uploads");
+    cb(null, "./tmp/uploads");
   },
   filename: function (req, file, cb) {
     if (file.fieldname === "img-profile") {
