@@ -3,10 +3,10 @@ import path from "path";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    if (file.fieldname === "img-profile") {
-      return cb(null, "./tmp/uploads/img-profile");
-    }
-    cb(null, "./tmp/uploads");
+    // if (file.fieldname === "img-profile") {
+    //   return cb(null, "/tmp/img-profile");
+    // }
+    cb(null, "/tmp");
   },
   filename: function (req, file, cb) {
     if (file.fieldname === "img-profile") {

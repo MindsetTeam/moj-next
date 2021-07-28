@@ -31,7 +31,7 @@ handler.post(
     }
     const userUploadBucket = storage.bucket("user_file_upload");
     const resUpload = await userUploadBucket.upload(
-      path.join('tmp', "uploads", "img-profile", req.file.filename),
+      path.join('/tmp', req.file.filename),
       { destination: "img-profile/" + req.file.filename }
     );
     console.log(resUpload);
