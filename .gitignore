@@ -35,3 +35,6 @@ yarn-error.log*
 
 #srun dev
 /.vscode
+
+#Google cloud files
+moj-hr-39b0f2e19dd4.json
