@@ -76,7 +76,7 @@ const Private = ({ userData }) => {
         updateData
       );
       setVisible(false);
-      setPrivateSectorList(res.data.privateSector);
+      setPrivateSectorList(res.data.data.privateSector);
       form.resetFields();
     });
   };
@@ -96,7 +96,7 @@ const Private = ({ userData }) => {
     let res = await api.put(`/api/users/${userData.id}`, {
       privateSector: privateSectorList.filter((v) => v._id !== record._id),
     });
-    setPrivateSectorList(res.data.privateSector);
+    setPrivateSectorList(res.data.data.privateSector);
   };
 
   const actionMenu = (record) => {

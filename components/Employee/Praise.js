@@ -72,7 +72,7 @@ const Praise = ({ userData }) => {
          const res = await api.put(`/api/users/${userData.id}`, updateData);
 
          setVisible(false);
-         setPraiseList(res.data.praised);
+         setPraiseList(res.data.data.praised);
          form.resetFields();
       });
    };
@@ -93,7 +93,7 @@ const Praise = ({ userData }) => {
       let res = await api.put(`/api/users/${userData.id}`, {
          praised: praiseList.filter((v) => v._id !== record._id),
       });
-      setPraiseList(res.data.praised);
+      setPraiseList(res.data.data.praised);
    };
 
    const actionMenu = (record) => {

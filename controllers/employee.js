@@ -92,7 +92,7 @@ export const updateEmployee = async (req, res, next) => {
   });
   res
     .status(200)
-    .json({ success: true, user, msg: "User updated successfully" });
+    .json({ success: true, data:user, msg: "User updated successfully" });
 };
 
 export const updateRole = async (req, res, next) => {

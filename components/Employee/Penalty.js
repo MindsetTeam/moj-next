@@ -67,7 +67,7 @@ const Penalty = ({ userData }) => {
          }
          const res = await api.put(`/api/users/${userData.id}`, updateData);
          setVisible(false);
-         setPenaltyList(res.data.penalty);
+         setPenaltyList(res.data.data.penalty);
          form.resetFields();
       });
    };
@@ -88,7 +88,7 @@ const Penalty = ({ userData }) => {
       let res = await api.put(`/api/users/${userData.id}`, {
          penalty: penaltyList.filter((v) => v._id !== record._id),
       });
-      setPenaltyList(res.data.penalty);
+      setPenaltyList(res.data.data.penalty);
    };
 
    const actionMenu = (record) => {

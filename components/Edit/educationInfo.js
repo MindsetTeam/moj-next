@@ -89,7 +89,7 @@ const EducationInfo = ({ userData }) => {
                            (v) => v._id !== record._id
                         ),
                      });
-                     setEducationList(res.data.education);
+                     setEducationList(res.data.data.education);
                   }}
                >
                   Delete
@@ -125,7 +125,7 @@ const EducationInfo = ({ userData }) => {
 
          const res = await api.put(`/api/users/${userData.id}`, updateData);
          setVisible(false);
-         setEducationList(res.data.education);
+         setEducationList(res.data.data.education);
          form.resetFields();
       });
    };

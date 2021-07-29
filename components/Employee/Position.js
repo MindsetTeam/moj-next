@@ -239,7 +239,7 @@ const position = ({ userData, ministryStructure }) => {
             experience: [...experiencesList, dataInput],
          });
          setVisible(false);
-         setExperiencesList(res.data.experience);
+         setExperiencesList(res.data.data.experience);
          form.resetFields();
       });
    };

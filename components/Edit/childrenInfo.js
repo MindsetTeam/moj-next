@@ -87,7 +87,7 @@ const childrenInfo = ({ userData }) => {
               let res = await api.put(`/api/users/${userData.id}`, {
                 children: childrenList.filter((v) => v._id !== record._id),
               });
-              setChildrenList(res.data.user.children);
+              setChildrenList(res.data.data.children);
             }}
           >
             Delete
@@ -122,7 +122,7 @@ const childrenInfo = ({ userData }) => {
       }
       let res = await api.put(`/api/users/${userData.id}`, updateData);
       setVisible(false);
-      setChildrenList(res.data.user.children);
+      setChildrenList(res.data.data.children);
       form.resetFields();
     });
   };

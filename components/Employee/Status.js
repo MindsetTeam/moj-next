@@ -105,7 +105,7 @@ const Status = ({
 
          const res = await api.put(`/api/users/${userData.id}`, updateData);
          setVisible(false);
-         setOfficerStatusList(res.data.officerStatus);
+         setOfficerStatusList(res.data.data.officerStatus);
          formStatus.resetFields();
       });
    };
@@ -126,7 +126,7 @@ const Status = ({
       let res = await api.put(`/api/users/${userData.id}`, {
          officerStatus: officerStatusList.filter((v) => v._id !== record._id),
       });
-      setOfficerStatusList(res.data.officerStatus);
+      setOfficerStatusList(res.data.data.officerStatus);
    };
    const dispatch = useContext(AlertDispatch);
    const onSave = () => {

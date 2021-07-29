@@ -242,7 +242,7 @@ const WorkHistory = ({ userData, ministryStructure }) => {
             experience: [...experiencesList, dataInput],
          });
          setVisible(false);
-         setExperiencesList([...res.data.user.experience]);
+         setExperiencesList([...res.data.data.experience]);
          form.resetFields();
       });
    };

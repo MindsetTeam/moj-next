@@ -85,7 +85,7 @@ const Rank = ({ userData }) => {
 
          const res = await api.put(`/api/users/${userData.id}`, updateData);
          setVisible(false);
-         setRankList(res.data.rank);
+         setRankList(res.data.data.rank);
          form.resetFields();
       });
    };
@@ -99,7 +99,7 @@ const Rank = ({ userData }) => {
       let res = await api.put(`/api/users/${userData.id}`, {
          rank: rankList.filter((v) => v._id !== record._id),
       });
-      setRankList(res.data.rank);
+      setRankList(res.data.data.rank);
    };
    useEffect(() => {
       if (visible === false) {
