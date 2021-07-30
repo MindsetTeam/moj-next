@@ -5,11 +5,12 @@ import { all } from "@/middlewares/index";
 import {
   getSingleEmployee,
   updateEmployee,
+  deleteEmployee,
   updateRole
 } from "controllers/employee";
 import ErrorResponse from "@/utils/errorResponse";
 import User from "@/models/User";
-import { protect } from "@/middlewares/auth";
+import { protect, role } from "@/middlewares/auth";
 
 const handler = nc({...errorHandle, attachParams: true});
 
@@ -40,5 +41,8 @@ handler.get(
   },
   updateRole
 );
+
+handler.delete(protect,role('admin'), deleteEmployee)
+
 
 export default handler;

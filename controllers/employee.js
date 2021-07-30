@@ -41,7 +41,7 @@ export const getOverviewEmployees = async (req, res) => {
   provinceInstitutionRawData.forEach((v) => {
     provinceInstitution[v._id] = v.total;
   });
-  
+
   res.status(200).json({
     success: true,
     msg: "Employees overview",
@@ -65,8 +65,8 @@ export const getEmployees = async (req, res) => {
   if (req.user.role !== "admin") {
     reqQuery = { ...req.query, department: req.user.department };
   }
-  const users = await User.find(reqQuery); 
-  
+  const users = await User.find(reqQuery);
+
   res.status(200).json({
     success: true,
     msg: searchTerm ? `User with ${searchTerm}` : "Find all user",
@@ -92,7 +92,16 @@ export const updateEmployee = async (req, res, next) => {
   });
   res
     .status(200)
-    .json({ success: true, data:user, msg: "User updated successfully" });
+    .json({ success: true, data: user, msg: "User updated successfully" });
+};
+
+export const deleteEmployee = async (req, res) => {
+  const { id } = req.query;
+  const resData = await User.findByIdAndDelete(id);
+  console.log(resData);
+  res
+    .status(200)
+    .json({ success: true, data: {}, msg: "User deleted successfully" });
 };
 
 export const updateRole = async (req, res, next) => {
