@@ -9,8 +9,8 @@ import api from "@/utils/api";
 
 const { TabPane } = Tabs;
 
-export async function getServerSideProps({params}) {
-  const res = await api.get("/api/users/"+params.id);
+export async function getServerSideProps({ params }) {
+  const res = await api.get("/api/users/" + params.id);
   console.log(res.data);
 
   return {
@@ -28,14 +28,14 @@ const Edit = ({ user }) => {
         <TabPane tab="ព័ត៌មានផ្ទាល់ខ្លួន" key="1">
           <SelfInfo userData={user}></SelfInfo>
         </TabPane>
-        <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="2">
-          <ParentInfo userData={user}></ParentInfo>
-        </TabPane>
         <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="3">
           <SpouseInfo userData={user}></SpouseInfo>
         </TabPane>
         <TabPane tab="ព័ត៌មានកូន" key="4">
           <ChildrenInfo userData={user}></ChildrenInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="2">
+          <ParentInfo userData={user}></ParentInfo>
         </TabPane>
         <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="5">
           <EducationInfo userData={user}></EducationInfo>

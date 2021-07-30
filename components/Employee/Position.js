@@ -789,6 +789,7 @@ const position = ({ userData, ministryStructure }) => {
                      >
                         <DatePicker
                            style={{ width: "100%" }}
+                           format='DD/MM/YYYY'
                            onChange={onStartDateChange}
                         />
                      </Form.Item>
@@ -810,6 +811,7 @@ const position = ({ userData, ministryStructure }) => {
                         <DatePicker
                            disabled={nowOption}
                            style={{ width: "100%" }}
+                           format='DD/MM/YYYY'
                            onChange={onEndDateChange}
                         />
                      </Form.Item>

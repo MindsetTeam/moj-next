@@ -271,6 +271,7 @@ const Status = ({
                   >
                      <DatePicker
                         style={{ width: "100%" }}
+                        format='DD/MM/YYYY'
                         onChange={onEmploymentDateChange}
                      />
                   </Form.Item>
@@ -289,6 +290,7 @@ const Status = ({
                   >
                      <DatePicker
                         style={{ width: "100%" }}
+                        format='DD/MM/YYYY'
                         onChange={onOfficialDateChange}
                      />
                   </Form.Item>
@@ -508,6 +510,7 @@ const Status = ({
                      >
                         <DatePicker
                            style={{ width: "100%" }}
+                           format='DD/MM/YYYY'
                            onChange={onStartDateChange}
                         />
                      </Form.Item>
@@ -528,6 +531,7 @@ const Status = ({
                      >
                         <DatePicker
                            disabled={nowOption}
+                           format='DD/MM/YYYY'
                            style={{ width: "100%" }}
                            onChange={onEndDateChange}
                         />

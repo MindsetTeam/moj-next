@@ -226,6 +226,7 @@ const Penalty = ({ userData }) => {
                      >
                         <DatePicker
                            style={{ width: "100%" }}
+                           format='DD/MM/YYYY'
                            onChange={onSignDateChange}
                         />
                      </Form.Item>

@@ -151,6 +151,7 @@ const SpouseInfo = ({ userData }) => {
                      >
                         <DatePicker
                            placeholder="ថ្ងៃខែឆ្នាំកំណើត"
+                           format='DD/MM/YYYY'
                            style={{ width: "100%" }}
                            //  onChange={onStartDateChange}
                         />

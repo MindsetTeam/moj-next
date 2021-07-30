@@ -264,6 +264,7 @@ const Private = ({ userData }) => {
               >
                 <DatePicker
                   style={{ width: "100%" }}
+                  format='DD/MM/YYYY'
                   onChange={onStartDateChange}
                 />
               </Form.Item>
@@ -282,6 +283,7 @@ const Private = ({ userData }) => {
               >
                 <DatePicker
                   style={{ width: "100%" }}
+                  format='DD/MM/YYYY'
                   onChange={onEndDateChange}
                 />
               </Form.Item>

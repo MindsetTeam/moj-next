@@ -256,6 +256,7 @@ const childrenInfo = ({ userData }) => {
                 <DatePicker
                   placeholder="ថ្ងៃខែឆ្នាំកំណើត"
                   style={{ width: "100%" }}
+                  format='DD/MM/YYYY'
                   //  onChange={onStartDateChange}
                 />
               </Form.Item>

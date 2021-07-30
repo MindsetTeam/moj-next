@@ -253,6 +253,7 @@ const Rank = ({ userData }) => {
                         ]}
                      >
                         <DatePicker
+                        format='DD/MM/YYYY'
                            style={{ width: "100%" }}
                            onChange={onStartDateChange}
                         />
@@ -274,6 +275,7 @@ const Rank = ({ userData }) => {
                      >
                         <DatePicker
                            disabled={nowOption}
+                           format='DD/MM/YYYY'
                            style={{ width: "100%" }}
                            onChange={onEndDateChange}
                         />
