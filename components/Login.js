@@ -23,8 +23,9 @@ const Login = () => {
   const dispatch = useContext(AlertDispatch);
 
   let referer = router.query.referer;
-  if (session && Cookies.get('authorization')) {
+  if (session && Cookies.get("authorization")) {
     router.push(`/`);
+    return null;
   }
   const [form] = Form.useForm();
   const login = () => {

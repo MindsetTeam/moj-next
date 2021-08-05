@@ -9,12 +9,8 @@ import GlobalLayout from "@/components/GlobalLayout";
 import { SWRConfig } from "swr";
 import Script from "next/script";
 import Head from "next/head";
-import Cookies from "js-cookie";
-import Redirect from "@/components/Redirect";
 
 function MyApp({ Component, pageProps }) {
-  const authCookie = Cookies.get("authorization");
-
   return (
     <>
       <Head>
@@ -35,12 +31,10 @@ function MyApp({ Component, pageProps }) {
             <GlobalLayout>
               {Component.withAuth === false ? (
                 <Component {...pageProps} />
-              ) : authCookie ? (
+              ) : (
                 <ProtectedLayout roles={Component.roles}>
                   <Component {...pageProps} />
                 </ProtectedLayout>
-              ) : (
-                <Redirect />
               )}
             </GlobalLayout>
           </AlertProvider>

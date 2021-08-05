@@ -12,6 +12,7 @@ import Header from "./Header";
 import Breadcrumb from "./Breadcrumb";
 import Footer from "./Footer";
 import Cookies from "js-cookie";
+import RedirectLogin from "./RedirectLogin";
 
 NProgress.configure({
   trickleRate: 0.02,
@@ -40,6 +41,10 @@ const Layout = ({ children, roles = [] }) => {
       return null;
     }
   }, [session]);
+
+  if (!authCookie) {
+    return <RedirectLogin />;
+  }
 
   return (
     <>
