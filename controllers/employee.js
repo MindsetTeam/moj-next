@@ -1,51 +1,76 @@
 import User from "@/models/User";
 import ErrorResponse from "@/utils/errorResponse";
 export const getOverviewEmployees = async (req, res) => {
-  const provinceInstitutionRawData = await User.aggregate([
-    {
-      $project: {
-        gender: 1,
-        approval: 1,
-        experience: { $slice: ["$experience", -1] },
+  const { role } = req.user;
+  let resData = {};
+  if (role === "editor") {
+    const users = await User.aggregate([
+      { $match: { department: req.user.department } },
+      { $group: { _id: "$gender", total: { $sum: 1 } } },
+    ]);
+    resData = users.reduce(
+      (pre, cur) => {
+        pre["total"] = pre.total + (cur["_id"] != null ? cur.total : 0);
+        pre[cur["_id"]] = +cur["total"];
+        return pre;
       },
-    },
-    { $match: { "experience.institution": "ថ្នាក់ក្រោមជាតិ", approval: true } },
-    {
-      $group: {
-        _id: "$gender",
-        total: { $sum: 1 },
+      { total: 0, ស្រី: 0, ប្រុស: 0 }
+    );
+  }
+  if (role === "admin") {
+    const provinceInstitutionRawData = await User.aggregate([
+      {
+        $project: {
+          gender: 1,
+          approval: 1,
+          experience: { $slice: ["$experience", -1] },
+        },
       },
-    },
-  ]);
-  const centerInstitutionRawData = await User.aggregate([
-    {
-      $project: {
-        gender: 1,
-        approval: 1,
-        experience: { $slice: ["$experience", -1] },
+      {
+        $match: { "experience.institution": "ថ្នាក់ក្រោមជាតិ", approval: true },
       },
-    },
-    { $match: { "experience.institution": "ថ្នាក់កណ្តាល", approval: true } },
-    {
-      $group: {
-        _id: "$gender",
-        total: { $sum: 1 },
+      {
+        $group: {
+          _id: "$gender",
+          total: { $sum: 1 },
+        },
       },
-    },
-  ]);
-  const centerInstitution = {};
-  centerInstitutionRawData.forEach((v) => {
-    centerInstitution[v._id] = v.total;
-  });
-  const provinceInstitution = {};
-  provinceInstitutionRawData.forEach((v) => {
-    provinceInstitution[v._id] = v.total;
-  });
+    ]);
+    const centerInstitutionRawData = await User.aggregate([
+      {
+        $project: {
+          gender: 1,
+          approval: 1,
+          experience: { $slice: ["$experience", -1] },
+        },
+      },
+      { $match: { "experience.institution": "ថ្នាក់កណ្តាល", approval: true } },
+      {
+        $group: {
+          _id: "$gender",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    const centerInstitution = {
+      ប្រុស: 0,
+      ស្រី: 0,
+    };
 
+    const provinceInstitution = { ...centerInstitution };
+    centerInstitutionRawData.forEach((v) => {
+      centerInstitution[v._id] = v.total;
+    });
+    provinceInstitutionRawData.forEach((v) => {
+      provinceInstitution[v._id] = v.total;
+    });
+    console.log({ provinceInstitution, centerInstitution });
+    resData = { centerInstitution, provinceInstitution };
+  }
   res.status(200).json({
     success: true,
     msg: "Employees overview",
-    data: { centerInstitution, provinceInstitution },
+    data: resData,
   });
 };
 export const getEmployees = async (req, res) => {

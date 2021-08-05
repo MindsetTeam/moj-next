@@ -18,4 +18,4 @@ const me = () => {
   );
 };
 
-export default withAuth(me);
+export default me;

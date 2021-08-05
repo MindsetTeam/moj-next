@@ -5,6 +5,7 @@ import { Button, Input, AutoComplete } from "antd";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import highlightJSX from "@/utils/highlightJSX";
+import Cookies from "js-cookie";
 
 const Header = () => {
   const [session, loading] = useSession();
@@ -89,7 +90,9 @@ const Header = () => {
         {session ? (
           <Button
             onClick={() => {
-              signOut({ redirect: false });
+              signOut({ redirect: false }).then(()=>{
+                Cookies.remove('authorization')
+              });
             }}
           >
             Logout

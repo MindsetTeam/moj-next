@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import structureMinistryData from "/data/Structure.json";
 
-import Link from "next/link";
 import { useRouter } from "next/router";
 
 import {
   EditOutlined,
-  SearchOutlined,
-  PlusOutlined,
   PrinterOutlined,
   DownOutlined,
   StopOutlined,
@@ -28,12 +25,10 @@ import {
   Select,
   Menu,
   Dropdown,
-  Popconfirm,
 } from "antd";
 
 import api from "@/utils/api";
 import { useSession } from "next-auth/client";
-import withAuth from "hoc/withAuth";
 
 const { Option } = Select;
 const { confirm } = Modal;
@@ -47,10 +42,9 @@ for (const key in data) {
     generalDepartmentData.push(...Object.keys(data[key]));
   }
 }
-
-console.log(generalDepartmentData, departmentData);
-
 const Index = () => {
+  const router = useRouter();
+  const [session, loading] = useSession();
   const [form] = Form.useForm();
 
   const [generalDepartment, setGeneralDepartment] = useState(
@@ -80,9 +74,6 @@ const Index = () => {
       ...Object.keys(departmentData[selectedGeneralDepartmentEdit] || {}),
     ]);
   }, [selectedGeneralDepartmentEdit]);
-
-  const router = useRouter();
-  const [session, loading] = useSession();
 
   const [modalAdd, setModalAdd] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
@@ -163,7 +154,6 @@ const Index = () => {
   const updateSuspendUser = async ({ suspended, userId }) => {
     console.log(`api/users/${userId}`, { suspended });
     const { data } = await api.put(`api/users/${userId}`, { suspended });
-    console.log(data);
     fetchEmployees();
   };
 
@@ -269,7 +259,7 @@ const Index = () => {
       key: "firstName",
       render: (firstName, record) => {
         console.log(record);
-        return (record.lastName ? record?.lastName + " " : "") + firstName;
+        return firstName + " " + (record.lastName || "");
       },
     },
     {
@@ -633,4 +623,6 @@ const Index = () => {
   );
 };
 
-export default withAuth(Index, ["admin", "editor"]);
+Index.roles = ["admin", "editor"];
+
+export default Index;

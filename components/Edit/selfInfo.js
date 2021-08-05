@@ -49,7 +49,6 @@ const SelfInfo = ({ userData }) => {
       }
 
       const res = await api.put(`/api/users/${userData.id}`, dataInput);
-      console.log(res);
       dispatch({
         type: "SUCCESS",
         payload: {
@@ -202,7 +201,7 @@ const SelfInfo = ({ userData }) => {
                 <Col span={8}>
                   <Form.Item
                     style={{ marginBottom: 10 }}
-                    name="lastName"
+                    name="firstName"
                     label="គោត្តនាម"
                     rules={[
                       {
@@ -217,7 +216,7 @@ const SelfInfo = ({ userData }) => {
                 <Col span={8}>
                   <Form.Item
                     style={{ marginBottom: 10 }}
-                    name="firstName"
+                    name="lastName"
                     label="នាម"
                     rules={[
                       {
@@ -249,7 +248,7 @@ const SelfInfo = ({ userData }) => {
                 <Col span={8}>
                   <Form.Item
                     style={{ marginBottom: 10 }}
-                    name="lastNameLatin"
+                    name="firstNameLatin"
                     label="គោត្តនាមឡាតាំង"
                     rules={[
                       {
@@ -264,7 +263,7 @@ const SelfInfo = ({ userData }) => {
                 <Col span={8}>
                   <Form.Item
                     style={{ marginBottom: 10 }}
-                    name="firstNameLatin"
+                    name="lastNameLatin"
                     label="នាមឡាតាំង"
                     rules={[
                       {
@@ -322,7 +321,7 @@ const SelfInfo = ({ userData }) => {
                   >
                     <DatePicker
                       placeholder="ថ្ងៃខែឆ្នាំកំណើត"
-                      format='DD/MM/YYYY'
+                      format="DD/MM/YYYY"
                       style={{ width: "100%" }}
                       //  onChange={onStartDateChange}
                     />
@@ -593,7 +592,6 @@ const SelfInfo = ({ userData }) => {
                   style={{ marginBottom: 10 }}
                   name={["currentResidence", "other"]}
                   label="ទីលំនៅបច្ចុប្បន្នផ្សេងៗ"
-                 
                 >
                   <Input placeholder="ទីលំនៅបច្ចុប្បន្នផ្សេងៗ" />
                 </Form.Item>
@@ -659,7 +657,6 @@ const SelfInfo = ({ userData }) => {
                   style={{ marginBottom: 10 }}
                   name={["contactInfo", "other"]}
                   label="ព័ត៌មានផ្សេងៗ"
-                 
                 >
                   <Input placeholder="ព័ត៌មានផ្សេងៗ" />
                 </Form.Item>

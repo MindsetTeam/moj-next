@@ -1,40 +1,52 @@
 import "../styles/globals.css";
 import "antd/dist/antd.css";
-import Layout from "../components/Layout";
-import { AlertProvider } from "contexts/alert.context";
-import router from "next/router";
-import NProgress from "nprogress";
-import "nprogress/nprogress.css";
-import { Provider } from "next-auth/client";
-import ProtectedRoute from "hoc/ProtectedRoute";
 
-NProgress.configure({
-  trickleRate: 0.02,
-  trickleSpeed: 800,
-  showSpinner: false,
-});
-router.events.on("routeChangeStart", (url) => {
-  console.log(`Loading: ${url}`);
-  NProgress.start();
-});
-router.events.on("routeChangeComplete", () => NProgress.done());
-router.events.on("routeChangeError", () => NProgress.done());
+import ProtectedLayout from "../components/ProtectedLayout";
+import { AlertProvider } from "contexts/alert.context";
+
+import { Provider } from "next-auth/client";
+import GlobalLayout from "@/components/GlobalLayout";
+import { SWRConfig } from "swr";
+import Script from "next/script";
+import Head from "next/head";
+import Cookies from "js-cookie";
+import Redirect from "@/components/Redirect";
 
 function MyApp({ Component, pageProps }) {
+  const authCookie = Cookies.get("authorization");
+
   return (
-    <Provider session={pageProps.session}>
-      <AlertProvider>
-        {Component.authCondition ==="WithoutAuth" ? (
-          <Component {...pageProps} />
-        ) : (
-          <ProtectedRoute>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </ProtectedRoute>
-        )}
-      </AlertProvider>
-    </Provider>
+    <>
+      <Head>
+        <link rel="manifest" href="/manifest.json" />
+      </Head>
+      {Component.name !== "login" && (
+        <Script src="js/auth.js" strategy="beforeInteractive" />
+      )}
+
+      <SWRConfig
+        value={{
+          fetcher: (resource, init) =>
+            fetch(resource, init).then((res) => res.json()),
+        }}
+      >
+        <Provider session={pageProps.session}>
+          <AlertProvider>
+            <GlobalLayout>
+              {Component.withAuth === false ? (
+                <Component {...pageProps} />
+              ) : authCookie ? (
+                <ProtectedLayout roles={Component.roles}>
+                  <Component {...pageProps} />
+                </ProtectedLayout>
+              ) : (
+                <Redirect />
+              )}
+            </GlobalLayout>
+          </AlertProvider>
+        </Provider>
+      </SWRConfig>
+    </>
   );
 }
 

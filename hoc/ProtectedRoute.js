@@ -5,9 +5,9 @@ const ProtectedRoute = ({ children, role = [], withAuth = false }) => {
   const [session, loading] = useSession();
   const router = useRouter();
 
-  if (!withAuth) {
-    return <>{children}</>;
-  }
+  // if (!withAuth) {
+  //   return <>{children}</>;
+  // }
 
   if (loading) {
     return null;
@@ -17,12 +17,12 @@ const ProtectedRoute = ({ children, role = [], withAuth = false }) => {
     return null;
   }
 
-  if (roles.length != 0 && !roles.includes(session.user.role)) {
+  if (role?.length != 0 && !roles.includes(session.user.role)) {
     router.push(`/`);
     return null;
   }
-  return <AuthComponent {...props} />;
-  return <div></div>;
+  // return <AuthComponent {...props} />;
+  return { children };
 };
 
 export default ProtectedRoute;

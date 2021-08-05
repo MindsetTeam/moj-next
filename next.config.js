@@ -1,4 +1,8 @@
 const { PHASE_DEVELOPMENT_SERVER } = require("next/constants");
+  
+const withPWA = require('next-pwa')
+const runtimeCaching = require('next-pwa/cache')
+
 
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
@@ -10,6 +14,12 @@ module.exports = (phase, { defaultConfig }) => {
   }
 
   return {
+    ...withPWA({
+      pwa: {
+        dest: "public",
+        runtimeCaching,
+      },
+    }),
     distDir: "build",
     env: {
       NEXTAUTH_URL: "https://test.khambodiahr.com",

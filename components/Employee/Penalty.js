@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import moment from "moment";
 import {
-   Drawer,
    Form,
    Button,
    Menu,
@@ -12,9 +11,6 @@ import {
    DatePicker,
    Dropdown,
    Table,
-   Tag,
-   Space,
-   Switch,
    Modal,
 } from "antd";
 
@@ -26,7 +22,6 @@ import {
    EditOutlined,
    DeleteOutlined,
    DownOutlined,
-   PrinterOutlined,
 } from "@ant-design/icons";
 
 const Penalty = ({ userData }) => {
@@ -37,7 +32,6 @@ const Penalty = ({ userData }) => {
    const [editData, setEditData] = useState(null);
    const onSignDateChange = (date, dateString) => {
       setSignDate(dateString);
-      console.log(dateString);
    };
 
    const showDrawer = () => {

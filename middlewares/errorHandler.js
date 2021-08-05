@@ -1,6 +1,6 @@
 import ErrorResponse from "@/utils/errorResponse";
 export default (err, req, res, next) => {
-  console.log(err, err.name.yellow);
+  console.log(err);
 
   if (err.name === "CastError") {
     err = new ErrorResponse(`Resource not found with of ID ${err.value}`, 404);

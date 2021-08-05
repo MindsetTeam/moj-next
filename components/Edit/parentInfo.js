@@ -19,7 +19,6 @@ const ParentInfo = ({ userData }) => {
 
   const onSave = () => {
     const dadDataInput = dadForm.getFieldsValue(true);
-    console.log(dadDataInput);
     const momDataInput = momForm.getFieldsValue(true);
     dadForm.validateFields();
     momForm.validateFields();
