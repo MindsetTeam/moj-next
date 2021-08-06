@@ -32,7 +32,10 @@ const Layout = ({ children, roles = [] }) => {
   const authCookie = Cookies.get("authorization");
 
   useEffect(() => {
-    if ((!loading && !session) || !authCookie) {
+    if (loading) {
+      return null;
+    }
+    if (!session || !authCookie) {
       router.push(`/login?referer=${encodeURIComponent(router.asPath)}`);
       return null;
     }
@@ -49,7 +52,7 @@ const Layout = ({ children, roles = [] }) => {
   return (
     <>
       <Slider />
-      <LayoutAnt className="site-layout" style={{minWidth: "1090px"}}>
+      <LayoutAnt className="site-layout" style={{ minWidth: "1090px" }}>
         <Header></Header>
         <Content>
           <Breadcrumb></Breadcrumb>
