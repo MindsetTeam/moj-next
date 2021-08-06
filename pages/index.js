@@ -67,70 +67,70 @@ const Index = (props) => {
   //    }
   // }, [session]);
 
-  const columns = [
-    {
-      title: "ល.រ",
-      dataIndex: "id",
-      key: "id",
-    },
-    {
-      title: "អត្តលេខ",
-      dataIndex: "nationalityIDNum",
-      key: "nationalityIDNum",
-    },
-    {
-      title: "គោត្តនាមនិងនាម",
-      dataIndex: "firstName",
-      key: "firstName",
-    },
-    {
-      title: "ភេទ",
-      dataIndex: "gender",
-      key: "gender",
-    },
-    {
-      title: "ថ្ងៃខែឆ្នាំកំណើត",
-      dataIndex: "birthDate",
-      key: "birthDate",
-    },
-    {
-      title: "មុខតំណែង",
-      dataIndex: ["experience", "position"],
-      key: "position",
-    },
-    {
-      title: "អង្គភាព",
-      dataIndex: "experience",
-      key: "department",
-      render: (experience) => {
-        return experience.department || experience.unit;
-      },
-    },
-    {
-      title: "ស្ថានភាព",
-      dataIndex: "status",
-      key: "status",
-    },
-    {
-      title: "ស្ថានភាពមន្ត្រី",
-      dataIndex: "approval",
-      key: "approvalStatus",
-      render: (approval, record) => {
-        console.log(approval);
-        let color = "red";
-        let title = "កំពុងពិនិត្យ";
-        if (approval) {
-          title = "អនុម័ត្ត";
-          color = "green";
-        }
-        return (
-          <Tag color={color} key={approval}>
-            {title}
-          </Tag>
-        );
-      },
-    },
-  ];
+  // const columns = [
+  //   {
+  //     title: "ល.រ",
+  //     dataIndex: "id",
+  //     key: "id",
+  //   },
+  //   {
+  //     title: "អត្តលេខ",
+  //     dataIndex: "nationalityIDNum",
+  //     key: "nationalityIDNum",
+  //   },
+  //   {
+  //     title: "គោត្តនាមនិងនាម",
+  //     dataIndex: "firstName",
+  //     key: "firstName",
+  //   },
+  //   {
+  //     title: "ភេទ",
+  //     dataIndex: "gender",
+  //     key: "gender",
+  //   },
+  //   {
+  //     title: "ថ្ងៃខែឆ្នាំកំណើត",
+  //     dataIndex: "birthDate",
+  //     key: "birthDate",
+  //   },
+  //   {
+  //     title: "មុខតំណែង",
+  //     dataIndex: ["experience", "position"],
+  //     key: "position",
+  //   },
+  //   {
+  //     title: "អង្គភាព",
+  //     dataIndex: "experience",
+  //     key: "department",
+  //     render: (experience) => {
+  //       return experience.department || experience.unit;
+  //     },
+  //   },
+  //   {
+  //     title: "ស្ថានភាព",
+  //     dataIndex: "status",
+  //     key: "status",
+  //   },
+  //   {
+  //     title: "ស្ថានភាពមន្ត្រី",
+  //     dataIndex: "approval",
+  //     key: "approvalStatus",
+  //     render: (approval, record) => {
+  //       console.log(approval);
+  //       let color = "red";
+  //       let title = "កំពុងពិនិត្យ";
+  //       if (approval) {
+  //         title = "អនុម័ត្ត";
+  //         color = "green";
+  //       }
+  //       return (
+  //         <Tag color={color} key={approval}>
+  //           {title}
+  //         </Tag>
+  //       );
+  //     },
+  //   },
+  // ];
 
   return (
     <div>
@@ -799,17 +799,6 @@ const Index = (props) => {
           </div>
         </>
       )}
-      <style global jsx>
-        {`
-          .ant-card-body {
-            padding: 13px 0px;
-          }
-
-          .ant-divider-horizontal {
-            margin: 15px 0;
-          }
-        `}
-      </style>
     </div>
   );
 };

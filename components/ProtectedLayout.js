@@ -49,7 +49,7 @@ const Layout = ({ children, roles = [] }) => {
   return (
     <>
       <Slider />
-      <LayoutAnt className="site-layout">
+      <LayoutAnt className="site-layout" style={{minWidth: "1090px"}}>
         <Header></Header>
         <Content>
           <Breadcrumb></Breadcrumb>

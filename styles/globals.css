@@ -137,3 +137,11 @@ a {
 .ant-menu-vertical .ant-menu-item::after, .ant-menu-vertical-left .ant-menu-item::after, .ant-menu-vertical-right .ant-menu-item::after, .ant-menu-inline .ant-menu-item::after {
   border-right: 0px !important;
 }
+
+.ant-card-body {
+  padding: 13px 0px;
+}
+
+.ant-divider-horizontal {
+  margin: 15px 0;
+}
