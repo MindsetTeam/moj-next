@@ -4,45 +4,92 @@ import ParentInfo from "@/components/Edit/parentInfo";
 import SpouseInfo from "@/components/Edit/spouseInfo";
 import ChildrenInfo from "@/components/Edit/childrenInfo";
 import EducationInfo from "@/components/Edit/educationInfo";
+import WorkHistoryInfo from "@/components/Edit/workHistoryInfo";
+import RankInfo from "@/components/Edit/rankInfo";
+import StatusInfo from "@/components/Edit/statusInfo";
+import PraiseInfo from "@/components/Edit/praiseInfo";
+import PenaltyInfo from "@/components/Edit/penaltyInfo";
 import { Tabs } from "antd";
 import api from "@/utils/api";
+
+import ministryStructure from "data/Structure.json";
+import statusOfficer from "data/StatusOfficer.json";
+import ministryList from "data/Ministry.json";
+import letterTypes from "data/LetterTypes.json";
+import rankList from "data/Rank.json";
 
 const { TabPane } = Tabs;
 
 export async function getServerSideProps({ params }) {
-  const res = await api.get("/api/users/" + params.id);
-  console.log(res.data);
+   const res = await api.get("/api/users/" + params.id);
+   console.log(res.data);
 
-  return {
-    props: {
-      user: res.data,
-    },
-  };
+   return {
+      props: {
+         ministryStructure,
+         statusOfficer,
+         letterTypes,
+         rankList,
+         ministryList,
+         user: res.data,
+      },
+   };
 }
 
-const Edit = ({ user }) => {
-  console.log(user);
-  return (
-    <div className={styles.container}>
-      <Tabs defaultActiveKey="1">
-        <TabPane tab="ព័ត៌មានផ្ទាល់ខ្លួន" key="1">
-          <SelfInfo userData={user}></SelfInfo>
-        </TabPane>
-        <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="3">
-          <SpouseInfo userData={user}></SpouseInfo>
-        </TabPane>
-        <TabPane tab="ព័ត៌មានកូន" key="4">
-          <ChildrenInfo userData={user}></ChildrenInfo>
-        </TabPane>
-        <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="2">
-          <ParentInfo userData={user}></ParentInfo>
-        </TabPane>
-        <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="5">
-          <EducationInfo userData={user}></EducationInfo>
-        </TabPane>
-      </Tabs>
-    </div>
-  );
+const Edit = ({
+   ministryStructure,
+   statusOfficer,
+   ministryList,
+   letterTypes,
+   rankList,
+   user,
+}) => {
+   console.log(user);
+   return (
+      <div className={styles.container}>
+         <Tabs defaultActiveKey="1">
+            <TabPane tab="ព័ត៌មានផ្ទាល់ខ្លួន" key="1">
+               <SelfInfo userData={user}></SelfInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="2">
+               <SpouseInfo userData={user}></SpouseInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានកូន" key="3">
+               <ChildrenInfo userData={user}></ChildrenInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="4">
+               <ParentInfo userData={user}></ParentInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="5">
+               <EducationInfo userData={user}></EducationInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានឋានន្តរសកិ្ត និងថ្នាក់" key="6">
+               <RankInfo userData={user}></RankInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានប្រវត្តិការងារ" key="7">
+               <WorkHistoryInfo
+                  userData={user}
+                  ministryStructure={ministryStructure}
+               ></WorkHistoryInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានស្ថានភាពមន្រ្ដី" key="8">
+               <StatusInfo
+                  userData={user}
+                  rankList={rankList}
+                  letterTypes={letterTypes}
+                  ministryList={ministryList}
+                  statusOfficer={statusOfficer}
+               ></StatusInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានការដាក់ពិន័យ" key="9">
+               <PenaltyInfo userData={user}></PenaltyInfo>
+            </TabPane>
+            <TabPane tab="ព័ត៌មានការលើកសសើរ" key="10">
+               <PraiseInfo userData={user}></PraiseInfo>
+            </TabPane>
+         </Tabs>
+      </div>
+   );
 };
 
 export default Edit;

@@ -36,8 +36,8 @@ const Praise = ({ userData }) => {
    const [form] = Form.useForm();
    const [editData, setEditData] = useState(null);
    useEffect(() => {
-      setPraiseList([...userData.praised])
-   }, [userData])
+      setPraiseList([...userData.praised]);
+   }, [userData]);
 
    const onSignDateChange = (date, dateString) => {
       setSignDate(dateString);
@@ -143,27 +143,27 @@ const Praise = ({ userData }) => {
          dataIndex: "ministry",
          key: "ministry",
       },
-      {
-         title: "ផ្សេងៗ",
-         key: "action",
-         render: (text, record) => (
-            <Dropdown overlay={() => actionMenu(record)}>
-               <a
-                  className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-               >
-                  ផ្សេងៗ <DownOutlined />
-               </a>
-            </Dropdown>
-         ),
-      },
+      // {
+      //    title: "ផ្សេងៗ",
+      //    key: "action",
+      //    render: (text, record) => (
+      //       <Dropdown overlay={() => actionMenu(record)}>
+      //          <a
+      //             className="ant-dropdown-link"
+      //             onClick={(e) => e.preventDefault()}
+      //          >
+      //             ផ្សេងៗ <DownOutlined />
+      //          </a>
+      //       </Dropdown>
+      //    ),
+      // },
    ];
 
    return (
       <div>
-         <Button icon={<PlusOutlined />} onClick={showDrawer}>
+         {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
             បញ្ចូលការលើកសសើរ
-         </Button>
+         </Button> */}
          <div style={{ marginTop: 20 }}>
             <Table columns={columns} dataSource={praiseList}></Table>
          </div>
@@ -231,7 +231,7 @@ const Praise = ({ userData }) => {
                      >
                         <DatePicker
                            style={{ width: "100%" }}
-                           format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            onChange={onSignDateChange}
                         />
                      </Form.Item>

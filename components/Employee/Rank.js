@@ -165,27 +165,27 @@ const Rank = ({ userData }) => {
          dataIndex: "otherNote",
          key: "otherNote",
       },
-      {
-         title: "ផ្សេងៗ",
-         key: "action",
-         render: (text, record) => (
-            <Dropdown overlay={() => actionMenu(record)}>
-               <a
-                  className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-               >
-                  ផ្សេងៗ <DownOutlined />
-               </a>
-            </Dropdown>
-         ),
-      },
+      // {
+      //    title: "ផ្សេងៗ",
+      //    key: "action",
+      //    render: (text, record) => (
+      //       <Dropdown overlay={() => actionMenu(record)}>
+      //          <a
+      //             className="ant-dropdown-link"
+      //             onClick={(e) => e.preventDefault()}
+      //          >
+      //             ផ្សេងៗ <DownOutlined />
+      //          </a>
+      //       </Dropdown>
+      //    ),
+      // },
    ];
 
    return (
       <div>
-         <Button icon={<PlusOutlined />} onClick={showDrawer}>
+         {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
             បញ្ចូលឋានន្តរសកិ្ត និងថ្នាក់
-         </Button>
+         </Button> */}
          <div style={{ marginTop: 20 }}>
             <Table columns={columns} dataSource={rankList}></Table>
          </div>
@@ -253,7 +253,7 @@ const Rank = ({ userData }) => {
                         ]}
                      >
                         <DatePicker
-                        format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            style={{ width: "100%" }}
                            onChange={onStartDateChange}
                         />
@@ -275,7 +275,7 @@ const Rank = ({ userData }) => {
                      >
                         <DatePicker
                            disabled={nowOption}
-                           format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            style={{ width: "100%" }}
                            onChange={onEndDateChange}
                         />

@@ -132,27 +132,27 @@ const Penalty = ({ userData }) => {
          dataIndex: "ministry",
          key: "ministry",
       },
-      {
-         title: "ផ្សេងៗ",
-         key: "action",
-         render: (text, record) => (
-            <Dropdown overlay={() => actionMenu(record)}>
-               <a
-                  className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-               >
-                  ផ្សេងៗ <DownOutlined />
-               </a>
-            </Dropdown>
-         ),
-      },
+      // {
+      //    title: "ផ្សេងៗ",
+      //    key: "action",
+      //    render: (text, record) => (
+      //       <Dropdown overlay={() => actionMenu(record)}>
+      //          <a
+      //             className="ant-dropdown-link"
+      //             onClick={(e) => e.preventDefault()}
+      //          >
+      //             ផ្សេងៗ <DownOutlined />
+      //          </a>
+      //       </Dropdown>
+      //    ),
+      // },
    ];
 
    return (
       <div>
-         <Button icon={<PlusOutlined />} onClick={showDrawer}>
+         {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
             បញ្ចូលការដាក់ពិន័យ
-         </Button>
+         </Button> */}
          <div style={{ marginTop: 20 }}>
             <Table columns={columns} dataSource={penaltyList}></Table>
          </div>
@@ -220,7 +220,7 @@ const Penalty = ({ userData }) => {
                      >
                         <DatePicker
                            style={{ width: "100%" }}
-                           format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            onChange={onSignDateChange}
                         />
                      </Form.Item>

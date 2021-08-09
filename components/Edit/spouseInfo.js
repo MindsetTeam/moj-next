@@ -1,6 +1,7 @@
 import styles from "@/styles/Edit.module.css";
+import { AlertDispatch } from "contexts/alert.context";
 import { UserOutlined, SaveOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 import { Col, Row, Form, Input, DatePicker, Radio, Select, Button } from "antd";
 import api from "@/utils/api";
@@ -12,6 +13,7 @@ const status = [
 ];
 
 const SpouseInfo = ({ userData }) => {
+   const dispatch = useContext(AlertDispatch);
    const [form] = Form.useForm();
    const [spouseInfo, setSpouseInfo] = useState(null);
 
@@ -19,6 +21,14 @@ const SpouseInfo = ({ userData }) => {
       const dataInput = form.getFieldsValue(true);
       form.validateFields().then(async () => {
          const res = await api.put(`/api/users/${userData.id}`, dataInput);
+
+         dispatch({
+            type: "SUCCESS",
+            payload: {
+               message: "បានរក្សាទុក",
+               //  description: "បានរក្សាទុក",
+            },
+         });
       });
    };
 
@@ -151,7 +161,7 @@ const SpouseInfo = ({ userData }) => {
                      >
                         <DatePicker
                            placeholder="ថ្ងៃខែឆ្នាំកំណើត"
-                           format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            style={{ width: "100%" }}
                            //  onChange={onStartDateChange}
                         />
@@ -216,31 +226,16 @@ const SpouseInfo = ({ userData }) => {
                   <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "birthPlace", "province"]}
-                        label="រាជធានី/ខេត្ត"
+                        name={["partnerInfo", "birthPlace", "village"]}
+                        label="ភូមិ"
                         rules={[
                            {
                               required: true,
-                              message: "សូមបំពេញរាជធានី/ខេត្ត",
+                              message: "សូមបំពេញភូមិ",
                            },
                         ]}
                      >
-                        <Input placeholder="រាជធានី/ខេត្ត" />
-                     </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                     <Form.Item
-                        style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "birthPlace", "district"]}
-                        label="ស្រុក/ខណ្ឌ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                           },
-                        ]}
-                     >
-                        <Input placeholder="ស្រុក/ខណ្ឌ" />
+                        <Input placeholder="ភូមិ" />
                      </Form.Item>
                   </Col>
                   <Col span={6}>
@@ -261,63 +256,7 @@ const SpouseInfo = ({ userData }) => {
                   <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "birthPlace", "village"]}
-                        label="ភូមិ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញភូមិ",
-                           },
-                        ]}
-                     >
-                        <Input placeholder="ភូមិ" />
-                     </Form.Item>
-                  </Col>
-               </Row>
-               <Row gutter={16}>
-                  <Col span={24}>
-                     <Form.Item
-                        style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "birthPlace", "other"]}
-                        label="ទីកន្លែងកំណើតផ្សេងៗ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញទីកន្លែងកំណើតផ្សេងៗ",
-                           },
-                        ]}
-                     >
-                        <Input placeholder="ទីកន្លែងកំណើតផ្សេងៗ" />
-                     </Form.Item>
-                  </Col>
-               </Row>
-            </div>
-
-            {/* Address */}
-            <div className={styles.addressContainer}>
-               <h1 className={styles.title}>
-                  <UserOutlined></UserOutlined>ទីលំនៅបច្ចុប្បន្ន
-               </h1>
-               <Row gutter={16}>
-                  <Col span={6}>
-                     <Form.Item
-                        style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "currentResidence", "province"]}
-                        label="រាជធានី/ខេត្ត"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញរាជធានី/ខេត្ត",
-                           },
-                        ]}
-                     >
-                        <Input placeholder="រាជធានី/ខេត្ត" />
-                     </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                     <Form.Item
-                        style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "currentResidence", "district"]}
+                        name={["partnerInfo", "birthPlace", "district"]}
                         label="ស្រុក/ខណ្ឌ"
                         rules={[
                            {
@@ -332,34 +271,26 @@ const SpouseInfo = ({ userData }) => {
                   <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "currentResidence", "commune"]}
-                        label="ឃុំ/សង្កាត់"
+                        name={["partnerInfo", "birthPlace", "province"]}
+                        label="រាជធានី/ខេត្ត"
                         rules={[
                            {
                               required: true,
-                              message: "សូមបំពេញឃុំ/សង្កាត់",
+                              message: "សូមបំពេញរាជធានី/ខេត្ត",
                            },
                         ]}
                      >
-                        <Input placeholder="ឃុំ/សង្កាត់" />
-                     </Form.Item>
-                  </Col>
-                  <Col span={6}>
-                     <Form.Item
-                        style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "currentResidence", "village"]}
-                        label="ភូមិ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញភូមិ",
-                           },
-                        ]}
-                     >
-                        <Input placeholder="ភូមិ" />
+                        <Input placeholder="រាជធានី/ខេត្ត" />
                      </Form.Item>
                   </Col>
                </Row>
+            </div>
+
+            {/* Address */}
+            <div className={styles.addressContainer}>
+               <h1 className={styles.title}>
+                  <UserOutlined></UserOutlined>ទីលំនៅបច្ចុប្បន្ន
+               </h1>
                <Row gutter={16}>
                   <Col span={6}>
                      <Form.Item
@@ -389,6 +320,68 @@ const SpouseInfo = ({ userData }) => {
                         ]}
                      >
                         <Input placeholder="ផ្លូវលេខ" />
+                     </Form.Item>
+                  </Col>
+                  <Col span={6}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["partnerInfo", "currentResidence", "village"]}
+                        label="ភូមិ"
+                        rules={[
+                           {
+                              required: true,
+                              message: "សូមបំពេញភូមិ",
+                           },
+                        ]}
+                     >
+                        <Input placeholder="ភូមិ" />
+                     </Form.Item>
+                  </Col>
+                  <Col span={6}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["partnerInfo", "currentResidence", "commune"]}
+                        label="ឃុំ/សង្កាត់"
+                        rules={[
+                           {
+                              required: true,
+                              message: "សូមបំពេញឃុំ/សង្កាត់",
+                           },
+                        ]}
+                     >
+                        <Input placeholder="ឃុំ/សង្កាត់" />
+                     </Form.Item>
+                  </Col>
+               </Row>
+               <Row gutter={16}>
+                  <Col span={6}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["partnerInfo", "currentResidence", "district"]}
+                        label="ស្រុក/ខណ្ឌ"
+                        rules={[
+                           {
+                              required: true,
+                              message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                           },
+                        ]}
+                     >
+                        <Input placeholder="ស្រុក/ខណ្ឌ" />
+                     </Form.Item>
+                  </Col>
+                  <Col span={6}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["partnerInfo", "currentResidence", "province"]}
+                        label="រាជធានី/ខេត្ត"
+                        rules={[
+                           {
+                              required: true,
+                              message: "សូមបំពេញរាជធានី/ខេត្ត",
+                           },
+                        ]}
+                     >
+                        <Input placeholder="រាជធានី/ខេត្ត" />
                      </Form.Item>
                   </Col>
                   <Col span={12}>

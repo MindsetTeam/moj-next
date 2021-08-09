@@ -1,4 +1,4 @@
-import React, { useEffect, useState , useContext} from "react";
+import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import {
    Drawer,
@@ -41,8 +41,7 @@ const Status = ({
    const [formStatus] = Form.useForm();
    const [visible, setVisible] = useState(false);
    const [nowOption, setNowOption] = useState(true);
-   const [officerStatusList, setOfficerStatusList] = useState([]
-   );
+   const [officerStatusList, setOfficerStatusList] = useState([]);
    const [editData, setEditData] = useState(null);
 
    const [startDate, setStartDate] = useState();
@@ -140,8 +139,8 @@ const Status = ({
             payload: {
                message: "Updated",
                description: "Successfully",
-            },  
-         })
+            },
+         });
       });
    };
 
@@ -202,20 +201,20 @@ const Status = ({
          dataIndex: "position",
          key: "position",
       },
-      {
-         title: "ផ្សេងៗ",
-         key: "action",
-         render: (text, record) => (
-            <Dropdown overlay={() => actionMenu(record)}>
-               <a
-                  className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-               >
-                  ផ្សេងៗ <DownOutlined />
-               </a>
-            </Dropdown>
-         ),
-      },
+      // {
+      //    title: "ផ្សេងៗ",
+      //    key: "action",
+      //    render: (text, record) => (
+      //       <Dropdown overlay={() => actionMenu(record)}>
+      //          <a
+      //             className="ant-dropdown-link"
+      //             onClick={(e) => e.preventDefault()}
+      //          >
+      //             ផ្សេងៗ <DownOutlined />
+      //          </a>
+      //       </Dropdown>
+      //    ),
+      // },
    ];
 
    const formInfoData = {
@@ -226,12 +225,14 @@ const Status = ({
       fullyEmploymentDate: userData.fullyEmploymentDate
          ? moment(userData.fullyEmploymentDate)
          : null,
-   }
+   };
    useEffect(() => {
-      formInfo.resetFields()
-      formInfo.setFieldsValue({formInfoData})
-      setOfficerStatusList(  userData.officerStatus ? [...userData.officerStatus] : [])
-   }, [userData])
+      formInfo.resetFields();
+      formInfo.setFieldsValue({ formInfoData });
+      setOfficerStatusList(
+         userData.officerStatus ? [...userData.officerStatus] : []
+      );
+   }, [userData]);
 
    return (
       <div>
@@ -254,7 +255,10 @@ const Status = ({
                         },
                      ]}
                   >
-                     <Input placeholder="អត្តលេខមន្រ្ដីរាជការ" />
+                     <Input
+                        placeholder="អត្តលេខមន្រ្ដីរាជការ"
+                        disabled={true}
+                     />
                   </Form.Item>
                </Col>
                <Col span={6}>
@@ -271,8 +275,9 @@ const Status = ({
                   >
                      <DatePicker
                         style={{ width: "100%" }}
-                        format='DD/MM/YYYY'
+                        format="DD/MM/YYYY"
                         onChange={onEmploymentDateChange}
+                        disabled={true}
                      />
                   </Form.Item>
                </Col>
@@ -290,8 +295,9 @@ const Status = ({
                   >
                      <DatePicker
                         style={{ width: "100%" }}
-                        format='DD/MM/YYYY'
+                        format="DD/MM/YYYY"
                         onChange={onOfficialDateChange}
+                        disabled={true}
                      />
                   </Form.Item>
                </Col>
@@ -307,23 +313,23 @@ const Status = ({
                         },
                      ]}
                   >
-                     <Input placeholder="កំណត់សំគាល់ផ្សេងៗ" />
+                     <Input placeholder="កំណត់សំគាល់ផ្សេងៗ" disabled={true} />
                   </Form.Item>
                </Col>
-               <Button
+               {/* <Button
                   type="primary"
                   onClick={onSave}
                   style={{ margin: "10px 8px 10px auto" }}
                >
                   រក្សាទុក
-               </Button>
+               </Button> */}
             </Row>
          </Form>
 
          <div>
-            <Button icon={<PlusOutlined />} onClick={showDrawer}>
+            {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
                បញ្ចូលស្ថានភាពមន្រ្ដី
-            </Button>
+            </Button> */}
             <div style={{ marginTop: 20 }}>
                <Table columns={columns} dataSource={officerStatusList}></Table>
             </div>
@@ -510,7 +516,7 @@ const Status = ({
                      >
                         <DatePicker
                            style={{ width: "100%" }}
-                           format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            onChange={onStartDateChange}
                         />
                      </Form.Item>
@@ -531,7 +537,7 @@ const Status = ({
                      >
                         <DatePicker
                            disabled={nowOption}
-                           format='DD/MM/YYYY'
+                           format="DD/MM/YYYY"
                            style={{ width: "100%" }}
                            onChange={onEndDateChange}
                         />
