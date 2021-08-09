@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import moment from "moment";
 import styles from "@/styles/Edit.module.css";
+import { AlertDispatch } from "contexts/alert.context";
 import {
    Form,
    Button,
@@ -26,6 +27,8 @@ import {
 } from "@ant-design/icons";
 
 const PenaltyInfo = ({ userData }) => {
+   const dispatch = useContext(AlertDispatch);
+
    const [visible, setVisible] = useState(false);
    const [signDate, setSignDate] = useState();
    const [penaltyList, setPenaltyList] = useState([...userData.penalty]);
@@ -61,6 +64,13 @@ const PenaltyInfo = ({ userData }) => {
             updateData = { penalty: [...penaltyList, dataInput] };
          }
          const res = await api.put(`/api/users/${userData.id}`, updateData);
+         dispatch({
+            type: "SUCCESS",
+            payload: {
+               message: "បានរក្សាទុក",
+               //  description: "បានរក្សាទុក",
+            },
+         });
          setVisible(false);
          setPenaltyList(res.data.data.penalty);
          form.resetFields();
@@ -127,6 +137,7 @@ const PenaltyInfo = ({ userData }) => {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "date",
          key: "date",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "ក្រសួង-ស្ថាប័ន",

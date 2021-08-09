@@ -61,6 +61,7 @@ const childrenInfo = ({ userData }) => {
          title: "ថ្ងៃខែឆ្នាំកំណើត",
          dataIndex: "birthDate",
          key: "birthDate",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "មុខរបរ",

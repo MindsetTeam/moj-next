@@ -17,6 +17,7 @@ import {
    Radio,
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import moment from "moment";
 
 const { Option } = Select;
 
@@ -37,55 +38,54 @@ const Family = ({ userData }) => {
    // Spouse
    const birthPlace = [];
    for (const key in userData.partnerInfo?.birthPlace) {
-     if (Object.hasOwnProperty.call(userData.partnerInfo?.birthPlace, key)) {
-       birthPlace.push(userData.partnerInfo?.birthPlace[key]);
-     }
+      if (Object.hasOwnProperty.call(userData.partnerInfo?.birthPlace, key)) {
+         birthPlace.push(userData.partnerInfo?.birthPlace[key]);
+      }
    }
    const currentResidence = [];
    for (const key in userData.partnerInfo?.currentResidence) {
-     if (
-       Object.hasOwnProperty.call(userData.partnerInfo?.currentResidence, key)
-     ) {
-       currentResidence.push(userData.partnerInfo?.currentResidence[key]);
-     }
+      if (
+         Object.hasOwnProperty.call(userData.partnerInfo?.currentResidence, key)
+      ) {
+         currentResidence.push(userData.partnerInfo?.currentResidence[key]);
+      }
    }
    userData.partnerInfo = {
-      ...userData.partnerInfo
-   }
-   userData.partnerInfo.birthPlace = birthPlace.join(", ")|| ''
+      ...userData.partnerInfo,
+   };
+   userData.partnerInfo.birthPlace = birthPlace.join(", ") || "";
    userData.partnerInfo.currentResidence = currentResidence.join(", ");
 
    // Parent
    const motherInfo = {
       ...userData?.motherInfo,
       birthPlaceOther: userData.motherInfo?.birthPlace.other,
-    };
-    const motherInfoBirthPlace = [];
-    for (const key in motherInfo?.birthPlace) {
+   };
+   const motherInfoBirthPlace = [];
+   for (const key in motherInfo?.birthPlace) {
       if (
-        Object.hasOwnProperty.call(motherInfo?.birthPlace, key) &&
-        key !== "other"
+         Object.hasOwnProperty.call(motherInfo?.birthPlace, key) &&
+         key !== "other"
       ) {
-        motherInfoBirthPlace.push(motherInfo?.birthPlace[key]);
+         motherInfoBirthPlace.push(motherInfo?.birthPlace[key]);
       }
-    }
-    motherInfo.birthPlace = motherInfoBirthPlace.join(", ");
+   }
+   motherInfo.birthPlace = motherInfoBirthPlace.join(", ");
 
-    const fatherInfo = {
+   const fatherInfo = {
       ...userData?.fatherInfo,
       birthPlaceOther: userData.fatherInfo?.birthPlace.other,
-    };
-    const fatherInfoBirthPlace = [];
-    for (const key in fatherInfo.birthPlace) {
+   };
+   const fatherInfoBirthPlace = [];
+   for (const key in fatherInfo.birthPlace) {
       if (
-        Object.hasOwnProperty.call(fatherInfo.birthPlace, key) &&
-        key !== "other"
+         Object.hasOwnProperty.call(fatherInfo.birthPlace, key) &&
+         key !== "other"
       ) {
-        fatherInfoBirthPlace.push(fatherInfo.birthPlace[key]);
+         fatherInfoBirthPlace.push(fatherInfo.birthPlace[key]);
       }
-    }
-    fatherInfo.birthPlace = fatherInfoBirthPlace.join(", ");
-
+   }
+   fatherInfo.birthPlace = fatherInfoBirthPlace.join(", ");
 
    const columns = [
       {
@@ -117,6 +117,7 @@ const Family = ({ userData }) => {
          title: "ថ្ងៃខែឆ្នាំកំណើត",
          dataIndex: "birthDate",
          key: "birthDate",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "មុខរបរ",
@@ -133,7 +134,11 @@ const Family = ({ userData }) => {
    return (
       <div>
          {/* Spouse */}
-         <Form layout="vertical" hideRequiredMark  initialValues={userData?.partnerInfo}>
+         <Form
+            layout="vertical"
+            hideRequiredMark
+            initialValues={userData?.partnerInfo}
+         >
             <h1 style={{ marginBottom: 20 }}>
                <UserOutlined style={{ fontSize: 23, marginRight: 5 }} />
                ព័ត៌មានសហព័ទ្ធ

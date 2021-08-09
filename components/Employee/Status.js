@@ -195,6 +195,7 @@ const Status = ({
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "startDate",
          key: "startDate",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "តួនាទី",

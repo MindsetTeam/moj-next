@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import moment from "moment";
 
 import {
    Drawer,
@@ -290,6 +291,7 @@ const WorkHistory = ({ userData, ministryStructure }) => {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "startDate",
          key: "startDate",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "ថ្ងៃខែឆ្នាំបញ្ចប់",

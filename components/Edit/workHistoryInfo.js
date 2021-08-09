@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "@/styles/Edit.module.css";
+import moment from "moment";
+
 import {
    Drawer,
    Form,
@@ -290,6 +292,7 @@ const workHistoryInfo = ({ userData, ministryStructure }) => {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "startDate",
          key: "startDate",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "ថ្ងៃខែឆ្នាំបញ្ចប់",

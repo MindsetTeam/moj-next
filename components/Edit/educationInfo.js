@@ -5,6 +5,7 @@ import {
    PlusOutlined,
    EditOutlined,
    DeleteOutlined,
+   DownOutlined,
 } from "@ant-design/icons";
 import React, { useState, useEffect, useContext } from "react";
 
@@ -19,13 +20,55 @@ import {
    Select,
    Button,
    Table,
+   Dropdown,
    Drawer,
+   Menu,
 } from "antd";
 import api from "@/utils/api";
 
 const { Option } = Select;
 
 const EducationInfo = ({ userData }) => {
+   const onEdit = (record) => {
+      setEditData(record);
+      setVisible(true);
+   };
+
+   const onDelete = async (record) => {
+      let res = await api.put(`/api/users/${userData.id}`, {
+         education: educationList.filter((v) => v._id !== record._id),
+      });
+      dispatch({
+         type: "SUCCESS",
+         payload: {
+            message: "ពត័មានត្រូវបានលុប",
+            //  description: "បានរក្សាទុក",
+         },
+      });
+      setEducationList(res.data.data.education);
+   };
+
+   const actionMenu = (record) => {
+      return (
+         <Menu>
+            <Menu.Item
+               key="0"
+               icon={<EditOutlined />}
+               onClick={onEdit.bind(this, record)}
+            >
+               <a>Edit</a>
+            </Menu.Item>
+            <Menu.Item
+               key="1"
+               icon={<DeleteOutlined />}
+               onClick={onDelete.bind(this, record)}
+            >
+               <a>Delete</a>
+            </Menu.Item>
+         </Menu>
+      );
+   };
+
    const columns = [
       {
          title: "វគ្គសិក្សា",
@@ -71,38 +114,14 @@ const EducationInfo = ({ userData }) => {
          title: "ផ្សេងៗ",
          key: "action",
          render: (text, record) => (
-            <Space size="middle">
-               <Button
-                  icon={<EditOutlined />}
-                  onClick={() => {
-                     setEditData(record);
-                     setVisible(true);
-                  }}
+            <Dropdown overlay={() => actionMenu(record)}>
+               <a
+                  className="ant-dropdown-link"
+                  onClick={(e) => e.preventDefault()}
                >
-                  Edit
-               </Button>
-               <Button
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={async () => {
-                     let res = await api.put(`/api/users/${userData.id}`, {
-                        education: educationList.filter(
-                           (v) => v._id !== record._id
-                        ),
-                     });
-                     dispatch({
-                        type: "SUCCESS",
-                        payload: {
-                           message: "ពត័មានត្រូវបានលុប",
-                           //  description: "បានរក្សាទុក",
-                        },
-                     });
-                     setEducationList(res.data.data.education);
-                  }}
-               >
-                  Delete
-               </Button>
-            </Space>
+                  ផ្សេងៗ <DownOutlined />
+               </a>
+            </Dropdown>
          ),
       },
    ];

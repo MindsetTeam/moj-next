@@ -137,6 +137,7 @@ const Praise = ({ userData }) => {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "date",
          key: "date",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "ក្រសួង-ស្ថាប័ន",

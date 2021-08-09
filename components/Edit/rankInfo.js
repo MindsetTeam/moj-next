@@ -1,6 +1,8 @@
 import styles from "@/styles/Edit.module.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
+import { AlertDispatch } from "contexts/alert.context";
+
 import {
    Drawer,
    Form,
@@ -31,6 +33,8 @@ import api from "@/utils/api";
 const { Option } = Select;
 
 const RankInfo = ({ userData }) => {
+   const dispatch = useContext(AlertDispatch);
+
    const [form] = Form.useForm();
    const [visible, setVisible] = useState(false);
    const [startDate, setStartDate] = useState();
@@ -85,6 +89,13 @@ const RankInfo = ({ userData }) => {
          }
 
          const res = await api.put(`/api/users/${userData.id}`, updateData);
+         dispatch({
+            type: "SUCCESS",
+            payload: {
+               message: "បានរក្សាទុក",
+               //  description: "បានរក្សាទុក",
+            },
+         });
          setVisible(false);
          setRankList(res.data.data.rank);
          form.resetFields();
@@ -160,6 +171,7 @@ const RankInfo = ({ userData }) => {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "startDate",
          key: "startDate",
+         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
       },
       {
          title: "កំណត់សំគាល់",

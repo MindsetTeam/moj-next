@@ -1,6 +1,7 @@
 import styles from "@/styles/Employee.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import moment from "moment";
 
 import { Row, Col, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
@@ -67,7 +68,9 @@ const General = ({ userData }) => {
                      <Col span={12} className={styles.singleGeneralInfo}>
                         <span>ថ្ងៃខែឆ្នាំកំណើត</span>
                         <span className={styles.hightLightInfo}>
-                           {userData.birthDate}
+                           {moment(userData.birthDate)
+                              .local(true)
+                              .format("DD/MM/YYYY")}
                         </span>
                      </Col>
                      <Col span={12} className={styles.singleGeneralInfo}>
