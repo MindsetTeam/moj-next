@@ -203,12 +203,12 @@ const childrenInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name="birthCertificateNum"
                         label="លេខសំបុត្រកំណើត"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញលេខសំបុត្រកំណើត",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញលេខសំបុត្រកំណើត",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="លេខសំបុត្រកំណើត" />
                      </Form.Item>

@@ -58,12 +58,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "weddingCertificateNum"]}
                         label="លេខសំបុត្រអាពាហ៍ពិពាហ៍"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញលេខសំបុត្រអាពាហ៍ពិពាហ៍",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញលេខសំបុត្រអាពាហ៍ពិពាហ៍",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="លេខសំបុត្រអាពាហ៍ពិពាហ៍" />
                      </Form.Item>
@@ -204,12 +204,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "workPlace"]}
                         label="ទីកន្លែងបំពេញការងារ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញទីកន្លែងបំពេញការងារ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញទីកន្លែងបំពេញការងារ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ទីកន្លែងបំពេញការងារ" />
                      </Form.Item>
@@ -228,12 +228,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "birthPlace", "village"]}
                         label="ភូមិ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញភូមិ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញភូមិ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ភូមិ" />
                      </Form.Item>
@@ -243,12 +243,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "birthPlace", "commune"]}
                         label="ឃុំ/សង្កាត់"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញឃុំ/សង្កាត់",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញឃុំ/សង្កាត់",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ឃុំ/សង្កាត់" />
                      </Form.Item>
@@ -258,12 +258,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "birthPlace", "district"]}
                         label="ស្រុក/ខណ្ឌ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ស្រុក/ខណ្ឌ" />
                      </Form.Item>
@@ -312,12 +312,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "currentResidence", "streetNum"]}
                         label="ផ្លូវលេខ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញផ្លូវលេខ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញផ្លូវលេខ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ផ្លូវលេខ" />
                      </Form.Item>
@@ -327,12 +327,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "currentResidence", "village"]}
                         label="ភូមិ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញភូមិ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញភូមិ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ភូមិ" />
                      </Form.Item>
@@ -342,12 +342,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "currentResidence", "commune"]}
                         label="ឃុំ/សង្កាត់"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញឃុំ/សង្កាត់",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញឃុំ/សង្កាត់",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ឃុំ/សង្កាត់" />
                      </Form.Item>
@@ -359,12 +359,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "currentResidence", "district"]}
                         label="ស្រុក/ខណ្ឌ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ស្រុក/ខណ្ឌ" />
                      </Form.Item>
@@ -389,12 +389,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "phoneNumber"]}
                         label="លេខទូរស័ព្ទ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញលេខទូរស័ព្ទ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញលេខទូរស័ព្ទ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="លេខទូរស័ព្ទ" />
                      </Form.Item>

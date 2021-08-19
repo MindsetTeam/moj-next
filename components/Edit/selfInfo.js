@@ -143,12 +143,12 @@ const SelfInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name="birthCertificateNum"
                               label="លេខសំបុត្រកំណើត"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញលេខសំបុត្រកំណើត",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញលេខសំបុត្រកំណើត",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខសំបុត្រកំណើត" />
                            </Form.Item>
@@ -179,12 +179,12 @@ const SelfInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name="passportNumber"
                               label="លេខលិខិតឆ្លងដែន"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញលេខលិខិតឆ្លងដែន",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញលេខលិខិតឆ្លងដែន",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខលិខិតឆ្លងដែន" />
                            </Form.Item>
@@ -194,13 +194,13 @@ const SelfInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name="officerId"
                               label="លេខអត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message:
-                                       "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message:
+                              //          "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការ" />
                            </Form.Item>
@@ -210,12 +210,12 @@ const SelfInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name="otherNum"
                               label="ផ្សេងៗ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញផ្សេងៗ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញផ្សេងៗ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ផ្សេងៗ" />
                            </Form.Item>
@@ -439,12 +439,12 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["birthPlace", "village"]}
                            label="ភូមិ"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញភូមិ",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញភូមិ",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="ភូមិ" />
                         </Form.Item>
@@ -454,12 +454,12 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["birthPlace", "commune"]}
                            label="ឃុំ/សង្កាត់"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញឃុំ/សង្កាត់",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញឃុំ/សង្កាត់",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="ឃុំ/សង្កាត់" />
                         </Form.Item>
@@ -469,12 +469,12 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["birthPlace", "district"]}
                            label="ស្រុក/ខណ្ឌ"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="ស្រុក/ខណ្ឌ" />
                         </Form.Item>
@@ -543,12 +543,12 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["currentResidence", "streetNum"]}
                            label="ផ្លូវលេខ"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញផ្លូវលេខ",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញផ្លូវលេខ",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="ផ្លូវលេខ" />
                         </Form.Item>
@@ -559,12 +559,12 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["currentResidence", "village"]}
                            label="ភូមិ"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញភូមិ",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញភូមិ",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="ភូមិ" />
                         </Form.Item>
@@ -574,18 +574,33 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["currentResidence", "commune"]}
                            label="ឃុំ/សង្កាត់"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញឃុំ/សង្កាត់",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញឃុំ/សង្កាត់",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="ឃុំ/សង្កាត់" />
                         </Form.Item>
                      </Col>
                   </Row>
                   <Row gutter={16}>
+                     <Col span={6}>
+                        <Form.Item
+                           style={{ marginBottom: 10 }}
+                           name={["currentResidence", "district"]}
+                           label="ស្រុក/ខណ្ឌ"
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                           //    },
+                           // ]}
+                        >
+                           <Input placeholder="ស្រុក/ខណ្ឌ" />
+                        </Form.Item>
+                     </Col>
                      <Col span={6}>
                         <Form.Item
                            style={{ marginBottom: 10 }}
@@ -599,21 +614,6 @@ const SelfInfo = ({ userData }) => {
                            ]}
                         >
                            <Input placeholder="រាជធានី/ខេត្ត" />
-                        </Form.Item>
-                     </Col>
-                     <Col span={6}>
-                        <Form.Item
-                           style={{ marginBottom: 10 }}
-                           name={["currentResidence", "district"]}
-                           label="ស្រុក/ខណ្ឌ"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                              },
-                           ]}
-                        >
-                           <Input placeholder="ស្រុក/ខណ្ឌ" />
                         </Form.Item>
                      </Col>
                      {/* <Col span={12}>
@@ -656,12 +656,12 @@ const SelfInfo = ({ userData }) => {
                            style={{ marginBottom: 10 }}
                            name={["contactInfo", "phoneNumber2"]}
                            label="លេខទូរស័ព្ទទី២"
-                           rules={[
-                              {
-                                 required: true,
-                                 message: "សូមបំពេញលេខទូរស័ព្ទទី២",
-                              },
-                           ]}
+                           // rules={[
+                           //    {
+                           //       required: true,
+                           //       message: "សូមបំពេញលេខទូរស័ព្ទទី២",
+                           //    },
+                           // ]}
                         >
                            <Input placeholder="លេខទូរស័ព្ទទី២" />
                         </Form.Item>

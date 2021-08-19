@@ -37,6 +37,11 @@ const Slider = () => {
       title: "ការបោះពុម្ភ",
       iconUrl: "/printer.png",
     },
+    {
+      link: "/print-card",
+      title: "បោះពុម្ភកាតមន្ត្រី",
+      iconUrl: "/printer.png",
+    },
   ];
   const secondarySiderMenu = [
     {
@@ -112,6 +117,16 @@ const Slider = () => {
       </div>
       <Menu theme="light" mode="inline" selectedKeys={selectedMenuKey}>
         {mainSiderMenu.map((v) => {
+        //   if(v.name==='print'){
+        //   return  <SubMenu key={v.name} icon={<MailOutlined />} title="Navigation One">
+        //   <Menu.Item key="1"> <Link href={v.link}>
+        //         <a>{v.title}</a>
+        //       </Link></Menu.Item>
+        //   <Menu.Item key="2">Option 2</Menu.Item>
+        //   <Menu.Item key="3">Option 3</Menu.Item>
+        //   <Menu.Item key="4">Option 4</Menu.Item>
+        // </SubMenu>  
+        //   }
           return (
             <Menu.Item
               key={v.link}

@@ -137,8 +137,8 @@ const Status = ({
          dispatch({
             type: "SUCCESS",
             payload: {
-               message: "Updated",
-               description: "Successfully",
+               message: "បានរក្សាទុក",
+               // description: "Successfully",
             },
          });
       });
@@ -307,12 +307,12 @@ const Status = ({
                      style={{ marginBottom: 10 }}
                      name="otherNote"
                      label="កំណត់សំគាល់ផ្សេងៗ"
-                     rules={[
-                        {
-                           required: true,
-                           message: "សូមបំពេញកំណត់សំគាល់ផ្សេងៗ",
-                        },
-                     ]}
+                     // rules={[
+                     //    {
+                     //       required: true,
+                     //       message: "សូមបំពេញកំណត់សំគាល់ផ្សេងៗ",
+                     //    },
+                     // ]}
                   >
                      <Input placeholder="កំណត់សំគាល់ផ្សេងៗ" disabled={true} />
                   </Form.Item>

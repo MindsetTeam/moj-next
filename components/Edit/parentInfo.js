@@ -70,13 +70,13 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "nationalityIDNum"]}
                               label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message:
-                                       "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message:
+                              //          "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
                            </Form.Item>
@@ -203,12 +203,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthPlace", "village"]}
                               label="ភូមិ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញភូមិ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញភូមិ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ភូមិ" />
                            </Form.Item>
@@ -218,12 +218,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthPlace", "commune"]}
                               label="ឃុំ/សង្កាត់"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញឃុំ/សង្កាត់",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញឃុំ/សង្កាត់",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ឃុំ/សង្កាត់" />
                            </Form.Item>
@@ -235,12 +235,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthPlace", "district"]}
                               label="ស្រុក/ខណ្ឌ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ស្រុក/ខណ្ឌ" />
                            </Form.Item>
@@ -272,12 +272,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "phoneNumber"]}
                               label="លេខទូរស័ព្ទ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញលេខទូរស័ព្ទ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញលេខទូរស័ព្ទ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខទូរស័ព្ទ" />
                            </Form.Item>
@@ -311,13 +311,13 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "nationalityIDNum"]}
                               label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message:
-                                       "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message:
+                              //          "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
                            </Form.Item>
@@ -444,12 +444,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "birthPlace", "village"]}
                               label="ភូមិ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញភូមិ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញភូមិ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ភូមិ" />
                            </Form.Item>
@@ -459,12 +459,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "birthPlace", "commune"]}
                               label="ឃុំ/សង្កាត់"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញឃុំ/សង្កាត់",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញឃុំ/សង្កាត់",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ឃុំ/សង្កាត់" />
                            </Form.Item>
@@ -476,12 +476,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "birthPlace", "district"]}
                               label="ស្រុក/ខណ្ឌ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញស្រុក/ខណ្ឌ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ស្រុក/ខណ្ឌ" />
                            </Form.Item>
@@ -512,12 +512,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "phoneNumber"]}
                               label="លេខទូរស័ព្ទ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញលេខទូរស័ព្ទ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញលេខទូរស័ព្ទ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="លេខទូរស័ព្ទ" />
                            </Form.Item>
