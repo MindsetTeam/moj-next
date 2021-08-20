@@ -491,7 +491,7 @@ const workHistoryInfo = ({ userData, ministryStructure }) => {
                   <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name="ក្រសួង-ស្ថាប័ន"
+                        name="ministry"
                         label="ក្រសួង-ស្ថាប័ន"
                         rules={[
                            {

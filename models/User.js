@@ -35,6 +35,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
     },
     civilID: String,
+    officerID: String,
     department: String,
     employmentDate: String,
     fullyEmploymentDate: String,
@@ -225,6 +226,7 @@ const UserSchema = new mongoose.Schema(
     experience: [
       {
         refNum: String,
+        ministry: String,
         position: String,
         unit: String,
         institution: String,

@@ -34,7 +34,7 @@ const Slider = () => {
     },
     {
       link: "/print",
-      title: "ការបោះពុម្ភ",
+      title: "បោះពុម្ភប្រវត្តិរូប",
       iconUrl: "/printer.png",
     },
     {

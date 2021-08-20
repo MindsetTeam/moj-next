@@ -192,7 +192,7 @@ const SelfInfo = ({ userData }) => {
                         <Col span={8}>
                            <Form.Item
                               style={{ marginBottom: 10 }}
-                              name="officerId"
+                              name="officerID"
                               label="លេខអត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការ"
                               // rules={[
                               //    {

@@ -1,17 +1,17 @@
 import { Button } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 const index = () => {
-  const [session, loading] = useSession();
+  const router = useRouter();
   const [user, setUser] = useState(null);
   useEffect(async () => {
-    const user = await fetch(`/api/users/${session?.user.id}`).then((res) =>
+    const user = await fetch(`/api/users/${router.query.id}`).then((res) =>
       res.json()
     );
     setUser(user);
-  }, [session]);
+  }, [router]);
   return (
     <>
       <style jsx>{`
@@ -260,9 +260,7 @@ const index = () => {
             </div>
             <div>
               <p>{user?.firstName + " " + user?.lastName}</p>
-              <p>
-                {((user?.civilID || "").match(/.{1,4}/g) || []).join(" ")}
-              </p>
+              <p>{((user?.civilID || "").match(/.{1,4}/g) || []).join(" ")}</p>
             </div>
           </div>
           <div className="bottom-section">
@@ -282,7 +280,11 @@ const index = () => {
             </div>
           </div>
           <div className="body-section">
-            <img className="user-profile" src={user?.photo|| '/card/user.png'} alt="" />
+            <img
+              className="user-profile"
+              src={user?.photo || "/card/user.png"}
+              alt=""
+            />
             <table>
               <tr>
                 <td>អត្តលេខមន្រ្ដី：</td>

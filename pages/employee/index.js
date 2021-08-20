@@ -224,6 +224,15 @@ const Index = () => {
         >
           <a>បោះពុម្ភ</a>
         </Menu.Item>
+        <Menu.Item
+          key="2"
+          icon={<PrinterOutlined />}
+          onClick={() => {
+            router.push(`/print-card/${record.id}`);
+          }}
+        >
+          <a>បោះពុម្ភកាត</a>
+        </Menu.Item>
         {["admin", "editor"].includes(session?.user.role) &&
           session?.user.id !== record.id && (
             <Menu.Item
