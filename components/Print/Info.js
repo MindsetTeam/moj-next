@@ -60,6 +60,14 @@ const PrintInfo = ({
           vertical-align: baseline;
         }
 
+        .labelInput {
+          display: inline-block;
+          min-width: 180px;
+        }
+        .labelSubInput {
+          margin-left: 50px;
+        }
+
         @media print {
           body * {
             visibility: hidden;
@@ -114,26 +122,36 @@ const PrintInfo = ({
             <h1>ក. ព័ត៌មានផ្ទាល់ខ្លួន</h1>
             <div style={{ marginLeft: 25 }}>
               <p>
-                - គោត្តនាម និងនាម {General.firstName + General.lastName} ភេទ :{" "}
-                {General.gender}{" "}
+                - <span className="labelInput">គោត្តនាម និងនាម</span>{" "}
+                {General.firstName + General.lastName}{" "}
+                <span className="labelSubInput">ភេទ :</span> {General.gender}{" "}
               </p>
               <p>
-                - អក្សរឡាតាំង {General.firstNameLatin + General.lastNameLatin}
-              </p>
-              <p>- ថ្ថៃ ខែ ឆ្នាំកំណើត {General.birthDate}</p>
-              <p>- ទីកន្លែងកំណើត {placeFormat(General.birthPlace)}</p>
-              <p>
-                - អាសយដ្ឋានបច្ចុប្បន្ន {placeFormat(General.currentResidence)}
+                - <span className="labelInput">អក្សរឡាតាំង</span>{" "}
+                {General.firstNameLatin + General.lastNameLatin}
               </p>
               <p>
-                - លេខទូរស័ព្ទ{" "}
+                - <span className="labelInput">ថ្ថៃ ខែ ឆ្នាំកំណើត</span>{" "}
+                {moment(General.birthDate).format("DD/MMMM/YYYY")}
+              </p>
+              <p>
+                - <span className="labelInput">ទីកន្លែងកំណើត</span>{" "}
+                {placeFormat(General.birthPlace)}
+              </p>
+              <p>
+                - <span className="labelInput">អាសយដ្ឋានបច្ចុប្បន្ន</span>{" "}
+                {placeFormat(General.currentResidence)}
+              </p>
+              <p>
+                - <span className="labelInput">លេខទូរស័ព្ទ</span>{" "}
                 {[
                   General.contactInfo?.phoneNumber1,
                   General.contactInfo?.phoneNumber2,
                 ]
                   .filter((v) => v)
                   .join(" , ")}{" "}
-                អ៊ីម៉ែល {General.contactInfo?.email}
+                <span className="labelSubInput">អ៊ីម៉ែល :</span>{" "}
+                {General.contactInfo?.email}
               </p>
             </div>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -177,7 +195,7 @@ const PrintInfo = ({
           </section>
         )}
         {Family && (
-          <section id="familyInfo">
+          <section style={{ margin: "14px 0 7px" }} id="familyInfo">
             <h1>
               ខ. ព័ត៌មានគ្រួសារ {Family?.partnerInfo.fullName ? "(រៀបការ)" : ""}
             </h1>
@@ -186,21 +204,34 @@ const PrintInfo = ({
                 <div style={{ marginLeft: 25 }}>
                   <h1>ក.ព័ត៌មានប្តី ឬប្រពន្ធ</h1>
                   <p>
-                    - ប្រពន្ធ ឬ ប្តីឈ្មោះ {Family.partnerInfo.fullName}{" "}
-                    ស្ថានភាព: {Family.partnerInfo.statusLive} កើតថ្ងៃទី ខែ ឆ្នាំ{" "}
-                    {Family.partnerInfo.birthDate}
+                    - <span className="labelInput">ប្រពន្ធ ឬ ប្តីឈ្មោះ</span>{" "}
+                    {Family.partnerInfo.fullName}{" "}
+                    <span className="labelSubInput">ស្ថានភាព :</span>{" "}
+                    {Family.partnerInfo.statusLive}{" "}
+                    <span className="labelSubInput">កើតថ្ងៃទី ខែ ឆ្នាំ : </span>
+                    {moment(Family.partnerInfo.birthDate).format(
+                      "DD MMMM YYYY"
+                    )}
                   </p>
                   <p>
-                    - លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ{" "}
+                    -{" "}
+                    <span className="labelInput">លេខអត្តសញ្ញាណប័ណ្ណខ្មែរ</span>{" "}
                     {Family.partnerInfo.nationalityIDNum}
                   </p>
                   <p>
-                    - ទីកន្លែងកំណើត {placeFormat(Family.partnerInfo.birthPlace)}
+                    - <span className="labelInput">ទីកន្លែងកំណើត</span>{" "}
+                    {placeFormat(Family.partnerInfo.birthPlace)}
                   </p>
-                  <p>- មុខ​របរ​បច្ចុប្បន្ន {Family.partnerInfo.occupation}</p>
-                  <p>- អង្គភាព {Family.partnerInfo.workPlace}</p>
                   <p>
-                    - អាសយដ្ឋានបច្ចុប្បន្ន{" "}
+                    - <span className="labelInput">មុខ​របរ​បច្ចុប្បន្ន</span>{" "}
+                    {Family.partnerInfo.occupation}
+                  </p>
+                  <p>
+                    - <span className="labelInput">អង្គភាព</span>{" "}
+                    {Family.partnerInfo.workPlace}
+                  </p>
+                  <p>
+                    - <span className="labelInput">អាសយដ្ឋានបច្ចុប្បន្ន</span>{" "}
                     {placeFormat(Family.partnerInfo.currentResidence)}
                   </p>
                 </div>
@@ -220,8 +251,37 @@ const PrintInfo = ({
                     {Family.children.map((v) => {
                       return (
                         <p>
-                          - ឈ្មោះ : {v.fullName} ភេទ : {v.gender} ឆ្នាំកំណើត :{" "}
-                          {v.birthDate} មុខរបរ : {v.occupation}
+                          <span
+                            style={{
+                              minWidth: "300px",
+                              display: "inline-block",
+                            }}
+                          >
+                            - ឈ្មោះ : {v.fullName}
+                          </span>
+                          <span
+                            style={{
+                              minWidth: "80px",
+                              display: "inline-block",
+                            }}
+                          >
+                            {" "}
+                            <span className="">ភេទ : </span>
+                            {v.gender}
+                          </span>
+                          <span
+                            style={{
+                              minWidth: "214px",
+                              display: "inline-block",
+                              marginLeft: "60px",
+                            }}
+                          >
+                            {" "}
+                            <span className="">ឆ្នាំកំណើត : </span>
+                            {moment(v.birthDate).format("DD MMMM YYYY")}
+                          </span>
+                          <span className="labelSubInput">មុខរបរ : </span>
+                          {v.occupation}
                         </p>
                       );
                     })}
@@ -233,28 +293,42 @@ const PrintInfo = ({
             <div style={{ marginLeft: 25 }}>
               <h1>គ.ព័ត៌មានឪពុក និងម្តាយបង្កើត</h1>
               <p>
-                - ឪពុកឈ្មោះ {Family?.fatherInfo.fullName} ស្ថានភាព{" "}
-                {Family?.fatherInfo.livingStatus} កើតថ្ងៃទី ខែ ឆ្នាំ{" "}
-                {Family?.fatherInfo.birthDate}
+                - <span className="labelInput">ឪពុកឈ្មោះ</span>{" "}
+                {Family?.fatherInfo.fullName}{" "}
+                <span className="labelSubInput">ស្ថានភាព</span>{" "}
+                {Family?.fatherInfo.livingStatus}{" "}
+                <span className="labelSubInput">កើតថ្ងៃទី ខែ ឆ្នាំ</span>{" "}
+                {moment(Family?.fatherInfo.birthDate).format("DD MMMM YYYY")}
               </p>
               <p>
-                - ទីកន្លែងកំណើត {placeFormat(Family?.fatherInfo.birthPlace)}
-              </p>
-              <p>- មុខ​របរ {Family?.fatherInfo.occupation}</p>
-              <p>
-                - ម្តាយឈ្មោះ {Family?.motherInfo.fullName} ស្ថានភាព{" "}
-                {Family?.motherInfo.livingStatus} កើតថ្ងៃទី ខែ ឆ្នាំ{" "}
-                {Family?.motherInfo.birthDate}
+                - <span className="labelInput">ទីកន្លែងកំណើត</span>{" "}
+                {placeFormat(Family?.fatherInfo.birthPlace)}
               </p>
               <p>
-                - ទីកន្លែងកំណើត {placeFormat(Family?.motherInfo.birthPlace)}
+                - <span className="labelInput">មុខ​របរ</span>{" "}
+                {Family?.fatherInfo.occupation}
               </p>
-              <p>- មុខ​របរ {Family?.motherInfo.occupation}</p>
+              <p>
+                - <span className="labelInput">ម្តាយឈ្មោះ</span>{" "}
+                {Family?.motherInfo.fullName}{" "}
+                <span className="labelSubInput">ស្ថានភាព</span>{" "}
+                {Family?.motherInfo.livingStatus}{" "}
+                <span className="labelSubInput">កើតថ្ងៃទី ខែ ឆ្នាំ</span>{" "}
+                {moment(Family?.motherInfo.birthDate).format("DD MMMM YYYY")}
+              </p>
+              <p>
+                - <span className="labelInput">ទីកន្លែងកំណើត</span>{" "}
+                {placeFormat(Family?.motherInfo.birthPlace)}
+              </p>
+              <p>
+                - <span className="labelInput">មុខ​របរ</span>{" "}
+                {Family?.motherInfo.occupation}
+              </p>
             </div>
           </section>
         )}
         {Education && (
-          <section>
+          <section style={{ margin: "7px 0 7px" }}>
             <h1>
               គ កម្រិតវប្បធម៍ទូទៅ ការបណ្តុះបណ្តាលវជ្ចាជីវៈ
               និងការបណ្តុះបណ្តាលបន្តៈ
@@ -337,7 +411,7 @@ const PrintInfo = ({
           </section>
         )}
         {WorkHistory && (
-          <section>
+          <section style={{ margin: "7px 0 7px" }}>
             <h1>ឃ. ប្រវត្តការងារ</h1>
             <div
               style={{

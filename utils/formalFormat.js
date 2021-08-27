@@ -7,8 +7,8 @@ export const placeFormat = ({
   province,
 } = {}) => {
   return [
-    houseNum && `${houseNum}`,
-    streetNum && `ផ្លូវ${streetNum}`,
+    houseNum && `ផ្ទះលេខ ${houseNum}`,
+    streetNum && `ផ្លូវ ${streetNum}`,
     village && `ភូមិ ${village} `,
     commune && `ឃុំ ${commune}`,
     district && `ស្រុក/ខណ្ឌ ${district}`,
