@@ -1,24 +1,26 @@
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/client";
-import { Checkbox, Button } from "antd";
+import { Checkbox, Button, Divider } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import PrintInfo from "@/components/Print/Info";
 
 const options = [
   { label: "ព័ត៌មានទូទៅ", value: "General" },
   { label: "គ្រួសារ", value: "Family" },
-  // { label: "ឋានន្តរសកិ្តនិងថ្នាក់", value: "Rank" },
   // { label: "ស្ថានភាពមន្រ្ដី", value: "Status" },
   // { label: "ការលើកសសើរ", value: "Praise" },
-  // { label: "ការដាក់ពិន័យ", value: "Penalty" },
   { label: "កម្រិតវប្បធម៌", value: "Education" },
   { label: "ប្រវត្តិការងារ", value: "WorkHistory" },
+  { label: "PDF", value: "Pdf" },
 ];
 
 const index = () => {
   const [printData, setPrintData] = useState({});
   const [session, loading] = useSession();
   const [user, setUser] = useState(null);
+  const [indeterminate, setIndeterminate] = useState(false);
+  const [checkAll, setCheckAll] = useState(false);
+  const [checkedList, setCheckedList] = useState([]);
 
   useEffect(async () => {
     const user = await fetch(`/api/users/${session?.user.id}`).then((res) =>
@@ -32,11 +34,11 @@ const index = () => {
     });
     setUser(user);
   }, [session]);
-  const onChange = (checkedValues) => {
-    console.log(checkedValues);
+
+  const setPrintDataFn = (checkListData) => {
     if (user) {
       const printDataBySelection = {};
-      checkedValues.forEach((v) => {
+      checkListData.forEach((v) => {
         let displayFields = [];
         if (v === "General") {
           displayFields = [
@@ -102,18 +104,44 @@ const index = () => {
         ...printDataBySelection,
       });
     }
-    // setPrintOptions(checkedValues);
+  };
+
+  const onChange = (checkedValues) => {
+    setCheckedList(checkedValues);
+    setIndeterminate(
+      !!checkedValues.length && checkedValues.length < options.length
+    );
+    setCheckAll(checkedValues.length === options.length);
   };
   const onPrint = (params) => {
     window.print();
   };
+
+  useEffect(() => {
+    setPrintDataFn(checkedList);
+  }, [checkedList]);
+
   return (
     <>
       <div style={{ backgroundColor: "#fff", padding: "20px 10px" }}>
         <p>បោះពុម្ព</p>
+        <Checkbox
+          style={{ marginTop: "20px" }}
+          indeterminate={indeterminate}
+          onChange={(e) => {
+            setCheckedList(e.target.checked ? options.map((v) => v.value) : []);
+            setIndeterminate(false);
+            setCheckAll(e.target.checked);
+          }}
+          checked={checkAll}
+        >
+          ទាំងអស់
+        </Checkbox>
+        <Divider />
         <Checkbox.Group
-          style={{ margin: "20px 0px", display: "flex" }}
+          style={{ marginBottom: "20px", display: "flex" }}
           options={options}
+          value={checkedList}
           onChange={onChange}
         />
         <Button icon={<PrinterOutlined />} onClick={onPrint}>

@@ -1,6 +1,12 @@
 import { placeFormat } from "@/utils/formalFormat";
+// import { Document, Page, pdfjs } from "react-pdf";
+import { Document, Page } from "react-pdf";
+// import { SizeMe } from "react-sizeme";
+
 import moment from "moment";
 import "moment/locale/km";
+
+// pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const PrintInfo = ({
   data: {
@@ -9,6 +15,7 @@ const PrintInfo = ({
     Family,
     Rank,
     Status,
+    Pdf,
     WorkHistory,
     Praise,
     Penalty,
@@ -289,7 +296,6 @@ const PrintInfo = ({
                 )}
               </>
             )}
-
             <div style={{ marginLeft: 25 }}>
               <h1>គ.ព័ត៌មានឪពុក និងម្តាយបង្កើត</h1>
               <p>
@@ -473,6 +479,27 @@ const PrintInfo = ({
             </table>
           </section>
         )}
+
+        {/* Render PDF pages */}
+        {/* <SizeMe
+          monitorHeight
+          refreshRate={128}
+          refreshMode={"debounce"}
+          render={({ size }) => (
+            <div>
+              <Document
+                file={"/pdftest.pdf"}
+                // onLoadSuccess={this.onDocumentLoadSuccess}
+                // onLoadError={this.onDocumentLoadError}
+              >
+               
+                <Page width={size.width} pageNumber={1} />
+                <Page width={size.width} pageNumber={2} />
+              </Document>
+            </div>
+          )}
+        /> */}
+
         <section className="text-center">
           <p>
             ខ្ងុំសូមធានាទទួលខុសត្រូវចំពោះមុខច្បាប់ថា

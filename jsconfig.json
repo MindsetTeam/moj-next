@@ -9,6 +9,7 @@
       "@/styles/*": ["styles/*"],
       "@/lib/*": ["lib/*"],
       "@/public/*": ["public/*"],
+      "@/hooks/*": ["hooks/*"],
     }
   }
 }
