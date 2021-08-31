@@ -193,7 +193,7 @@ const SelfInfo = ({ userData }) => {
                            <Form.Item
                               style={{ marginBottom: 10 }}
                               name="officerID"
-                              label="លេខអត្តសញ្ញាណប័ណ្ណសំគាល់ខ្លួនមន្រ្ដី"
+                              label="លេខកាតមន្រ្ដីរាជការ"
                               // rules={[
                               //    {
                               //       required: true,
@@ -202,7 +202,7 @@ const SelfInfo = ({ userData }) => {
                               //    },
                               // ]}
                            >
-                              <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណសំគាល់ខ្លួនមន្រ្ដី" />
+                              <Input placeholder="លេខកាតមន្រ្ដីរាជការ" />
                            </Form.Item>
                         </Col>
                         <Col span={8}>
@@ -470,7 +470,7 @@ const SelfInfo = ({ userData }) => {
                         <Form.Item
                            style={{ marginBottom: 10 }}
                            name={["birthPlace", "district"]}
-                           label="ស្រុក/ខណ្ឌ"
+                           label="ក្រុង/ស្រុក/ខណ្ឌ"
                            // rules={[
                            //    {
                            //       required: true,
@@ -478,7 +478,7 @@ const SelfInfo = ({ userData }) => {
                            //    },
                            // ]}
                         >
-                           <Input placeholder="ស្រុក/ខណ្ឌ" />
+                           <Input placeholder="ក្រុង/ស្រុក/ខណ្ឌ" />
                         </Form.Item>
                      </Col>
 
@@ -592,15 +592,15 @@ const SelfInfo = ({ userData }) => {
                         <Form.Item
                            style={{ marginBottom: 10 }}
                            name={["currentResidence", "district"]}
-                           label="ស្រុក/ខណ្ឌ"
+                           label="ក្រុង/ស្រុក/ខណ្ឌ"
                            // rules={[
                            //    {
                            //       required: true,
-                           //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                           //       message: "សូមបំពេញក្រុង/ស្រុក/ខណ្ឌ",
                            //    },
                            // ]}
                         >
-                           <Input placeholder="ស្រុក/ខណ្ឌ" />
+                           <Input placeholder="ក្រុង/ស្រុក/ខណ្ឌ" />
                         </Form.Item>
                      </Col>
                      <Col span={6}>

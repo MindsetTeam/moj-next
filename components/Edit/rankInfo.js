@@ -242,26 +242,26 @@ const RankInfo = ({ userData }) => {
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="refNum"
-                        label="លេខលិខិតយោង"
+                        label="លេខលិខិតបទដ្ឋានគតិយុត្ត"
                         rules={[
                            {
                               required: true,
-                              message: "សូមបំពេញលេខលិខិតយោង",
+                              message: "សូមបំពេញលេខលិខិតបទដ្ឋានគតិយុត្ត",
                            },
                         ]}
                      >
-                        <Input placeholder="លេខលិខិតយោង" />
+                        <Input placeholder="លេខលិខិតបទដ្ឋានគតិយុត្ត" />
                      </Form.Item>
                   </Col>
                   <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="startDate"
-                        label="កាលបរិច្ឆេទតែងតាំង"
+                        label="កាលបរិច្ឆេទបទដ្ឋានគតិយុត្តិ"
                         rules={[
                            {
                               required: true,
-                              message: "សូមជ្រើសរើសកាលបរិច្ឆេទតែងតាំង",
+                              message: "សូមជ្រើសរើសកាលបរិច្ឆេទបទដ្ឋានគតិយុត្តិ",
                            },
                         ]}
                      >
@@ -312,16 +312,9 @@ const RankInfo = ({ userData }) => {
                            <Option value="ព្រះរាជក្រឹត្យ">
                               ព្រះរាជក្រឹត្យ
                            </Option>
-                           <Option value="ព្រះរាជក្រម">ព្រះរាជក្រម</Option>
-                           <Option value="ដីការ">ដីការ</Option>
-                           <Option value="លិខិតឧទ្ទេសនាម">
-                              លិខិតឧទ្ទេសនាម
-                           </Option>
-                           <Option value="លិខិតបង្គាប់ការ">
-                              លិខិតបង្គាប់ការ
-                           </Option>
                            <Option value="អនុក្រឹត្យ">អនុក្រឹត្យ</Option>
                            <Option value="ប្រកាស">ប្រកាស</Option>
+                           <Option value="ដីការ">ដីការ</Option>
                         </Select>
                      </Form.Item>
                   </Col>
@@ -338,14 +331,10 @@ const RankInfo = ({ userData }) => {
                         ]}
                      >
                         <Select placeholder="ជ្រើសរើស">
-                           <Option value="ថ្នាក់ប្រចាំឆ្នាំ">
-                              ថ្នាក់ប្រចាំឆ្នាំ
-                           </Option>
-                           <Option value="ថ្នាក់កិត្តិយស">
-                              ថ្នាក់កិត្តិយស
-                           </Option>
-                           <Option value="ថ្នាក់តាមកំរិតសញ្ញាប័ត្រ">
-                              ថ្នាក់តាមកំរិតសញ្ញាប័ត្រ
+                           <Option value="ប្រចាំឆ្នាំ">ប្រចាំឆ្នាំ</Option>
+                           <Option value="កិត្តិយស">កិត្តិយស</Option>
+                           <Option value="តាមកំរិតសញ្ញាប័ត្រ">
+                              តាមកំរិតសញ្ញាប័ត្រ
                            </Option>
                            <Option value="និយ័តកម្ម">និយ័តកម្ម</Option>
                         </Select>
@@ -357,11 +346,11 @@ const RankInfo = ({ userData }) => {
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="statueType"
-                        label="ប្រភេទលក្ខន្តិកៈ"
+                        label="អង្គវីជ្ជាជីវៈ"
                         rules={[
                            {
                               required: true,
-                              message: "សូមជ្រើសរើសប្រភេទលក្ខន្តិកៈ",
+                              message: "សូមជ្រើសរើសអង្គវីជ្ជាជីវៈ",
                            },
                         ]}
                      >
@@ -385,9 +374,9 @@ const RankInfo = ({ userData }) => {
                         ]}
                      >
                         <Select placeholder="ជ្រើសរើស">
-                           <Option value="a">a</Option>
-                           <Option value="b">b</Option>
-                           <Option value="c">c</Option>
+                           {[...Array(3)].map((e, i) => {
+                              return <Option value={i + 1}>{i + 1}</Option>;
+                           })}
                         </Select>
                      </Form.Item>
                   </Col>
@@ -397,18 +386,18 @@ const RankInfo = ({ userData }) => {
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="rankType"
-                        label="ឋានន្តរស័ក្តិ និងថ្នាក់"
+                        label="ឋានន្តរស័ក្តិ"
                         rules={[
                            {
                               required: true,
-                              message: "សូមជ្រើសរើសឋានន្តរស័ក្តិ និងថ្នាក់",
+                              message: "សូមជ្រើសរើសឋានន្តរស័ក្តិ",
                            },
                         ]}
                      >
                         <Select placeholder="ជ្រើសរើស">
-                           <Option value="a">a</Option>
-                           <Option value="b">b</Option>
-                           <Option value="c">c</Option>
+                           {[...Array(3)].map((e, i) => {
+                              return <Option value={i + 1}>{i + 1}</Option>;
+                           })}
                         </Select>
                      </Form.Item>
                   </Col>
@@ -416,18 +405,18 @@ const RankInfo = ({ userData }) => {
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="level"
-                        label="កម្រិតថ្នាក់"
+                        label="ថ្នាក់"
                         rules={[
                            {
                               required: true,
-                              message: "សូមជ្រើសរើសកម្រិតថ្នាក់",
+                              message: "សូមជ្រើសរើសថ្នាក់",
                            },
                         ]}
                      >
                         <Select placeholder="ជ្រើសរើស">
-                           <Option value="a">a</Option>
-                           <Option value="b">b</Option>
-                           <Option value="c">c</Option>
+                           {[...Array(10)].map((e, i) => {
+                              return <Option value={i + 1}>{i + 1}</Option>;
+                           })}
                         </Select>
                      </Form.Item>
                   </Col>
