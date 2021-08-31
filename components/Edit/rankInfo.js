@@ -238,7 +238,7 @@ const RankInfo = ({ userData }) => {
                }}
             >
                <Row gutter={16}>
-                  <Col span={9}>
+                  <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="refNum"
@@ -253,7 +253,7 @@ const RankInfo = ({ userData }) => {
                         <Input placeholder="លេខលិខិតយោង" />
                      </Form.Item>
                   </Col>
-                  <Col span={6}>
+                  <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="startDate"
@@ -272,7 +272,7 @@ const RankInfo = ({ userData }) => {
                         />
                      </Form.Item>
                   </Col>
-                  <Col span={3}>
+                  {/* <Col span={3}>
                      <Form.Item
                         label="បច្ចុប្បន្ន"
                         style={{ marginBottom: 10 }}
@@ -293,7 +293,7 @@ const RankInfo = ({ userData }) => {
                            onChange={onEndDateChange}
                         />
                      </Form.Item>
-                  </Col>
+                  </Col> */}
                </Row>
                <Row gutter={16}>
                   <Col span={12}>

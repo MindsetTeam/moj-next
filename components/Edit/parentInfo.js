@@ -88,12 +88,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "fullName"]}
                               label="គោត្តនាម និងនាម"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញគោត្តនាម និងនាម",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញគោត្តនាម និងនាម",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="គោត្តនាម និងនាម" />
                            </Form.Item>
@@ -103,12 +103,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "fullNameLatin"]}
                               label="គោត្តនាម និងនាមឡាតាំង"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="គោត្តនាម និងនាមឡាតាំង" />
                            </Form.Item>
@@ -120,12 +120,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthDate"]}
                               label="ថ្ងៃខែឆ្នាំកំណើត"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
+                              //    },
+                              // ]}
                            >
                               <DatePicker
                                  placeholder="ថ្ងៃខែឆ្នាំកំណើត"
@@ -140,12 +140,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "nationality"]}
                               label="ជនជាតិ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញជនជាតិ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញជនជាតិ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ជនជាតិ" />
                            </Form.Item>
@@ -155,12 +155,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "ethnicity"]}
                               label="សញ្ជាតិ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញសញ្ជាតិ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញសញ្ជាតិ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="សញ្ជាតិ" />
                            </Form.Item>
@@ -172,12 +172,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "livingStatus"]}
                               label="ស្ថានភាព"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមជ្រើសរើសស្ថានភាព",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមជ្រើសរើសស្ថានភាព",
+                              //    },
+                              // ]}
                            >
                               <Radio.Group
                                  options={statusOptions}
@@ -251,12 +251,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthPlace", "province"]}
                               label="រាជធានី/ខេត្ត"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញរាជធានី/ខេត្ត",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញរាជធានី/ខេត្ត",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="រាជធានី/ខេត្ត" />
                            </Form.Item>
@@ -329,12 +329,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "fullName"]}
                               label="គោត្តនាម និងនាម"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញគោត្តនាម និងនាម",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញគោត្តនាម និងនាម",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="គោត្តនាម និងនាម" />
                            </Form.Item>
@@ -344,12 +344,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "fullNameLatin"]}
                               label="គោត្តនាម និងនាមឡាតាំង"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="គោត្តនាម និងនាមឡាតាំង" />
                            </Form.Item>
@@ -361,12 +361,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "birthDate"]}
                               label="ថ្ងៃខែឆ្នាំកំណើត"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
+                              //    },
+                              // ]}
                            >
                               <DatePicker
                                  placeholder="ថ្ងៃខែឆ្នាំកំណើត"
@@ -381,12 +381,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "nationality"]}
                               label="ជនជាតិ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញជនជាតិ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញជនជាតិ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="ជនជាតិ" />
                            </Form.Item>
@@ -396,12 +396,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "ethnicity"]}
                               label="សញ្ជាតិ"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញសញ្ជាតិ",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញសញ្ជាតិ",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="សញ្ជាតិ" />
                            </Form.Item>
@@ -413,12 +413,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "livingStatus"]}
                               label="ស្ថានភាព"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមជ្រើសរើសស្ថានភាព",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមជ្រើសរើសស្ថានភាព",
+                              //    },
+                              // ]}
                            >
                               <Radio.Group
                                  options={statusOptions}
@@ -491,12 +491,12 @@ const ParentInfo = ({ userData }) => {
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "birthPlace", "province"]}
                               label="រាជធានី/ខេត្ត"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញរាជធានី/ខេត្ត",
-                                 },
-                              ]}
+                              // rules={[
+                              //    {
+                              //       required: true,
+                              //       message: "សូមបំពេញរាជធានី/ខេត្ត",
+                              //    },
+                              // ]}
                            >
                               <Input placeholder="រាជធានី/ខេត្ត" />
                            </Form.Item>

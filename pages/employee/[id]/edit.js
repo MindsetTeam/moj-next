@@ -54,25 +54,25 @@ const Edit = ({
             <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="2">
                <SpouseInfo userData={user}></SpouseInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានកូន" key="3">
+            {/* <TabPane tab="ព័ត៌មានកូន" key="3">
                <ChildrenInfo userData={user}></ChildrenInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="4">
+            </TabPane> */}
+            <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="3">
                <ParentInfo userData={user}></ParentInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="5">
+            <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="4">
                <EducationInfo userData={user}></EducationInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានឋានន្តរសកិ្ត និងថ្នាក់" key="6">
+            <TabPane tab="ព័ត៌មានឋានន្តរសកិ្ត និងថ្នាក់" key="5">
                <RankInfo userData={user}></RankInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានប្រវត្តិការងារ" key="7">
+            <TabPane tab="ព័ត៌មានប្រវត្តិការងារ" key="6">
                <WorkHistoryInfo
                   userData={user}
                   ministryStructure={ministryStructure}
                ></WorkHistoryInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានស្ថានភាពមន្រ្ដី" key="8">
+            <TabPane tab="ព័ត៌មានស្ថានភាពមន្រ្ដី" key="7">
                <StatusInfo
                   userData={user}
                   rankList={rankList}
@@ -81,10 +81,10 @@ const Edit = ({
                   statusOfficer={statusOfficer}
                ></StatusInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានការដាក់ពិន័យ" key="9">
+            <TabPane tab="ព័ត៌មានការដាក់ពិន័យ" key="8">
                <PenaltyInfo userData={user}></PenaltyInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានការលើកសសើរ" key="10">
+            <TabPane tab="ព័ត៌មានការលើកសសើរ" key="9">
                <PraiseInfo userData={user}></PraiseInfo>
             </TabPane>
          </Tabs>

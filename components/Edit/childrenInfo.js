@@ -6,6 +6,7 @@ import {
    SaveOutlined,
    DeleteOutlined,
    EditOutlined,
+   UploadOutlined,
 } from "@ant-design/icons";
 import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
@@ -22,6 +23,7 @@ import {
    Space,
    Table,
    Drawer,
+   Upload,
 } from "antd";
 import api from "@/utils/api";
 
@@ -328,6 +330,18 @@ const childrenInfo = ({ userData }) => {
                      >
                         <Radio.Group options={statusOptions}></Radio.Group>
                      </Form.Item>
+                  </Col>
+               </Row>
+               <Row>
+                  <Col span={24}>
+                     <div>
+                        <p>File Name</p>
+                        <Upload>
+                           <Button icon={<UploadOutlined />}>
+                              ឯកសារសំបុត្រកំណើតកូន
+                           </Button>
+                        </Upload>
+                     </div>
                   </Col>
                </Row>
             </Form>

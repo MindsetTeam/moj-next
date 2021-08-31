@@ -1,9 +1,22 @@
 import styles from "@/styles/Edit.module.css";
 import { AlertDispatch } from "contexts/alert.context";
-import { UserOutlined, SaveOutlined } from "@ant-design/icons";
+import { UserOutlined, SaveOutlined, UploadOutlined } from "@ant-design/icons";
 import { useState, useContext } from "react";
 
-import { Col, Row, Form, Input, DatePicker, Radio, Select, Button } from "antd";
+import ChildrenInfo from "@/components/Edit/childrenInfo";
+
+import {
+   Col,
+   Row,
+   Form,
+   Input,
+   DatePicker,
+   Radio,
+   Select,
+   Button,
+   Checkbox,
+   Upload,
+} from "antd";
 import api from "@/utils/api";
 import moment from "moment";
 
@@ -16,6 +29,7 @@ const SpouseInfo = ({ userData }) => {
    const dispatch = useContext(AlertDispatch);
    const [form] = Form.useForm();
    const [spouseInfo, setSpouseInfo] = useState(null);
+   const [isSingle, setIsSingle] = useState(true);
 
    const onSave = () => {
       const dataInput = form.getFieldsValue(true);
@@ -30,6 +44,10 @@ const SpouseInfo = ({ userData }) => {
             },
          });
       });
+   };
+
+   const isSingleToggle = () => {
+      setIsSingle(!isSingle);
    };
 
    return (
@@ -52,6 +70,13 @@ const SpouseInfo = ({ userData }) => {
                <h1 className={styles.title}>
                   <UserOutlined></UserOutlined>ព័ត៌មានទូទៅ
                </h1>
+               <Row gutter={16}>
+                  <Col span={24}>
+                     <Checkbox onChange={isSingleToggle} checked={isSingle}>
+                        មិនទាន់រៀបការ
+                     </Checkbox>
+                  </Col>
+               </Row>
                <Row gutter={16}>
                   <Col span={12}>
                      <Form.Item
@@ -199,7 +224,7 @@ const SpouseInfo = ({ userData }) => {
                   </Col>
                </Row>
                <Row gutter={16}>
-                  <Col span={24}>
+                  <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "workPlace"]}
@@ -213,6 +238,16 @@ const SpouseInfo = ({ userData }) => {
                      >
                         <Input placeholder="ទីកន្លែងបំពេញការងារ" />
                      </Form.Item>
+                  </Col>
+                  <Col span={12}>
+                     <div>
+                        <p>File Name</p>
+                        <Upload>
+                           <Button icon={<UploadOutlined />}>
+                              ឯកសារសំបុត្រអាពាហ៏ពិពាហ៏
+                           </Button>
+                        </Upload>
+                     </div>
                   </Col>
                </Row>
             </div>
@@ -273,14 +308,31 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "birthPlace", "province"]}
                         label="រាជធានី/ខេត្ត"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញរាជធានី/ខេត្ត",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញរាជធានី/ខេត្ត",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="រាជធានី/ខេត្ត" />
+                     </Form.Item>
+                  </Col>
+               </Row>
+               <Row gutter={16}>
+                  <Col span={24}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["birthPlace", "other"]}
+                        label="ទីកន្លែងកំណើតផ្សេងៗ"
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញទីកន្លែងកំណើតផ្សេងៗ",
+                        //    },
+                        // ]}
+                     >
+                        <Input placeholder="ទីកន្លែងកំណើតផ្សេងៗ" />
                      </Form.Item>
                   </Col>
                </Row>
@@ -297,12 +349,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "currentResidence", "houseNum"]}
                         label="ផ្ទះលេខ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញផ្ទះលេខ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញផ្ទះលេខ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="ផ្ទះលេខ" />
                      </Form.Item>
@@ -374,12 +426,12 @@ const SpouseInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name={["partnerInfo", "currentResidence", "province"]}
                         label="រាជធានី/ខេត្ត"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញរាជធានី/ខេត្ត",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញរាជធានី/ខេត្ត",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="រាជធានី/ខេត្ត" />
                      </Form.Item>
@@ -400,8 +452,29 @@ const SpouseInfo = ({ userData }) => {
                      </Form.Item>
                   </Col>
                </Row>
+               <Row gutter={12}>
+                  <Col span={24}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["birthPlace", "other"]}
+                        label="ទីលំនៅបច្ចុប្បន្នផ្សេងៗ"
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញទីលំនៅបច្ចុប្បន្នផ្សេងៗ",
+                        //    },
+                        // ]}
+                     >
+                        <Input placeholder="ទីលំនៅបច្ចុប្បន្នផ្សេងៗ" />
+                     </Form.Item>
+                  </Col>
+               </Row>
             </div>
          </Form>
+
+         {/* Children */}
+         <ChildrenInfo userData={userData}></ChildrenInfo>
+
          <div className={styles.btnContainer}>
             <Button icon={<SaveOutlined />} onClick={onSave}>
                រក្សាទុក

@@ -6,6 +6,7 @@ import {
    EditOutlined,
    DeleteOutlined,
    DownOutlined,
+   UploadOutlined,
 } from "@ant-design/icons";
 import React, { useState, useEffect, useContext } from "react";
 
@@ -23,6 +24,7 @@ import {
    Dropdown,
    Drawer,
    Menu,
+   Upload,
 } from "antd";
 import api from "@/utils/api";
 
@@ -101,12 +103,12 @@ const EducationInfo = ({ userData }) => {
          key: "place",
       },
       {
-         title: "ឆ្នាំចូលសិក្សា",
+         title: "ថ្ងៃខែឆ្នាំចូលសិក្សា",
          dataIndex: "startYear",
          key: "startYear",
       },
       {
-         title: "ឆ្នាំបញ្ចប់សិក្សា",
+         title: "ថ្ងៃខែឆ្នាំបញ្ចប់សិក្សា",
          dataIndex: "endYear",
          key: "endYear",
       },
@@ -175,6 +177,7 @@ const EducationInfo = ({ userData }) => {
       <div className={styles.educationInfoContainer}>
          <h1 className={styles.title} style={{ marginBottom: 20 }}>
             <UserOutlined></UserOutlined>ព័ត៌មានកម្រិតវប្បធម៌
+            ការបណ្ដុះបណ្ដាលវិជ្ជាជីវៈ​ និងការបណ្ដុះបណ្ដាលបន្ដ
          </h1>
          <Button icon={<PlusOutlined />} onClick={() => setVisible(true)}>
             បញ្ចូលកម្រិតវប្បធម៌
@@ -306,7 +309,7 @@ const EducationInfo = ({ userData }) => {
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="startYear"
-                        label="ឆ្នាំចូលសិក្សា"
+                        label="ថ្ងៃខែឆ្នាំចូលសិក្សា"
                         rules={[
                            {
                               required: true,
@@ -314,14 +317,20 @@ const EducationInfo = ({ userData }) => {
                            },
                         ]}
                      >
-                        <Input placeholder="ឆ្នាំចូលសិក្សា" />
+                        <DatePicker
+                           placeholder="ថ្ងៃខែឆ្នាំចូលសិក្សា"
+                           format="DD/MM/YYYY"
+                           style={{ width: "100%" }}
+                           //  onChange={onStartDateChange}
+                        />
+                        {/* <Input placeholder="ឆ្នាំចូលសិក្សា" /> */}
                      </Form.Item>
                   </Col>
                   <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="endYear"
-                        label="ឆ្នាំបញ្ចប់សិក្សា"
+                        label="ថ្ងៃខែឆ្នាំបញ្ចប់សិក្សា"
                         rules={[
                            {
                               required: true,
@@ -329,7 +338,13 @@ const EducationInfo = ({ userData }) => {
                            },
                         ]}
                      >
-                        <Input placeholder="ឆ្នាំបញ្ចប់សិក្សា" />
+                        <DatePicker
+                           placeholder="ថ្ងៃខែឆ្នាំបញ្ចប់សិក្សា"
+                           format="DD/MM/YYYY"
+                           style={{ width: "100%" }}
+                           //  onChange={onStartDateChange}
+                        />
+                        {/* <Input placeholder="ឆ្នាំបញ្ចប់សិក្សា" /> */}
                      </Form.Item>
                   </Col>
                </Row>
@@ -351,6 +366,16 @@ const EducationInfo = ({ userData }) => {
                      >
                         <Input placeholder="ទីកន្លែងសិក្សា" />
                      </Form.Item>
+                  </Col>
+               </Row>
+               <Row gutter={12}>
+                  <Col span={24}>
+                     <div>
+                        <p>File Name</p>
+                        <Upload>
+                           <Button icon={<UploadOutlined />}>សញ្ញាប័ត្រ</Button>
+                        </Upload>
+                     </div>
                   </Col>
                </Row>
             </Form>
