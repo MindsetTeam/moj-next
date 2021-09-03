@@ -389,7 +389,10 @@ const Index = (props) => {
                     fontSize: "1.4em",
                   }}
                 >
-                  0
+                  {displayData?.data?.centerInstitution
+                    ? displayData?.data?.centerInstitution.total +
+                      displayData?.data?.provinceInstitution.total
+                    : 0}
                 </p>
                 <p>នាក់ ក្នុងឆ្នាំ2021</p>
               </Card>
@@ -428,7 +431,8 @@ const Index = (props) => {
                     fontSize: "1.4em",
                   }}
                 >
-                  0
+                  {displayData?.data?.officerStatusList["មន្រ្តីកម្មសិក្សា"] ||
+                    0}
                 </p>
                 <p>នាក់ ក្នុងឆ្នាំ2021</p>
               </Card>
@@ -466,7 +470,7 @@ const Index = (props) => {
                     fontSize: "1.4em",
                   }}
                 >
-                  0
+                  {displayData?.data?.officerStatusList["គ្មានក្រប​ខណ្ឌ"] || 0}
                 </p>
                 <p>នាក់ ក្នុងឆ្នាំ2021</p>
               </Card>
@@ -505,7 +509,7 @@ const Index = (props) => {
                     fontSize: "1.4em",
                   }}
                 >
-                  0
+                  {displayData?.data?.retiredUsers}
                 </p>
                 <p>នាក់ ក្នុងឆ្នាំ2021</p>
               </Card>

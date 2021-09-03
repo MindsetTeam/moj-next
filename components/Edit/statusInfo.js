@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from "react";
 import moment from "moment";
 import styles from "@/styles/Edit.module.css";
 import {
-   Drawer,
    Form,
    Button,
    Col,
@@ -11,8 +10,6 @@ import {
    Select,
    DatePicker,
    Table,
-   Tag,
-   Space,
    Dropdown,
    Menu,
    Switch,
@@ -25,7 +22,6 @@ import {
    EditOutlined,
    DeleteOutlined,
    DownOutlined,
-   PrinterOutlined,
 } from "@ant-design/icons";
 import api from "@/utils/api";
 
@@ -36,6 +32,7 @@ const StatusInfo = ({
    ministryList,
    letterTypes,
    rankList,
+   onChangeTabKey,
    userData,
 }) => {
    const [formInfo] = Form.useForm();
@@ -142,6 +139,7 @@ const StatusInfo = ({
                // description: "Successfully",
             },
          });
+         onChangeTabKey('8')
       });
    };
 

@@ -18,6 +18,37 @@ export const getOverviewEmployees = async (req, res) => {
     );
   }
   if (role === "admin") {
+    const retiredUsers = await User.find({
+      approval: true,
+      birthDate: { $lt: new Date(Date.now() - 65 * 365 * 24 * 60 * 60 * 1000) },
+    }).countDocuments();
+
+    const officerStatusListRes = await User.aggregate([
+      {
+        $project: {
+          approval: 1,
+          officerStatus: { $slice: ["$officerStatus", -1] },
+        },
+      },
+      {
+        $match: {
+          approval: true,
+          officerStatus: { $elemMatch: { $exists: true } },
+        },
+      },
+      {
+        $group: {
+          _id: "$officerStatus.rank",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    const officerStatusList = {};
+    officerStatusListRes.forEach((v) => {
+      officerStatusList[v._id] = v.total;
+    });
+    console.log(officerStatusList);
+
     const provinceInstitutionRawData = await User.aggregate([
       {
         $project: {
@@ -55,17 +86,25 @@ export const getOverviewEmployees = async (req, res) => {
     const centerInstitution = {
       ប្រុស: 0,
       ស្រី: 0,
+      total: 0,
     };
 
     const provinceInstitution = { ...centerInstitution };
     centerInstitutionRawData.forEach((v) => {
       centerInstitution[v._id] = v.total;
+      centerInstitution.total += v.total;
     });
     provinceInstitutionRawData.forEach((v) => {
       provinceInstitution[v._id] = v.total;
+      provinceInstitution.total += v.total;
     });
     console.log({ provinceInstitution, centerInstitution });
-    resData = { centerInstitution, provinceInstitution };
+    resData = {
+      centerInstitution,
+      provinceInstitution,
+      retiredUsers,
+      officerStatusList,
+    };
   }
   res.status(200).json({
     success: true,
@@ -88,8 +127,9 @@ export const getEmployees = async (req, res) => {
     };
   }
   if (req.user.role !== "admin") {
-    reqQuery = { ...req.query, department: req.user.department };
+    reqQuery = { ...reqQuery, department: req.user.department };
   }
+  console.log(reqQuery);
   const users = await User.find(reqQuery);
 
   res.status(200).json({

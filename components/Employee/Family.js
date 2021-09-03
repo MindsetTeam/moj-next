@@ -1,25 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-   Drawer,
    Form,
-   Button,
-   Menu,
    Col,
    Row,
    Input,
-   Select,
-   DatePicker,
-   Dropdown,
    Table,
-   Tag,
-   Space,
-   Switch,
    Radio,
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import moment from "moment";
-
-const { Option } = Select;
 
 const statusOptions = [
    { label: "រស់", value: "រស់" },

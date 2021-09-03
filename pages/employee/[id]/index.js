@@ -1,15 +1,15 @@
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+// import Image from "next/image";
+// import Link from "next/link";
 import styles from "@/styles/Employee.module.css";
 
-import { Tabs, Col, Row, Button } from "antd";
+import { Tabs } from "antd";
 
-import {
-   HomeOutlined,
-   DatabaseOutlined,
-   UserOutlined,
-} from "@ant-design/icons";
+// import {
+//    HomeOutlined,
+//    DatabaseOutlined,
+//    UserOutlined,
+// } from "@ant-design/icons";
 
 const { TabPane } = Tabs;
 

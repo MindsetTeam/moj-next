@@ -5,6 +5,7 @@ export const placeFormat = ({
   village,
   district,
   province,
+  other,
 } = {}) => {
   return [
     houseNum && `ផ្ទះលេខ ${houseNum}`,
@@ -13,5 +14,6 @@ export const placeFormat = ({
     commune && `ឃុំ ${commune}`,
     district && `ស្រុក/ខណ្ឌ ${district}`,
     province && `រាជធានី/ខេត្ត ${province}`,
+    other && other,
   ].join(" ");
 };

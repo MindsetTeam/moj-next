@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
 import {
-   Drawer,
    Form,
    Button,
    Col,
@@ -10,20 +9,14 @@ import {
    Select,
    DatePicker,
    Table,
-   Tag,
-   Space,
    Switch,
    Menu,
-   Dropdown,
    Modal,
 } from "antd";
 
 import {
-   PlusOutlined,
    EditOutlined,
    DeleteOutlined,
-   PrinterOutlined,
-   DownOutlined,
 } from "@ant-design/icons";
 import api from "@/utils/api";
 

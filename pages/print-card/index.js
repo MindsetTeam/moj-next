@@ -60,176 +60,80 @@ const index = () => {
           align-items: center;
         }
 
-        /* Front Card */
         .front-card-container {
-          width: 326px;
-          height: 550px;
-          position: relative;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
+          width: 550px;
+          height: 400px;
+          padding: 20px;
+          border: 1px solid #000;
           border-radius: 15px;
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-          letter-spacing: 0.7px;
         }
 
-        .front-card-container::before {
-          content: "";
-          -webkit-print-color-adjust: exact;
-          background-image: url("/card/frontcard.jpg");
-          background-size: cover;
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          bottom: 0px;
-          left: 0px;
-          margin: auto;
-          opacity: 0.2;
-          height: 100%;
-          width: 100%;
+        /* Front Top */
+        .front-card-container .top-section .profile {
+          margin-right: 10px;
         }
 
-        /* Top */
+        .front-card-container .top-section .profile img {
+          width: 160px;
+          height: 180px;
+        }
+
         .front-card-container .top-section {
-          height: 40%;
-          padding-top: 30px;
+          display: flex;
+          font-style: italic;
         }
 
-        .front-card-container .top-section img {
-          width: 80px;
-          height: 80px;
-          display: block;
-          margin: auto;
-          margin-bottom: 15px;
+        .front-card-container .top-section table tr td:nth-child(3n + 3) {
+          color: rgb(34, 34, 185);
         }
 
-        .front-card-container .top-section div {
-          text-align: center;
-          font-weight: bold;
-        }
-
-        /* Body */
-        .front-card-container .body-section {
-          width: 100%;
-          height: 60%;
-          padding-top: 100px;
-          color: #0e588d;
-          font-weight: bold;
-          text-align: center;
-          border-bottom: 5px solid;
-          border-image-slice: 1;
-          border-image-source: radial-gradient(
-            circle,
-            rgba(241, 49, 58, 1) 38%,
-            rgba(93, 49, 47, 1) 100%
-          );
-        }
-
-        .front-card-container .body-section div:nth-child(2) {
-          margin-top: 110px;
-          padding-left: 30px;
-          text-align: left;
-        }
-
-        .front-card-container .body-section div:nth-child(2) p:nth-child(1) {
-          letter-spacing: 1.2px;
-        }
-
-        .front-card-container .body-section div:nth-child(2) p:nth-child(2) {
-          font-size: 1.3rem;
-          letter-spacing: 2px;
-        }
-
-        /* Bottom */
+        /* Front Bottom */
         .front-card-container .bottom-section {
-          padding-top: 10px;
-          padding-bottom: 10px;
-          color: #0e588d;
+          display: flex;
+        }
+
+        .front-card-container .bottom-section .card-info {
+          flex: 1;
+          font-size: 0.8rem;
+          font-style: italic;
+          color: rgb(34, 34, 185);
+        }
+
+        .front-card-container .bottom-section .card-info .qrcode img {
+          padding-left: 30px;
+          width: 90px;
+        }
+
+        .front-card-container .bottom-section .signature {
+          flex: 1;
+          text-align: center;
+          font-weight: bold;
+          font-size: 1.2rem;
+          color: rgb(34, 34, 185);
         }
 
         /* Back Card */
+
         .back-card-container {
-          width: 326px;
-          height: 550px;
-          position: relative;
+          font-family: "Moul", serif;
+          width: 550px;
+          height: 400px;
+          padding: 20px;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          font-size: 1.2rem;
+          color: rgb(34, 34, 185);
+          border: 1px solid #000;
           border-radius: 15px;
           box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         }
 
-        .back-card-container::before {
-          content: "";
-          -webkit-print-color-adjust: exact;
-          background-image: url("/card/logo.png");
-          background-size: cover;
-          position: absolute;
-          top: 0px;
-          right: 0px;
-          bottom: 0px;
-          left: 0px;
-          margin: auto;
-          opacity: 0.08;
-          height: 300px;
-          width: 300px;
-        }
-
-        /* Top */
-        .back-card-container .top-section {
-          // height: 12%;
-          padding: 10px 15px;
-          display: flex;
-          border-bottom: 10px solid;
-          border-image-slice: 1;
-          border-width: 10px;
-          border-image-source: linear-gradient(
-            90deg,
-            rgba(237, 180, 161, 1) 35%,
-            rgba(186, 157, 149, 1) 100%
-          );
-        }
-
-        .back-card-container .top-section div:nth-child(2) {
-          padding-top: 10px;
-        }
-
-        .back-card-container .top-section div:nth-child(2) h3,
-        .back-card-container .top-section div:nth-child(2) p {
-          color: #0e588d;
-          font-weight: bold;
-        }
-
-        .back-card-container .top-section div:nth-child(2) p {
-          font-size: 0.7rem;
-        }
-
-        .back-card-container .top-section .logo img {
-          height: 60px;
-          width: 60px;
-          margin-right: 15px;
-        }
-
-        /* Body */
-        .back-card-container .body-section {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          height: 80%;
-          color: #0e588d;
-          font-weight: bold;
-        }
-
-        .back-card-container .body-section .user-profile {
-          width: 90px;
-          position: relative;
-          // height: 130px;
-          margin-bottom: 15px;
-        }
-
-        .back-card-container .body-section .qrcode {
-          width: 80px;
-          height: 80px;
-          margin-top: 25px;
+        .back-card-container .logo img {
+          width: 170px;
         }
       `}</style>
       <Button
@@ -243,70 +147,90 @@ const index = () => {
       <div className="container" id="section-to-print">
         <div className="front-card-container">
           <div className="top-section">
-            <img src="/card/nation.png" alt="" />
-            <div>
-              <p>
-                <strong>ព្រះរាជាណាចក្រកម្ពុជា</strong>
-              </p>
-              <p>
-                <strong>ជាតិ សាសនា ព្រះមហាក្សត្រ</strong>
-              </p>
+            <div className="profile">
+              <img src="/card/user.png" alt="" />
             </div>
-          </div>
-          <div className="body-section">
-            <div>
-              <p>អត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការស៊ីវិល</p>
-              <p>Identity Card of Officer</p>
-            </div>
-            <div>
-              <p>{user?.firstName + " " + user?.lastName}</p>
-              <p>
-                {((user?.civilID || "").match(/.{1,4}/g) || []).join(" ")}
-              </p>
-            </div>
+            <table>
+              <tr>
+                <td>គោត្តនាម-នាម</td>
+                <td>:</td>
+                <td>ម៉េង ស្រីនួន</td>
+                <td>ភេទ </td>
+                <td>:</td>
+                <td>ស្រី</td>
+              </tr>
+              <tr>
+                <td>អក្សរពុម្ពឡាតាំង </td>
+                <td>:</td>
+                <td>MENG SREYNOUN</td>
+              </tr>
+              <tr>
+                <td>ថ្ងៃខែឆ្នាំកំណើត </td>
+                <td>:</td>
+
+                <td>០៥-០៩-១៩៩១</td>
+              </tr>
+              <tr>
+                <td>មុខតំណែង </td>
+                <td>:</td>
+
+                <td>ប្រធានការិយាល័យ</td>
+              </tr>
+              <tr>
+                <td>អង្គភាព </td>
+                <td>:</td>
+
+                <td>នាយកដ្ឋានកិច្ចការរដ្ឋបាល</td>
+              </tr>
+              <tr>
+                <td>អត្តលេខ </td>
+                <td>:</td>
+
+                <td>២៩១២១០០២៧៥</td>
+              </tr>
+            </table>
           </div>
           <div className="bottom-section">
-            <p>
-              <strong>www.moj.gov.kh</strong>
-            </p>
+            <div className="card-info">
+              <div className="qrcode">
+                <img src="/card/qrcode.png" alt="" />
+              </div>
+              <div>
+                <table>
+                  <tr>
+                    <td>លេខរៀងប័ណ្ណ</td>
+                    <td>:</td>
+                    <td>១៨៣</td>
+                  </tr>
+                  <tr>
+                    <td>ថ្ងៃចេញប័ណ្ណ</td>
+                    <td>:</td>
+                    <td>០១-០១-២០២១</td>
+                  </tr>
+                  <tr>
+                    <td>មានសុពលភាព</td>
+                    <td>:</td>
+                    <td>៣១-១២-២០២២</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div className="signature">
+              <p>រដ្ឋមន្រ្ដីក្រសួងយុត្តិធម៌</p>
+            </div>
           </div>
         </div>
         <div className="back-card-container">
-          <div className="top-section">
-            <div className="logo">
-              <img src="/card/logo.png" alt="" />
-            </div>
-            <div>
-              <h3>ក្រសួងយុត្តិធម៌</h3>
-              <p>Ministry of Justice</p>
-            </div>
+          <div>
+            <p>ព្រះរាជាណាចក្រកម្ពុជា</p>
+            <p>ជាតិ សាសនា ព្រះមហាក្សត្រ</p>
           </div>
-          <div className="body-section">
-            <img className="user-profile" src={user?.photo|| '/card/user.png'} alt="" />
-            <table>
-              <tr>
-                <td>អត្តលេខមន្រ្ដី：</td>
-                <td>{user?.civilID}</td>
-              </tr>
-              <tr>
-                <td>គោត្តនាម-នាម:</td>
-                <td>{user?.firstName + " " + user?.lastName}</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td>{user?.firstNameLatin + " " + user?.lastNameLatin}</td>
-              </tr>
-              <tr>
-                <td>ភេទ：</td>
-                <td>{user?.gender}</td>
-              </tr>
-              <tr>
-                <td>អង្គភាព：</td>
-                <td>{user?.department}</td>
-              </tr>
-            </table>
-            <img className="qrcode" src="/card/qrcode.png" alt="" />
-            <p>ថ្ងៃផុតកំណត់ ៣១-ធ្នូ-២០២២</p>
+          <div className="logo">
+            <img src="/card/logo.png" alt="" />
+          </div>
+          <div>
+            <p>ក្រសួងយុត្តិធម៌</p>
+            <p>ប័ណ្ណសម្គាល់ខ្លួនមន្រ្ដីរាជការ</p>
           </div>
         </div>
       </div>

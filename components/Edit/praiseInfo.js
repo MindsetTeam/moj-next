@@ -3,7 +3,6 @@ import moment from "moment";
 import styles from "@/styles/Edit.module.css";
 import { AlertDispatch } from "contexts/alert.context";
 import {
-   Drawer,
    Form,
    Menu,
    Button,
@@ -14,9 +13,6 @@ import {
    Select,
    DatePicker,
    Table,
-   Tag,
-   Space,
-   Switch,
    Modal,
 } from "antd";
 
@@ -28,7 +24,6 @@ import {
    DownOutlined,
    EditOutlined,
    DeleteOutlined,
-   PrinterOutlined,
 } from "@ant-design/icons";
 
 const Praise = ({ userData }) => {

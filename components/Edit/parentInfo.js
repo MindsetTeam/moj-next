@@ -3,7 +3,7 @@ import { AlertDispatch } from "contexts/alert.context";
 import { UserOutlined, PhoneOutlined } from "@ant-design/icons";
 import { useState, useContext } from "react";
 
-import { Col, Row, Form, Input, DatePicker, Radio, Select, Button } from "antd";
+import { Col, Row, Form, Input, DatePicker, Radio, Button } from "antd";
 import { SaveOutlined } from "@ant-design/icons";
 import api from "@/utils/api";
 import moment from "moment";
@@ -12,7 +12,7 @@ const statusOptions = [
    { label: "ស្លាប់", value: "ស្លាប់" },
 ];
 
-const ParentInfo = ({ userData }) => {
+const ParentInfo = ({ userData ,onChangeTabKey}) => {
    const dispatch = useContext(AlertDispatch);
    const [dadForm] = Form.useForm();
    const [momForm] = Form.useForm();
@@ -38,6 +38,7 @@ const ParentInfo = ({ userData }) => {
                   //  description: "បានរក្សាទុក",
                },
             });
+            onChangeTabKey('4')
          }
       );
    };
@@ -234,15 +235,15 @@ const ParentInfo = ({ userData }) => {
                            <Form.Item
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthPlace", "district"]}
-                              label="ស្រុក/ខណ្ឌ"
+                              label="ក្រុង/ស្រុក/ខណ្ឌ"
                               // rules={[
                               //    {
                               //       required: true,
-                              //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                              //       message: "សូមបំពេញក្រុង/ស្រុក/ខណ្ឌ",
                               //    },
                               // ]}
                            >
-                              <Input placeholder="ស្រុក/ខណ្ឌ" />
+                              <Input placeholder="ក្រុង/ស្រុក/ខណ្ឌ" />
                            </Form.Item>
                         </Col>
 
@@ -475,15 +476,15 @@ const ParentInfo = ({ userData }) => {
                            <Form.Item
                               style={{ marginBottom: 10 }}
                               name={["motherInfo", "birthPlace", "district"]}
-                              label="ស្រុក/ខណ្ឌ"
+                              label="ក្រុង/ស្រុក/ខណ្ឌ"
                               // rules={[
                               //    {
                               //       required: true,
-                              //       message: "សូមបំពេញស្រុក/ខណ្ឌ",
+                              //       message: "សូមបំពេញក្រុង/ស្រុក/ខណ្ឌ",
                               //    },
                               // ]}
                            >
-                              <Input placeholder="ស្រុក/ខណ្ឌ" />
+                              <Input placeholder="ក្រុង/ស្រុក/ខណ្ឌ" />
                            </Form.Item>
                         </Col>
                         <Col span={12}>

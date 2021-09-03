@@ -5,6 +5,7 @@ import moment from "moment";
 
 import { Row, Col, Button } from "antd";
 import { UserOutlined } from "@ant-design/icons";
+import { placeFormat } from "@/utils/formalFormat";
 
 const General = ({ userData }) => {
   return (
@@ -88,41 +89,14 @@ const General = ({ userData }) => {
               <Col span={24} className={styles.singleGeneralInfo}>
                 <span style={{ flex: 1 }}>ទីកន្លែងកំណើត</span>
                 <span className={styles.hightLightInfo} style={{ flex: 6 }}>
-                  {userData.birthPlace &&
-                    [
-                      userData.birthPlace.houseNum &&
-                        `${userData.birthPlace.houseNum}`,
-                      userData.birthPlace.streetNum &&
-                        `ផ្លូវ${userData.birthPlace.streetNum}`,
-                      userData.birthPlace.village &&
-                        `ភូមិ ${userData.birthPlace.village} `,
-                      userData.birthPlace.commune &&
-                        `ឃុំ ${userData.birthPlace.commune}`,
-                      userData.birthPlace.district &&
-                        `ស្រុក/ខណ្ឌ ${userData.birthPlace.district}`,
-                      userData.birthPlace.province &&
-                        `រាជធានី/ខេត្ត ${userData.birthPlace.province}`,
-                    ].join(" ")}
+                  {userData.birthPlace && placeFormat(userData.birthPlace)}
                 </span>
               </Col>
               <Col span={24} className={styles.singleGeneralInfo}>
                 <span style={{ flex: 1 }}>អាស័យដ្ឋាន</span>
                 <span className={styles.hightLightInfo} style={{ flex: 6 }}>
                   {userData.currentResidence &&
-                    [
-                      userData.currentResidence.houseNum &&
-                        `${userData.currentResidence.houseNum}`,
-                      userData.currentResidence.streetNum &&
-                        `ផ្លូវ${userData.currentResidence.streetNum}`,
-                      userData.currentResidence.village &&
-                        `ភូមិ ${userData.currentResidence.village} `,
-                      userData.currentResidence.commune &&
-                        `ឃុំ ${userData.currentResidence.commune}`,
-                      userData.currentResidence.district &&
-                        `ស្រុក/ខណ្ឌ ${userData.currentResidence.district}`,
-                      userData.currentResidence.province &&
-                        `រាជធានី/ខេត្ត ${userData.currentResidence.province}`,
-                    ].join(" ")}
+                    placeFormat(userData.currentResidence)}
                 </span>
               </Col>
             </Row>

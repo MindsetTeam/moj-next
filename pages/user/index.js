@@ -1,4 +1,4 @@
-import { Table, Button, Modal, Form, Col, Row, Input } from "antd";
+import { Table, Button } from "antd";
 import Link from "next/link";
 
 import { EditOutlined, SearchOutlined, PlusOutlined } from "@ant-design/icons";

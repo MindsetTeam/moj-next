@@ -15,9 +15,7 @@ import {
    Row,
    Form,
    Input,
-   Space,
    DatePicker,
-   Radio,
    Select,
    Button,
    Table,
@@ -308,7 +306,7 @@ const EducationInfo = ({ userData }) => {
                   <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name="startYear"
+                        name="startDate"
                         label="ថ្ងៃខែឆ្នាំចូលសិក្សា"
                         rules={[
                            {
@@ -329,7 +327,7 @@ const EducationInfo = ({ userData }) => {
                   <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name="endYear"
+                        name="endDate"
                         label="ថ្ងៃខែឆ្នាំបញ្ចប់សិក្សា"
                         rules={[
                            {

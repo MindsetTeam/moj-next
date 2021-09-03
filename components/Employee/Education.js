@@ -1,20 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import {
-   Drawer,
-   Form,
-   Button,
-   Col,
-   Row,
-   Input,
-   Select,
-   DatePicker,
    Table,
-   Tag,
-   Space,
-   Switch,
-   Menu,
-   Dropdown,
 } from "antd";
 
 import { UserOutlined } from "@ant-design/icons";

@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import {
-   Drawer,
    Form,
    Menu,
    Button,
    Col,
    Row,
-   Dropdown,
    Input,
    Select,
    DatePicker,
    Table,
-   Tag,
-   Space,
-   Switch,
    Modal,
 } from "antd";
 
@@ -22,11 +17,8 @@ const { Option } = Select;
 import api from "@/utils/api";
 
 import {
-   PlusOutlined,
-   DownOutlined,
    EditOutlined,
    DeleteOutlined,
-   PrinterOutlined,
 } from "@ant-design/icons";
 
 const Praise = ({ userData }) => {
