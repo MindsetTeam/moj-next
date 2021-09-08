@@ -13,11 +13,11 @@ const Attachment = () => {
          dataIndex: "attachment",
          key: "attachment",
       },
-      {
-         title: "ប្រភេទឯកសារ",
-         dataIndex: "attachmentType",
-         key: "attachmentType",
-      },
+      // {
+      //    title: "ប្រភេទឯកសារ",
+      //    dataIndex: "attachmentType",
+      //    key: "attachmentType",
+      // },
       {
          title: "ផ្សេងៗ",
          key: "action",
@@ -29,13 +29,43 @@ const Attachment = () => {
    const data = [
       {
          key: "1",
-         attachment: "John Brown",
-         attachmentType: "hi2",
+         attachment: "ឯកសារផ្ទាល់ខ្លួន",
+         children: [
+            {
+               key: "11",
+               attachment: "asdf",
+            },
+            {
+               key: "12",
+               attachment: "asdf123123",
+            },
+         ],
       },
       {
          key: "2",
-         attachment: "123123",
-         attachmentType: "hi3",
+         attachment: "ឋានន្តរសកិ្ត និងថ្នាក់",
+         children: [
+            {
+               key: "21",
+               attachment: "rank1",
+            },
+            {
+               key: "22",
+               attachment: "rank2",
+            },
+         ],
+      },
+      {
+         key: "3",
+         attachment: "សញ្ញាបត្រ",
+      },
+      {
+         key: "4",
+         attachment: "សំបុត្រអាពាហ៍ពិពាហ៍",
+      },
+      {
+         key: "5",
+         attachment: "សំបុត្រកំណើតកូន",
       },
    ];
 
@@ -68,6 +98,7 @@ const Attachment = () => {
             dataSource={data}
             rowSelection={{
                type: "checkbox",
+               checkStrictly: false,
                ...rowSelection,
             }}
          ></Table>
