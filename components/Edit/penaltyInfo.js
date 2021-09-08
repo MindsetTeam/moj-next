@@ -38,7 +38,7 @@ const PenaltyInfo = ({ userData }) => {
       setSignDate(dateString);
    };
 
-   const showDrawer = () => {
+   const showModal = () => {
       setVisible(true);
    };
 
@@ -162,7 +162,7 @@ const PenaltyInfo = ({ userData }) => {
 
    return (
       <div className={styles.penaltyInfoContainer}>
-         <Button icon={<PlusOutlined />} onClick={showDrawer}>
+         <Button icon={<PlusOutlined />} onClick={showModal}>
             បញ្ចូលការដាក់ពិន័យ
          </Button>
          <div style={{ marginTop: 20 }}>

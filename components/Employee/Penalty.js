@@ -149,11 +149,11 @@ const Penalty = ({ userData }) => {
    ];
 
    return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
          {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
             បញ្ចូលការដាក់ពិន័យ
          </Button> */}
-         <div style={{ marginTop: 20 }}>
+         <div>
             <Table columns={columns} dataSource={penaltyList}></Table>
          </div>
 

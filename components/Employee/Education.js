@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 
-import {
-   Table,
-} from "antd";
+import { Table } from "antd";
 
 import { UserOutlined } from "@ant-design/icons";
 
-const Education = ({userData}) => {
-   const [educationLevel, setEducationLevel] = useState(userData?.education || []);
+const Education = ({ userData }) => {
+   const [educationLevel, setEducationLevel] = useState(
+      userData?.education || []
+   );
    const [foreignLangLevel, setForeignLangLevel] = useState(null);
 
    const educationLevelColumns = [
@@ -77,7 +77,7 @@ const Education = ({userData}) => {
    ];
 
    return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
          <div style={{ marginBottom: 30 }}>
             <h1 style={{ marginBottom: 20 }}>
                <UserOutlined style={{ fontSize: 23, marginRight: 5 }} />

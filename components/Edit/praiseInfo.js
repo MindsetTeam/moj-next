@@ -43,7 +43,7 @@ const Praise = ({ userData }) => {
       console.log(dateString);
    };
 
-   const showDrawer = () => {
+   const showModal = () => {
       setVisible(true);
    };
 
@@ -167,7 +167,7 @@ const Praise = ({ userData }) => {
 
    return (
       <div className={styles.praiseInfoContainer}>
-         <Button icon={<PlusOutlined />} onClick={showDrawer}>
+         <Button icon={<PlusOutlined />} onClick={showModal}>
             បញ្ចូលការលើកសសើរ
          </Button>
          <div style={{ marginTop: 20 }}>

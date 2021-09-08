@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-   Form,
-   Col,
-   Row,
-   Input,
-   Table,
-   Radio,
-} from "antd";
+import { Form, Col, Row, Input, Table, Radio } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import moment from "moment";
 
@@ -121,7 +114,7 @@ const Family = ({ userData }) => {
    ];
 
    return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
          {/* Spouse */}
          <Form
             layout="vertical"

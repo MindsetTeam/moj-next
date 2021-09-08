@@ -342,7 +342,7 @@ const WorkHistory = ({ userData, ministryStructure }) => {
    // }, [visible])
 
    return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
          {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
         បញ្ចូលមុខតំណែង
       </Button> */}
@@ -396,7 +396,7 @@ const WorkHistory = ({ userData, ministryStructure }) => {
                })}
             </table>
          </div>
-         <div style={{ marginTop: 20 }}>
+         <div>
             <Table columns={columns} dataSource={experiencesList}></Table>
          </div>
 

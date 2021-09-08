@@ -14,10 +14,7 @@ import {
    Modal,
 } from "antd";
 
-import {
-   EditOutlined,
-   DeleteOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import api from "@/utils/api";
 
 const { Option } = Select;
@@ -176,11 +173,11 @@ const Rank = ({ userData }) => {
    ];
 
    return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
          {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
             បញ្ចូលឋានន្តរសកិ្ត និងថ្នាក់
          </Button> */}
-         <div style={{ marginTop: 20 }}>
+         <div>
             <Table columns={columns} dataSource={rankList}></Table>
          </div>
 

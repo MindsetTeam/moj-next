@@ -16,10 +16,7 @@ import {
 const { Option } = Select;
 import api from "@/utils/api";
 
-import {
-   EditOutlined,
-   DeleteOutlined,
-} from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 const Praise = ({ userData }) => {
    const [visible, setVisible] = useState(false);
@@ -153,11 +150,11 @@ const Praise = ({ userData }) => {
    ];
 
    return (
-      <div>
+      <div style={{ paddingTop: 10 }}>
          {/* <Button icon={<PlusOutlined />} onClick={showDrawer}>
             បញ្ចូលការលើកសសើរ
          </Button> */}
-         <div style={{ marginTop: 20 }}>
+         <div>
             <Table columns={columns} dataSource={praiseList}></Table>
          </div>
 

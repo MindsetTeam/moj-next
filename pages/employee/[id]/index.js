@@ -24,14 +24,14 @@ import Penalty from "@/components/Employee/Penalty";
 
 import api from "@/utils/api";
 // import { readFileFolderData } from "@/lib/ReadFileFolderData";
-import ministryStructure from 'data/Structure.json'
-import statusOfficer from 'data/StatusOfficer.json'
-import ministryList from 'data/Ministry.json'
-import letterTypes from 'data/LetterTypes.json'
-import rankList from 'data/Rank.json'
+import ministryStructure from "data/Structure.json";
+import statusOfficer from "data/StatusOfficer.json";
+import ministryList from "data/Ministry.json";
+import letterTypes from "data/LetterTypes.json";
+import rankList from "data/Rank.json";
+import Attachment from "@/components/Employee/Attachment";
 
 export async function getServerSideProps({ params }) {
-   
    const res = await api.get("/api/users/" + params.id);
    return {
       props: {
@@ -53,7 +53,6 @@ export default function Home({
    rankList,
    user,
 }) {
-
    return (
       <div className={styles.container}>
          <Head>
@@ -169,6 +168,17 @@ export default function Home({
                   key="8"
                >
                   <Praise userData={user}></Praise>
+               </TabPane>
+               <TabPane
+                  tab={
+                     <span>
+                        <img src="/attachment.png" width="30" height="30" />
+                        ឯកសារយោង
+                     </span>
+                  }
+                  key="9"
+               >
+                  <Attachment></Attachment>
                </TabPane>
             </Tabs>
          </div>
