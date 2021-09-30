@@ -1,3 +1,4 @@
+import styles from "@/styles/Login.module.css";
 import { Form, Button, Input } from "antd";
 import { signIn } from "next-auth/client";
 import { useRouter } from "next/router";
@@ -53,58 +54,58 @@ const Login = () => {
       });
    };
    return (
-      <div
-         style={{
-            width: "100vw",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-            height: "78vh",
-         }}
-      >
-         <div style={{ textAlign: "center" }}>
-            <Image
-               src={Hello}
-               alt="Typer"
-               placeholder="blur"
-               width={130}
-               height={130}
-            />
-         </div>
-         <Form hideRequiredMark form={form} {...layout}>
-            <Form.Item
-               style={{ marginBottom: 10, width: "300px" }}
-               label="អត្តលេខ"
-               name="username"
-               rules={[
-                  {
-                     required: true,
-                  },
-               ]}
-            >
-               <Input placeholder="អត្តលេខ" />
-            </Form.Item>
-
-            <Form.Item
-               style={{ marginBottom: 10, width: "300px" }}
-               label="Password"
-               name="password"
-               rules={[
-                  {
-                     required: true,
-                  },
-               ]}
-            >
-               <Input placeholder="password" />
-            </Form.Item>
-
-            <div style={{ width: 100, margin: "auto" }}>
-               <Button htmlType="submit" onClick={login}>
-                  Login
-               </Button>
+      <div className={styles.container}>
+         <div className={styles.loginContainer}>
+            <div className={styles.leftSection}>
+               <Image
+                  src={Hello}
+                  alt="Typer"
+                  placeholder="blur"
+                  width={120}
+                  height={120}
+               />
+               <p>Blah Blah Blah</p>
             </div>
-         </Form>
+            <div className={styles.rightSection}>
+               <h1>Login</h1>
+               <Form hideRequiredMark form={form} {...layout}>
+                  <Form.Item
+                     style={{ marginBottom: 20 }}
+                     label="អត្តលេខ"
+                     name="username"
+                     rules={[
+                        {
+                           required: true,
+                        },
+                     ]}
+                  >
+                     <Input placeholder="អត្តលេខ" />
+                  </Form.Item>
+
+                  <Form.Item
+                     style={{ marginBottom: 10 }}
+                     label="Password"
+                     name="password"
+                     rules={[
+                        {
+                           required: true,
+                        },
+                     ]}
+                  >
+                     <Input placeholder="password" />
+                  </Form.Item>
+
+                  <Button
+                     htmlType="submit"
+                     onClick={login}
+                     className={styles.btnLogin}
+                     shape="round"
+                  >
+                     Login
+                  </Button>
+               </Form>
+            </div>
+         </div>
       </div>
    );
 };

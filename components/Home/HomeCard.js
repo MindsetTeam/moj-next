@@ -8,6 +8,7 @@ const HomeCard = ({ number, title, color }) => {
             hoverable
             style={{
                textAlign: "center",
+               paddingTop: 5,
             }}
          >
             <TeamOutlined

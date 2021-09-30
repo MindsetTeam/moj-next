@@ -1,0 +1,20 @@
+.container {
+   background-color: #fff;
+   padding: 50px 20px;
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   min-height: 80vh;
+}
+
+.container p {
+   margin-bottom: 50px !important;
+   font-size: 1.5rem;
+}
+
+.btnResetPassword {
+   display: block;
+   margin: auto;
+   margin-top: 30px;
+   width: 200px;
+}

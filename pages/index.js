@@ -182,6 +182,15 @@ const Index = (props) => {
                </Col>
             </Row>
          </div>
+
+         <style global jsx>{`
+            .ant-collapse-icon-position-right
+               > .ant-collapse-item
+               > .ant-collapse-header
+               .ant-collapse-arrow {
+               margin-top: 5px;
+            }
+         `}</style>
       </div>
    );
 };

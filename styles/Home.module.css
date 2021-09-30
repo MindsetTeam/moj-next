@@ -1,5 +1,6 @@
 .container {
-   padding: 20px 15px;
+   padding: 0px 20px;
+   min-height: 80vh;
 }
 
 /*  officer */
@@ -10,6 +11,7 @@
    align-items: center;
    justify-content: space-between;
    font-size: 1.1rem;
+   padding: 5px 10px;
 }
 
 /* middle section */

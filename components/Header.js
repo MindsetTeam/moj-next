@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import TopMenu from "@/components/TopMenu";
 import { Menu, Avatar, Dropdown } from "antd";
@@ -11,7 +12,11 @@ import { useSession, signOut } from "next-auth/client";
 const dropDownMenu = (
    <Menu>
       <Menu.Item>
-         <EditOutlined></EditOutlined>កែប្រែ
+         <Link href="/personal">
+            <a>
+               <EditOutlined></EditOutlined>កែប្រែ
+            </a>
+         </Link>
       </Menu.Item>
       <Menu.Item
          onClick={() =>
