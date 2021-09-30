@@ -1,4 +1,4 @@
-const setting = () => {
+const Setting = () => {
    return (
       <div>
          <p>Setting Page</p>
@@ -6,4 +6,4 @@ const setting = () => {
    );
 };
 
-export default setting;
+export default Setting;

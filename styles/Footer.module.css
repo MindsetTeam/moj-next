@@ -1,0 +1,15 @@
+.footer {
+   background-color: #800808;
+   color: #fff;
+   padding: 15px;
+   display: flex;
+   justify-content: space-between;
+}
+
+.announcement {
+   display: flex;
+}
+
+.announcement p {
+   padding-left: 10px;
+}

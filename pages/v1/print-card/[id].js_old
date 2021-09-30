@@ -1,0 +1,319 @@
+import { Button } from "antd";
+import { PrinterOutlined } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+const index = () => {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  useEffect(async () => {
+    const user = await fetch(`/api/users/${router.query.id}`).then((res) =>
+      res.json()
+    );
+    setUser(user);
+  }, [router]);
+  return (
+    <>
+      <style jsx>{`
+        #section-to-print h1 {
+          font-size: 1.2em;
+          margin: 0;
+          font-weight: bold;
+        }
+        #section-to-print .tacteng {
+          font-family: tacteng;
+          font-size: 2.2em;
+          margin-top: -20px;
+        }
+
+        .text-center {
+          text-align: center;
+        }
+
+        @media print {
+          body * {
+            visibility: hidden;
+          }
+          body *:not(#section-to-print *) {
+            height: 0px;
+          }
+          #section-to-print,
+          #section-to-print * {
+            visibility: visible;
+          }
+          #section-to-print {
+            padding: 0px 45px;
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+          }
+        }
+        .container {
+          background: white;
+          height: 100%;
+          margin: auto;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        /* Front Card */
+        .front-card-container {
+          width: 326px;
+          height: 550px;
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          border-radius: 15px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          letter-spacing: 0.7px;
+        }
+
+        .front-card-container::before {
+          content: "";
+          -webkit-print-color-adjust: exact;
+          background-image: url("/card/frontcard.jpg");
+          background-size: cover;
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          bottom: 0px;
+          left: 0px;
+          margin: auto;
+          opacity: 0.2;
+          height: 100%;
+          width: 100%;
+        }
+
+        /* Top */
+        .front-card-container .top-section {
+          height: 40%;
+          padding-top: 30px;
+        }
+
+        .front-card-container .top-section img {
+          width: 80px;
+          height: 80px;
+          display: block;
+          margin: auto;
+          margin-bottom: 15px;
+        }
+
+        .front-card-container .top-section div {
+          text-align: center;
+          font-weight: bold;
+        }
+
+        /* Body */
+        .front-card-container .body-section {
+          width: 100%;
+          height: 60%;
+          padding-top: 100px;
+          color: #0e588d;
+          font-weight: bold;
+          text-align: center;
+          border-bottom: 5px solid;
+          border-image-slice: 1;
+          border-image-source: radial-gradient(
+            circle,
+            rgba(241, 49, 58, 1) 38%,
+            rgba(93, 49, 47, 1) 100%
+          );
+        }
+
+        .front-card-container .body-section div:nth-child(2) {
+          margin-top: 110px;
+          padding-left: 30px;
+          text-align: left;
+        }
+
+        .front-card-container .body-section div:nth-child(2) p:nth-child(1) {
+          letter-spacing: 1.2px;
+        }
+
+        .front-card-container .body-section div:nth-child(2) p:nth-child(2) {
+          font-size: 1.3rem;
+          letter-spacing: 2px;
+        }
+
+        /* Bottom */
+        .front-card-container .bottom-section {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          color: #0e588d;
+        }
+
+        /* Back Card */
+        .back-card-container {
+          width: 326px;
+          height: 550px;
+          position: relative;
+          border-radius: 15px;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+
+        .back-card-container::before {
+          content: "";
+          -webkit-print-color-adjust: exact;
+          background-image: url("/card/logo.png");
+          background-size: cover;
+          position: absolute;
+          top: 0px;
+          right: 0px;
+          bottom: 0px;
+          left: 0px;
+          margin: auto;
+          opacity: 0.08;
+          height: 300px;
+          width: 300px;
+        }
+
+        /* Top */
+        .back-card-container .top-section {
+          // height: 12%;
+          padding: 10px 15px;
+          display: flex;
+          border-bottom: 10px solid;
+          border-image-slice: 1;
+          border-width: 10px;
+          border-image-source: linear-gradient(
+            90deg,
+            rgba(237, 180, 161, 1) 35%,
+            rgba(186, 157, 149, 1) 100%
+          );
+        }
+
+        .back-card-container .top-section div:nth-child(2) {
+          padding-top: 10px;
+        }
+
+        .back-card-container .top-section div:nth-child(2) h3,
+        .back-card-container .top-section div:nth-child(2) p {
+          color: #0e588d;
+          font-weight: bold;
+        }
+
+        .back-card-container .top-section div:nth-child(2) p {
+          font-size: 0.7rem;
+        }
+
+        .back-card-container .top-section .logo img {
+          height: 60px;
+          width: 60px;
+          margin-right: 15px;
+        }
+
+        /* Body */
+        .back-card-container .body-section {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          height: 80%;
+          color: #0e588d;
+          font-weight: bold;
+        }
+
+        .back-card-container .body-section .user-profile {
+          width: 90px;
+          position: relative;
+          // height: 130px;
+          margin-bottom: 15px;
+        }
+
+        .back-card-container .body-section .qrcode {
+          width: 80px;
+          height: 80px;
+          margin-top: 25px;
+        }
+      `}</style>
+      <Button
+        icon={<PrinterOutlined />}
+        onClick={() => {
+          window.print();
+        }}
+      >
+        បោះពុម្ព
+      </Button>
+      <div className="container" id="section-to-print">
+        <div className="front-card-container">
+          <div className="top-section">
+            <img src="/card/nation.png" alt="" />
+            <div>
+              <p>
+                <strong>ព្រះរាជាណាចក្រកម្ពុជា</strong>
+              </p>
+              <p>
+                <strong>ជាតិ សាសនា ព្រះមហាក្សត្រ</strong>
+              </p>
+            </div>
+          </div>
+          <div className="body-section">
+            <div>
+              <p>អត្តសញ្ញាណប័ណ្ណមន្រ្ដីរាជការស៊ីវិល</p>
+              <p>Identity Card of Officer</p>
+            </div>
+            <div>
+              <p>{user?.firstName + " " + user?.lastName}</p>
+              <p>{((user?.civilID || "").match(/.{1,4}/g) || []).join(" ")}</p>
+            </div>
+          </div>
+          <div className="bottom-section">
+            <p>
+              <strong>www.moj.gov.kh</strong>
+            </p>
+          </div>
+        </div>
+        <div className="back-card-container">
+          <div className="top-section">
+            <div className="logo">
+              <img src="/card/logo.png" alt="" />
+            </div>
+            <div>
+              <h3>ក្រសួងយុត្តិធម៌</h3>
+              <p>Ministry of Justice</p>
+            </div>
+          </div>
+          <div className="body-section">
+            <img
+              className="user-profile"
+              src={user?.photo || "/card/user.png"}
+              alt=""
+            />
+            <table>
+              <tr>
+                <td>អត្តលេខមន្រ្ដី：</td>
+                <td>{user?.civilID}</td>
+              </tr>
+              <tr>
+                <td>គោត្តនាម-នាម:</td>
+                <td>{user?.firstName + " " + user?.lastName}</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>{user?.firstNameLatin + " " + user?.lastNameLatin}</td>
+              </tr>
+              <tr>
+                <td>ភេទ：</td>
+                <td>{user?.gender}</td>
+              </tr>
+              <tr>
+                <td>អង្គភាព：</td>
+                <td>{user?.department}</td>
+              </tr>
+            </table>
+            <img className="qrcode" src="/card/qrcode.png" alt="" />
+            <p>ថ្ងៃផុតកំណត់ ៣១-ធ្នូ-២០២២</p>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default index;

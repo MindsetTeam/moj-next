@@ -1,0 +1,54 @@
+.hightLightInfo {
+   color: slateblue;
+}
+
+/* .container {
+    height: 100vh;
+} */
+
+.generalInfoContainer {
+   margin-bottom: 20px;
+}
+
+.userImg {
+   padding: 20px;
+   background-color: #fff;
+   height: 300px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.userImg img {
+   /* border: 1px solid #ddd !important; */
+   box-shadow: 0 0 4px;
+   /* border-radius: 5px ; */
+}
+
+.generalInfo {
+   height: 300px;
+   background-color: #fff;
+   padding: 20px;
+}
+
+.singleGeneralInfo {
+   padding: 0 10px;
+   margin-bottom: 10px;
+   display: flex;
+   flex-direction: row;
+}
+
+.singleGeneralInfo span:nth-child(1) {
+   flex: 1;
+}
+
+.singleGeneralInfo span:nth-child(2) {
+   flex: 2;
+}
+
+.specificInfo {
+   padding: 20px;
+   background-color: #fff;
+   margin-bottom: 20px;
+}

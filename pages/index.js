@@ -1,810 +1,189 @@
-// import { Card, Row, Col, Divider, Table, Tag } from "antd";
-import { Card, Row, Col, Divider, Tag } from "antd";
-// import { UserOutlined, TeamOutlined } from "@ant-design/icons";
-import { TeamOutlined } from "@ant-design/icons";
-import Image from "next/image";
-import TyperPNG from "@/public/home/typer.png";
-// import { useEffect, useState } from "react";
-// import api from "@/utils/api";
+import styles from "@/styles/Home.module.css";
+import HomeCard from "@/components/Home/HomeCard";
+import Chart from "@/components/Home/Chart";
+import Dot from "@/components/Home/Dot";
 
-// import General from "@/components/Employee/General";
+import { Row, Col, Collapse } from "antd";
+import { TeamOutlined, DownOutlined } from "@ant-design/icons";
+
 import { useSession } from "next-auth/client";
 import useSWR from "swr";
 
-// const { Meta } = Card;
+const { Panel } = Collapse;
 
 const Index = (props) => {
-  // const [displayData, setDisplayData] = useState();
-  // const [employees, setEmployees] = useState([]);
-  const [session, loading] = useSession();
-  // const [user, setUser] = useState({});
-  const { data: displayData } = useSWR(
-    session?.user.role != "user" ? "/api/users/overview" : null
-  );
+   const [session, loading] = useSession();
+   const { data: displayData } = useSWR(
+      session?.user.role != "user" ? "/api/users/overview" : null
+   );
 
-  // useEffect(() => {
-  //    if (session?.user.role === "admin") {
-  //       (async () => {
-  //          const { data } = await api.get("/api/users/overview");
-  //          console.log(data);
-  //          setDisplayData(data.data);
-  //       })();
-  //    }
-  //    if (session?.user.role === "user") {
-  //       (async () => {
-  //          const user = await fetch(`/api/users/${session?.user.id}`).then(
-  //             (res) => res.json()
-  //          );
-  //          console.log(user);
-  //          setUser(user);
-  //       })();
-  //    }
-  //    if (session?.user.role === "editor") {
-  //       // (async () => {
-  //       //    try {
-  //       //       const { data } = await api.get(`/api/users`);
-  //       //       const employees = data.data.map((employee) => {
-  //       //          for (const key in employee) {
-  //       //             if (Object.hasOwnProperty.call(employee, key)) {
-  //       //                if (
-  //       //                   typeof employee[key] != "string" &&
-  //       //                   typeof employee[key] != "boolean" &&
-  //       //                   key != "experience"
-  //       //                ) {
-  //       //                   delete employee[key];
-  //       //                }
-  //       //             }
-  //       //          }
-  //       //          employee.experience =
-  //       //             employee.experience[employee.experience.length - 1] || {};
-  //       //          return employee;
-  //       //       });
-  //       //       setEmployees(employees);
-  //       //    } catch (error) {
-  //       //       console.log(error);
-  //       //    }
-  //       // })();
-  //    }
-  // }, [session]);
-
-  // const columns = [
-  //   {
-  //     title: "ល.រ",
-  //     dataIndex: "id",
-  //     key: "id",
-  //   },
-  //   {
-  //     title: "អត្តលេខ",
-  //     dataIndex: "nationalityIDNum",
-  //     key: "nationalityIDNum",
-  //   },
-  //   {
-  //     title: "គោត្តនាមនិងនាម",
-  //     dataIndex: "firstName",
-  //     key: "firstName",
-  //   },
-  //   {
-  //     title: "ភេទ",
-  //     dataIndex: "gender",
-  //     key: "gender",
-  //   },
-  //   {
-  //     title: "ថ្ងៃខែឆ្នាំកំណើត",
-  //     dataIndex: "birthDate",
-  //     key: "birthDate",
-  //   },
-  //   {
-  //     title: "មុខតំណែង",
-  //     dataIndex: ["experience", "position"],
-  //     key: "position",
-  //   },
-  //   {
-  //     title: "អង្គភាព",
-  //     dataIndex: "experience",
-  //     key: "department",
-  //     render: (experience) => {
-  //       return experience.department || experience.unit;
-  //     },
-  //   },
-  //   {
-  //     title: "ស្ថានភាព",
-  //     dataIndex: "status",
-  //     key: "status",
-  //   },
-  //   {
-  //     title: "ស្ថានភាពមន្ត្រី",
-  //     dataIndex: "approval",
-  //     key: "approvalStatus",
-  //     render: (approval, record) => {
-  //       console.log(approval);
-  //       let color = "red";
-  //       let title = "កំពុងពិនិត្យ";
-  //       if (approval) {
-  //         title = "អនុម័ត្ត";
-  //         color = "green";
-  //       }
-  //       return (
-  //         <Tag color={color} key={approval}>
-  //           {title}
-  //         </Tag>
-  //       );
-  //     },
-  //   },
-  // ];
-
-  return (
-    <div>
-      <div className="top-section">
-        <Row gutter={16}>
-          <Col span={16}>
-            <div
-              style={{
-                height: 230,
-                backgroundColor: "#FEE5D1",
-                borderRadius: 10,
-                padding: 10,
-                paddingLeft: 20,
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-              }}
-            >
-              <Image
-                src={TyperPNG}
-                alt="Typer"
-                placeholder="blur"
-                width={200}
-                height={190}
-              />
-              <section
-                style={{
-                  marginTop: -50,
-                }}
-              >
-                <h1 style={{ color: "orange", fontSize: "1.5rem" }}>
-                  សូមស្វាគមន៏មកកាន់ប្រព័ន្ធគ្រប់គ្រង khambodiaHR
-                </h1>
-                <div
-                  style={{
-                    marginTop: 30,
-                    marginLeft: 50,
-                    fontSize: "1rem",
-                  }}
-                >
-                  <p>
-                    <span style={{ fontWeight: "bold" }}>+</span>
-                    ប្រកាសស្ដីពីការប្រើប្រាស់ប្រព័ន្ធគ្រប់គ្រង khambodiaHR
-                  </p>
-                  <p>
-                    <span style={{ fontWeight: "bold" }}>+</span> សេចក្ដីណែនាំ
-                    របៀបការប្រើប្រាស់ប្រព័ន្ធគ្រប់គ្រង khambodiaHR
-                  </p>
-                </div>
-              </section>
-            </div>
-          </Col>
-          <Col span={8}>
-            <div style={{ height: 230, backgroundColor: "#FEE5D1" }}>
-              <iframe
-                width="100%"
-                height="230"
-                src="https://www.youtube.com/embed/KODKSNiVd7E"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </Col>
-        </Row>
+   const statusOfficer = (
+      <div className={styles.statusOfficerContainer}>
+         <div>
+            <TeamOutlined
+               style={{ fontSize: "1.4rem", marginRight: 10 }}
+            ></TeamOutlined>
+            <span>ស្ថានភាពមន្ត្រីរាជការ គិតត្រឹមឆ្នាំ2021</span>
+         </div>
+         <div>1000000 នាក់</div>
       </div>
+   );
 
-      {/* General Info */}
-      {/* {session?.user.role === "user" && <General userData={user}></General>} */}
+   const civilOfficer = (
+      <div className={styles.civilOfficerContainer}>
+         <div>
+            <TeamOutlined
+               style={{ fontSize: "1.4rem", marginRight: 10 }}
+            ></TeamOutlined>
+            <span>មន្ត្រីរាជការតាមស៊ីវិល តាមប្រភេទក្របខ័ណ្ឌ</span>
+         </div>
+         <div>1000000 នាក់</div>
+      </div>
+   );
 
-      {/* List User */}
-      {/* {session?.user.role === "editor" && (
-            <div style={{ marginTop: 20 }}>
-               <Table columns={columns} dataSource={employees}></Table>
-            </div>
-         )} */}
-      {session?.user.role === "editor" && (
-        <div style={{ width: "50%", margin: "auto", marginTop: 30 }}>
-          <h1
-            style={{
-              textAlign: "center",
-              fontSize: "22px",
-              color: "#E6C155",
-            }}
-          >
-            ចំនួនមន្ត្រីរាជការដែលបានបញ្ចូល
-          </h1>
-          <div
-            style={{
-              backgroundColor: "#fff",
-              padding: "10px 0px",
-              borderRadius: 10,
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                fontSize: "1.1em",
-                padding: "0px 10px",
-              }}
-            >
-              <div>
-                <TeamOutlined
-                  style={{
-                    fontSize: "2em",
-                    color: "#E6C155",
-                  }}
-                ></TeamOutlined>
-                <span style={{ marginTop: -30 }}>មន្រ្ដីដែលបានបញ្ចូល</span>
-              </div>
-              <div>{displayData?.data.total || 0} នាក់</div>
-            </div>
-            <Divider style={{ borderWidth: 2 }}></Divider>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-around",
-                paddingTop: 20,
-                paddingBottom: 25,
-              }}
-            >
-              <Card
-                hoverable
-                style={{
-                  width: 200,
-                  textAlign: "center",
-                  borderRadius: 10,
-                }}
-              >
-                <TeamOutlined
-                  style={{
-                    fontSize: "2em",
-                    color: "#E6C155",
-                  }}
-                ></TeamOutlined>
-                <span
-                  style={{
-                    fontSize: "1.1em",
-                    margin: "-20px 5px",
-                  }}
-                >
-                  មន្រ្ដីប្រុស
-                </span>
-                <Divider
-                  style={{
-                    borderColor: "#E6C155",
-                    borderWidth: "2px",
-                  }}
-                ></Divider>
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "1.4em",
-                    paddingTop: 10,
-                  }}
-                >
-                  {displayData?.data.ប្រុស || 0} នាក់
-                </p>
-              </Card>
-              <Card
-                hoverable
-                style={{
-                  width: 200,
-                  textAlign: "center",
-                  borderRadius: 10,
-                }}
-              >
-                <TeamOutlined
-                  style={{
-                    fontSize: "2em",
-                    color: "#E6C155",
-                  }}
-                ></TeamOutlined>
-                <span
-                  style={{
-                    fontSize: "1.1em",
-                    margin: "-20px 5px",
-                  }}
-                >
-                  មន្រ្ដីស្រី
-                </span>
-                <Divider
-                  style={{
-                    borderColor: "#E6C155",
-                    borderWidth: "2px",
-                  }}
-                ></Divider>
-                <p
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: "1.4em",
-                    paddingTop: 10,
-                  }}
-                >
-                  {displayData?.data.ស្រី || 0} នាក់
-                </p>
-              </Card>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Admin */}
-      {session?.user.role === "admin" && (
-        <>
-          <div style={{ margin: "30px 0px" }}>
-            <h1
-              style={{
-                textAlign: "center",
-                fontSize: "22px",
-                color: "#E6C155",
-              }}
-            >
-              ចំនួនមន្ត្រីរាជការស៊ីវិល តាមប្រភេទក្របខ័ណ្ឌ
-            </h1>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <Card
-                hoverable
-                style={{
-                  width: 290,
-                  textAlign: "center",
-                  borderRadius: 10,
-                }}
-              >
-                <TeamOutlined
-                  style={{ fontSize: "2em", color: "#E6C155" }}
-                ></TeamOutlined>
-                <span
-                  style={{
-                    color: "#4B5E9B",
-                    fontSize: "1.1em",
-                    margin: "-20px 5px",
-                  }}
-                >
-                  មន្រ្ដីក្របខ័ណ្ឌ
-                </span>
-                <Divider
-                  style={{
-                    borderColor: "#E6C155",
-                    borderWidth: "2px",
-                  }}
-                ></Divider>
-                <p
-                  style={{
-                    color: "#4B5E9B",
-                    fontWeight: "bold",
-                    fontSize: "1.4em",
-                  }}
-                >
-                  {displayData?.data?.centerInstitution
-                    ? displayData?.data?.centerInstitution.total +
-                      displayData?.data?.provinceInstitution.total
-                    : 0}
-                </p>
-                <p>នាក់ ក្នុងឆ្នាំ2021</p>
-              </Card>
-
-              <Card
-                hoverable
-                style={{
-                  width: 290,
-                  textAlign: "center",
-                  borderRadius: 10,
-                  margin: "0px 30px",
-                }}
-              >
-                <TeamOutlined
-                  style={{ fontSize: "2em", color: "#683131" }}
-                ></TeamOutlined>
-                <span
-                  style={{
-                    color: "#4B5E9B",
-                    fontSize: "1.1em",
-                    margin: "-20px 5px",
-                  }}
-                >
-                  មន្រ្ដីកំពុងកម្មសិក្សា
-                </span>
-                <Divider
-                  style={{
-                    borderColor: "#683131",
-                    borderWidth: "2px",
-                  }}
-                ></Divider>
-                <p
-                  style={{
-                    color: "#4B5E9B",
-                    fontWeight: "bold",
-                    fontSize: "1.4em",
-                  }}
-                >
-                  {displayData?.data?.officerStatusList["មន្រ្តីកម្មសិក្សា"] ||
-                    0}
-                </p>
-                <p>នាក់ ក្នុងឆ្នាំ2021</p>
-              </Card>
-
-              <Card
-                hoverable
-                style={{
-                  width: 290,
-                  textAlign: "center",
-                  borderRadius: 10,
-                }}
-              >
-                <TeamOutlined
-                  style={{ fontSize: "2em", color: "#4B5E9B" }}
-                ></TeamOutlined>
-                <span
-                  style={{
-                    color: "#4B5E9B",
-                    fontSize: "1.1em",
-                    margin: "-20px 5px",
-                  }}
-                >
-                  មន្រ្ដីគ្មានក្របខ័ណ្ឌ
-                </span>
-                <Divider
-                  style={{
-                    borderColor: "#4B5E9B",
-                    borderWidth: "2px",
-                  }}
-                ></Divider>
-                <p
-                  style={{
-                    color: "#4B5E9B",
-                    fontWeight: "bold",
-                    fontSize: "1.4em",
-                  }}
-                >
-                  {displayData?.data?.officerStatusList["គ្មានក្រប​ខណ្ឌ"] || 0}
-                </p>
-                <p>នាក់ ក្នុងឆ្នាំ2021</p>
-              </Card>
-
-              <Card
-                hoverable
-                style={{
-                  width: 290,
-                  textAlign: "center",
-                  borderRadius: 10,
-                  marginLeft: 30,
-                }}
-              >
-                <TeamOutlined
-                  style={{ fontSize: "2em", color: "#486E6C" }}
-                ></TeamOutlined>
-                <span
-                  style={{
-                    color: "#4B5E9B",
-                    fontSize: "1.1em",
-                    margin: "-20px 5px",
-                  }}
-                >
-                  មន្រ្ដីចូលនិវត្តន៏
-                </span>
-                <Divider
-                  style={{
-                    borderColor: "#4B5E9B",
-                    borderWidth: "2px",
-                  }}
-                ></Divider>
-                <p
-                  style={{
-                    color: "#486E6C",
-                    fontWeight: "bold",
-                    fontSize: "1.4em",
-                  }}
-                >
-                  {displayData?.data?.retiredUsers}
-                </p>
-                <p>នាក់ ក្នុងឆ្នាំ2021</p>
-              </Card>
-            </div>
-          </div>
-
-          <div style={{ margin: "50px 0px" }}>
-            <h1
-              style={{
-                textAlign: "center",
-                fontSize: "22px",
-                color: "#E6C155",
-              }}
-            >
-              ស្ថានភាពមន្រ្ដីរាជការ គិតត្រឹមឆ្នាំ2021
-            </h1>
-            <div style={{ width: "80%", margin: "auto" }}>
-              <Row gutter={10}>
-                <Col span={12}>
-                  <div
-                    style={{
-                      backgroundColor: "#fff",
-                      padding: "10px 0px",
-                      borderRadius: 10,
-                    }}
+   return (
+      <div className={styles.container}>
+         <div className={styles.topSection}>
+            <Row gutter={50}>
+               <Col span={12}>
+                  <Collapse
+                     accordion
+                     expandIconPosition="right"
+                     expandIcon={({ isActive }) => (
+                        <DownOutlined rotate={isActive ? 180 : 0} />
+                     )}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        fontSize: "1.1em",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <div>
-                        <TeamOutlined
-                          style={{
-                            fontSize: "2em",
-                            color: "#E6C155",
-                          }}
-                        ></TeamOutlined>
-                        <span style={{ marginTop: -30 }}>
-                          មន្រ្ដីរាជការថ្នាក់ជាតិ
-                        </span>
-                      </div>
-                      <div>
-                        {displayData?.data?.centerInstitution
-                          ? +(
-                              displayData?.data?.centerInstitution["ស្រី"] || 0
-                            ) +
-                            +(
-                              displayData?.data?.centerInstitution["ប្រុស"] || 0
-                            )
-                          : 0}{" "}
-                        នាក់
-                      </div>
-                    </div>
-                    <Divider style={{ borderWidth: 2 }}></Divider>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        paddingTop: 20,
-                        paddingBottom: 25,
-                      }}
-                    >
-                      <Card
-                        hoverable
-                        style={{
-                          width: 200,
-                          textAlign: "center",
-                          borderRadius: 10,
-                        }}
-                      >
-                        <TeamOutlined
-                          style={{
-                            fontSize: "2em",
-                            color: "#E6C155",
-                          }}
-                        ></TeamOutlined>
-                        <span
-                          style={{
-                            fontSize: "1.1em",
-                            margin: "-20px 5px",
-                          }}
-                        >
-                          ថ្នាក់ជាតិប្រុស
-                        </span>
-                        <Divider
-                          style={{
-                            borderColor: "#E6C155",
-                            borderWidth: "2px",
-                          }}
-                        ></Divider>
-                        <p
-                          style={{
-                            fontWeight: "bold",
-                            fontSize: "1.4em",
-                            paddingTop: 10,
-                          }}
-                        >
-                          {displayData?.data?.centerInstitution
-                            ? displayData?.data?.centerInstitution["ប្រុស"]
-                            : 0}{" "}
-                          នាក់
-                        </p>
-                      </Card>
-                      <Card
-                        hoverable
-                        style={{
-                          width: 200,
-                          textAlign: "center",
-                          borderRadius: 10,
-                        }}
-                      >
-                        <TeamOutlined
-                          style={{
-                            fontSize: "2em",
-                            color: "#E6C155",
-                          }}
-                        ></TeamOutlined>
-                        <span
-                          style={{
-                            fontSize: "1.1em",
-                            margin: "-20px 5px",
-                          }}
-                        >
-                          ថ្នាក់ជាតិស្រី
-                        </span>
-                        <Divider
-                          style={{
-                            borderColor: "#E6C155",
-                            borderWidth: "2px",
-                          }}
-                        ></Divider>
-                        <p
-                          style={{
-                            fontWeight: "bold",
-                            fontSize: "1.4em",
-                            paddingTop: 10,
-                          }}
-                        >
-                          {displayData?.data?.centerInstitution
-                            ? displayData?.data?.centerInstitution["ស្រី"]
-                            : 0}{" "}
-                          នាក់
-                        </p>
-                      </Card>
-                    </div>
-                  </div>
-                </Col>
-                <Col span={12}>
-                  <div
-                    style={{
-                      backgroundColor: "#fff",
-                      padding: "10px 0px",
-                      borderRadius: 10,
-                    }}
+                     <Panel header={statusOfficer} key="1">
+                        <p>Nothing to see here</p>
+                     </Panel>
+                  </Collapse>
+               </Col>
+               <Col span={12}>
+                  <Collapse
+                     accordion
+                     expandIconPosition="right"
+                     expandIcon={({ isActive }) => (
+                        <DownOutlined rotate={isActive ? 180 : 0} />
+                     )}
                   >
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        fontSize: "1.1em",
-                        padding: "0px 10px",
-                      }}
-                    >
-                      <div>
-                        <TeamOutlined
-                          style={{
-                            fontSize: "2em",
-                            color: "#E6C155",
-                          }}
-                        ></TeamOutlined>
-                        <span style={{ marginTop: -30 }}>
-                          មន្រ្ដីរាជការថ្នាក់ក្រោមជាតិ
-                        </span>
-                      </div>
-                      <div>
-                        {displayData?.data?.provinceInstitution
-                          ? +(
-                              displayData?.data?.provinceInstitution["ស្រី"] ||
-                              0
-                            ) +
-                            +(
-                              displayData?.data?.provinceInstitution["ប្រុស"] ||
-                              0
-                            )
-                          : 0}{" "}
-                        នាក់
-                      </div>
-                    </div>
-                    <Divider style={{ borderWidth: 2 }}></Divider>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-around",
-                        paddingTop: 20,
-                        paddingBottom: 25,
-                      }}
-                    >
-                      <Card
-                        hoverable
-                        style={{
-                          width: 200,
-                          textAlign: "center",
-                          borderRadius: 10,
-                        }}
-                      >
-                        <TeamOutlined
-                          style={{
-                            fontSize: "2em",
-                            color: "#E6C155",
-                          }}
-                        ></TeamOutlined>
-                        <span
-                          style={{
-                            fontSize: "1.1em",
-                            margin: "-20px 5px",
-                          }}
-                        >
-                          ថ្នាក់ក្រោមជាតិប្រុស
-                        </span>
-                        <Divider
-                          style={{
-                            borderColor: "#E6C155",
-                            borderWidth: "2px",
-                          }}
-                        ></Divider>
-                        <p
-                          style={{
-                            fontWeight: "bold",
-                            fontSize: "1.4em",
-                            paddingTop: 10,
-                          }}
-                        >
-                          {displayData?.data?.provinceInstitution
-                            ? displayData?.data?.provinceInstitution["ប្រុស"]
-                            : 0}{" "}
-                          នាក់
-                        </p>
-                      </Card>
-                      <Card
-                        hoverable
-                        style={{
-                          width: 200,
-                          textAlign: "center",
-                          borderRadius: 10,
-                        }}
-                      >
-                        <TeamOutlined
-                          style={{
-                            fontSize: "2em",
-                            color: "#E6C155",
-                          }}
-                        ></TeamOutlined>
-                        <span
-                          style={{
-                            fontSize: "1.1em",
-                            margin: "-20px 5px",
-                          }}
-                        >
-                          ថ្នាក់ក្រោមជាតិស្រី
-                        </span>
-                        <Divider
-                          style={{
-                            borderColor: "#E6C155",
-                            borderWidth: "2px",
-                          }}
-                        ></Divider>
-                        <p
-                          style={{
-                            fontWeight: "bold",
-                            fontSize: "1.4em",
-                            paddingTop: 10,
-                          }}
-                        >
-                          {displayData?.data?.provinceInstitution
-                            ? displayData?.data?.provinceInstitution["ស្រី"]
-                            : 0}{" "}
-                          នាក់
-                        </p>
-                      </Card>
-                    </div>
+                     <Panel header={civilOfficer} key="1">
+                        <p>Nothing to see here</p>
+                     </Panel>
+                  </Collapse>
+               </Col>
+            </Row>
+         </div>
+         <div className={styles.middleSection}>
+            <Row gutter={50}>
+               <Col span={12}>
+                  <div className={styles.pieChart}>
+                     <p>1</p>
+                     <Chart></Chart>
                   </div>
-                </Col>
-              </Row>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
-  );
+               </Col>
+               <Col span={12}>
+                  <Row gutter={50} style={{ marginBottom: 15 }}>
+                     <Col span={12}>
+                        <HomeCard
+                           number={10}
+                           title="មន្រ្ដីកំពុងកម្មសិក្សា"
+                           color="red"
+                        ></HomeCard>
+                     </Col>
+                     <Col span={12}>
+                        <HomeCard
+                           number={20}
+                           title="មន្ត្រីកំពុងកម្មសិក្សា"
+                           color="green"
+                        ></HomeCard>
+                     </Col>
+                  </Row>
+                  <Row gutter={50}>
+                     <Col span={12}>
+                        <HomeCard
+                           number={30}
+                           title="មន្ត្រីកិច្ចសន្យា"
+                           color="lightblue"
+                        ></HomeCard>
+                     </Col>
+                     <Col span={12}>
+                        <HomeCard
+                           number={40}
+                           title="មន្ត្រីចូលនិវត្តន៍"
+                           color="teal"
+                        ></HomeCard>
+                     </Col>
+                  </Row>
+               </Col>
+            </Row>
+         </div>
+         <div className={styles.bottomSection}>
+            <Row gutter={50}>
+               <Col span={12}>
+                  <div className={styles.summaryContainer}>
+                     <table>
+                        <tr>
+                           <td>
+                              <Dot color="green"></Dot>
+                              អគ្គលេខាធិការដ្ឋាន
+                           </td>
+                           <td>0 នាក់</td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <Dot color="blue"></Dot>
+                              អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋបាលតុលាការ
+                           </td>
+                           <td>0 នាក់</td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <Dot color="purple"></Dot>
+                              អគ្គនាយកកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ
+                           </td>
+                           <td>0 នាក់</td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <Dot color="pink"></Dot>
+                              អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋប្បវេណី
+                           </td>
+                           <td>0 នាក់</td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <Dot color="brown"></Dot>
+                              អគ្គនាយកដ្ឋានអភិវឌ្ឍន៍វិស័យយុត្តិធម៌
+                           </td>
+                           <td>0 នាក់</td>
+                        </tr>
+                        <tr>
+                           <td>
+                              <Dot color="yellow"></Dot>
+                              អគ្គធិការដ្ឋានកិច្ចការតុលាការ
+                           </td>
+                           <td>0 នាក់</td>
+                        </tr>
+                     </table>
+                  </div>
+               </Col>
+               <Col span={12}>
+                  <div style={{ height: 300, backgroundColor: "#FEE5D1" }}>
+                     <iframe
+                        width="100%"
+                        height="300"
+                        src="https://www.youtube.com/embed/KODKSNiVd7E"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                     ></iframe>
+                  </div>
+               </Col>
+            </Row>
+         </div>
+      </div>
+   );
 };
 
 export default Index;

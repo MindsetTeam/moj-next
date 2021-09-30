@@ -1,55 +1,145 @@
-.hightLightInfo {
-    color: slateblue;
-  }
-  
-/* .container {
-    height: 100vh;
-} */
+.employeeListContainer {
+   background: #fff;
+   padding: 10px;
+}
+
+.employeeContainer {
+   padding: 20px;
+}
+
+.greyText {
+   color: #aaa;
+}
+
+.btnContainer {
+   background-color: #fff;
+   display: flex;
+   justify-content: flex-end;
+   padding-bottom: 20px;
+   padding-right: 20px;
+}
+
+/* Add User */
+.addUserContainer {
+   background-color: #fff;
+   padding: 20px;
+   width: 100%;
+   height: 100%;
+   padding: 100px 0px;
+}
+
+.addUserContainer div {
+   width: 500px;
+   margin: 0 auto;
+}
+
+.addUserContainer div h1 {
+   text-align: center;
+}
+
+.addUserContainer .btnAdd {
+   width: 30%;
+   margin: 0 auto;
+   display: block;
+   margin-top: 10px;
+}
+
+/* Summary */
+.summaryInfoContainer {
+   margin-top: 15px;
+}
+
+/* Summary */
+/* Left */
+.summaryInfoContainer .leftSection {
+   background-color: #fff;
+   padding: 20px;
+   padding-bottom: 50px;
+}
+
+.summaryInfoContainer .leftSection .userImg {
+   text-align: center;
+}
+
+.summaryInfoContainer .leftSection div:nth-child(2) {
+   margin-top: 40px;
+   padding: 0px 50px;
+}
+
+.summaryInfoContainer .leftSection table {
+   width: 100%;
+}
+
+.summaryInfoContainer .leftSection table td {
+   padding: 10px 0px;
+}
+
+.summaryInfoContainer .leftSection table td:nth-child(2n) {
+   text-align: right;
+}
+
+/* Summary */
+/* Right */
+.summaryInfoContainer .rightSection {
+   background-color: #fff;
+   padding: 20px;
+}
+/* General */
+.generalInfoContainer {
+   background-color: #fff;
+   padding: 20px 0px;
+}
+
+.generalInfoContainer .topSection,
+.generalInfoContainer .bottomSection {
+   padding: 30px 60px;
+}
+/* Status */
+.praiseInfoContainer img,
+.penaltyInfoContainer img {
+   float: left;
+   margin-right: 10px;
+}
+
+/* Edit */
+.selfInfoContainer,
+.spouseInfoContainer,
+.dadInfoContainer,
+.momInfoContainer,
+.educationInfoContainer,
+.rankInfoContainer,
+.workHistoryInfoContainer,
+.statusInfoContainer,
+.attachmentInfoContainer,
+.penaltyInfoContainer,
+.praiseInfoContainer {
+   background-color: #fff;
+   padding: 20px;
+}
 
 .generalInfoContainer {
-    margin-bottom: 20px;
+   background-color: #fff;
+   padding: 20px;
 }
 
-.userImg {
-    padding: 20px;
-    background-color: #fff;
-    height: 300px; 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.userImg img {
-    /* border: 1px solid #ddd !important; */
-    box-shadow: 0 0 4px ;
-    /* border-radius: 5px ; */
+.imgContainer {
+   width: 15%;
+   display: flex;
+   justify-content: center;
 }
 
 .generalInfo {
-    height: 300px; 
-    background-color: #fff;
-    padding: 20px;
+   width: 84%;
 }
 
-.singleGeneralInfo {
-    padding: 0 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: row;
+.imgContainer img {
+   box-shadow: 0 0 4px;
 }
 
-.singleGeneralInfo span:nth-child(1) {
-    flex:1  
+.birthPlaceContainer,
+.addressContainer,
+.contactContainer {
+   background-color: #fff;
+   padding: 20px;
+   margin-top: 20px;
 }
-
-.singleGeneralInfo span:nth-child(2) {
-    flex:2
-}
-
-.specificInfo {
-    padding: 20px;
-    background-color: #fff;
-    margin-bottom: 20px;
-}
-  

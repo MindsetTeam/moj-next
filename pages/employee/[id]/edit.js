@@ -1,15 +1,15 @@
 import styles from "@/styles/Edit.module.css";
-import SelfInfo from "@/components/Edit/selfInfo";
-import ParentInfo from "@/components/Edit/parentInfo";
-import SpouseInfo from "@/components/Edit/spouseInfo";
-import ChildrenInfo from "@/components/Edit/childrenInfo";
-import EducationInfo from "@/components/Edit/educationInfo";
-import WorkHistoryInfo from "@/components/Edit/workHistoryInfo";
-import RankInfo from "@/components/Edit/rankInfo";
-import StatusInfo from "@/components/Edit/statusInfo";
-import PraiseInfo from "@/components/Edit/praiseInfo";
-import PenaltyInfo from "@/components/Edit/penaltyInfo";
-import AttachmentInfo from "@/components/Edit/attachmentInfo";
+import SelfInfo from "@/components/v1/Edit/selfInfo";
+import ParentInfo from "@/components/v1/Edit/parentInfo";
+import SpouseInfo from "@/components/v1/Edit/spouseInfo";
+import ChildrenInfo from "@/components/v1/Edit/childrenInfo";
+import EducationInfo from "@/components/v1/Edit/educationInfo";
+import WorkHistoryInfo from "@/components/v1/Edit/workHistoryInfo";
+import RankInfo from "@/components/v1/Edit/rankInfo";
+import StatusInfo from "@/components/v1/Edit/statusInfo";
+import PraiseInfo from "@/components/v1/Edit/praiseInfo";
+import PenaltyInfo from "@/components/v1/Edit/penaltyInfo";
+import AttachmentInfo from "@/components/v1/Edit/attachmentInfo";
 
 import { Tabs } from "antd";
 import api from "@/utils/api";
@@ -81,9 +81,6 @@ const Edit = ({
                </TabPane>
             )}
 
-            {/* <TabPane tab="ព័ត៌មានកូន" key="3">
-               <ChildrenInfo userData={user}></ChildrenInfo>
-            </TabPane> */}
             <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="3">
                <ParentInfo
                   userData={user}

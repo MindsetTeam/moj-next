@@ -1,0 +1,43 @@
+.header {
+   background-color: #800808;
+   /* padding: 15px; */
+   padding-left: 20px;
+   color: #fff;
+   display: flex;
+   justify-content: space-between;
+}
+
+.logo {
+   display: flex;
+   align-items: center;
+}
+
+.logo img {
+   width: 50px;
+   height: 50px;
+}
+
+.logoName {
+   padding-left: 10px;
+}
+
+/* Menu */
+.topMenu {
+}
+
+/* User */
+.user {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-right: 20px;
+}
+
+.user div {
+   margin-left: 5px;
+   cursor: pointer;
+}
+
+.user div div span {
+   margin-right: 5px;
+}
