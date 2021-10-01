@@ -104,6 +104,12 @@
 }
 
 /* Edit */
+.editInfoContainer {
+   background-color: #fff;
+   padding: 25px 20px;
+   min-height: 80vh;
+}
+
 .selfInfoContainer,
 .spouseInfoContainer,
 .dadInfoContainer,

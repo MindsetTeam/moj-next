@@ -70,12 +70,12 @@ const TopMenu = () => {
                   <a>របាយការណ៌</a>
                </Link>
             </Menu.Item>
-            <Menu.Item key="setting">
+            <Menu.Item key="announcement">
                <span>
-                  <img src="/setting.png" width="20" height="20" />
+                  <img src="/announcement.png" width="20" height="20" />
                </span>
-               <Link href="/setting">
-                  <a>កំណត់ប្រើប្រាស់</a>
+               <Link href="/announcement">
+                  <a>សេចក្ដីជូនដំណឹង</a>
                </Link>
             </Menu.Item>
             <Menu.Item key="feedback">

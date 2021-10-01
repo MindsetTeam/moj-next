@@ -25,15 +25,15 @@ const General = ({ userData }) => {
                   ...
                </Col>
 
-               <Col span={6}>លេខលិខិតឆ្លងដែន</Col>
+               <Col span={6}>អគ្គនាយកដ្ឋាន</Col>
                <Col span={6} className={styles.greyText}>
                   ...
                </Col>
             </Row>
             <Row gutter={30} style={{ marginBottom: 20 }}>
-               <Col span={6}>លេខសំបុត្រកំណើត</Col>
+               <Col span={6}>នាយកដ្ឋាន</Col>
                <Col span={6} className={styles.greyText}>
-                  {userData.birthCertificateNum}
+                  ...
                </Col>
 
                <Col span={6}>លេខប័ណ្ណមន្រ្ដីរាជការ</Col>

@@ -3,13 +3,34 @@
    color: #fff;
    padding: 15px;
    display: flex;
-   justify-content: space-between;
 }
 
 .announcement {
    display: flex;
+   flex: 1;
 }
 
 .announcement p {
    padding-left: 10px;
+}
+
+.marquee {
+   flex: 4;
+   margin-right: 20px;
+}
+
+.temp {
+   display: flex;
+   align-items: center;
+   align-self: flex-end;
+}
+
+.marquee {
+   /* opacity: 0.8; */
+   display: flex;
+   margin-left: -100px;
+}
+
+.marquee span {
+   margin-right: 300px;
 }

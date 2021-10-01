@@ -1,13 +1,11 @@
 import Head from "next/head";
+import Link from "next/link";
 
 import SummaryInfo from "@/components/Employee/SummaryInfo";
-import EditInfo from "@/components/Employee/EditInfo";
 
 import styles from "@/styles/Employee.module.css";
 
-import { Tabs } from "antd";
-
-const { TabPane } = Tabs;
+import { Button } from "antd";
 
 import api from "@/utils/api";
 import ministryStructure from "data/Structure.json";
@@ -50,28 +48,22 @@ export default function Home({
          </Head>
 
          <div>
-            <Tabs defaultActiveKey="1" onChange={null} type="card">
-               <TabPane tab="ព័ត៌មានប្រវត្តិរូបសង្ខេប" key="1">
-                  <SummaryInfo
-                     userData={user}
-                     ministryStructure={ministryStructure}
-                     rankList={rankList}
-                     letterTypes={letterTypes}
-                     statusOfficer={statusOfficer}
-                     ministryList={ministryList}
-                  ></SummaryInfo>
-               </TabPane>
-               <TabPane tab="កែប្រែព័ត៌មាន" key="2">
-                  <EditInfo
-                     userData={user}
-                     ministryStructure={ministryStructure}
-                     rankList={rankList}
-                     letterTypes={letterTypes}
-                     statusOfficer={statusOfficer}
-                     ministryList={ministryList}
-                  ></EditInfo>
-               </TabPane>
-            </Tabs>
+            <div>
+               <Button style={{ marginRight: 5 }}>
+                  ព័ត៌មានប្រវត្តិរូបសង្ខេប
+               </Button>
+               <Button type="primary">
+                  <Link href={`/employee/${user.id}/edit`}>កែប្រែព័ត៌មាន</Link>
+               </Button>
+            </div>
+            <SummaryInfo
+               userData={user}
+               ministryStructure={ministryStructure}
+               rankList={rankList}
+               letterTypes={letterTypes}
+               statusOfficer={statusOfficer}
+               ministryList={ministryList}
+            ></SummaryInfo>
          </div>
       </div>
    );

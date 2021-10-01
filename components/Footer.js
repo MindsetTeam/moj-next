@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Footer.module.css";
 
 const Footer = () => {
    const [temp, setTemp] = useState("Something Went Wrong");
+
+   const marqueeRef = useRef(null);
+
    useEffect(async () => {
       const { cod, main } = await fetch(
          "https://api.openweathermap.org/data/2.5/weather?q=phnom%20penh&units=metric&appid=058c4dbeb76422dd4385d2b21838334d"
@@ -19,25 +22,29 @@ const Footer = () => {
             <p>សេចក្ដីជូនដំណឹងក្រសួងយុត្តិធម៌</p>
          </div>
 
+         <div className={styles.marquee}>
+            <marquee
+               ref={marqueeRef}
+               behavior="scroll"
+               direction="left"
+               onMouseOver={() => {
+                  marqueeRef.current.stop();
+               }}
+               onMouseOut={() => {
+                  marqueeRef.current.start();
+               }}
+            >
+               <span>
+                  Adipisicing fugiat amet incididunt qui cillum id consequat
+                  excepteur exercitation.1
+               </span>
+               <span>Duis aliqua magna veniam aute ea ullamco voluptate.2</span>
+            </marquee>
+         </div>
+
          {typeof window !== "undefined" && navigator.platform === "Win32" ? (
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div className={styles.temp}>
                <span style={{ marginRight: "1rem" }}>Phnom Penh: {temp} </span>{" "}
-               Time:{" "}
-               <svg
-                  style={{ width: "1.2rem" }}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-               >
-                  <path
-                     strokeLinecap="round"
-                     strokeLinejoin="round"
-                     strokeWidth={2}
-                     d="M19 14l-7 7m0 0l-7-7m7 7V3"
-                  />
-               </svg>
             </div>
          ) : (
             <div></div>

@@ -6,6 +6,8 @@
 /*  officer */
 .civilOfficerContainer,
 .statusOfficerContainer {
+   background-color: #fff;
+   padding: 20px 25px !important;
    color: #800808;
    display: flex;
    align-items: center;

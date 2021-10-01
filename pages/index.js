@@ -23,9 +23,11 @@ const Index = (props) => {
             <TeamOutlined
                style={{ fontSize: "1.4rem", marginRight: 10 }}
             ></TeamOutlined>
-            <span>ស្ថានភាពមន្ត្រីរាជការ គិតត្រឹមឆ្នាំ2021</span>
+            <span>ស្ថានភាពមន្ត្រីរាជការ គិតត្រឹមឆ្នាំ 2021</span>
          </div>
-         <div>1000000 នាក់</div>
+         <div>
+            1000000 នាក់ <DownOutlined></DownOutlined>
+         </div>
       </div>
    );
 
@@ -37,7 +39,9 @@ const Index = (props) => {
             ></TeamOutlined>
             <span>មន្ត្រីរាជការតាមស៊ីវិល តាមប្រភេទក្របខ័ណ្ឌ</span>
          </div>
-         <div>1000000 នាក់</div>
+         <div>
+            0 នាក់ <DownOutlined></DownOutlined>
+         </div>
       </div>
    );
 
@@ -45,32 +49,8 @@ const Index = (props) => {
       <div className={styles.container}>
          <div className={styles.topSection}>
             <Row gutter={50}>
-               <Col span={12}>
-                  <Collapse
-                     accordion
-                     expandIconPosition="right"
-                     expandIcon={({ isActive }) => (
-                        <DownOutlined rotate={isActive ? 180 : 0} />
-                     )}
-                  >
-                     <Panel header={statusOfficer} key="1">
-                        <p>Nothing to see here</p>
-                     </Panel>
-                  </Collapse>
-               </Col>
-               <Col span={12}>
-                  <Collapse
-                     accordion
-                     expandIconPosition="right"
-                     expandIcon={({ isActive }) => (
-                        <DownOutlined rotate={isActive ? 180 : 0} />
-                     )}
-                  >
-                     <Panel header={civilOfficer} key="1">
-                        <p>Nothing to see here</p>
-                     </Panel>
-                  </Collapse>
-               </Col>
+               <Col span={12}>{statusOfficer}</Col>
+               <Col span={12}>{civilOfficer}</Col>
             </Row>
          </div>
          <div className={styles.middleSection}>
