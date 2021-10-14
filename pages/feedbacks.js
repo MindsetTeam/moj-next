@@ -17,14 +17,24 @@ const { TextArea } = Input;
 
 const columns = [
   {
-    title: "phone",
-    dataIndex: "phone",
-    key: "phone",
+    title: "userName",
+    dataIndex: "userName",
+    key: "userName",
   },
   {
-    title: "feedback",
-    dataIndex: "feedback",
-    key: "feedback",
+    title: "description",
+    dataIndex: "description",
+    key: "description",
+  },
+  {
+    title: "phoneNumber",
+    dataIndex: "phoneNumber",
+    key: "phoneNumber",
+  },
+  {
+    title: "action",
+    dataIndex: "action",
+    key: "action",
   },
 ];
 
@@ -32,41 +42,38 @@ const Feedback = () => {
   const [session] = useSession();
   const [form] = Form.useForm();
   const [feedbackList, setfeedBackList] = useState([]);
-  const onSubmitFeedback = () => {
-     
-  }
+  const onSubmitFeedback = () => {};
 
   return (
     <div className={styles.container}>
-      {session?.user.role != "admin" ? (
+      {session?.user.role !== "admin" ? (
         <div className={styles.feedbackForm}>
           <p className={styles.title}>Feedback Form</p>
           <div>
             <Form hideRequiredMark form={form} {...layout}>
               <Form.Item
                 style={{ marginBottom: 20, width: 800 }}
-                label="phone"
-                name="phone"
+                label="phoneNumber"
+                name="phoneNumber"
                 rules={[
                   {
                     required: true,
                   },
                 ]}
               >
-                <Input placeholder="phone" />
+                <Input placeholder="phoneNumber" />
               </Form.Item>
-
               <Form.Item
                 style={{ marginBottom: 20, width: 800 }}
-                label="feedback"
-                name="feedback"
+                label="description"
+                name="description"
                 rules={[
                   {
                     required: true,
                   },
                 ]}
               >
-                <TextArea rows={4} placeholder="feedback" />
+                <TextArea rows={4} placeholder="description" />
               </Form.Item>
 
               <Button

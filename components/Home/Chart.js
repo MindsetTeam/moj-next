@@ -3,66 +3,54 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
 const Pie = dynamic(() => import("@ant-design/charts").then((mod) => mod.Pie), {
-   ssr: false,
+  ssr: false,
 });
 
 const Chart = () => {
-   var data = [
-      {
-         type: "分类一",
-         value: 27,
+  const data = [
+    {
+      type: "ប្រុស",
+      value: 10,
+    },
+    {
+      type: "ស្រី",
+      value: 5,
+    },
+  ];
+  const config = {
+    appendPadding: 10,
+    data: data,
+    angleField: "value",
+    colorField: "type",
+    radius: 1,
+    innerRadius: 0.6,
+    label: {
+      type: "inner",
+      offset: "-50%",
+      content: "{value}",
+      style: {
+        textAlign: "center",
+        fontSize: 20,
       },
-      {
-         type: "分类二",
-         value: 25,
+    },
+    interactions: [{ type: "element-selected" }, { type: "element-active" }],
+    statistic: {
+      title: false,
+      content: {
+        style: {
+          fontSize: 25,
+          whiteSpace: "pre-wrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+        },
+        content: `
+មន្រ្ដីរាជការ
+` `
+ថ្នាក់់ជាតិ`,
       },
-      {
-         type: "分类三",
-         value: 18,
-      },
-      {
-         type: "分类四",
-         value: 15,
-      },
-      {
-         type: "分类五",
-         value: 10,
-      },
-      {
-         type: "其他",
-         value: 5,
-      },
-   ];
-   var config = {
-      appendPadding: 10,
-      data: data,
-      angleField: "value",
-      colorField: "type",
-      radius: 1,
-      innerRadius: 0.6,
-      label: {
-         type: "inner",
-         offset: "-50%",
-         content: "{value}",
-         style: {
-            textAlign: "center",
-            fontSize: 14,
-         },
-      },
-      interactions: [{ type: "element-selected" }, { type: "element-active" }],
-      statistic: {
-         title: false,
-         content: {
-            style: {
-               whiteSpace: "pre-wrap",
-               overflow: "hidden",
-               textOverflow: "ellipsis",
-            },
-            content: "AntV\nG2Plot",
-         },
-      },
-   };
-   return <Pie {...config} />;
+    },
+  };
+  return <Pie {...config} />;
 };
 
 export default Chart;

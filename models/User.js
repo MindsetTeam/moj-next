@@ -38,6 +38,7 @@ const UserSchema = new mongoose.Schema(
     civilID: String,
     officerID: String,
     department: String,
+    generalDepartment: String,
     employmentDate: String,
     fullyEmploymentDate: String,
     otherNote: String,

@@ -17,7 +17,7 @@ import AttachmentInfo from "@/components/Employee/Edit/AttachmentInfo";
 
 const { TabPane } = Tabs;
 
-const EditInfo = ({
+const    EditInfo = ({
    userData,
    ministryStructure,
    statusOfficer,

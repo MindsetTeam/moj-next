@@ -37,6 +37,7 @@ const Edit = ({
    rankList,
    user,
 }) => {
+   console.log(user)
    return (
       <div style={{ padding: "25px 20px" }}>
          {/* <div style={{ marginBottom: 20 }}>
