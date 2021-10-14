@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
     },
     suspended: {
       type: Boolean,
-      default: false
+      default: false,
     },
     addBy: {
       type: mongoose.Schema.Types.ObjectId,
@@ -253,15 +253,15 @@ UserSchema.pre("save", async function (next) {
   if (!this.isModified("password")) {
     next();
   }
-  this.password = await bcrypt.hash(this.nationalityIDNum, 10);
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
 });
 
 UserSchema.post("save", function (error, doc, next) {
   if (error.code === 11000) {
     next(new Error("Nationality ID already being used"));
-  } else {
-    next(error);
   }
+  next();
 });
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);

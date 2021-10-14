@@ -1,7 +1,5 @@
-// import ErrorResponse from "@/utils/errorResponse";
-// import Ajv from "ajv";
-
 import Ajv from "ajv";
+import ErrorResponse from "@/utils/errorResponse";
 
 export function validateBody(schema) {
   const ajv = new Ajv();
@@ -14,11 +12,7 @@ export function validateBody(schema) {
     } else {
       const error = validate.errors[0];
       console.log(error);
-      return res.status(400).json({
-        error: {
-          message: `${error.message}`,
-        },
-      });
+      throw new ErrorResponse(error.message, 400)
     }
   };
 }

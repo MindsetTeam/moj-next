@@ -1,14 +1,10 @@
 PATCH http://localhost:3000/api/employee
 
 ###
-GET http://localhost:3000/api/users/asdfasdf/role
-
-
-###
 PUT http://localhost:3000/api/auth/updatepassword
-
-Content-Type: application/json
+content-type: application/json
 
 {
-  "newPassword":"test",
+    "oldPassword": "sample",
+    "newPassword": "Wed, 21 Oct 2015 18:27:50 GMT"
 }

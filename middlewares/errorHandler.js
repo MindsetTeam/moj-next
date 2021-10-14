@@ -1,7 +1,6 @@
 import ErrorResponse from "@/utils/errorResponse";
-export default (err, req, res, next) => {
+export default (err, req, res) => {
   console.log(err);
-
   if (err.name === "CastError") {
     err = new ErrorResponse(`Resource not found with of ID ${err.value}`, 404);
   }
@@ -17,9 +16,9 @@ export default (err, req, res, next) => {
   if (err.code === 11000) {
     err = new ErrorResponse("Duplication field value entered", 400);
   }
-
+  
   return res.status(err.statusCode || 500).json({
     success: false,
-    msg: err.message || "Server Error",
+    message: err.message || "Server Error",
   });
 };

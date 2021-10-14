@@ -82,7 +82,7 @@ const TopMenu = () => {
                <span>
                   <img src="/setting.png" width="20" height="20" />
                </span>
-               <Link href="/feedback">
+               <Link href="/feedbacks">
                   <a>មតិយោបល់</a>
                </Link>
             </Menu.Item>
