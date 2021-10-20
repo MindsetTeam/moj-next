@@ -1,4 +1,4 @@
-import styles from "@/styles/Print.module.css";
+// import styles from "@/styles/Print.module.css";
 import { Button } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
