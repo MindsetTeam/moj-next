@@ -136,7 +136,7 @@ const Rank = ({ userData }) => {
          key: "framework",
       },
       {
-         title: "ឋានន្តរសកិ្ត និងថ្នាក់",
+         title: "ឋានន្តរសកិ្ត",
          dataIndex: "rankType",
          key: "rankType",
       },

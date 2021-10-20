@@ -433,7 +433,7 @@ const RankInfo = ({ userData }) => {
                      </Form.Item>
                   </Col>
                </Row>
-               <Col span={12}>
+               {/* <Col span={12}>
                   <div>
                      <p>ឯកសារយោង</p>
                      <Upload>
@@ -442,7 +442,7 @@ const RankInfo = ({ userData }) => {
                         </Button>
                      </Upload>
                   </div>
-               </Col>
+               </Col> */}
             </Form>
          </Modal>
       </div>
