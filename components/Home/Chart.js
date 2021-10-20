@@ -6,15 +6,15 @@ const Pie = dynamic(() => import("@ant-design/charts").then((mod) => mod.Pie), {
   ssr: false,
 });
 
-const Chart = () => {
+const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) => {
   const data = [
     {
       type: "ប្រុស",
-      value: 10,
+      value: centerInstitution["ប្រុស"],
     },
     {
       type: "ស្រី",
-      value: 5,
+      value: centerInstitution["ស្រី"],
     },
   ];
   const config = {
@@ -45,7 +45,7 @@ const Chart = () => {
         },
         content: `
 មន្រ្ដីរាជការ
-` `
+
 ថ្នាក់់ជាតិ`,
       },
     },

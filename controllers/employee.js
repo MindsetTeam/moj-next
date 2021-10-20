@@ -18,7 +18,7 @@ export const getOverviewEmployees = async (req, res) => {
     );
   }
   if (role === "admin") {
-    const retiredUsers = await User.find({
+    const retiredEmployee = await User.find({
       approval: true,
       birthDate: { $lt: new Date(Date.now() - 65 * 365 * 24 * 60 * 60 * 1000) },
     }).countDocuments();
@@ -47,26 +47,26 @@ export const getOverviewEmployees = async (req, res) => {
     officerStatusListRes.forEach((v) => {
       officerStatusList[v._id] = v.total;
     });
-    console.log(officerStatusList);
+    // console.log(officerStatusList);
 
-    const provinceInstitutionRawData = await User.aggregate([
-      {
-        $project: {
-          gender: 1,
-          approval: 1,
-          experience: { $slice: ["$experience", -1] },
-        },
-      },
-      {
-        $match: { "experience.institution": "ថ្នាក់ក្រោមជាតិ", approval: true },
-      },
-      {
-        $group: {
-          _id: "$gender",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
+    // const provinceInstitutionRawData = await User.aggregate([
+    //   {
+    //     $project: {
+    //       gender: 1,
+    //       approval: 1,
+    //       experience: { $slice: ["$experience", -1] },
+    //     },
+    //   },
+    //   {
+    //     $match: { "experience.institution": "ថ្នាក់ក្រោមជាតិ", approval: true },
+    //   },
+    //   {
+    //     $group: {
+    //       _id: "$gender",
+    //       total: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
     const centerInstitutionRawData = await User.aggregate([
       {
         $project: {
@@ -89,20 +89,37 @@ export const getOverviewEmployees = async (req, res) => {
       total: 0,
     };
 
-    const provinceInstitution = { ...centerInstitution };
+    const totalEmployee = await User.countDocuments({ approval: true });
+    const generalDepartmentRes = await User.aggregate([
+      { $match: { approval: true } },
+      {
+        $group: {
+          _id: "$generalDepartment",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    const generalDepartmentList = {};
+    generalDepartmentRes.forEach((v) => {
+      generalDepartmentList[v._id] = v.total;
+    });
+
+    // const provinceInstitution = { ...centerInstitution };
     centerInstitutionRawData.forEach((v) => {
       centerInstitution[v._id] = v.total;
       centerInstitution.total += v.total;
     });
-    provinceInstitutionRawData.forEach((v) => {
-      provinceInstitution[v._id] = v.total;
-      provinceInstitution.total += v.total;
-    });
-    console.log({ provinceInstitution, centerInstitution });
+    // provinceInstitutionRawData.forEach((v) => {
+    //   provinceInstitution[v._id] = v.total;
+    //   provinceInstitution.total += v.total;
+    // });
+    // console.log({ provinceInstitution, centerInstitution });
     resData = {
+      totalEmployee,
+      generalDepartmentList,
       centerInstitution,
-      provinceInstitution,
-      retiredUsers,
+      // provinceInstitution,
+      retiredEmployee,
       officerStatusList,
     };
   }
@@ -127,10 +144,10 @@ export const getEmployees = async (req, res) => {
     };
   }
   if (req.user.role !== "admin") {
-    reqQuery = { ...reqQuery, department: req.user.department};
+    reqQuery = { ...reqQuery, department: req.user.department };
   }
   console.log(reqQuery);
-  const users = await User.find(reqQuery).sort('-createdAt');
+  const users = await User.find(reqQuery).sort("-createdAt");
 
   res.status(200).json({
     success: true,
