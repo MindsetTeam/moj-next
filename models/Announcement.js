@@ -15,11 +15,7 @@ const AnnouncementSchema = new mongoose.Schema(
       type: mongoose.Schema.ObjectId,
       required: true,
     },
-    files: [
-      {
-        type: String,
-      },
-    ],
+    attachment: String,
   },
   {
     timestamps: true,

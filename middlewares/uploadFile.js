@@ -6,12 +6,14 @@ const storage = multer.diskStorage({
     // if (file.fieldname === "img-profile") {
     //   return cb(null, "/tmp/img-profile");
     // }
-    cb(null, "/tmp");
+    cb(null, "tmp");
   },
   filename: function (req, file, cb) {
     if (file.fieldname === "img-profile") {
       return cb(null, req.user.id + path.parse(file.originalname).ext);
     }
+
+    return cb(null, req.user.id + path.parse(file.originalname).ext);
   },
 });
 

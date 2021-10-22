@@ -1,7 +1,7 @@
 import styles from "@/styles/Feedback.module.css";
 import { useState } from "react";
 
-import { Form, Button, Input, Table } from "antd";
+import { Form, Button, Input, Table, Upload } from "antd";
 import { useSession } from "node_modules/next-auth/client";
 
 const layout = {
@@ -75,7 +75,12 @@ const Feedback = () => {
               >
                 <TextArea rows={4} placeholder="description" />
               </Form.Item>
-
+              <Form.Item label="attachment"
+                name="attachment" maxCount={1}>
+                <Upload>
+                  <Button>Click to upload</Button>
+                </Upload>
+              </Form.Item>
               <Button
                 htmlType="submit"
                 //  onClick={login}

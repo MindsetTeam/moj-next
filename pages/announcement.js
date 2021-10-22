@@ -8,6 +8,7 @@ import {
   Dropdown,
   Menu,
   Form,
+  Upload,
   Input,
   Select,
 } from "antd";
@@ -15,9 +16,11 @@ import {
 import {
   PlusOutlined,
   EditOutlined,
+  UploadOutlined,
   DeleteOutlined,
   DownOutlined,
 } from "@ant-design/icons";
+import { fetcher } from "@/lib/fetch";
 
 const { Option } = Select;
 
@@ -45,7 +48,22 @@ const Announcement = () => {
     form.resetFields();
   };
 
-  const onSubmit = () => {};
+  const onSubmit = () => {
+    form.validateFields().then(async () => {
+      const values = form.getFieldsValue();
+      const formData = new FormData();
+      if (values.attachment?.fileList?.length) {
+        formData.append(
+          "attachment",
+          values.attachment?.fileList?.[0]?.originFileObj
+        );
+      }
+      formData.append("title", values.title);
+      formData.append("isActive", values.isActive);
+       fetcher("/api/announcements", { method: "POST", body: formData });
+      console.log(values, formData);
+    });
+  };
 
   const actionMenu = (record) => {
     return (
@@ -78,6 +96,14 @@ const Announcement = () => {
       title: "isActive",
       dataIndex: "isActive",
       key: "isActive",
+      render: (text) => {
+        return <p>{text ? "Active" : "Inactive"}</p>;
+      },
+    },
+    {
+      title: "Attachment",
+      dataIndex: "attachment",
+      key: "attachment",
       render: (text) => {
         return <p>{text ? "Active" : "Inactive"}</p>;
       },
@@ -127,7 +153,7 @@ const Announcement = () => {
           </div>
         }
       >
-        <Form hideRequiredMark form={form}>
+        <Form hideRequiredMark form={form} initialValues={{ isActive: false }}>
           <Form.Item
             style={{ marginBottom: 10 }}
             name="title"
@@ -152,10 +178,15 @@ const Announcement = () => {
               },
             ]}
           >
-            <Select defaultValue={false}>
+            <Select>
               <Option value={true}>Active</Option>
               <Option value={false}>Inactive</Option>
             </Select>
+          </Form.Item>
+          <Form.Item name="attachment" label="attachment">
+            <Upload maxCount={1}>
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
+            </Upload>
           </Form.Item>
         </Form>
       </Modal>

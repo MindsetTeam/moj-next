@@ -8,7 +8,9 @@ export const getAnnouncements = async (req, res, next) => {
 };
 
 export const createAnnouncement = async (req, res, next) => {
-  const createdAnnouncement = await Announcement.create(req.body);
+  console.log({file: req.file, body: req.body})
+  // const createdAnnouncement = await Announcement.create(req.body);
+  res.status(200).json({test:false})
 };
 
 export const deleteAnnouncement = (req, res, next) => {};
