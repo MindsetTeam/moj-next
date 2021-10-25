@@ -1,9 +1,11 @@
-import { protect } from "@/middlewares/auth";
+import { protect, role } from "@/middlewares/auth";
 import database from "@/middlewares/database";
 import uploadFile from "@/middlewares/uploadFile";
-import { ValidateProps } from "api-lib/constants";
 import { ncOpts } from "api-lib/nc";
-import { deleteAnnouncement, updateAnnouncement } from "controllers/announcement";
+import {
+  deleteAnnouncement,
+  updateAnnouncement,
+} from "controllers/announcement";
 import nc from "next-connect";
 
 const handler = nc(ncOpts);
@@ -20,8 +22,13 @@ handler.use(database);
 //   required: ['phoneNumber', 'description'],
 // }
 
-handler.delete(protect, deleteAnnouncement);
-handler.put(protect, updateAnnouncement);
+handler.delete(protect, role("admin"), deleteAnnouncement);
+handler.put(
+  protect,
+  role("admin"),
+  uploadFile.single("attachment"),
+  updateAnnouncement
+);
 
 export default handler;
 export const config = {

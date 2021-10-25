@@ -1,8 +1,10 @@
 import styles from "@/styles/Feedback.module.css";
 import { useState } from "react";
 
-import { Form, Button, Input, Table, Upload } from "antd";
+import { Form, Button, Input, Table, Upload, notification } from "antd";
 import { useSession } from "node_modules/next-auth/client";
+import { fetcher } from "@/lib/fetch";
+import { useFeedbacks } from "@/lib/feedback/hooks";
 
 const layout = {
   labelCol: {
@@ -18,8 +20,11 @@ const { TextArea } = Input;
 const columns = [
   {
     title: "userName",
-    dataIndex: "userName",
-    key: "userName",
+    dataIndex: "user",
+    key: "user", 
+    render(record) {
+      return record.firstName + " " + record.lastName;
+    },
   },
   {
     title: "description",
@@ -35,18 +40,48 @@ const columns = [
     title: "action",
     dataIndex: "action",
     key: "action",
+    render: (text, record) => {
+      return record.attachment ? (
+        <a href={record.attachment} target={"_blank"}>
+          View
+        </a>
+      ) : null;
+    },
   },
 ];
 
 const Feedback = () => {
   const [session] = useSession();
   const [form] = Form.useForm();
-  const [feedbackList, setfeedBackList] = useState([]);
-  const onSubmitFeedback = () => {};
+  const { data: feedbackList } = useFeedbacks();
+  const onSubmitFeedback = () => {
+    form.validateFields().then(async () => {
+      const values = form.getFieldsValue();
+      const formData = new FormData();
+      if (values.attachment?.fileList?.length) {
+        formData.append(
+          "attachment",
+          values.attachment?.fileList?.[0]?.originFileObj
+        );
+      }
+      formData.append("phoneNumber", values.phoneNumber);
+      formData.append("description", values.description);
+      try {
+        const res = await fetcher("/api/feedbacks", {
+          method: "POST",
+          body: formData,
+        });
+        notification.success({ message: res.msg });
+        form.resetFields();
+      } catch (error) {
+        notification.error({ message: error });
+      }
+    });
+  };
 
   return (
     <div className={styles.container}>
-      {session?.user.role !== "admin" ? (
+      {session?.user?.role !== "admin" ? (
         <div className={styles.feedbackForm}>
           <p className={styles.title}>Feedback Form</p>
           <div>
@@ -75,15 +110,14 @@ const Feedback = () => {
               >
                 <TextArea rows={4} placeholder="description" />
               </Form.Item>
-              <Form.Item label="attachment"
-                name="attachment" maxCount={1}>
+              <Form.Item label="attachment" name="attachment" maxCount={1}>
                 <Upload>
                   <Button>Click to upload</Button>
                 </Upload>
               </Form.Item>
               <Button
                 htmlType="submit"
-                //  onClick={login}
+                onClick={onSubmitFeedback}
                 className={styles.btnSubmit}
               >
                 Submit

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/styles/Announcement.module.css";
 
 import {
@@ -11,6 +11,7 @@ import {
   Upload,
   Input,
   Select,
+  notification,
 } from "antd";
 
 import {
@@ -21,24 +22,32 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import { fetcher } from "@/lib/fetch";
+import { useAnnouncements } from "@/lib/announcement/hooks";
 
 const { Option } = Select;
 
 const Announcement = () => {
-  const [announcementList, setAnnouncementList] = useState([
-    {
-      title: "Do Lorem sit ad fugiat cillum eiusmod do.",
-      isActive: false,
-    },
-    {
-      title: "Do Lorem sit ad fugiat cillum eiusmod do.",
-      isActive: true,
-    },
-  ]);
+  const { data: announcementList = [], mutate } = useAnnouncements();
+  // const [announcementList, setAnnouncementList] = useState([
+  //   {
+  //     title: "Do Lorem sit ad fugiat cillum eiusmod do.",
+  //     isActive: false,
+  //   },
+  //   {
+  //     title: "Do Lorem sit ad fugiat cillum eiusmod do.",
+  //     isActive: true,
+  //   },
+  // ]);
 
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
   const [editData, setEditData] = useState(null);
+  useEffect(() => {
+    form.resetFields();
+    if (visible == false) {
+      setEditData(null);
+    }
+  }, [visible]);
 
   const toggleModal = () => {
     setVisible(!visible);
@@ -47,10 +56,31 @@ const Announcement = () => {
   const onClear = () => {
     form.resetFields();
   };
+  const onDelete = async (id) => {
+    try {
+      const res = await fetcher(`/api/announcements/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id }),
+      });
+      notification.success({ message: res.msg });
+      mutate();
+      setVisible(false);
+    } catch (error) {
+      notification.error({ message: error });
+    }
+  };
+  const onEdit = (record) => {
+    setEditData(record);
+    setVisible(true);
+  };
 
   const onSubmit = () => {
     form.validateFields().then(async () => {
       const values = form.getFieldsValue();
+      console.log(values);
       const formData = new FormData();
       if (values.attachment?.fileList?.length) {
         formData.append(
@@ -60,8 +90,29 @@ const Announcement = () => {
       }
       formData.append("title", values.title);
       formData.append("isActive", values.isActive);
-       fetcher("/api/announcements", { method: "POST", body: formData });
-      console.log(values, formData);
+      try {
+        let res;
+        if (editData) {
+          if (editData.attachment !== values.attachment) {
+            formData.append("oldFileDeleted", true);
+          }
+          res = await fetcher("/api/announcements/" + editData.id, {
+            method: "PUT",
+            body: formData,
+          });
+        } else {
+          res = await fetcher("/api/announcements", {
+            method: "POST",
+            body: formData,
+          });
+        }
+        notification.success({ message: res.msg });
+        mutate();
+        setVisible(false);
+        onClear();
+      } catch (error) {
+        notification.error({ message: error });
+      }
     });
   };
 
@@ -71,14 +122,14 @@ const Announcement = () => {
         <Menu.Item
           key="0"
           icon={<EditOutlined />}
-          //    onClick={onEdit.bind(this, record)}
+          onClick={onEdit.bind(this, record)}
         >
           <a>Edit</a>
         </Menu.Item>
         <Menu.Item
           key="1"
           icon={<DeleteOutlined />}
-          //    onClick={onDelete.bind(this, record)}
+          onClick={onDelete.bind(this, record.id)}
         >
           <a>Delete</a>
         </Menu.Item>
@@ -104,8 +155,12 @@ const Announcement = () => {
       title: "Attachment",
       dataIndex: "attachment",
       key: "attachment",
-      render: (text) => {
-        return <p>{text ? "Active" : "Inactive"}</p>;
+      render: (url) => {
+        return url ? (
+          <a href={url} target={"_blank"}>
+            View
+          </a>
+        ) : null;
       },
     },
     {
@@ -153,7 +208,11 @@ const Announcement = () => {
           </div>
         }
       >
-        <Form hideRequiredMark form={form} initialValues={{ isActive: false }}>
+        <Form
+          hideRequiredMark
+          form={form}
+          initialValues={{ isActive: false, ...editData }}
+        >
           <Form.Item
             style={{ marginBottom: 10 }}
             name="title"
@@ -184,7 +243,19 @@ const Announcement = () => {
             </Select>
           </Form.Item>
           <Form.Item name="attachment" label="attachment">
-            <Upload maxCount={1}>
+            <Upload
+              maxCount={1}
+              defaultFileList={
+                editData?.attachment
+                  ? [
+                      {
+                        name: editData.attachment.split("/announcement/")[1],
+                        url: editData.attachment,
+                      },
+                    ]
+                  : null
+              }
+            >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
@@ -193,5 +264,6 @@ const Announcement = () => {
     </div>
   );
 };
+Announcement.roles = ["admin"];
 
 export default Announcement;

@@ -1,4 +1,4 @@
-import { protect } from "@/middlewares/auth";
+import { protect, role } from "@/middlewares/auth";
 import database from "@/middlewares/database";
 import uploadFile from "@/middlewares/uploadFile";
 import { ValidateProps } from "api-lib/constants";
@@ -20,7 +20,7 @@ handler.use(database);
 //   required: ['phoneNumber', 'description'],
 // }
 
-handler.get(protect, getFeedbacks);
+handler.get(protect,role('admin'), getFeedbacks);
 handler.post(protect, uploadFile.single("attachment"), createFeedback);
 
 export default handler;

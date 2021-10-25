@@ -168,8 +168,8 @@ const Add = () => {
                      >
                         <Select placeholder="ជ្រើសរើស">
                            <Option value="user">User</Option>
+                           <Option value="moderator">Moderator</Option>
                            <Option value="editor">Editor</Option>
-                           <Option value="semi-editor">Semi Editor</Option>
                         </Select>
                      </Form.Item>
                   </Col>
@@ -182,5 +182,5 @@ const Add = () => {
       </div>
    );
 };
-
+Add.roles = ['admin', 'editor']
 export default Add;

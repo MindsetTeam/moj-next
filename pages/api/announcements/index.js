@@ -1,4 +1,4 @@
-import { protect } from "@/middlewares/auth";
+import { protect, role } from "@/middlewares/auth";
 import database from "@/middlewares/database";
 import uploadFile from "@/middlewares/uploadFile";
 import { ValidateProps } from "api-lib/constants";
@@ -10,18 +10,13 @@ const handler = nc(ncOpts);
 
 handler.use(database);
 
-// const schemaAnnouncement ={
-//   type: 'object',
-//   properties: {
-//     phoneNumber: ValidateProps.user.phoneNumber,
-//     description: ValidateProps.announcement.description,
-//     attachment: ValidateProps.file.path
-//   },k
-//   required: ['phoneNumber', 'description'],
-// }
-
 handler.get(protect, getAnnouncements);
-handler.post(protect, uploadFile.single("attachment"), createAnnouncement);
+handler.post(
+  protect,
+  role("admin"),
+  uploadFile.single("attachment"),
+  createAnnouncement
+);
 
 export default handler;
 export const config = {

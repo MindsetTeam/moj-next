@@ -14,7 +14,7 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["user", "admin", "editor"],
+      enum: ["user", "admin", "editor", "moderator"],
       default: "user",
     },
     photo: {
@@ -33,6 +33,13 @@ const UserSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+    },
+    attachment: {
+      info: [{ description: String, url: String }],
+      rank: [{ description: String, url: String }],
+      education: [{ description: String, url: String }],
+      marriage: [{ description: String, url: String }],
+      child: [{ description: String, url: String }],
     },
     vaccine: String,
     civilID: String,

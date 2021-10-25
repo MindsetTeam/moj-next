@@ -32,7 +32,6 @@ const dropDownMenu = (
 
 const Header = () => {
   const [session, loading] = useSession();
-
   return (
     <div className={styles.header}>
       <div className={styles.logo}>
@@ -45,20 +44,21 @@ const Header = () => {
         <TopMenu></TopMenu>
       </div>
 
-      <div className={styles.user}>
-        <Avatar src="/noImg.jpg" />
-        <div>
-          <Dropdown overlay={dropDownMenu}>
-            <div>
-              <span>
-                {session &&
-                  session.user?.firstName + " " + session.user?.lastName}
-              </span>
-              <DownOutlined></DownOutlined>
-            </div>
-          </Dropdown>
+      {session?.user && (
+        <div className={styles.user}>
+          <Avatar src={session.user.photo} />
+          <div>
+            <Dropdown overlay={dropDownMenu}>
+              <div>
+                <span>
+                  {session.user.firstName + " " + session.user.lastName}
+                </span>
+                <DownOutlined></DownOutlined>
+              </div>
+            </Dropdown>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

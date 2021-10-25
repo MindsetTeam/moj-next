@@ -38,7 +38,7 @@ const Personal = () => {
       } catch (err) {
          console.log(err);
         return notification.error({
-          message: err.message,
+          message: err,
         });
       } finally {
         setIsLoading(false);

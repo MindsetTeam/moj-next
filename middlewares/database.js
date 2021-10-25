@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 let connectionStatus = 0;
 
-export default async (req, res, next) => {
+const database = async (req, res, next) => {
   console.log("hit database middleware");
   if (connectionStatus) return next();
   const conn = await mongoose.connect(
@@ -18,3 +18,5 @@ export default async (req, res, next) => {
   next();
   console.log(`MongoDB Connected: ${conn.connection.host}`);
 };
+
+export default database

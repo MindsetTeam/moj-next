@@ -13,10 +13,9 @@ const { Panel } = Collapse;
 
 const Index = (props) => {
   const [session, loading] = useSession();
-  const {
-    data: overviewData,
-    error,
-  } = useSWR(session?.user.role != "user" ? "/api/users/overview" : null);
+  const { data: overviewData, error } = useSWR(
+    session?.user?.role === "admin" ? "/api/users/overview" : null
+  );
 
   const statusOfficer = (
     <div className={styles.statusOfficerContainer}>
@@ -49,7 +48,7 @@ const Index = (props) => {
 
   return (
     <div className={styles.container}>
-      {!overviewData && !error && <p>loading</p>}
+      {/* {!overviewData && !error && <p>loading</p>} */}
       {session?.user.role !== "admin" && <p>Home Page</p>}
       {session?.user.role === "admin" && (
         <>

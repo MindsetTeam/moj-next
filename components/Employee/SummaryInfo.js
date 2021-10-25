@@ -175,7 +175,7 @@ const SummaryInfo = ({
                         }
                         key="7"
                      >
-                        <Attachment></Attachment>
+                        <Attachment  userData={userData}></Attachment>
                      </TabPane>
                   </Tabs>
                </div>

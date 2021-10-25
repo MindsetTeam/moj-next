@@ -7,6 +7,7 @@ const FeedbackSchema = new mongoose.Schema(
     attachment: String,
     user: {
       type: mongoose.Schema.ObjectId,
+      ref: 'User',
       required: true,
     },
   },

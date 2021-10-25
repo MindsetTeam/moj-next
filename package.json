@@ -7,6 +7,7 @@
     "gcp-build": "find ./build -name '\\[@@@*' -exec bash -c 'mv \"$1\" \"${1/@@@/...}\"' -- {} \\;",
     "deploy": "npm run build && npm run gcp-predeploy && gcloud app deploy",
     "build": "rm -rf ./build && NODE_ENV=production next build",
+    "testing-build": "next build",
     "dev": "next dev",
     "start": "next start"
   },
@@ -18,9 +19,11 @@
     "antd": "^4.12.3",
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "js-cookie": "^3.0.0",
     "mongoose": "^5.12.0",
     "multer": "^1.4.2",
+    "nanoid": "^3.1.30",
     "next": "^11.1.2",
     "next-auth": "^3.23.1",
     "next-connect": "^0.10.1",
@@ -31,6 +34,5 @@
     "react-pdf": "^5.3.2",
     "react-sizeme": "^3.0.2",
     "swr": "^0.5.6"
-  },
-  "devDependencies": {}
+  }
 }

@@ -19,6 +19,6 @@ export default (err, req, res) => {
   
   return res.status(err.statusCode || 500).json({
     success: false,
-    message: err.message || "Server Error",
+    msg: err.message || "Server Error",
   });
 };

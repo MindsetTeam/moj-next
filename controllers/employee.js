@@ -1,5 +1,9 @@
 import User from "@/models/User";
 import ErrorResponse from "@/utils/errorResponse";
+import {
+  deleteFileFromBucket,
+  uploadFileToBucket,
+} from "api-lib/storageBucket";
 export const getOverviewEmployees = async (req, res) => {
   const { role } = req.user;
   let resData = {};
@@ -198,4 +202,53 @@ export const updateRole = async (req, res, next) => {
   res
     .status(200)
     .json({ success: true, msg: "Role updated successfully", data: user });
+};
+
+export const addAttachment = async (req, res, next) => {
+  const { id } = req.query;
+  const { description, type } = req.body;
+  if (!req.file) {
+    throw new ErrorResponse("Missing attachment", 400);
+  }
+  const publicUrl = await uploadFileToBucket({
+    fileName: req.file.filename,
+    folderName: "user-attachment/" + id,
+  });
+  const attachmentType = "attachment." + type;
+  const user = await User.findByIdAndUpdate(
+    id,
+    {
+      $push: { [attachmentType]: { description, url: publicUrl } },
+    },
+    { new: true }
+  );
+  res.status(200).json({
+    success: true,
+    msg: "Successfully added",
+    data: {
+      id: user.id,
+      attachment: user.attachment,
+    },
+  });
+};
+
+export const deleteAttachment = async (req, res, next) => {
+  const { id, attachmentId, type } = req.query;
+  const searchPath = `attachment.${type}._id`;
+  const user = await User.findOne({
+    [searchPath]: attachmentId,
+    _id: id,
+  }).select("attachment");
+  if (!user) {
+    throw new ErrorResponse("File not found", 404);
+  }
+  const indexDeleteFile = user.attachment[type].findIndex(
+    (v) => v._id == attachmentId
+  );
+  if (indexDeleteFile >= 0) {
+    deleteFileFromBucket(user.attachment[type][indexDeleteFile].url);
+  }
+  user.attachment[type].pull({ _id: attachmentId });
+  await user.save();
+  res.status(200).json({ msg: "Deleted", success: true, data: user });
 };

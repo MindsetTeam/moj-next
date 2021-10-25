@@ -9,6 +9,7 @@ module.exports = (phase, { defaultConfig }) => {
     return {
       env: {
         baseURL: "http://localhost:3000",
+        uploadFilePath: 'tmp'
       },
     };
   }
@@ -24,6 +25,7 @@ module.exports = (phase, { defaultConfig }) => {
     env: {
       NEXTAUTH_URL: "https://test.khambodiahr.com",
       baseURL: "https://test.khambodiahr.com",
+      uploadFilePath: '/tmp'
     },
   };
 };

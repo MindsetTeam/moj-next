@@ -5,7 +5,7 @@ import upload from "@/middlewares/uploadFile";
 import nc from "next-connect";
 // import { Storage } from "@google-cloud/storage";
 import path from "path";
-import storageBucket from "@/utils/storageBucket";
+import storageBucket, { extractFileName } from "api-lib/storageBucket";
 const handler = nc();
 
 // const storage = new Storage({
@@ -30,17 +30,22 @@ handler.post(
     if (!req.file) {
       throw new ErrorResponse("Image not found", 400);
     }
-    // const userUploadBucket = storage.bucket("user_file_upload");
     const userUploadBucket = storageBucket;
+    const user = await User.findById(req.user.id);
+    if(user.photo !=='/noImg.jpg'){
+      const oldFilename = extractFileName(user.photo)
+      console.log(oldFilename);
+      await userUploadBucket.file(oldFilename).delete();
+    }
+    // const userUploadBucket = storage.bucket("user_file_upload");
     const resUpload = await userUploadBucket.upload(
-      path.join("/tmp", req.file.filename),
+      path.join(process.env.uploadFilePath, req.file.filename),
       { destination: "img-profile/" + req.file.filename }
     );
     console.log(resUpload);
 
-    const user = await User.findById(req.user.id);
     user.photo = (
-      "https://storage.googleapis.com/user_file_upload/img-profile/" +
+      "https://storage.googleapis.com/users_upload_files/img-profile/" +
       req.file.filename
     ).toString();
     await user.save();
