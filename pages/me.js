@@ -12,7 +12,8 @@ const me = () => {
    }, [session]);
    return (
       <div>
-         <p>Profile Page</p>
+         {/* <p>Profile Page</p> */}
+         <p>Loading...</p>
       </div>
    );
 };

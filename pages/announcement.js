@@ -264,6 +264,6 @@ const Announcement = () => {
     </div>
   );
 };
-Announcement.roles = ["admin"];
+Announcement.allowed_roles = ["admin", "editor"];
 
 export default Announcement;

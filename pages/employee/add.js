@@ -182,5 +182,5 @@ const Add = () => {
       </div>
    );
 };
-Add.roles = ['admin', 'editor']
+Add.allowed_roles = ['admin', 'editor']
 export default Add;

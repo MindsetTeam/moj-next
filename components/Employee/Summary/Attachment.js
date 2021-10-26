@@ -14,7 +14,7 @@ const attachmentTypeName = {
 const Attachment = ({ userData }) => {
   const [selectedRows, setSelectedRows] = useState(null);
   const [attachmentList, setAttachmentList] = useState(() => {
-    return Object.keys(userData.attachment).map((v, i) => {
+    return Object.keys(userData.attachment || {}).map((v, i) => {
       console.log(i);
       const returnObject = {
         key: i,

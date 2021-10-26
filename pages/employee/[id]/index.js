@@ -13,58 +13,60 @@ import statusOfficer from "data/StatusOfficer.json";
 import ministryList from "data/Ministry.json";
 import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
+import { useSession } from "next-auth/client";
 
 export async function getServerSideProps({ params }) {
-   const res = await api.get("/api/users/" + params.id);
-   return {
-      props: {
-         ministryStructure,
-         statusOfficer,
-         letterTypes,
-         rankList,
-         ministryList,
-         user: res.data,
-      },
-   };
+  const res = await api.get("/api/users/" + params.id);
+  return {
+    props: {
+      ministryStructure,
+      statusOfficer,
+      letterTypes,
+      rankList,
+      ministryList,
+      user: res.data,
+    },
+  };
 }
 
 export default function Home({
-   ministryStructure,
-   statusOfficer,
-   ministryList,
-   letterTypes,
-   rankList,
-   user,
+  ministryStructure,
+  statusOfficer,
+  ministryList,
+  letterTypes,
+  rankList,
+  user,
 }) {
-   return (
-      <div className={styles.employeeContainer}>
-         <Head>
-            <title>ព័ត៌មានមន្រ្តីរាជការ</title>
-            <link rel="icon" href="/favicon.ico" />
-            <meta
-               name="viewport"
-               content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-            ></meta>
-         </Head>
+  const [session] = useSession();
+  return (
+    <div className={styles.employeeContainer}>
+      <Head>
+        <title>ព័ត៌មានមន្រ្តីរាជការ</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        ></meta>
+      </Head>
 
-         <div>
-            <div>
-               <Button style={{ marginRight: 5 }}>
-                  ព័ត៌មានប្រវត្តិរូបសង្ខេប
-               </Button>
-               <Button type="primary">
-                  <Link href={`/employee/${user.id}/edit`}>កែប្រែព័ត៌មាន</Link>
-               </Button>
-            </div>
-            <SummaryInfo
-               userData={user}
-               ministryStructure={ministryStructure}
-               rankList={rankList}
-               letterTypes={letterTypes}
-               statusOfficer={statusOfficer}
-               ministryList={ministryList}
-            ></SummaryInfo>
-         </div>
+      <div>
+        <div>
+          <Button style={{ marginRight: 5 }}>ព័ត៌មានប្រវត្តិរូបសង្ខេប</Button>
+          {session?.user.role === "user" || session?.user.role === "moderator" ? null : (
+            <Button type="primary">
+              <Link href={`/employee/${user.id}/edit`}>កែប្រែព័ត៌មាន</Link>
+            </Button>
+          )}
+        </div>
+        <SummaryInfo
+          userData={user}
+          ministryStructure={ministryStructure}
+          rankList={rankList}
+          letterTypes={letterTypes}
+          statusOfficer={statusOfficer}
+          ministryList={ministryList}
+        ></SummaryInfo>
       </div>
-   );
+    </div>
+  );
 }

@@ -43,22 +43,23 @@ const Header = () => {
       <div className={styles.topMenu}>
         <TopMenu></TopMenu>
       </div>
-
-      {session?.user && (
-        <div className={styles.user}>
-          <Avatar src={session.user.photo} />
-          <div>
-            <Dropdown overlay={dropDownMenu}>
-              <div>
-                <span>
-                  {session.user.firstName + " " + session.user.lastName}
-                </span>
-                <DownOutlined></DownOutlined>
-              </div>
-            </Dropdown>
-          </div>
-        </div>
-      )}
+      <div className={styles.user}>
+        {session?.user && (
+          <>
+            <Avatar src={session.user.photo} />
+            <div>
+              <Dropdown overlay={dropDownMenu}>
+                <div>
+                  <span>
+                    {session.user.firstName + " " + session.user.lastName}
+                  </span>
+                  <DownOutlined></DownOutlined>
+                </div>
+              </Dropdown>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };

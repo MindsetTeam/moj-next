@@ -37,7 +37,7 @@ const attachmentInfo = ({ userData }) => {
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
   const [attachmentList, setAttachmentList] = useState(() => {
-    return Object.keys(userData.attachment).map((v, i) => {
+    return Object.keys(userData.attachment || {}).map((v, i) => {
       return {
         key: i,
         type: attachmentTypeName[v],

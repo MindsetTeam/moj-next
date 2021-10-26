@@ -2,7 +2,7 @@ import styles from "@/styles/Feedback.module.css";
 import { useState } from "react";
 
 import { Form, Button, Input, Table, Upload, notification } from "antd";
-import { useSession } from "node_modules/next-auth/client";
+import { useSession } from "next-auth/client";
 import { fetcher } from "@/lib/fetch";
 import { useFeedbacks } from "@/lib/feedback/hooks";
 

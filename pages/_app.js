@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
               {Component.withAuth === false ? (
                 <Component {...pageProps} />
               ) : (
-                <ProtectedLayout roles={Component.roles}>
+                <ProtectedLayout roles={Component.allowed_roles}>
                   <Component {...pageProps} />
                 </ProtectedLayout>
               )}

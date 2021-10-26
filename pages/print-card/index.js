@@ -188,7 +188,7 @@ const index = () => {
                   <td>:</td>
 
                   <td>
-                    {user?.experience?.[user?.experience?.length - 1].position}
+                    {user?.experience?.[user?.experience?.length - 1]?.position}
                   </td>
                 </tr>
                 <tr>
@@ -197,8 +197,8 @@ const index = () => {
 
                   <td>
                     {user?.experience?.[user?.experience?.length - 1]
-                      .department ||
-                      user?.experience?.[user?.experience?.length - 1].unit}
+                      ?.department ||
+                      user?.experience?.[user?.experience?.length - 1]?.unit}
                   </td>
                 </tr>
                 <tr>

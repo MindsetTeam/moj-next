@@ -187,7 +187,7 @@ const index = () => {
                   <td>:</td>
 
                   <td>
-                    {user?.experience?.[user?.experience?.length - 1].position}
+                    {user?.experience?.[user?.experience?.length - 1]?.position}
                   </td>
                 </tr>
                 <tr>
@@ -256,5 +256,6 @@ const index = () => {
     </>
   );
 };
+index.allowed_roles = ["admin", "editor"];
 
 export default index;

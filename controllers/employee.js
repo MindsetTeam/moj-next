@@ -150,7 +150,6 @@ export const getEmployees = async (req, res) => {
   if (req.user.role !== "admin") {
     reqQuery = { ...reqQuery, department: req.user.department };
   }
-  console.log(reqQuery);
   const users = await User.find(reqQuery).sort("-createdAt");
 
   res.status(200).json({

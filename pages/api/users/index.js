@@ -5,10 +5,10 @@ const { default: all } = require("@/middlewares/all");
 
 const { getEmployees } = require("controllers/employee");
 
-const handler = nc({onError: errorHandler});
+const handler = nc({ onError: errorHandler });
 
 handler.use(all);
 
-handler.get(protect,role('admin', 'editor'),getEmployees);
+handler.get(protect, role("admin", "editor", "moderator"), getEmployees);
 
 export default handler;

@@ -125,4 +125,6 @@ const index = () => {
   );
 };
 
+index.allowed_roles = ["admin", "editor"];
+
 export default index;

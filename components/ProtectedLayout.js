@@ -29,20 +29,31 @@ const Layout = ({ children, roles = [] }) => {
   const [session, loading] = useSession();
   const router = useRouter();
   const authCookie = Cookies.get("authorization");
-
-  useEffect(() => {
-    if (loading || session.user) {
-      return null;
-    }
-    if (!session || !authCookie) {
-      router.push(`/login?referer=${encodeURIComponent(router.asPath)}`);
-      return null;
-    }
-    if (roles.length != 0 && !roles.includes(session?.user?.role)) {
-      router.push(`/`);
-      return null;
-    }
-  }, [session, router]);
+  if (loading) {
+    return null;
+  }
+  if (!session || !authCookie) {
+    router.push(`/login?referer=${encodeURIComponent(router.asPath)}`);
+    return null;
+  }
+  if (roles.length != 0 && !roles.includes(session?.user?.role)) {
+    router.push(`/`);
+    return null;
+  }
+  // console.log(roles,session)
+  //   useEffect(() => {
+  //     if (loading) {
+  //       return null;
+  //     }
+  //     if (!session || !authCookie) {
+  //       router.push(`/login?referer=${encodeURIComponent(router.asPath)}`);
+  //       return null;
+  //     }
+  //     if (roles.length != 0 && !roles.includes(session?.user?.role)) {
+  //       router.push(`/`);
+  //       return null;
+  //     }
+  //   }, [session]);
 
   if (!authCookie) {
     return <RedirectLogin />;

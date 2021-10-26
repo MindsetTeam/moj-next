@@ -463,6 +463,6 @@ const Index = () => {
   );
 };
 
-Index.roles = ["admin", "editor"];
+Index.allowed_roles = ["admin", "editor", "moderator"];
 
 export default Index;
