@@ -318,13 +318,29 @@ const Index = () => {
     {
       title: "កែប្រែ",
       key: "action",
-      render: (text, record) => (
-        <Dropdown overlay={() => actionMenu(record)}>
-          <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
-            ផ្សេងៗ <DownOutlined />
-          </a>
-        </Dropdown>
-      ),
+      render: (text, record) => {
+        if (session?.user.role === "moderator") {
+          return (
+            <a
+              onClick={() => {
+                router.push(`/employee/${record.id}`);
+              }}
+            >
+              View
+            </a>
+          );
+        }
+        return (
+          <Dropdown overlay={() => actionMenu(record)}>
+            <a
+              className="ant-dropdown-link"
+              onClick={(e) => e.preventDefault()}
+            >
+              ផ្សេងៗ <DownOutlined />
+            </a>
+          </Dropdown>
+        );
+      },
     },
   ];
 
