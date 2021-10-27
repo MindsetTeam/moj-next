@@ -16,13 +16,16 @@ const General = ({ userData }) => {
 
           <Col span={6}>ឋានន្តរសកិ្ត និងថ្នាក់</Col>
           <Col span={6} className={styles.greyText}>
-          {`${userData.rank?.[userData.rank.length - 1]?.framework} - ${userData.rank?.[userData.rank.length - 1]?.rankType} - ${userData.rank?.[userData.rank.length - 1]?.level}` }
+            {`${userData.rank?.[userData.rank.length - 1]?.framework || ""} - ${
+              userData.rank?.[userData.rank.length - 1]?.rankType || ""
+            } - ${userData.rank?.[userData.rank.length - 1]?.level || ""}`}
           </Col>
         </Row>
         <Row gutter={30} style={{ marginBottom: 20 }}>
           <Col span={6}>តួនាទី</Col>
           <Col span={6} className={styles.greyText}>
-            {userData.experience?.[userData.experience.length - 1]?.department ||
+            {userData.experience?.[userData.experience.length - 1]
+              ?.department ||
               userData.experience?.[userData.experience.length - 1]?.unit}
           </Col>
 

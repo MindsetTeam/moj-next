@@ -32,10 +32,14 @@ handler.post(
     }
     const userUploadBucket = storageBucket;
     const user = await User.findById(req.user.id);
-    if(user.photo !=='/noImg.jpg'){
-      const oldFilename = extractFileName(user.photo)
+    if (user.photo !== "/noImg.jpg") {
+      const oldFilename = extractFileName(user.photo);
       console.log(oldFilename);
-      await userUploadBucket.file(oldFilename).delete();
+      try {
+        await userUploadBucket.file(oldFilename).delete();
+      } catch (error) {
+        console.log(error);
+      }
     }
     // const userUploadBucket = storage.bucket("user_file_upload");
     const resUpload = await userUploadBucket.upload(

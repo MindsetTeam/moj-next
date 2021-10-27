@@ -13,7 +13,7 @@ handler.use(database);
 handler.get(protect, getAnnouncements);
 handler.post(
   protect,
-  role("admin"),
+  role("admin", 'editor'),
   uploadFile.single("attachment"),
   createAnnouncement
 );

@@ -72,14 +72,7 @@ export const getOverviewEmployees = async (req, res) => {
     //   },
     // ]);
     const centerInstitutionRawData = await User.aggregate([
-      {
-        $project: {
-          gender: 1,
-          approval: 1,
-          experience: { $slice: ["$experience", -1] },
-        },
-      },
-      { $match: { "experience.institution": "ថ្នាក់កណ្តាល", approval: true } },
+      { $match: { approval: true } },
       {
         $group: {
           _id: "$gender",
@@ -87,6 +80,22 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
+    // const centerInstitutionRawData = await User.aggregate([
+    //   {
+    //     $project: {
+    //       gender: 1,
+    //       approval: 1,
+    //       experience: { $slice: ["$experience", -1] },
+    //     },
+    //   },
+    //   { $match: { "experience.institution": "ថ្នាក់កណ្តាល", approval: true } },
+    //   {
+    //     $group: {
+    //       _id: "$gender",
+    //       total: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
     const centerInstitution = {
       ប្រុស: 0,
       ស្រី: 0,

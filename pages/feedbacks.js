@@ -21,9 +21,9 @@ const columns = [
   {
     title: "userName",
     dataIndex: "user",
-    key: "user", 
+    key: "user",
     render(record) {
-      return record.firstName + " " + record.lastName;
+      return record?.firstName + " " + record?.lastName;
     },
   },
   {
@@ -81,7 +81,7 @@ const Feedback = () => {
 
   return (
     <div className={styles.container}>
-      {session?.user?.role !== "admin" ? (
+      {!["admin", "editor"].includes(session?.user?.role) ? (
         <div className={styles.feedbackForm}>
           <p className={styles.title}>Feedback Form</p>
           <div>

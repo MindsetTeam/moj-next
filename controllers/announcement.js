@@ -7,7 +7,7 @@ import {
 
 export const getAnnouncements = async (req, res, next) => {
   const reqQuery = {};
-  if (req.user.role !== "admin") {
+  if (!["admin", 'editor'].includes(req.user.role)) {
     reqQuery.isActive = true;
   }
   const announcements = await Announcement.find(reqQuery).sort("-createdAt");

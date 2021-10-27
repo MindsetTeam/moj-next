@@ -22,10 +22,10 @@ handler.use(database);
 //   required: ['phoneNumber', 'description'],
 // }
 
-handler.delete(protect, role("admin"), deleteAnnouncement);
+handler.delete(protect, role("admin", "editor"), deleteAnnouncement);
 handler.put(
   protect,
-  role("admin"),
+  role("admin", "editor"),
   uploadFile.single("attachment"),
   updateAnnouncement
 );
