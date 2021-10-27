@@ -229,7 +229,7 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
                         <Input placeholder="ទីកន្លែងបំពេញការងារ" />
                      </Form.Item>
                   </Col>
-                  <Col span={12}>
+                  {/* <Col span={12}>
                      <div>
                         <p>File Name</p>
                         <Upload>
@@ -238,7 +238,7 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
                            </Button>
                         </Upload>
                      </div>
-                  </Col>
+                  </Col> */}
                </Row>
             </div>
 

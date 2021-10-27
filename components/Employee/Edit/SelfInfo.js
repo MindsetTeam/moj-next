@@ -193,39 +193,6 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                         </Col>
                      </Row>
                      <Row gutter={16}>
-                        <Col span={12}>
-                           <Form.Item
-                              style={{ marginBottom: 10 }}
-                              name="generalDepartment"
-                              label="General Department"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញ General Department",
-                                 },
-                              ]}
-                           >
-                              <Input placeholder="General Department" />
-                           </Form.Item>
-                        </Col>
-                        <Col span={12}>
-                           <Form.Item
-                              style={{ marginBottom: 10 }}
-                              name="department"
-                              label="Department"
-                              rules={[
-                                 {
-                                    required: true,
-                                    message: "សូមបំពេញ Department",
-                                 },
-                              ]}
-                           >
-                              <Input placeholder="Department" />
-                           </Form.Item>
-                        </Col>
-                       
-                     </Row>
-                     <Row gutter={16}>
                         <Col span={8}>
                            <Form.Item
                               style={{ marginBottom: 10 }}

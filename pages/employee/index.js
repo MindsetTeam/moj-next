@@ -241,7 +241,7 @@ const Index = () => {
 
   const columns = [
     {
-      title: "អត្តលេខ",
+      title: "nationalityIDNum",
       dataIndex: "nationalityIDNum",
       key: "nationalityIDNum",
     },
@@ -405,13 +405,14 @@ const Index = () => {
                 ]}
               >
                 <Select placeholder="ជ្រើសរើស">
-                  <Option value="user">User</Option>
                   <Option value="editor">Editor</Option>
+                  <Option value="moderator">Moderator</Option>
+                  <Option value="user">User</Option>
                 </Select>
               </Form.Item>
             </Col>
           </Row>
-          <Row gutter={16}>
+          {/* <Row gutter={16}>
             <Col span={24}>
               <Form.Item
                 style={{ marginBottom: 10 }}
@@ -437,8 +438,8 @@ const Index = () => {
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={16}>
+          </Row> */}
+          {/* <Row gutter={16}>
             <Col span={24}>
               <Form.Item
                 style={{ marginBottom: 10 }}
@@ -461,7 +462,7 @@ const Index = () => {
                 </Select>
               </Form.Item>
             </Col>
-          </Row>
+          </Row> */}
           <Button
             style={{ marginRight: 8 }}
             onClick={() => {

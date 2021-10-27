@@ -70,16 +70,15 @@ const TopMenu = () => {
               title: "ការបោះពុម្ពកាតមន្រ្ដី",
             },
           ],
+        },
+        {
+          link: "/announcement",
+          title: "សេចក្ដីជូនដំណឹង",
+          iconUrl: "/announcement.png",
         }
       );
     }
-    if (session?.user.role === "admin") {
-      menu.push({
-        link: "/announcement",
-        title: "សេចក្ដីជូនដំណឹង",
-        iconUrl: "/announcement.png",
-      });
-    }
+
     menuList.splice(2, 0, ...menu);
   }
   return (
