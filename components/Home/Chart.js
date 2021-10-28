@@ -9,36 +9,40 @@ const Pie = dynamic(() => import("@ant-design/charts").then((mod) => mod.Pie), {
 const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) => {
   const data = [
     {
-      type: "ប្រុស",
+      type: `ប្រុស ${centerInstitution["ប្រុស"]}`,
       value: centerInstitution["ប្រុស"],
     },
     {
-      type: "ស្រី",
+      type: `ស្រី ${centerInstitution["ស្រី"]}`,
       value: centerInstitution["ស្រី"],
     },
   ];
   const config = {
     appendPadding: 10,
     data: data,
+    height:250,
     angleField: "value",
     colorField: "type",
     radius: 1,
     innerRadius: 0.6,
     label: {
-      type: "inner",
-      offset: "-50%",
-      content: "{value}",
-      style: {
-        textAlign: "center",
-        fontSize: 20,
-      },
+      // type: "inner",
+      // offset: "-50%",
+      // content: "{value}",
+      // style: {
+      //   textAlign: "center",
+      //   fontSize: 20,
+      // },
+      type: 'spider',
+      labelHeight: 28,
+      content: '{name}\n{percentage}',
     },
     interactions: [{ type: "element-selected" }, { type: "element-active" }],
     statistic: {
       title: false,
       content: {
         style: {
-          fontSize: 25,
+          fontSize: 20,
           whiteSpace: "pre-wrap",
           overflow: "hidden",
           textOverflow: "ellipsis",

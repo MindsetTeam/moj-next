@@ -34,6 +34,7 @@ const Attachment = ({ userData }) => {
       title: "ប្រភេទឯកសារ",
       dataIndex: "type",
       key: "type",
+      width: '15%',
     },
     {
       title: "ឯកសារ",

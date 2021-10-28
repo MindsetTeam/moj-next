@@ -298,12 +298,12 @@ const workHistoryInfo = ({
                 style={{ marginBottom: 10 }}
                 name="refNum"
                 label="លេខលិខិតយោង"
-                rules={[
-                  {
-                    required: true,
-                    message: "សូមបំពេញលេខលិខិតយោង",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "សូមបំពេញលេខលិខិតយោង",
+                //   },
+                // ]}
               >
                 <Input placeholder="លេខលិខិតយោង" />
               </Form.Item>

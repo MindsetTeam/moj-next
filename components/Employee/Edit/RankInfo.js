@@ -241,7 +241,7 @@ const RankInfo = ({ userData }) => {
           }}
         >
           <Row gutter={16}>
-            <Col span={6}>
+            <Col span={8}>
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="refNum"
@@ -256,7 +256,7 @@ const RankInfo = ({ userData }) => {
                 <Input placeholder="លេខលិខិតបទដ្ឋានគតិយុត្ត" />
               </Form.Item>
             </Col>
-            <Col span={9}>
+            <Col span={8}>
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="startDate"
@@ -283,10 +283,10 @@ const RankInfo = ({ userData }) => {
                         <Switch defaultChecked onChange={onNowChange}></Switch>
                      </Form.Item>
                   </Col> */}
-            <Col span={9}>
+            <Col span={8}>
               <Form.Item
                 name="endDate"
-                label="កាលបរិច្ឆេទដំឡើងឋាន្តរសក្តិ និងថ្នាក់ចុងក្រោយ"
+                label="កាលបរិច្ឆេទដំឡើងឋាន្តរសក្តិ ថ្នាក់ចុងក្រោយ"
                 style={{ marginBottom: 10 }}
               >
                 <DatePicker

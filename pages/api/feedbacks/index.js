@@ -20,7 +20,7 @@ handler.use(database);
 //   required: ['phoneNumber', 'description'],
 // }
 
-handler.get(protect,role('admin'), getFeedbacks);
+handler.get(protect,role('admin','editor'), getFeedbacks);
 handler.post(protect, uploadFile.single("attachment"), createFeedback);
 
 export default handler;

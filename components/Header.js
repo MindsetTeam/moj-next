@@ -36,7 +36,7 @@ const Header = () => {
     <div className={styles.header}>
       <div className={styles.logo}>
         <div>
-          <Image src="/hello.png" width={40} height={40} />
+          <Image src="/logo.png" width={40} height={40} />
         </div>
         <p className={styles.logoName}>ប្រព័ន្ធគ្រប់គ្រងមន្រ្ដីរាជការស៊ីវិល</p>
       </div>
