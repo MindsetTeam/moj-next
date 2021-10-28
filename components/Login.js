@@ -41,9 +41,9 @@ const Login = () => {
             dispatch({
                type: "ERROR",
                payload: {
-                  message: "Password not match",
+                  message: "Incorrect Password",
                   description:
-                     "Password should be the same as username (អត្តលេខ)",
+                     "The password you entered is incorrect",
                },
             });
          }
@@ -71,7 +71,7 @@ const Login = () => {
                <Form hideRequiredMark form={form} {...layout}>
                   <Form.Item
                      style={{ marginBottom: 20 }}
-                     label="អត្តលេខ"
+                     label="អត្តសញ្ញាណប័ណ្ណ"
                      name="username"
                      rules={[
                         {
@@ -79,12 +79,12 @@ const Login = () => {
                         },
                      ]}
                   >
-                     <Input placeholder="អត្តលេខ" />
+                     <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណ" />
                   </Form.Item>
 
                   <Form.Item
                      style={{ marginBottom: 10 }}
-                     label="Password"
+                     label="ពាក្យសម្ងាត់"
                      name="password"
                      rules={[
                         {
@@ -92,7 +92,7 @@ const Login = () => {
                         },
                      ]}
                   >
-                     <Input placeholder="password" />
+                     <Input placeholder="ពាក្យសម្ងាត់" />
                   </Form.Item>
 
                   <Button

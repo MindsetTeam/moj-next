@@ -13,7 +13,7 @@ const options = [
    // { label: "ការលើកសសើរ", value: "Praise" },
    { label: "កម្រិតវប្បធម៌", value: "Education" },
    { label: "ប្រវត្តិការងារ", value: "WorkHistory" },
-   { label: "PDF", value: "Pdf" },
+   // { label: "PDF", value: "Pdf" },
 ];
 
 const index = () => {

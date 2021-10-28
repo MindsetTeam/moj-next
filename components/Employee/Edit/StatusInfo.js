@@ -32,7 +32,9 @@ const StatusInfo = ({
   ministryList,
   letterTypes,
   rankList,
+  positionList,
   onChangeTabKey,
+  ministryStructure,
   userData,
 }) => {
   const [formInfo] = Form.useForm();
@@ -41,6 +43,7 @@ const StatusInfo = ({
   const [nowOption, setNowOption] = useState(true);
   const [officerStatusList, setOfficerStatusList] = useState([]);
   const [editData, setEditData] = useState(null);
+  const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -50,13 +53,6 @@ const StatusInfo = ({
 
   const onStartDateChange = (date, dateString) => {
     setStartDate(dateString);
-    //TODO status
-    // modal
-    // minsitry: MOJ
-    // position: list (chhayheng)
-
-    // /employee
-    // status
   };
 
   const onEndDateChange = (date, dateString) => {
@@ -204,7 +200,7 @@ const StatusInfo = ({
       render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
     },
     {
-      title: "តួនាទី",
+      title: "មុខតំណែង",
       dataIndex: "position",
       key: "position",
     },
@@ -361,6 +357,7 @@ const StatusInfo = ({
           hideRequiredMark
           form={formStatus}
           initialValues={{
+            ministry: "ក្រសួងយុត្តិធម៌",
             ...editData,
             startDate: editData?.startDate ? moment(editData.startDate) : null,
             endDate: editData?.endDate ? moment(editData.endDate) : null,
@@ -462,21 +459,15 @@ const StatusInfo = ({
                 style={{ marginBottom: 10 }}
                 name={"ministry"}
                 label="ក្រសួង-ស្ថាប័ន"
-                rules={[
-                  {
-                    required: true,
-                    message: "សូមជ្រើសរើសក្រសួង-ស្ថាប័ន",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "សូមជ្រើសរើសក្រសួង-ស្ថាប័ន",
+                //   },
+                // ]}
               >
-                <Select placeholder="ជ្រើសរើស">
-                  {ministryList.map((v, i) => {
-                    return (
-                      <Option key={i} value={v}>
-                        {v}
-                      </Option>
-                    );
-                  })}
+                <Select placeholder="ជ្រើសរើស" defaultValue={"ក្រសួងយុត្តិធម៌"}>
+                  <Option value="ក្រសួងយុត្តិធម៌">ក្រសួងយុត្តិធម៌</Option>
                 </Select>
               </Form.Item>
             </Col>
@@ -486,16 +477,24 @@ const StatusInfo = ({
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="generalDepartment"
-                label="General Department"
+                label="អគ្គនាយកដ្ឋាន"
                 rules={[
                   {
                     required: true,
-                    message: "សូមជ្រើសរើស General Department",
+                    message: "សូមជ្រើសរើសអគ្គនាយកដ្ឋាន",
                   },
                 ]}
               >
-                <Select placeholder="ជ្រើសរើស">
-                  {ministryList.map((v, i) => {
+                <Select
+                  placeholder="ជ្រើសរើស"
+                  onChange={(v) => {
+                    setChoiceGeneralDepartment(v);
+                    formStatus.resetFields(["department"]);
+                  }}
+                >
+                  {Object.keys(
+                    ministryStructure["ក្រសួងយុត្តិធម៌"]["ថ្នាក់កណ្តាល"]
+                  ).map((v, i) => {
                     return (
                       <Option key={i} value={v}>
                         {v}
@@ -509,16 +508,20 @@ const StatusInfo = ({
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="department"
-                label="Department"
+                label="នាយកដ្ឋាន"
                 rules={[
                   {
                     required: true,
-                    message: "សូមជ្រើសរើស  Department",
+                    message: "សូមជ្រើសរើសនាយកដ្ឋាន",
                   },
                 ]}
               >
                 <Select placeholder="ជ្រើសរើស">
-                  {ministryList.map((v, i) => {
+                  {Object.keys(
+                    ministryStructure["ក្រសួងយុត្តិធម៌"]["ថ្នាក់កណ្តាល"][
+                      choiceGeneralDepartment
+                    ] || {}
+                  ).map((v, i) => {
                     return (
                       <Option key={i} value={v}>
                         {v}
@@ -544,7 +547,7 @@ const StatusInfo = ({
               >
                 {/* <Input placeholder="មុខតំណែង" /> */}
                 <Select placeholder="ជ្រើសរើស">
-                  {ministryList.map((v, i) => {
+                  {positionList.map((v, i) => {
                     return (
                       <Option key={i} value={v}>
                         {v}

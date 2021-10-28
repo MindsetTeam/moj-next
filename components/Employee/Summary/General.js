@@ -24,20 +24,24 @@ const General = ({ userData }) => {
         <Row gutter={30} style={{ marginBottom: 20 }}>
           <Col span={6}>តួនាទី</Col>
           <Col span={6} className={styles.greyText}>
-            {userData.experience?.[userData.experience.length - 1]
+            {/* {userData.experience?.[userData.experience.length - 1]
               ?.department ||
-              userData.experience?.[userData.experience.length - 1]?.unit}
+              userData.experience?.[userData.experience.length - 1]?.unit} */}
+            {userData.officerStatus?.[userData.officerStatus.length - 1]
+              ?.position || ""}
           </Col>
 
           <Col span={6}>អគ្គនាយកដ្ឋាន</Col>
           <Col span={6} className={styles.greyText}>
-            {userData.generalDepartment}
+            {userData.officerStatus?.[userData.officerStatus.length - 1]
+              ?.generalDepartment || ""}
           </Col>
         </Row>
         <Row gutter={30} style={{ marginBottom: 20 }}>
           <Col span={6}>នាយកដ្ឋាន</Col>
           <Col span={6} className={styles.greyText}>
-            {userData.department}
+            {userData.officerStatus?.[userData.officerStatus.length - 1]
+              ?.department || ""}
           </Col>
 
           <Col span={6}>លេខប័ណ្ណមន្រ្ដីរាជការ</Col>

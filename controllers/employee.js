@@ -7,27 +7,26 @@ import {
 export const getOverviewEmployees = async (req, res) => {
   const { role } = req.user;
   let resData = {};
-  if (role === "editor") {
-    const users = await User.aggregate([
-      { $match: { department: req.user.department } },
-      { $group: { _id: "$gender", total: { $sum: 1 } } },
-    ]);
-    resData = users.reduce(
-      (pre, cur) => {
-        pre["total"] = pre.total + (cur["_id"] != null ? cur.total : 0);
-        pre[cur["_id"]] = +cur["total"];
-        return pre;
-      },
-      { total: 0, ស្រី: 0, ប្រុស: 0 }
-    );
-  }
-  if (role === "admin") {
-    const retiredEmployee = await User.find({
+  // if (role === "editor") {
+  //   const users = await User.aggregate([
+  //     { $match: { department: req.user.department } },
+  //     { $group: { _id: "$gender", total: { $sum: 1 } } },
+  //   ]);
+  //   resData = users.reduce(
+  //     (pre, cur) => {
+  //       pre["total"] = pre.total + (cur["_id"] != null ? cur.total : 0);
+  //       pre[cur["_id"]] = +cur["total"];
+  //       return pre;
+  //     },
+  //     { total: 0, ស្រី: 0, ប្រុស: 0 }
+  //   );
+  // }
+  if (["admin", "editor"].includes(role)) {
+    const retiredEmployeeReq = User.find({
       approval: true,
       birthDate: { $lt: new Date(Date.now() - 65 * 365 * 24 * 60 * 60 * 1000) },
     }).countDocuments();
-
-    const officerStatusListRes = await User.aggregate([
+    const officerStatusListReq = User.aggregate([
       {
         $project: {
           approval: 1,
@@ -47,6 +46,60 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
+    const centerInstitutionRawDataReq = User.aggregate([
+      { $match: { approval: true } },
+      {
+        $group: {
+          _id: "$gender",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    const totalEmployeeReq = User.countDocuments({ approval: true });
+    const generalDepartmentResReq = User.aggregate([
+      {
+        $project: {
+          approval: 1,
+          officerStatus: { $slice: ["$officerStatus", -1] },
+        },
+      },
+      {
+        $match: {
+          approval: true,
+          officerStatus: { $elemMatch: { $exists: true } },
+        },
+      },
+      {
+        $group: {
+          _id: "$officerStatus.generalDepartment",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    // const generalDepartmentResReq = User.aggregate([
+    //   { $match: { approval: true } },
+    //   {
+    //     $group: {
+    //       _id: "$generalDepartment",
+    //       total: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
+    const [
+      retiredEmployee,
+      officerStatusListRes,
+      centerInstitutionRawData,
+      totalEmployee,
+      generalDepartmentRes,
+    ] = await Promise.all([
+      retiredEmployeeReq,
+      officerStatusListReq,
+      centerInstitutionRawDataReq,
+      totalEmployeeReq,
+      generalDepartmentResReq,
+    ]);
+    // const retiredEmployee = await
+    // const officerStatusListRes = await
     const officerStatusList = {};
     officerStatusListRes.forEach((v) => {
       officerStatusList[v._id] = v.total;
@@ -71,15 +124,7 @@ export const getOverviewEmployees = async (req, res) => {
     //     },
     //   },
     // ]);
-    const centerInstitutionRawData = await User.aggregate([
-      { $match: { approval: true } },
-      {
-        $group: {
-          _id: "$gender",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
+    // const centerInstitutionRawData = await
     // const centerInstitutionRawData = await User.aggregate([
     //   {
     //     $project: {
@@ -102,16 +147,16 @@ export const getOverviewEmployees = async (req, res) => {
       total: 0,
     };
 
-    const totalEmployee = await User.countDocuments({ approval: true });
-    const generalDepartmentRes = await User.aggregate([
-      { $match: { approval: true } },
-      {
-        $group: {
-          _id: "$generalDepartment",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
+    // const totalEmployee = await User.countDocuments({ approval: true });
+    // const generalDepartmentRes = await User.aggregate([
+    //   { $match: { approval: true } },
+    //   {
+    //     $group: {
+    //       _id: "$generalDepartment",
+    //       total: { $sum: 1 },
+    //     },
+    //   },
+    // ]);
     const generalDepartmentList = {};
     generalDepartmentRes.forEach((v) => {
       generalDepartmentList[v._id] = v.total;
@@ -142,8 +187,9 @@ export const getOverviewEmployees = async (req, res) => {
     data: resData,
   });
 };
+
 export const getEmployees = async (req, res) => {
-  const { searchTerm } = req.query;
+  const { searchTerm, select } = req.query;
   let reqQuery;
   if (searchTerm) {
     let searchReg = new RegExp(searchTerm, "i");
@@ -156,10 +202,59 @@ export const getEmployees = async (req, res) => {
       ],
     };
   }
-  if (req.user.role !== "admin") {
-    reqQuery = { ...reqQuery, department: req.user.department };
+  // if (!["admin", "editor"].includes(req.user.role)) {
+  //   reqQuery = { ...reqQuery, department: req.user.department };
+  // }
+  let searchQuery = User.find(reqQuery).sort("-createdAt");
+  if (select) {
+    searchQuery = searchQuery.select(select.split(",").join(" "));
   }
-  const users = await User.find(reqQuery).sort("-createdAt");
+  if (req.user.role === "moderator") {
+    const userModerator = await User.findById(req.user.id);
+    const statusModerator =
+      userModerator.officerStatus[userModerator.officerStatus.length - 1];
+    let matchQueryMo;
+    console.log(userModerator, userModerator.moderatorType);
+    if (userModerator.moderatorType === "generalDepartment") {
+      matchQueryMo = {
+        $elemMatch: {
+          generalDepartment: statusModerator.generalDepartment,
+        },
+      };
+    } else {
+      matchQueryMo = {
+        $elemMatch: {
+          department: statusModerator.department,
+        },
+      };
+    }
+    searchQuery = User.aggregate([
+      {
+        $project: {
+          firstName: 1,
+          lastName: 1,
+          nationalityIDNum: 1,
+          gender: 1,
+          birthDate: 1,
+          rank: 1,
+          role: 1,
+          approval: 1,
+          createdAt: 1,
+          officerStatus: { $slice: ["$officerStatus", -1] },
+        },
+      },
+      {
+        $match: {
+          approval: true,
+          officerStatus: { ...matchQueryMo },
+          ...reqQuery,
+          // officerStatus: { $elemMatch: { $exists: true } },
+        },
+      },
+      { $sort: { createdAt: -1 } },
+    ]);
+  }
+  const users = await searchQuery;
 
   res.status(200).json({
     success: true,

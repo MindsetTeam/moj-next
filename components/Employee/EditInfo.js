@@ -17,94 +17,100 @@ import AttachmentInfo from "@/components/Employee/Edit/AttachmentInfo";
 
 const { TabPane } = Tabs;
 
-const    EditInfo = ({
-   userData,
-   ministryStructure,
-   statusOfficer,
-   ministryList,
-   letterTypes,
-   rankList,
+const EditInfo = ({
+  userData,
+  ministryStructure,
+  statusOfficer,
+  ministryList,
+  letterTypes,
+  provincesList,
+  positionList,
+  rankList,
 }) => {
-   const [activeTabKey, setActiveTabKey] = useState("1");
-   const [familyStatusInfo, setFamilyStatusInfo] = useState(
-      userData.familyStatus
-   );
-   const onChangeTabKey = (key) => {
-      setActiveTabKey(key);
-      window.scrollTo({
-         top: 0,
-         behavior: "smooth",
-      });
-   };
+  const [activeTabKey, setActiveTabKey] = useState("1");
+  const [familyStatusInfo, setFamilyStatusInfo] = useState(
+    userData.familyStatus
+  );
+  const onChangeTabKey = (key) => {
+    setActiveTabKey(key);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
-   return (
-      <div>
-         <Tabs
-            activeKey={activeTabKey}
-            onTabClick={(e) => {
-               setActiveTabKey(e);
-            }}
-         >
-            <TabPane tab="ព័ត៌មានផ្ទាល់ខ្លួន" key="1">
-               <SelfInfo
-                  userData={userData}
-                  onChangeTabKey={onChangeTabKey}
-                  setFamilyStatusInfo={setFamilyStatusInfo}
-               ></SelfInfo>
-            </TabPane>
-            {familyStatusInfo !== "នៅលីវ" && (
-               <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="2">
-                  <SpouseInfo
-                     userData={userData}
-                     familyStatusInfo={familyStatusInfo}
-                     onChangeTabKey={onChangeTabKey}
-                  ></SpouseInfo>
-               </TabPane>
-            )}
+  return (
+    <div>
+      <Tabs
+        activeKey={activeTabKey}
+        onTabClick={(e) => {
+          setActiveTabKey(e);
+        }}
+      >
+        <TabPane tab="ព័ត៌មានផ្ទាល់ខ្លួន" key="1">
+          <SelfInfo
+            userData={userData}
+            onChangeTabKey={onChangeTabKey}
+            setFamilyStatusInfo={setFamilyStatusInfo}
+          ></SelfInfo>
+        </TabPane>
+        {familyStatusInfo !== "នៅលីវ" && (
+          <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="2">
+            <SpouseInfo
+              userData={userData}
+              familyStatusInfo={familyStatusInfo}
+              onChangeTabKey={onChangeTabKey}
+            ></SpouseInfo>
+          </TabPane>
+        )}
 
-            {/* <TabPane tab="ព័ត៌មានកូន" key="3">
+        {/* <TabPane tab="ព័ត៌មានកូន" key="3">
                <ChildrenInfo userData={user}></ChildrenInfo>
             </TabPane> */}
-            <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="3">
-               <ParentInfo
-                  userData={userData}
-                  onChangeTabKey={onChangeTabKey}
-               ></ParentInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="4">
-               <EducationInfo userData={userData}></EducationInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានឋានន្តរសកិ្ត និងថ្នាក់" key="5">
-               <RankInfo userData={userData}></RankInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានប្រវត្តិការងារ" key="6">
-               <WorkHistoryInfo
-                  userData={userData}
-                  ministryStructure={ministryStructure}
-               ></WorkHistoryInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានស្ថានភាពមន្រ្ដី" key="7">
-               <StatusInfo
-                  onChangeTabKey={onChangeTabKey}
-                  userData={userData}
-                  rankList={rankList}
-                  letterTypes={letterTypes}
-                  ministryList={ministryList}
-                  statusOfficer={statusOfficer}
-               ></StatusInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានការដាក់ពិន័យ" key="8">
-               <PenaltyInfo userData={userData}></PenaltyInfo>
-            </TabPane>
-            <TabPane tab="ព័ត៌មានការលើកសសើរ" key="9">
-               <PraiseInfo userData={userData}></PraiseInfo>
-            </TabPane>
-            <TabPane tab="ឯកសារយោង" key="10">
-               <AttachmentInfo userData={userData}></AttachmentInfo>
-            </TabPane>
-         </Tabs>
-      </div>
-   );
+        <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="3">
+          <ParentInfo
+            userData={userData}
+            onChangeTabKey={onChangeTabKey}
+          ></ParentInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="4">
+          <EducationInfo userData={userData}></EducationInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានឋានន្តរសកិ្ត និងថ្នាក់" key="5">
+          <RankInfo userData={userData}></RankInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានប្រវត្តិការងារ" key="6">
+          <WorkHistoryInfo
+            userData={userData}
+            provincesList={provincesList}
+            ministryStructure={ministryStructure}
+            positionList={positionList}
+          ></WorkHistoryInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានស្ថានភាពមន្រ្ដី" key="7">
+          <StatusInfo
+            onChangeTabKey={onChangeTabKey}
+            userData={userData}
+            rankList={rankList}
+            letterTypes={letterTypes}
+            positionList={positionList}
+            ministryList={ministryList}
+            statusOfficer={statusOfficer}
+            ministryStructure={ministryStructure}
+          ></StatusInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានការដាក់ពិន័យ" key="8">
+          <PenaltyInfo userData={userData}></PenaltyInfo>
+        </TabPane>
+        <TabPane tab="ព័ត៌មានការលើកសសើរ" key="9">
+          <PraiseInfo userData={userData}></PraiseInfo>
+        </TabPane>
+        <TabPane tab="ឯកសារយោង" key="10">
+          <AttachmentInfo userData={userData}></AttachmentInfo>
+        </TabPane>
+      </Tabs>
+    </div>
+  );
 };
 
 export default EditInfo;

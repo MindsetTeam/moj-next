@@ -133,11 +133,11 @@ const Praise = ({ userData }) => {
          dataIndex: "letterType",
          key: "letterType",
       },
-      {
-         title: "រូបភាពលើកសសើរ",
-         dataIndex: "photo",
-         key: "photo",
-      },
+      // {
+      //    title: "រូបភាពលើកសសើរ",
+      //    dataIndex: "photo",
+      //    key: "photo",
+      // },
       {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "date",
@@ -452,7 +452,7 @@ const Praise = ({ userData }) => {
                      </Form.Item>
                   </Col>
                </Row>
-               <Row gutter={16}>
+               {/* <Row gutter={16}>
                   <Col span={24}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
@@ -468,7 +468,7 @@ const Praise = ({ userData }) => {
                         <Input placeholder="រូបភាពនៃការលើកសសើរ" />
                      </Form.Item>
                   </Col>
-               </Row>
+               </Row> */}
             </Form>
          </Modal>
       </div>

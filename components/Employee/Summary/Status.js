@@ -67,11 +67,11 @@ const Status = ({
          dataIndex: "letterType",
          key: "letterType",
       },
-      {
-         title: "រូបភាពលើកសសើរ",
-         dataIndex: "photo",
-         key: "photo",
-      },
+      // {
+      //    title: "រូបភាពលើកសសើរ",
+      //    dataIndex: "photo",
+      //    key: "photo",
+      // },
       {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "date",
@@ -96,11 +96,11 @@ const Status = ({
          dataIndex: "type",
          key: "type",
       },
-      {
-         title: "រូបភាពការដាក់ពិន័យ",
-         dataIndex: "photo",
-         key: "photo",
-      },
+      // {
+      //    title: "រូបភាពការដាក់ពិន័យ",
+      //    dataIndex: "photo",
+      //    key: "photo",
+      // },
       {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "date",

@@ -35,13 +35,13 @@ const TopMenu = () => {
       iconUrl: "/setting.png",
     },
   ];
-  if (["moderator"].includes(session?.user.role)) {
-    menuList.splice(2, 0, {
-      link: "/employee",
-      title: "បញ្ជីឈ្មោះមន្រ្តីរាជការ",
-      iconUrl: "/team.png",
-    });
-  }
+  // if (["moderator"].includes(session?.user.role)) {
+  //   menuList.splice(2, 0, {
+  //     link: "/employee",
+  //     title: "បញ្ជីឈ្មោះមន្រ្តីរាជការ",
+  //     iconUrl: "/team.png",
+  //   });
+  // }
   if (["admin", "editor", "moderator"].includes(session?.user.role)) {
     let menu = [
       {

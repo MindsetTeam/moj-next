@@ -6,7 +6,7 @@ import Search from "@/components/Employee/Search";
 import {
   CheckOutlined,
   CloseOutlined,
-  SearchOutlined,
+  // SearchOutlined,
 } from "@ant-design/icons";
 import structureMinistryData from "/data/Structure.json";
 
@@ -33,6 +33,8 @@ import {
   Select,
   Menu,
   Dropdown,
+  notification,
+  Radio,
 } from "antd";
 
 import api from "@/utils/api";
@@ -54,6 +56,7 @@ const Index = () => {
   const router = useRouter();
   const [session, loading] = useSession();
   const [form] = Form.useForm();
+  const [roleChoice, setRoleChoice] = useState("");
 
   const [generalDepartment, setGeneralDepartment] = useState(
     generalDepartmentData
@@ -91,6 +94,15 @@ const Index = () => {
     setModalEdit(!modalEdit);
   };
 
+  // change password
+  const [modalChangePassword, setModalChangePassword] = useState(false);
+
+  const [formChangePassword] = Form.useForm();
+
+  const toggleModalChangePassword = () => {
+    setModalChangePassword(!modalChangePassword);
+  };
+
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
     fetchEmployees(router.query.s || "");
@@ -98,7 +110,11 @@ const Index = () => {
   const fetchEmployees = async (search) => {
     try {
       const { data } = await api.get(
-        `/api/users${search ? `?searchTerm=${search}` : ""}`
+        `/api/users${
+          search
+            ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
+            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,role"
+        }`
       );
       const employees = data.data.map((employee) => {
         for (const key in employee) {
@@ -107,14 +123,15 @@ const Index = () => {
               typeof employee[key] != "string" &&
               typeof employee[key] != "boolean" &&
               key != "experience" &&
-              key != "rank"
+              key != "rank" &&
+              key !== "officerStatus"
             ) {
               delete employee[key];
             }
           }
         }
-        employee.experience =
-          employee.experience[employee.experience.length - 1] || {};
+        employee.officerStatus =
+          employee.officerStatus[employee.officerStatus.length - 1] || {};
         employee.rank = employee.rank[employee.rank.length - 1] || {};
 
         return employee;
@@ -128,13 +145,30 @@ const Index = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const onEditRole = async (record) => {
     setSelectedUser(record);
-    formEditRole.setFieldsValue({ role: record.role });
+    formEditRole.setFieldsValue({
+      role: record.role,
+      moderatorType: record.moderatorType,
+    });
     toggleModalEdit();
   };
+  const onEditChangePassword = async (record) => {
+    setSelectedUser(record);
+    toggleModalChangePassword();
+  };
 
-  const updateUserRole = async (role) => {
-    console.log(role);
-    const { data } = await api.put(`api/users/${selectedUser.id}`, { role });
+  const onSubmitChangePassword = async (password) => {
+    const res = await api.put(`api/users/${selectedUser.id}/updatepassword`, {
+      newPassword: password,
+    });
+    notification.success({ message: res.data.msg });
+    formChangePassword.resetFields();
+    toggleModalChangePassword();
+  };
+  const updateUserRole = async ({ role, moderatorType }) => {
+    const { data } = await api.put(`api/users/${selectedUser.id}`, {
+      role,
+      moderatorType,
+    });
     toggleModalEdit();
     setSelectedUser(null);
     fetchEmployees();
@@ -189,15 +223,18 @@ const Index = () => {
         >
           <a>កែប្រែ</a>
         </Menu.Item>
-        {session?.user.role === "admin" && session?.user.id !== record.id && (
-          <Menu.Item
-            key="1"
-            icon={<EditOutlined />}
-            onClick={onEditRole.bind(this, record)}
-          >
-            <a>កំណត់តួនាទី</a>
-          </Menu.Item>
-        )}
+        {["admin", "editor"].includes(session?.user.role) &&
+          session?.user.id !== record.id &&
+          record.role !== "admin" &&
+          !(session?.user.role == "editor" && record.role == "editor") && (
+            <Menu.Item
+              key="1"
+              icon={<EditOutlined />}
+              onClick={onEditRole.bind(this, record)}
+            >
+              <a>កំណត់តួនាទី</a>
+            </Menu.Item>
+          )}
         <Menu.Item
           key="2"
           icon={<PrinterOutlined />}
@@ -217,7 +254,9 @@ const Index = () => {
           <a>បោះពុម្ភកាត</a>
         </Menu.Item>
         {["admin", "editor"].includes(session?.user.role) &&
-          session?.user.id !== record.id && (
+          session?.user.id !== record.id &&
+          record.role !== "admin" &&
+          !(session?.user.role == "editor" && record.role == "editor") && (
             <Menu.Item
               key="4"
               icon={<StopOutlined />}
@@ -226,22 +265,37 @@ const Index = () => {
               <a>{record.suspended ? "បិទផ្អាក" : "ផ្អាក"}</a>
             </Menu.Item>
           )}
-        {session?.user.role === "admin" && session?.user.id !== record.id && (
-          <Menu.Item
-            key="5"
-            icon={<DeleteOutlined />}
-            onClick={onDeleteUser.bind(this, record)}
-          >
-            <a>លុប</a>
-          </Menu.Item>
-        )}
+        {["admin", "editor"].includes(session?.user.role) &&
+          session?.user.id !== record.id &&
+          record.role !== "admin" &&
+          !(session?.user.role == "editor" && record.role == "editor") && (
+            <Menu.Item
+              key="1"
+              icon={<EditOutlined />}
+              onClick={onEditChangePassword.bind(this, record)}
+            >
+              <a>ផ្លាស់ប្តូរពាក្យសម្ងាត់</a>
+            </Menu.Item>
+          )}
+        {["admin", "editor"].includes(session?.user.role) &&
+          session?.user.id !== record.id &&
+          record.role !== "admin" &&
+          !(session?.user.role == "editor" && record.role == "editor") && (
+            <Menu.Item
+              key="5"
+              icon={<DeleteOutlined />}
+              onClick={onDeleteUser.bind(this, record)}
+            >
+              <a>លុប</a>
+            </Menu.Item>
+          )}
       </Menu>
     );
   };
 
   const columns = [
     {
-      title: "nationalityIDNum",
+      title: "លេខអត្តសញ្ញាណប័ណ្ណ",
       dataIndex: "nationalityIDNum",
       key: "nationalityIDNum",
     },
@@ -268,15 +322,15 @@ const Index = () => {
     },
     {
       title: "មុខតំណែង",
-      dataIndex: ["experience", "position"],
+      dataIndex: ["officerStatus", "position"],
       key: "position",
     },
     {
       title: "អង្គភាព",
-      dataIndex: "experience",
+      dataIndex: "officerStatus",
       key: "department",
-      render: (experience) => {
-        return experience.department || experience.unit;
+      render: (officerStatus) => {
+        return officerStatus.department || officerStatus.unit;
       },
     },
     {
@@ -344,7 +398,7 @@ const Index = () => {
     },
   ];
 
-  if (session?.user.role === "admin") {
+  if (["admin", "editor"].includes(session?.user.role)) {
     columns.splice(columns.length - 1, 0, {
       title: "ផ្ទៀង​ផ្ទាត់",
       dataIndex: "approval",
@@ -386,6 +440,40 @@ const Index = () => {
 
       {/* Modal Edit */}
       <Modal
+        title="ផ្លាស់ប្តូរពាក្យសម្ងាត់"
+        visible={modalChangePassword}
+        footer={null}
+        onCancel={toggleModalChangePassword}
+      >
+        <Form form={formChangePassword} layout="vertical">
+          <Row gutter={16}>
+            <Col span={24}>
+              <Form.Item
+                style={{ marginBottom: 10 }}
+                label="New Password"
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input placeholder="ពាក្យសម្ងាត់" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Button
+            style={{ marginRight: 8 }}
+            onClick={() => {
+              const data = formChangePassword.getFieldsValue();
+              onSubmitChangePassword(data.password);
+            }}
+          >
+            Save
+          </Button>
+        </Form>
+      </Modal>
+      <Modal
         title="Edit Role"
         visible={modalEdit}
         onCancel={toggleModalEdit}
@@ -404,14 +492,49 @@ const Index = () => {
                   },
                 ]}
               >
-                <Select placeholder="ជ្រើសរើស">
-                  <Option value="editor">Editor</Option>
+                <Select
+                  placeholder="ជ្រើសរើស"
+                  onChange={(v) => {
+                    console.log(v);
+                    if (v == "moderator") {
+                      setRoleChoice(v);
+                    } else {
+                      setRoleChoice("");
+                    }
+                  }}
+                >
+                  {session?.user.role === "admin" && (
+                    <Option value="editor">Editor</Option>
+                  )}
                   <Option value="moderator">Moderator</Option>
                   <Option value="user">User</Option>
                 </Select>
               </Form.Item>
             </Col>
           </Row>
+          {roleChoice === "moderator" && (
+            <Row gutter={16}>
+              <Col span={24}>
+                <Form.Item
+                  style={{ marginBottom: 10 }}
+                  label="Type"
+                  name="moderatorType"
+                  rules={[
+                    {
+                      required: true,
+                    },
+                  ]}
+                >
+                  <Radio.Group
+                    options={[
+                      { label: "នាយកដ្ឋាន", value: "department" },
+                      { label: "អគ្គនាយកដ្ឋាន", value: "generalDepartment" },
+                    ]}
+                  ></Radio.Group>
+                </Form.Item>
+              </Col>
+            </Row>
+          )}
           {/* <Row gutter={16}>
             <Col span={24}>
               <Form.Item
@@ -468,7 +591,10 @@ const Index = () => {
             onClick={() => {
               const data = formEditRole.getFieldsValue(true);
               console.log(data);
-              updateUserRole(data.role);
+              updateUserRole({
+                role: data.role,
+                moderatorType: data.moderatorType,
+              });
               // alert("Save");
             }}
           >

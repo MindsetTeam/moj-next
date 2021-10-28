@@ -42,7 +42,7 @@ handler.get(
   updateRole
 );
 
-handler.delete(protect,role('admin'), deleteEmployee)
+handler.delete(protect,role('admin','editor'), deleteEmployee)
 
 
 export default handler;

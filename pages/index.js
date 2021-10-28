@@ -3,18 +3,18 @@ import HomeCard from "@/components/Home/HomeCard";
 import Chart from "@/components/Home/Chart";
 import Dot from "@/components/Home/Dot";
 
-import { Row, Col, Collapse } from "antd";
-import { TeamOutlined, DownOutlined } from "@ant-design/icons";
+import { Row, Col } from "antd";
+import { TeamOutlined } from "@ant-design/icons";
 
 import { useSession } from "next-auth/client";
 import useSWR from "swr";
 
-const { Panel } = Collapse;
-
 const Index = (props) => {
   const [session, loading] = useSession();
   const { data: overviewData, error } = useSWR(
-    session?.user?.role === "admin" ? "/api/users/overview" : null
+    ["admin", "editor"].includes(session?.user?.role)
+      ? "/api/users/overview"
+      : null
   );
 
   const statusOfficer = (
@@ -25,10 +25,7 @@ const Index = (props) => {
         ></TeamOutlined>
         <span>ស្ថានភាពមន្ត្រីរាជការ គិតត្រឹមឆ្នាំ 2021</span>
       </div>
-      <div>
-        {overviewData?.data?.totalEmployee || 0} នាក់
-        {/* <DownOutlined></DownOutlined> */}
-      </div>
+      <div>{overviewData?.data?.totalEmployee || 0} នាក់</div>
     </div>
   );
 
@@ -49,8 +46,8 @@ const Index = (props) => {
   return (
     <div className={styles.container}>
       {/* {!overviewData && !error && <p>loading</p>} */}
-      {session?.user.role !== "admin" && <p>Home Page</p>}
-      {session?.user.role === "admin" && (
+      {!["admin", "editor"].includes(session?.user?.role) && <p>Home Page</p>}
+      {["admin", "editor"].includes(session?.user?.role) && (
         <>
           <div className={styles.topSection}>
             <Row gutter={50}>
@@ -148,11 +145,11 @@ const Index = (props) => {
                     <tr>
                       <td>
                         <Dot color="purple"></Dot>
-                        អគ្គនាយកកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ
+                        អគ្គនាយកដ្ធានកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ
                       </td>
                       <td>
                         {overviewData?.data?.generalDepartmentList?.[
-                          "អគ្គនាយកកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ"
+                          "អគ្គនាយកដ្ធានកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ"
                         ] || 0}{" "}
                         នាក់
                       </td>
@@ -160,11 +157,11 @@ const Index = (props) => {
                     <tr>
                       <td>
                         <Dot color="pink"></Dot>
-                        អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋប្បវេណី
+                        អគ្គនាយកដ្ធានកិច្ចការរដ្ធប្បវេណី
                       </td>
                       <td>
                         {overviewData?.data?.generalDepartmentList?.[
-                          "អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋប្បវេណី"
+                          "អគ្គនាយកដ្ធានកិច្ចការរដ្ធប្បវេណី"
                         ] || 0}{" "}
                         នាក់
                       </td>
@@ -172,11 +169,11 @@ const Index = (props) => {
                     <tr>
                       <td>
                         <Dot color="brown"></Dot>
-                        អគ្គនាយកដ្ឋានអភិវឌ្ឍន៍វិស័យយុត្តិធម៌
+                        អគ្គនាយកដ្ធានអភិវឌ្ឈន៏វិស័យយុត្តិធម៌
                       </td>
                       <td>
                         {overviewData?.data?.generalDepartmentList?.[
-                          "អគ្គនាយកដ្ឋានអភិវឌ្ឍន៍វិស័យយុត្តិធម៌"
+                          "អគ្គនាយកដ្ធានអភិវឌ្ឈន៏វិស័យយុត្តិធម៌"
                         ] || 0}{" "}
                         នាក់
                       </td>
@@ -184,11 +181,11 @@ const Index = (props) => {
                     <tr>
                       <td>
                         <Dot color="yellow"></Dot>
-                        អគ្គធិការដ្ឋានកិច្ចការតុលាការ
+                        អគ្គនាយកដ្ធានកិច្ចការតុលាការ
                       </td>
                       <td>
                         {overviewData?.data?.generalDepartmentList?.[
-                          "អគ្គធិការដ្ឋានកិច្ចការតុលាការ"
+                          "អគ្គនាយកដ្ធានកិច្ចការតុលាការ"
                         ] || 0}{" "}
                         នាក់
                       </td>

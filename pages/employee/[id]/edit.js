@@ -12,6 +12,8 @@ import statusOfficer from "data/StatusOfficer.json";
 import ministryList from "data/Ministry.json";
 import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
+import provincesList from "data/Province.json";
+import positionList from "data/Position.json";
 
 export async function getServerSideProps({ params }) {
   const res = await api.get("/api/users/" + params.id);
@@ -24,6 +26,8 @@ export async function getServerSideProps({ params }) {
       letterTypes,
       rankList,
       ministryList,
+      provincesList,
+      positionList,
       user: res.data,
     },
   };
@@ -35,6 +39,8 @@ const Edit = ({
   ministryList,
   letterTypes,
   rankList,
+  provincesList,
+  positionList,
   user,
 }) => {
   console.log(user);
@@ -54,7 +60,9 @@ const Edit = ({
           ministryStructure={ministryStructure}
           rankList={rankList}
           letterTypes={letterTypes}
+          provincesList={provincesList}
           statusOfficer={statusOfficer}
+          positionList={positionList}
           ministryList={ministryList}
         ></EditInfo>
       </div>

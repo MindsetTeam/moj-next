@@ -1,7 +1,7 @@
 import { protect, role } from "@/middlewares/auth";
 import database from "@/middlewares/database";
 import uploadFile from "@/middlewares/uploadFile";
-import { ValidateProps } from "api-lib/constants";
+// import { ValidateProps } from "api-lib/constants";
 import { ncOpts } from "api-lib/nc";
 import { createFeedback, getFeedbacks } from "controllers/feedback";
 import nc from "next-connect";

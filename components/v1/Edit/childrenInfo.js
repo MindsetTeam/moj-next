@@ -5,7 +5,7 @@ import {
    PlusOutlined,
    DeleteOutlined,
    EditOutlined,
-   UploadOutlined,
+   // UploadOutlined,
 } from "@ant-design/icons";
 import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
@@ -21,7 +21,7 @@ import {
    Space,
    Table,
    Drawer,
-   Upload,
+   // Upload,
 } from "antd";
 import api from "@/utils/api";
 
@@ -110,7 +110,7 @@ const childrenInfo = ({ userData }) => {
 
    const dispatch = useContext(AlertDispatch);
    const [form] = Form.useForm();
-   const [childInfo, setChildInfo] = useState(null);
+   // const [childInfo, setChildInfo] = useState(null);
    const [visible, setVisible] = useState(false);
    const [childrenList, setChildrenList] = useState([...userData.children]);
    const [editData, setEditData] = useState(null);
@@ -218,12 +218,12 @@ const childrenInfo = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name="nationalityIDNum"
                         label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
+                        //    },
+                        // ]}
                      >
                         <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
                      </Form.Item>
@@ -330,7 +330,7 @@ const childrenInfo = ({ userData }) => {
                      </Form.Item>
                   </Col>
                </Row>
-               <Row>
+               {/* <Row>
                   <Col span={24}>
                      <div>
                         <p>File Name</p>
@@ -341,7 +341,7 @@ const childrenInfo = ({ userData }) => {
                         </Upload>
                      </div>
                   </Col>
-               </Row>
+               </Row> */}
             </Form>
          </Drawer>
       </div>

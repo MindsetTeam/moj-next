@@ -12,7 +12,7 @@ const Search = () => {
    const handleSearch = async (value) => {
       setValueSearch(value);
       const { data: users } = await fetch(
-         "/api/users?searchTerm=" + value.toLowerCase()
+         "/api/users?select=firstName,lastName,nationalityIDNum&searchTerm=" + value.toLowerCase()
       ).then((res) => res.json());
       setDropdownSearchState(true);
       setOptions(

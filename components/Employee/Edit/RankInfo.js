@@ -12,7 +12,7 @@ import {
   Select,
   DatePicker,
   Table,
-  Upload,
+  // Upload,
   Menu,
   Dropdown,
   Modal,
@@ -22,7 +22,7 @@ import {
   PlusOutlined,
   EditOutlined,
   DeleteOutlined,
-  UploadOutlined,
+  // UploadOutlined,
   DownOutlined,
 } from "@ant-design/icons";
 import api from "@/utils/api";
@@ -55,12 +55,12 @@ const RankInfo = ({ userData }) => {
 
   const onStartDateChange = (date, dateString) => {
     setStartDate(dateString);
-    console.log(dateString);
+    // console.log(dateString);
   };
 
   const onEndDateChange = (date, dateString) => {
     setEndDate(dateString);
-    console.log(dateString);
+    // console.log(dateString);
   };
 
   const onNowChange = (checked) => {
@@ -246,12 +246,12 @@ const RankInfo = ({ userData }) => {
                 style={{ marginBottom: 10 }}
                 name="refNum"
                 label="លេខលិខិតបទដ្ឋានគតិយុត្ត"
-                rules={[
-                  {
-                    required: true,
-                    message: "សូមបំពេញលេខលិខិតបទដ្ឋានគតិយុត្ត",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "សូមបំពេញលេខលិខិតបទដ្ឋានគតិយុត្ត",
+                //   },
+                // ]}
               >
                 <Input placeholder="លេខលិខិតបទដ្ឋានគតិយុត្ត" />
               </Form.Item>
@@ -344,12 +344,12 @@ const RankInfo = ({ userData }) => {
                 style={{ marginBottom: 10 }}
                 name="statueType"
                 label="អង្គវីជ្ជាជីវៈ"
-                rules={[
-                  {
-                    required: true,
-                    message: "សូមជ្រើសរើសអង្គវីជ្ជាជីវៈ",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "សូមជ្រើសរើសអង្គវីជ្ជាជីវៈ",
+                //   },
+                // ]}
               >
                 <Select placeholder="ជ្រើសរើស">
                   <Option value="លក្ខន្តិកៈរដ្ឋបាលទូទៅ">
@@ -424,12 +424,12 @@ const RankInfo = ({ userData }) => {
                 style={{ marginBottom: 10 }}
                 name="otherNote"
                 label="កំណត់សម្គាល់"
-                rules={[
-                  {
-                    required: true,
-                    message: "សូមបំពេញកំណត់សម្គាល់",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "សូមបំពេញកំណត់សម្គាល់",
+                //   },
+                // ]}
               >
                 <Input placeholder="កំណត់សម្គាល់" />
               </Form.Item>

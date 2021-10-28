@@ -13,7 +13,7 @@ export const createUser = async (req, res, next) => {
     password: req.body.nationalityIDNum,
     addBy: req.user.id,
   };
-  if (req.user.role != "admin") {
+  if (!["admin", "editor"].includes(req.user.role)) {
     newUserData = { ...newUserData, department: req.user.department };
   }
 
@@ -34,9 +34,22 @@ export const updatePassword = async (req, res, next) => {
   if (!isMatched) {
     throw new ErrorResponse("Current password incorrect", 401);
   }
-  user.password = newPassword
+  user.password = newPassword;
   await user.save();
   return res
     .status(200)
-    .json({ success: true, data: user, msg: "Password updated" });
+    .json({ success: true, msg: "Password updated" });
+};
+export const updatePasswordBelowLevel = async (req, res, next) => {
+  const { newPassword } = req.body;
+  const {id} = req.query;
+  const user = await User.findById(id);
+  if (!user) {
+    throw new ErrorResponse("User not found", 404);
+  }
+  user.password = newPassword;
+  await user.save();
+  return res
+    .status(200)
+    .json({ success: true, msg: "Password updated" });
 };

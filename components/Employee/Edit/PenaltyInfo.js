@@ -128,11 +128,11 @@ const PenaltyInfo = ({ userData }) => {
          dataIndex: "type",
          key: "type",
       },
-      {
-         title: "រូបភាពការដាក់ពិន័យ",
-         dataIndex: "photo",
-         key: "photo",
-      },
+      // {
+      //    title: "រូបភាពការដាក់ពិន័យ",
+      //    dataIndex: "photo",
+      //    key: "photo",
+      // },
       {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "date",
@@ -434,7 +434,7 @@ const PenaltyInfo = ({ userData }) => {
                      </Form.Item>
                   </Col>
                </Row>
-               <Row gutter={16}>
+               {/* <Row gutter={16}>
                   <Col span={24}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
@@ -450,7 +450,7 @@ const PenaltyInfo = ({ userData }) => {
                         <Input placeholder="រូបភាពនៃការដាក់ពិន័យ" />
                      </Form.Item>
                   </Col>
-               </Row>
+               </Row> */}
             </Form>
          </Modal>
       </div>

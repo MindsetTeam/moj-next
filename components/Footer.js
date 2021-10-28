@@ -26,7 +26,7 @@ const Footer = () => {
         <p>សេចក្ដីជូនដំណឹងក្រសួងយុត្តិធម៌</p>
       </div>
 
-      {session?.user?.role !== "admin" && (
+      {!["admin", "editor"].includes(session?.user?.role) && (
         <div className={styles.marquee}>
           <marquee
             ref={marqueeRef}

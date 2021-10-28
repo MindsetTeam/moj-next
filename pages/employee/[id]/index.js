@@ -52,7 +52,8 @@ export default function Home({
       <div>
         <div>
           <Button style={{ marginRight: 5 }}>ព័ត៌មានប្រវត្តិរូបសង្ខេប</Button>
-          {session?.user.role === "user" || session?.user.role === "moderator" ? null : (
+          {session?.user.role === "user" ||
+          session?.user.role === "moderator" ? null : (
             <Button type="primary">
               <Link href={`/employee/${user.id}/edit`}>កែប្រែព័ត៌មាន</Link>
             </Button>
