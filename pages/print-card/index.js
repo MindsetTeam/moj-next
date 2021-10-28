@@ -53,6 +53,8 @@ const index = () => {
             visibility: visible;
           }
           #section-to-print {
+            display: flex;
+            flex-direction: column;
             padding: 0px 45px;
             margin: 0;
             height: 100%;

@@ -20,7 +20,7 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
   const config = {
     appendPadding: 10,
     data: data,
-    height:250,
+    height: 250,
     angleField: "value",
     colorField: "type",
     radius: 1,
@@ -33,16 +33,20 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
       //   textAlign: "center",
       //   fontSize: 20,
       // },
-      type: 'spider',
+      type: "spider",
       labelHeight: 28,
-      content: '{name}\n{percentage}',
+      content: "{name}\n{percentage}",
     },
+
+    colorField: "type", // or seriesField in some cases
+    color: ["#d62728", "#1890ff"],
     interactions: [{ type: "element-selected" }, { type: "element-active" }],
     statistic: {
       title: false,
       content: {
         style: {
-          fontSize: 20,
+          fontSize: 15,
+          lineHeight: 1.5,
           whiteSpace: "pre-wrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
