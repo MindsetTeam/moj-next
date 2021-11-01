@@ -377,7 +377,7 @@ const Index = () => {
           return (
             <a
               onClick={() => {
-                router.push(`/employee/${record.id}`);
+                router.push(`/employee/${record._id}`);
               }}
             >
               View
