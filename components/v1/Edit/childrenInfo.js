@@ -202,7 +202,7 @@ const childrenInfo = ({ userData }) => {
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="birthCertificateNum"
-                        label="លេខសំបុត្រកំណើត"
+                        label="លេខសំបុត្រកំណើត និងថ្ងៃខែឆ្នាំ"
                         // rules={[
                         //    {
                         //       required: true,
