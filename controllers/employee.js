@@ -22,9 +22,10 @@ export const getOverviewEmployees = async (req, res) => {
   //   );
   // }
   if (["admin", "editor"].includes(role)) {
+    // TODO: get retired info from status officer.
     const retiredEmployeeReq = User.find({
       approval: true,
-      birthDate: { $lt: new Date(Date.now() - 65 * 365 * 24 * 60 * 60 * 1000) },
+      birthDate: { $lt: new Date(Date.now() - 60 * 365 * 24 * 60 * 60 * 1000) },
     }).countDocuments();
     const officerStatusListReq = User.aggregate([
       {
@@ -189,6 +190,7 @@ export const getOverviewEmployees = async (req, res) => {
 };
 
 export const getEmployees = async (req, res) => {
+  // TODO: work history sort by startYear
   const { searchTerm, select } = req.query;
   let reqQuery;
   if (searchTerm) {
