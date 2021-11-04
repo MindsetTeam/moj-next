@@ -574,12 +574,12 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                   style={{ marginBottom: 10 }}
                   name={["contactInfo", "email"]}
                   label="អ៊ីម៉ែល"
-                  rules={[
-                    {
-                      required: true,
-                      message: "សូមបំពេញអ៊ីម៉ែល",
-                    },
-                  ]}
+                  // rules={[
+                  //   {
+                  //     required: true,
+                  //     message: "សូមបំពេញអ៊ីម៉ែល",
+                  //   },
+                  // ]}
                 >
                   <Input placeholder="អ៊ីម៉ែល" />
                 </Form.Item>
