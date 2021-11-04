@@ -232,7 +232,6 @@ const RankInfo = ({ userData }) => {
       >
         <Form
           layout="vertical"
-          hideRequiredMark
           form={form}
           initialValues={{
             ...editData,

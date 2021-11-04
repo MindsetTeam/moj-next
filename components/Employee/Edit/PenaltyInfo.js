@@ -193,7 +193,6 @@ const PenaltyInfo = ({ userData }) => {
          >
             <Form
                layout="vertical"
-               hideRequiredMark
                form={form}
                initialValues={{
                   ...editData,

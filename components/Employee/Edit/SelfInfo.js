@@ -71,7 +71,6 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
     <div className={styles.selfInfoContainer}>
       <Form
         layout="vertical"
-        hideRequiredMark
         form={form}
         initialValues={{
           ...userData,

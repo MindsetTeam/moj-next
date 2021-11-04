@@ -57,7 +57,7 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
     <div>
       <Form
         layout="vertical"
-        hideRequiredMark
+        // hideRequiredMark
         form={form}
         initialValues={{
           partnerInfo: {

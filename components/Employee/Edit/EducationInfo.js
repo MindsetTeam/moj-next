@@ -212,7 +212,6 @@ const EducationInfo = ({ userData }) => {
       >
         <Form
           layout="vertical"
-          hideRequiredMark
           form={form}
           initialValues={{
             ...editData,

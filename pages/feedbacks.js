@@ -85,7 +85,7 @@ const Feedback = () => {
         <div className={styles.feedbackForm}>
           <p className={styles.title}>Feedback Form</p>
           <div>
-            <Form hideRequiredMark form={form} {...layout}>
+            <Form form={form} {...layout}>
               <Form.Item
                 style={{ marginBottom: 20, width: 800 }}
                 label="phoneNumber"

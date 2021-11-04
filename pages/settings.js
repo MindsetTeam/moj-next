@@ -51,7 +51,7 @@ const Personal = () => {
     <div className={styles.container}>
       <p>Reset Account Password</p>
       <div>
-        <Form hideRequiredMark form={form} {...layout}>
+        <Form form={form} {...layout}>
           <Form.Item
             style={{ marginBottom: 20, width: 800 }}
             label="Current Password"

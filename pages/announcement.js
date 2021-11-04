@@ -209,7 +209,6 @@ const Announcement = () => {
         }
       >
         <Form
-          hideRequiredMark
           form={form}
           initialValues={{ isActive: false, ...editData }}
         >

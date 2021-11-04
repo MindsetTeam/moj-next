@@ -69,7 +69,7 @@ const Login = () => {
         </div>
         <div className={styles.rightSection}>
           <h1>Login</h1>
-          <Form hideRequiredMark form={form} {...layout}>
+          <Form form={form} {...layout}>
             <Form.Item
               style={{ marginBottom: 20 }}
               label="អត្តសញ្ញាណប័ណ្ណ"

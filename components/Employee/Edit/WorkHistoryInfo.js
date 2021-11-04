@@ -284,7 +284,6 @@ const workHistoryInfo = ({
       >
         <Form
           layout="vertical"
-          hideRequiredMark
           form={form}
           initialValues={{
             ...editData,

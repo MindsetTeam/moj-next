@@ -238,7 +238,6 @@ const StatusInfo = ({
     <div className={styles.statusInfoContainer}>
       <Form
         layout="vertical"
-        hideRequiredMark
         form={formInfo}
         initialValues={formInfoData}
       >
@@ -354,7 +353,6 @@ const StatusInfo = ({
       >
         <Form
           layout="vertical"
-          hideRequiredMark
           form={formStatus}
           initialValues={{
             ministry: "ក្រសួងយុត្តិធម៌",

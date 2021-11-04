@@ -131,7 +131,6 @@ const Status = ({ userData }) => {
       <div className={styles.statusInfoContainer}>
         <Form
           layout="vertical"
-          hideRequiredMark
           form={formInfo}
           initialValues={formInfoData}
         >

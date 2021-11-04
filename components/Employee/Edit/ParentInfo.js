@@ -54,7 +54,6 @@ const ParentInfo = ({ userData, onChangeTabKey }) => {
                   </h1>
                   <Form
                      layout="vertical"
-                     hideRequiredMark
                      form={dadForm}
                      initialValues={{
                         fatherInfo: {
@@ -295,7 +294,6 @@ const ParentInfo = ({ userData, onChangeTabKey }) => {
                   </h1>
                   <Form
                      layout="vertical"
-                     hideRequiredMark
                      form={momForm}
                      initialValues={{
                         motherInfo: {

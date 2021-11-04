@@ -198,7 +198,7 @@ const attachmentInfo = ({ userData }) => {
         onOk={handleOk}
         bodyStyle={{ paddingBottom: 80 }}
       >
-        <Form hideRequiredMark form={form}>
+        <Form form={form}>
           <Row gutter={16}>
             <Col span={24}>
               <Form.Item

@@ -118,7 +118,6 @@ const Family = ({ userData }) => {
          {/* Spouse */}
          <Form
             layout="vertical"
-            hideRequiredMark
             initialValues={userData?.partnerInfo}
          >
             <h1 style={{ marginBottom: 20 }}>
@@ -280,7 +279,6 @@ const Family = ({ userData }) => {
          {/* Father */}
          <Form
             layout="vertical"
-            hideRequiredMark
             initialValues={fatherInfo}
             style={{ marginTop: 20 }}
          >
@@ -392,7 +390,6 @@ const Family = ({ userData }) => {
          {/* Mother */}
          <Form
             layout="vertical"
-            hideRequiredMark
             initialValues={motherInfo}
             style={{ margin: "20px 0px" }}
          >
