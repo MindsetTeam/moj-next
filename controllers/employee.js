@@ -22,11 +22,21 @@ export const getOverviewEmployees = async (req, res) => {
   //   );
   // }
   if (["admin", "editor"].includes(role)) {
-    // TODO: get retired info from status officer.
-    const retiredEmployeeReq = User.find({
-      approval: true,
-      birthDate: { $lt: new Date(Date.now() - 60 * 365 * 24 * 60 * 60 * 1000) },
-    }).countDocuments();
+    // const retiredEmployeeReq = User.find({
+    //   approval: true,
+    //   birthDate: { $lt: new Date(Date.now() - 60 * 365 * 24 * 60 * 60 * 1000) },
+    // }).countDocuments();
+    const retiredEmployeeReq = User.aggregate([
+      {
+        $match: {
+          approval: true,
+          officerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+        },
+      },
+      {
+        $count: "total",
+      },
+    ]);
     const officerStatusListReq = User.aggregate([
       {
         $project: {
@@ -99,6 +109,7 @@ export const getOverviewEmployees = async (req, res) => {
       totalEmployeeReq,
       generalDepartmentResReq,
     ]);
+    console.log(retiredEmployee);
     // const retiredEmployee = await
     // const officerStatusListRes = await
     const officerStatusList = {};
@@ -178,7 +189,8 @@ export const getOverviewEmployees = async (req, res) => {
       generalDepartmentList,
       centerInstitution,
       // provinceInstitution,
-      retiredEmployee,
+      retiredEmployee:
+        retiredEmployee.length > 0 ? retiredEmployee[0].total : 0,
       officerStatusList,
     };
   }
@@ -190,7 +202,6 @@ export const getOverviewEmployees = async (req, res) => {
 };
 
 export const getEmployees = async (req, res) => {
-  // TODO: work history sort by startYear
   const { searchTerm, select } = req.query;
   let reqQuery;
   if (searchTerm) {
