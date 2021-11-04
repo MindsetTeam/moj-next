@@ -216,7 +216,6 @@ export const getEmployees = async (req, res) => {
     const statusModerator =
       userModerator.officerStatus[userModerator.officerStatus.length - 1];
     let matchQueryMo;
-    console.log(userModerator, userModerator.moderatorType);
     if (userModerator.moderatorType === "generalDepartment") {
       matchQueryMo = {
         $elemMatch: {
@@ -269,7 +268,13 @@ export const getSingleEmployee = async (req, res, next) => {
   const { id } = req.query;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   const user = await User.findById(id);
-  console.log(user);
+  if (user.experience) {
+    user.experience = user.experience.sort(
+      (a, b) =>
+        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    );
+    console.log(user.experience);
+  }
   res.status(200).json(user);
 };
 
