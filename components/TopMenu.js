@@ -25,6 +25,20 @@ const TopMenu = () => {
       iconUrl: "/user.png",
     },
     {
+      iconUrl: "/printer.png",
+      title: "ការបោះពុម្ព",
+      sub: [
+        {
+          link: "/print",
+          title: "ការបោះពុម្ពប្រវត្តិរូប",
+        },
+        {
+          link: "/print-card",
+          title: "ការបោះពុម្ពកាតមន្រ្ដី",
+        },
+      ],
+    },
+    {
       link: "/report",
       title: "របាយការណ៌",
       iconUrl: "/setting.png",
@@ -56,20 +70,6 @@ const TopMenu = () => {
           link: "/employee/add",
           title: "បញ្ចូលមន្ត្រីរាជការថ្មី",
           iconUrl: "/addUser.png",
-        },
-        {
-          iconUrl: "/printer.png",
-          title: "ការបោះពុម្ព",
-          sub: [
-            {
-              link: "/print",
-              title: "ការបោះពុម្ពប្រវត្តិរូប",
-            },
-            {
-              link: "/print-card",
-              title: "ការបោះពុម្ពកាតមន្រ្ដី",
-            },
-          ],
         },
         {
           link: "/announcement",
