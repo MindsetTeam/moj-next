@@ -275,6 +275,11 @@ export const updateEmployee = async (req, res, next) => {
   const { id } = req.query;
   const dataUpdate = req.body;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
+  if (dataUpdate.currentResidence) {
+    dataUpdate.partnerInfo = {
+      currentResidence: { ...dataUpdate.currentResidence },
+    };
+  }
   const user = await User.findByIdAndUpdate(id, dataUpdate, {
     new: true,
     runValidators: true,
