@@ -120,7 +120,8 @@
 .statusInfoContainer,
 .attachmentInfoContainer,
 .penaltyInfoContainer,
-.praiseInfoContainer {
+.praiseInfoContainer,
+.childrenInfoContainer {
    background-color: #fff;
    padding: 20px;
 }
