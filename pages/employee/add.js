@@ -72,15 +72,29 @@ const Add = () => {
             <Col span={24}>
               <Form.Item
                 style={{ marginBottom: 10 }}
-                label="firstName"
-                name="firstName"
+                label="គោត្តនាមឡាតាំង"
+                name="firstNameLatin"
                 rules={[
                   {
                     required: true,
                   },
                 ]}
               >
-                <Input placeholder="firstName" />
+                <Input placeholder="គោត្តនាមឡាតាំង" />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Form.Item
+                style={{ marginBottom: 10 }}
+                label="នាមឡាតាំង"
+                name="lastNameLatin"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
+                <Input placeholder="នាមឡាតាំង" />
               </Form.Item>
             </Col>
           </Row>

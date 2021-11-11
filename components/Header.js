@@ -51,9 +51,9 @@ const Header = () => {
               <Dropdown overlay={dropDownMenu}>
                 <div>
                   <span>
-                    {session.user.firstName +
+                    {session.user.firstNameLatin +
                       " " +
-                      (session.user.lastName || "")}
+                      (session.user.lastNameLatin || "")}
                   </span>
                   <DownOutlined></DownOutlined>
                 </div>

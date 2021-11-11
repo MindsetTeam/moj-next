@@ -26,8 +26,8 @@ handler.use(
           if (!isValid) {
             throw new Error("Password not match");
           }
-          const { id, firstName, lastName, role, department, photo,moderatorType } = user;
-          return { id, firstName, lastName, role, department, photo,moderatorType };
+          const { id, firstNameLatin, lastNameLatin, role, department, photo,moderatorType } = user;
+          return { id, firstNameLatin, lastNameLatin, role, department, photo,moderatorType };
         },
       }),
     ],

@@ -245,15 +245,15 @@ const attachmentInfo = ({ userData }) => {
                   <Col span={24}>
                      <Form.Item
                         name="attachment"
-                        label="file"
+                        label="ប្រភេទឯកសារ"
                         rules={[
                            {
                               required: true,
                            },
                         ]}
                      >
-                        <Upload maxCount={1}>
-                           <Button icon={<UploadOutlined />}>Upload</Button>
+                        <Upload accept="image/*,.pdf" maxCount={1}>
+                           <Button icon={<UploadOutlined />}>ផ្ទុកឡើង</Button>
                         </Upload>
                      </Form.Item>
                   </Col>
