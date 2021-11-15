@@ -24,6 +24,7 @@ import {
    DownOutlined,
 } from "@ant-design/icons";
 import { fetcher } from "@/lib/fetch";
+import { CircleGrid } from "@antv/g2/lib/dependents";
 
 const attachmentTypeName = {
    info: "ឯកសារផ្ទាល់ខ្លួន",
@@ -33,7 +34,10 @@ const attachmentTypeName = {
    child: "សំបុត្រកំណើតកូន",
 };
 
-const attachmentInfo = ({ userData }) => {
+const attachmentInfo = ({ userData, fileTypeName }) => {
+   const [selectedFileType, setSelectedFileType] = useState("");
+   const [selectedFileName, setSelectedFileName] = useState("");
+   const [fileNameList, setFileNameList] = useState(null);
    const [visible, setVisible] = useState(false);
    const [form] = Form.useForm();
    const [attachmentList, setAttachmentList] = useState(() => {
@@ -214,12 +218,23 @@ const attachmentInfo = ({ userData }) => {
                            },
                         ]}
                      >
-                        <Select placeholder="ជ្រើសរើស">
-                           <Option value="info">ឯកសារផ្ទាល់ខ្លួន</Option>
-                           <Option value="rank">ឋានន្តរសកិ្ត និងថ្នាក់</Option>
-                           <Option value="education">សញ្ញាបត្រ</Option>
-                           <Option value="marriage">សំបុត្រអាពាហ៍ពិពាហ៍</Option>
-                           <Option value="child">សំបុត្រកំណើតកូន</Option>
+                        <Select
+                           placeholder="ជ្រើសរើស"
+                           onChange={(v) => {
+                              setSelectedFileType(v);
+                              setFileNameList(fileTypeName[v]);
+                           }}
+                        >
+                           <Option value="info">ព័ត៌មានផ្ទាល់ខ្លួន</Option>
+                           <Option value="family">ព័ត៌មានគ្រួសារ</Option>
+                           <Option value="rank">
+                              ក្របខណ្ឌ ឋាន្តរស័ក្តិ និងថ្នាក់
+                           </Option>
+                           <Option value="work">ប្រវត្តិការងារ</Option>
+                           <Option value="education">ប្រវត្តិការសិក្សា</Option>
+                           <Option value="status">ស្ថានភាពមន្រ្តី</Option>
+                           {/* <Option value="marriage">សំបុត្រអាពាហ៍ពិពាហ៍</Option>
+                           <Option value="child">សំបុត្រកំណើតកូន</Option> */}
                         </Select>
                      </Form.Item>
                   </Col>
@@ -236,7 +251,17 @@ const attachmentInfo = ({ userData }) => {
                            },
                         ]}
                      >
-                        <Input placeholder="ឈ្មោះឯកសារ" />
+                        {/* <Input placeholder="ឈ្មោះឯកសារ" /> */}
+                        <Select placeholder="ជ្រើសរើស">
+                           {selectedFileType &&
+                              fileNameList?.map((v, i) => {
+                                 return (
+                                    <Option key={i} value={v}>
+                                       {v}
+                                    </Option>
+                                 );
+                              })}
+                        </Select>
                      </Form.Item>
                   </Col>
                </Row>

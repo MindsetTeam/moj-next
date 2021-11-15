@@ -25,6 +25,7 @@ const EditInfo = ({
    letterTypes,
    provincesList,
    positionList,
+   fileTypeName,
    rankList,
 }) => {
    const [activeTabKey, setActiveTabKey] = useState("1");
@@ -106,7 +107,10 @@ const EditInfo = ({
           <PraiseInfo userData={userData}></PraiseInfo>
         </TabPane> */}
             <TabPane tab="ឯកសារយោង" key="10">
-               <AttachmentInfo userData={userData}></AttachmentInfo>
+               <AttachmentInfo
+                  userData={userData}
+                  fileTypeName={fileTypeName}
+               ></AttachmentInfo>
             </TabPane>
          </Tabs>
       </div>

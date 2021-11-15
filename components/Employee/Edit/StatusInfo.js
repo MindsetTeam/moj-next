@@ -440,16 +440,16 @@ const StatusInfo = ({
                            },
                         ]}
                      >
-                        {/* <Select placeholder="ជ្រើសរើស">
-                  {statusOfficer.map((v) => {
-                    return (
-                      <Option key={v} value={v}>
-                        {v}
-                      </Option>
-                    );
-                  })}
-                </Select> */}
-                        <Input placeholder="ស្ថានភាព" />
+                        <Select placeholder="ជ្រើសរើស">
+                           {statusOfficer.map((v) => {
+                              return (
+                                 <Option key={v} value={v}>
+                                    {v}
+                                 </Option>
+                              );
+                           })}
+                        </Select>
+                        {/* <Input placeholder="ស្ថានភាព" /> */}
                      </Form.Item>
                   </Col>
                </Row>

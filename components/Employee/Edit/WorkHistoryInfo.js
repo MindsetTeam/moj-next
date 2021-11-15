@@ -42,7 +42,7 @@ const workHistoryInfo = ({
    ]);
    const [editData, setEditData] = useState(null);
 
-   const [choiceMinistry, setChoiceMinistry] = useState("");
+   const [choiceMinistry, setChoiceMinistry] = useState("ក្រសួងយុត្តិធម៌");
    const [choiceInstitution, setChoiceInstitution] = useState("");
    const [choiceUnit, setChoiceUnit] = useState("");
    const [choiceDepartment, setChoiceDepartment] = useState("");
@@ -371,7 +371,7 @@ const workHistoryInfo = ({
                            },
                         ]}
                      >
-                        <Input placeholder="ក្រសួង-ស្ថាប័ន" />
+                        {/* <Input placeholder="ក្រសួង-ស្ថាប័ន" /> */}
                         {/* <Select
                            placeholder="ជ្រើសរើស"
                            onChange={(v) => {
@@ -397,6 +397,14 @@ const workHistoryInfo = ({
                               );
                            })}
                         </Select> */}
+                        <Select
+                           placeholder="ជ្រើសរើស"
+                           defaultValue={"ក្រសួងយុត្តិធម៌"}
+                        >
+                           <Option value="ក្រសួងយុត្តិធម៌">
+                              ក្រសួងយុត្តិធម៌
+                           </Option>
+                        </Select>
                      </Form.Item>
                   </Col>
                   <Col span={6}>
@@ -411,8 +419,8 @@ const workHistoryInfo = ({
                            },
                         ]}
                      >
-                        <Input placeholder="ប្រភេទស្ថាប័ន" />
-                        {/* <Select
+                        {/* <Input placeholder="ប្រភេទស្ថាប័ន" /> */}
+                        <Select
                            placeholder="ជ្រើសរើស"
                            onChange={(v) => {
                               form.resetFields([
@@ -436,7 +444,7 @@ const workHistoryInfo = ({
                                     </Option>
                                  );
                               })}
-                        </Select> */}
+                        </Select>
                      </Form.Item>
                      {/* <Form.Item
                         name="type"
@@ -466,12 +474,12 @@ const workHistoryInfo = ({
                            },
                         ]}
                      >
-                        <Input placeholder="មុខតំណែង" />
-                        {/* <Select placeholder="ជ្រើសរើស">
+                        {/* <Input placeholder="មុខតំណែង" /> */}
+                        <Select placeholder="ជ្រើសរើស">
                            {positionList.map((v) => (
                               <Option value={v}>{v}</Option>
                            ))}
-                        </Select> */}
+                        </Select>
                      </Form.Item>
                   </Col>
                </Row>
@@ -488,8 +496,8 @@ const workHistoryInfo = ({
                            },
                         ]}
                      >
-                        <Input placeholder="អង្គភាព" />
-                        {/* <Select
+                        {/* <Input placeholder="អង្គភាព" /> */}
+                        <Select
                            placeholder="ជ្រើសរើស"
                            onChange={(v) => {
                               form.resetFields(["department", "office"]);
@@ -507,7 +515,7 @@ const workHistoryInfo = ({
                                     {v}
                                  </Option>
                               ))}
-                        </Select> */}
+                        </Select>
                      </Form.Item>
                   </Col>
                   <Col span={8}>
