@@ -16,6 +16,7 @@ handler.use(
           const user = await User.findOne({
             nationalityIDNum: credentials.username,
           });
+         console.log(user);
           if (!user) {
             throw new Error("No user found");
           }
@@ -23,6 +24,7 @@ handler.use(
             throw new Error("Please ask for approval");
           }
           const isValid = await compare(credentials.password, user.password);
+          console.log(isValid);
           if (!isValid) {
             throw new Error("Password not match");
           }

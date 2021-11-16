@@ -113,7 +113,7 @@ const Index = () => {
         `/api/users${
           search
             ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
-            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,role"
+            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role"
         }`
       );
       const employees = data.data.map((employee) => {
@@ -176,6 +176,7 @@ const Index = () => {
   const updateSuspendUser = async ({ suspended, userId }) => {
     console.log(`api/users/${userId}`, { suspended });
     const { data } = await api.put(`api/users/${userId}`, { suspended });
+    console.log(data)
     fetchEmployees();
   };
 

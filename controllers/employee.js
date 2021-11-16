@@ -250,6 +250,7 @@ export const getEmployees = async (req, res) => {
           birthDate: 1,
           rank: 1,
           role: 1,
+          suspended: 1,
           approval: 1,
           createdAt: 1,
           officerStatus: { $slice: ["$officerStatus", -1] },
@@ -290,6 +291,7 @@ export const getSingleEmployee = async (req, res, next) => {
 };
 
 export const updateEmployee = async (req, res, next) => {
+  console.log(req.body);
   const { id } = req.query;
   const dataUpdate = req.body;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);

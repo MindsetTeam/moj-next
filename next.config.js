@@ -7,6 +7,7 @@ const runtimeCaching = require('next-pwa/cache')
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
+      swcMinify: true,
       env: {
         baseURL: "http://localhost:3000",
         uploadFilePath: 'tmp'
@@ -21,6 +22,7 @@ module.exports = (phase, { defaultConfig }) => {
         runtimeCaching,
       },
     }),
+    swcMinify: true,
     distDir: "build",
     env: {
       NEXTAUTH_URL: "https://test.khambodiahr.com",
