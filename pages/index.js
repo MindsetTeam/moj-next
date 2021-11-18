@@ -1,7 +1,7 @@
 import styles from "@/styles/Home.module.css";
 import HomeCard from "@/components/Home/HomeCard";
 import Chart from "@/components/Home/Chart";
-import Dot from "@/components/Home/Dot";
+import SummaryList from "@/components/Home/SummaryList";
 
 import { useRouter } from "next/router";
 
@@ -129,102 +129,25 @@ const Index = (props) => {
                <div className={styles.bottomSection}>
                   <Row gutter={50}>
                      <Col span={12}>
-                        <div className={styles.summaryContainer}>
-                           <table>
-                              <tr>
-                                 <td>
-                                    <Dot color="green"></Dot>
-                                    អគ្គលេខាធិការដ្ឋាន
-                                 </td>
-                                 <td>
-                                    {overviewData?.data
-                                       ?.generalDepartmentList?.[
-                                       "អគ្គលេខាធិការដ្ឋាន"
-                                    ] || 0}{" "}
-                                    នាក់
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <Dot color="blue"></Dot>
-                                    អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋបាលតុលាការ
-                                 </td>
-                                 <td>
-                                    {overviewData?.data
-                                       ?.generalDepartmentList?.[
-                                       "អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋបាលតុលាការ"
-                                    ] || 0}{" "}
-                                    នាក់
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <Dot color="purple"></Dot>
-                                    អគ្គនាយកដ្ធានកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ
-                                 </td>
-                                 <td>
-                                    {overviewData?.data
-                                       ?.generalDepartmentList?.[
-                                       "អគ្គនាយកដ្ធានកិច្ចការអយ្យការនិងព្រហ្មទណ្ឌ"
-                                    ] || 0}{" "}
-                                    នាក់
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <Dot color="pink"></Dot>
-                                    អគ្គនាយកដ្ធានកិច្ចការរដ្ធប្បវេណី
-                                 </td>
-                                 <td>
-                                    {overviewData?.data
-                                       ?.generalDepartmentList?.[
-                                       "អគ្គនាយកដ្ធានកិច្ចការរដ្ធប្បវេណី"
-                                    ] || 0}{" "}
-                                    នាក់
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <Dot color="brown"></Dot>
-                                    អគ្គនាយកដ្ធានអភិវឌ្ឈន៏វិស័យយុត្តិធម៌
-                                 </td>
-                                 <td>
-                                    {overviewData?.data
-                                       ?.generalDepartmentList?.[
-                                       "អគ្គនាយកដ្ធានអភិវឌ្ឈន៏វិស័យយុត្តិធម៌"
-                                    ] || 0}{" "}
-                                    នាក់
-                                 </td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <Dot color="yellow"></Dot>
-                                    អគ្គនាយកដ្ធានកិច្ចការតុលាការ
-                                 </td>
-                                 <td>
-                                    {overviewData?.data
-                                       ?.generalDepartmentList?.[
-                                       "អគ្គនាយកដ្ធានកិច្ចការតុលាការ"
-                                    ] || 0}{" "}
-                                    នាក់
-                                 </td>
-                              </tr>
-                           </table>
-                        </div>
-                     </Col>
-                     <Col span={12}>
                         <div
                            style={{ height: 300, backgroundColor: "#FEE5D1" }}
                         >
                            <iframe
                               width="100%"
                               height="300"
-                              src="https://www.youtube.com/embed/KODKSNiVd7E"
+                              src="https://www.youtube.com/embed/N3R9QGvjimg"
                               title="YouTube video player"
                               frameborder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowfullscreen
                            ></iframe>
+                        </div>
+                     </Col>
+                     <Col span={12}>
+                        <div className={styles.summaryContainer}>
+                           <SummaryList
+                              overviewData={overviewData}
+                           ></SummaryList>
                         </div>
                      </Col>
                   </Row>

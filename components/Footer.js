@@ -22,8 +22,8 @@ const Footer = () => {
    return (
       <div className={styles.footer}>
          <div className={styles.announcement}>
-            <img src="/announcement.png" width="20" height="20"></img>
-            <p>សេចក្ដីជូនដំណឹងក្រសួងយុត្តិធម៌</p>
+            {/* <img src="/announcement.png" width="20" height="20"></img>
+            <p>សេចក្ដីជូនដំណឹងក្រសួងយុត្តិធម៌</p> */}
          </div>
 
          {/* {!["admin", "editor"].includes(session?.user?.role) && (

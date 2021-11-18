@@ -38,11 +38,7 @@ const TopMenu = () => {
             },
          ],
       },
-      {
-         link: "/report",
-         title: "របាយការណ៌",
-         iconUrl: "/setting.png",
-      },
+
       // {
       //   link: "/feedbacks",
       //   title: "មតិយោបល់",
@@ -70,6 +66,11 @@ const TopMenu = () => {
                link: "/employee/add",
                title: "បញ្ចូលមន្ត្រីរាជការថ្មី",
                iconUrl: "/addUser.png",
+            },
+            {
+               link: "/report",
+               title: "របាយការណ៌",
+               iconUrl: "/setting.png",
             }
             // {
             //   link: "/announcement",
@@ -200,7 +201,7 @@ const TopMenu = () => {
             //     .ant-menu-item:hover {
             //    top: -4px;
             //    transition: top 0.1s;
-            // } 
+            // }
             // }
 
             .ant-menu-horizontal > .ant-menu-item a {

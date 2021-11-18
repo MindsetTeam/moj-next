@@ -490,8 +490,8 @@ const StatusInfo = ({
                            },
                         ]}
                      >
-                        <Input placeholder="អគ្គនាយកដ្ឋាន" />
-                        {/* <Select
+                        {/* <Input placeholder="អគ្គនាយកដ្ឋាន" /> */}
+                        <Select
                            placeholder="ជ្រើសរើស"
                            onChange={(v) => {
                               setChoiceGeneralDepartment(v);
@@ -509,7 +509,7 @@ const StatusInfo = ({
                                  </Option>
                               );
                            })}
-                        </Select> */}
+                        </Select>
                      </Form.Item>
                   </Col>
                   <Col span={12}>
@@ -524,7 +524,7 @@ const StatusInfo = ({
                            },
                         ]}
                      >
-                        {/* <Select placeholder="ជ្រើសរើស">
+                        <Select placeholder="ជ្រើសរើស">
                            {Object.keys(
                               ministryStructure["ក្រសួងយុត្តិធម៌"][
                                  "ថ្នាក់កណ្តាល"
@@ -536,8 +536,8 @@ const StatusInfo = ({
                                  </Option>
                               );
                            })}
-                        </Select> */}
-                        <Input placeholder="អគ្គនាយកដ្ឋាន" />
+                        </Select>
+                        {/* <Input placeholder="អគ្គនាយកដ្ឋាន" /> */}
                      </Form.Item>
                   </Col>
                </Row>
@@ -554,8 +554,8 @@ const StatusInfo = ({
                            },
                         ]}
                      >
-                        <Input placeholder="មុខតំណែង" />
-                        {/* <Select placeholder="ជ្រើសរើស">
+                        {/* <Input placeholder="មុខតំណែង" /> */}
+                        <Select placeholder="ជ្រើសរើស">
                            {positionList.map((v, i) => {
                               return (
                                  <Option key={i} value={v}>
@@ -563,7 +563,7 @@ const StatusInfo = ({
                                  </Option>
                               );
                            })}
-                        </Select> */}
+                        </Select>
                      </Form.Item>
                   </Col>
                </Row>

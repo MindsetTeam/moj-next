@@ -2,39 +2,41 @@ import React, { useEffect, useState } from "react";
 import styles from "@/styles/Employee.module.css";
 
 import Search from "@/components/Employee/Search";
+import SortOption from "@/components/Employee/SortOption";
 
 import {
-  CheckOutlined,
-  CloseOutlined,
-  // SearchOutlined,
+   CheckOutlined,
+   CloseOutlined,
+   // SearchOutlined,
 } from "@ant-design/icons";
 import structureMinistryData from "/data/Structure.json";
 
 import { useRouter } from "next/router";
 
 import {
-  EditOutlined,
-  PrinterOutlined,
-  DownOutlined,
-  StopOutlined,
-  ExclamationCircleOutlined,
-  DeleteOutlined,
+   EditOutlined,
+   PrinterOutlined,
+   DownOutlined,
+   StopOutlined,
+   ExclamationCircleOutlined,
+   DeleteOutlined,
 } from "@ant-design/icons";
 
 import {
-  Table,
-  Button,
-  Modal,
-  Form,
-  Col,
-  Tag,
-  Row,
-  Input,
-  Select,
-  Menu,
-  Dropdown,
-  notification,
-  Radio,
+   Table,
+   Button,
+   Modal,
+   Form,
+   Col,
+   Tag,
+   Row,
+   Input,
+   Select,
+   Menu,
+   Dropdown,
+   notification,
+   Radio,
+   Checkbox,
 } from "antd";
 
 import api from "@/utils/api";
@@ -47,496 +49,505 @@ const data = structureMinistryData["ក្រសួងយុត្តិធម�
 const generalDepartmentData = [];
 let departmentData = {};
 for (const key in data) {
-  if (Object.hasOwnProperty.call(data, key)) {
-    departmentData = { ...departmentData, ...data[key] };
-    generalDepartmentData.push(...Object.keys(data[key]));
-  }
+   if (Object.hasOwnProperty.call(data, key)) {
+      departmentData = { ...departmentData, ...data[key] };
+      generalDepartmentData.push(...Object.keys(data[key]));
+   }
 }
 const Index = () => {
-  const router = useRouter();
-  const [session, loading] = useSession();
-  const [form] = Form.useForm();
-  const [roleChoice, setRoleChoice] = useState("");
+   const router = useRouter();
+   const [session, loading] = useSession();
+   const [form] = Form.useForm();
+   const [roleChoice, setRoleChoice] = useState("");
 
-  const [generalDepartment, setGeneralDepartment] = useState(
-    generalDepartmentData
-  );
-  const [selectedGeneralDepartment, setSelectedGeneralDepartment] =
-    useState("");
-  const [department, setDepartment] = useState([]);
+   const [nearlyRetired, setNearlyRetired] = useState(false);
 
-  const [generalDepartmentEdit, setGeneralDepartmentEdit] = useState(
-    generalDepartmentData
-  );
-  const [selectedGeneralDepartmentEdit, setSelectedGeneralDepartmentEdit] =
-    useState("");
-  const [departmentEdit, setDepartmentEdit] = useState([]);
+   const [generalDepartment, setGeneralDepartment] = useState(
+      generalDepartmentData
+   );
+   const [selectedGeneralDepartment, setSelectedGeneralDepartment] =
+      useState("");
+   const [department, setDepartment] = useState([]);
 
-  useEffect(() => {
-    form.resetFields(["department"]);
-    setDepartment([
-      ...Object.keys(departmentData[selectedGeneralDepartment] || {}),
-    ]);
-  }, [selectedGeneralDepartment]);
+   const [generalDepartmentEdit, setGeneralDepartmentEdit] = useState(
+      generalDepartmentData
+   );
+   const [selectedGeneralDepartmentEdit, setSelectedGeneralDepartmentEdit] =
+      useState("");
+   const [departmentEdit, setDepartmentEdit] = useState([]);
 
-  useEffect(() => {
-    formEditRole.resetFields(["departmentEdit"]);
-    setDepartmentEdit([
-      ...Object.keys(departmentData[selectedGeneralDepartmentEdit] || {}),
-    ]);
-  }, [selectedGeneralDepartmentEdit]);
+   useEffect(() => {
+      form.resetFields(["department"]);
+      setDepartment([
+         ...Object.keys(departmentData[selectedGeneralDepartment] || {}),
+      ]);
+   }, [selectedGeneralDepartment]);
 
-  const [modalEdit, setModalEdit] = useState(false);
+   useEffect(() => {
+      formEditRole.resetFields(["departmentEdit"]);
+      setDepartmentEdit([
+         ...Object.keys(departmentData[selectedGeneralDepartmentEdit] || {}),
+      ]);
+   }, [selectedGeneralDepartmentEdit]);
 
-  const [formEditRole] = Form.useForm();
+   const [modalEdit, setModalEdit] = useState(false);
 
-  const toggleModalEdit = () => {
-    setModalEdit(!modalEdit);
-  };
+   const [formEditRole] = Form.useForm();
 
-  // change password
-  const [modalChangePassword, setModalChangePassword] = useState(false);
+   const toggleModalEdit = () => {
+      setModalEdit(!modalEdit);
+   };
 
-  const [formChangePassword] = Form.useForm();
+   // change password
+   const [modalChangePassword, setModalChangePassword] = useState(false);
 
-  const toggleModalChangePassword = () => {
-    setModalChangePassword(!modalChangePassword);
-  };
+   const [formChangePassword] = Form.useForm();
 
-  const [employees, setEmployees] = useState([]);
-  useEffect(() => {
-    fetchEmployees(router.query.s || "");
-  }, [router]);
-  const fetchEmployees = async (search) => {
-    try {
-      const { data } = await api.get(
-        `/api/users${
-          search
-            ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
-            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role"
-        }`
-      );
-      const employees = data.data.map((employee) => {
-        for (const key in employee) {
-          if (Object.hasOwnProperty.call(employee, key)) {
-            if (
-              typeof employee[key] != "string" &&
-              typeof employee[key] != "boolean" &&
-              key != "experience" &&
-              key != "rank" &&
-              key !== "officerStatus"
-            ) {
-              delete employee[key];
+   const toggleModalChangePassword = () => {
+      setModalChangePassword(!modalChangePassword);
+   };
+
+   const [employees, setEmployees] = useState([]);
+   useEffect(() => {
+      fetchEmployees(router.query.s || "");
+   }, [router]);
+   const fetchEmployees = async (search) => {
+      try {
+         const { data } = await api.get(
+            `/api/users${
+               search
+                  ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
+                  : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role"
+            }`
+         );
+         const employees = data.data.map((employee) => {
+            for (const key in employee) {
+               if (Object.hasOwnProperty.call(employee, key)) {
+                  if (
+                     typeof employee[key] != "string" &&
+                     typeof employee[key] != "boolean" &&
+                     key != "experience" &&
+                     key != "rank" &&
+                     key !== "officerStatus"
+                  ) {
+                     delete employee[key];
+                  }
+               }
             }
-          }
-        }
-        employee.officerStatus =
-          employee.officerStatus[employee.officerStatus.length - 1] || {};
-        employee.rank = employee.rank[employee.rank.length - 1] || {};
+            employee.officerStatus =
+               employee.officerStatus[employee.officerStatus.length - 1] || {};
+            employee.rank = employee.rank[employee.rank.length - 1] || {};
 
-        return employee;
+            return employee;
+         });
+         setEmployees(employees);
+      } catch (error) {
+         console.log(error);
+      }
+   };
+
+   const [selectedUser, setSelectedUser] = useState(null);
+   const onEditRole = async (record) => {
+      setSelectedUser(record);
+      formEditRole.setFieldsValue({
+         role: record.role,
+         moderatorType: record.moderatorType,
       });
-      setEmployees(employees);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+      toggleModalEdit();
+   };
+   const onEditChangePassword = async (record) => {
+      setSelectedUser(record);
+      toggleModalChangePassword();
+   };
 
-  const [selectedUser, setSelectedUser] = useState(null);
-  const onEditRole = async (record) => {
-    setSelectedUser(record);
-    formEditRole.setFieldsValue({
-      role: record.role,
-      moderatorType: record.moderatorType,
-    });
-    toggleModalEdit();
-  };
-  const onEditChangePassword = async (record) => {
-    setSelectedUser(record);
-    toggleModalChangePassword();
-  };
+   const onSubmitChangePassword = async (password) => {
+      const res = await api.put(`api/users/${selectedUser.id}/updatepassword`, {
+         newPassword: password,
+      });
+      notification.success({ message: res.data.msg });
+      formChangePassword.resetFields();
+      toggleModalChangePassword();
+   };
+   const updateUserRole = async ({ role, moderatorType }) => {
+      const { data } = await api.put(`api/users/${selectedUser.id}`, {
+         role,
+         moderatorType,
+      });
+      toggleModalEdit();
+      setSelectedUser(null);
+      fetchEmployees();
+   };
+   const updateSuspendUser = async ({ suspended, userId }) => {
+      console.log(`api/users/${userId}`, { suspended });
+      const { data } = await api.put(`api/users/${userId}`, { suspended });
+      console.log(data);
+      fetchEmployees();
+   };
 
-  const onSubmitChangePassword = async (password) => {
-    const res = await api.put(`api/users/${selectedUser.id}/updatepassword`, {
-      newPassword: password,
-    });
-    notification.success({ message: res.data.msg });
-    formChangePassword.resetFields();
-    toggleModalChangePassword();
-  };
-  const updateUserRole = async ({ role, moderatorType }) => {
-    const { data } = await api.put(`api/users/${selectedUser.id}`, {
-      role,
-      moderatorType,
-    });
-    toggleModalEdit();
-    setSelectedUser(null);
-    fetchEmployees();
-  };
-  const updateSuspendUser = async ({ suspended, userId }) => {
-    console.log(`api/users/${userId}`, { suspended });
-    const { data } = await api.put(`api/users/${userId}`, { suspended });
-    console.log(data)
-    fetchEmployees();
-  };
+   const onSuspendUser = (record) => {
+      confirm({
+         title: `Do you want to ${record.suspended ? "unsuspend" : "suspend"} ${
+            record.firstName
+         } ?`,
+         icon: <ExclamationCircleOutlined />,
+         onOk() {
+            return updateSuspendUser({
+               suspended: !record.suspended,
+               userId: record.id,
+            });
+         },
+         onCancel() {
+            console.log("Cancel");
+         },
+      });
+   };
 
-  const onSuspendUser = (record) => {
-    confirm({
-      title: `Do you want to ${record.suspended ? "unsuspend" : "suspend"} ${
-        record.firstName
-      } ?`,
-      icon: <ExclamationCircleOutlined />,
-      onOk() {
-        return updateSuspendUser({
-          suspended: !record.suspended,
-          userId: record.id,
-        });
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
-  };
+   const onDeleteUser = (record) => {
+      confirm({
+         title: `Do you want to delete User: ${record.firstName} ?`,
+         icon: <ExclamationCircleOutlined />,
+         async onOk() {
+            await api.delete(`/api/users/${record.id}`);
+            fetchEmployees(router.query.s || "");
+         },
+         onCancel() {
+            // console.log("Cancel");
+         },
+      });
+   };
 
-  const onDeleteUser = (record) => {
-    confirm({
-      title: `Do you want to delete User: ${record.firstName} ?`,
-      icon: <ExclamationCircleOutlined />,
-      async onOk() {
-        await api.delete(`/api/users/${record.id}`);
-        fetchEmployees(router.query.s || "");
-      },
-      onCancel() {
-        // console.log("Cancel");
-      },
-    });
-  };
-
-  const actionMenu = (record) => {
-    return (
-      <Menu>
-        <Menu.Item
-          key="0"
-          icon={<EditOutlined />}
-          onClick={() => {
-            router.push(`/employee/${record.id}`);
-          }}
-        >
-          <a>កែប្រែ</a>
-        </Menu.Item>
-        {["admin", "editor"].includes(session?.user.role) &&
-          session?.user.id !== record.id &&
-          record.role !== "admin" &&
-          !(session?.user.role == "editor" && record.role == "editor") && (
+   const actionMenu = (record) => {
+      return (
+         <Menu>
             <Menu.Item
-              key="1"
-              icon={<EditOutlined />}
-              onClick={onEditRole.bind(this, record)}
+               key="0"
+               icon={<EditOutlined />}
+               onClick={() => {
+                  router.push(`/employee/${record.id}`);
+               }}
             >
-              <a>កំណត់តួនាទី</a>
+               <a>កែប្រែ</a>
             </Menu.Item>
-          )}
-        <Menu.Item
-          key="2"
-          icon={<PrinterOutlined />}
-          onClick={() => {
-            router.push(`/print/${record.id}`);
-          }}
-        >
-          <a>បោះពុម្ភ</a>
-        </Menu.Item>
-        <Menu.Item
-          key="2"
-          icon={<PrinterOutlined />}
-          onClick={() => {
-            router.push(`/print-card/${record.id}`);
-          }}
-        >
-          <a>បោះពុម្ភកាត</a>
-        </Menu.Item>
-        {["admin", "editor"].includes(session?.user.role) &&
-          session?.user.id !== record.id &&
-          record.role !== "admin" &&
-          !(session?.user.role == "editor" && record.role == "editor") && (
+            {["admin", "editor"].includes(session?.user.role) &&
+               session?.user.id !== record.id &&
+               record.role !== "admin" &&
+               !(session?.user.role == "editor" && record.role == "editor") && (
+                  <Menu.Item
+                     key="1"
+                     icon={<EditOutlined />}
+                     onClick={onEditRole.bind(this, record)}
+                  >
+                     <a>កំណត់តួនាទី</a>
+                  </Menu.Item>
+               )}
             <Menu.Item
-              key="4"
-              icon={<StopOutlined />}
-              onClick={onSuspendUser.bind(this, record)}
+               key="2"
+               icon={<PrinterOutlined />}
+               onClick={() => {
+                  router.push(`/print/${record.id}`);
+               }}
             >
-              <a>{record.suspended ? "បិទផ្អាក" : "ផ្អាក"}</a>
+               <a>បោះពុម្ភ</a>
             </Menu.Item>
-          )}
-        {["admin", "editor"].includes(session?.user.role) &&
-          session?.user.id !== record.id &&
-          record.role !== "admin" &&
-          !(session?.user.role == "editor" && record.role == "editor") && (
             <Menu.Item
-              key="1"
-              icon={<EditOutlined />}
-              onClick={onEditChangePassword.bind(this, record)}
+               key="2"
+               icon={<PrinterOutlined />}
+               onClick={() => {
+                  router.push(`/print-card/${record.id}`);
+               }}
             >
-              <a>ផ្លាស់ប្តូរពាក្យសម្ងាត់</a>
+               <a>បោះពុម្ភកាត</a>
             </Menu.Item>
-          )}
-        {["admin", "editor"].includes(session?.user.role) &&
-          session?.user.id !== record.id &&
-          record.role !== "admin" &&
-          !(session?.user.role == "editor" && record.role == "editor") && (
-            <Menu.Item
-              key="5"
-              icon={<DeleteOutlined />}
-              onClick={onDeleteUser.bind(this, record)}
-            >
-              <a>លុប</a>
-            </Menu.Item>
-          )}
-      </Menu>
-    );
-  };
+            {["admin", "editor"].includes(session?.user.role) &&
+               session?.user.id !== record.id &&
+               record.role !== "admin" &&
+               !(session?.user.role == "editor" && record.role == "editor") && (
+                  <Menu.Item
+                     key="4"
+                     icon={<StopOutlined />}
+                     onClick={onSuspendUser.bind(this, record)}
+                  >
+                     <a>{record.suspended ? "បិទផ្អាក" : "ផ្អាក"}</a>
+                  </Menu.Item>
+               )}
+            {["admin", "editor"].includes(session?.user.role) &&
+               session?.user.id !== record.id &&
+               record.role !== "admin" &&
+               !(session?.user.role == "editor" && record.role == "editor") && (
+                  <Menu.Item
+                     key="1"
+                     icon={<EditOutlined />}
+                     onClick={onEditChangePassword.bind(this, record)}
+                  >
+                     <a>ផ្លាស់ប្តូរពាក្យសម្ងាត់</a>
+                  </Menu.Item>
+               )}
+            {["admin", "editor"].includes(session?.user.role) &&
+               session?.user.id !== record.id &&
+               record.role !== "admin" &&
+               !(session?.user.role == "editor" && record.role == "editor") && (
+                  <Menu.Item
+                     key="5"
+                     icon={<DeleteOutlined />}
+                     onClick={onDeleteUser.bind(this, record)}
+                  >
+                     <a>លុប</a>
+                  </Menu.Item>
+               )}
+         </Menu>
+      );
+   };
 
-  const columns = [
-    {
-      title: "លេខអត្តសញ្ញាណប័ណ្ណ",
-      dataIndex: "nationalityIDNum",
-      key: "nationalityIDNum",
-    },
-    {
-      title: "គោត្តនាមនិងនាម",
-      dataIndex: "firstName",
-      key: "firstName",
-      render: (firstName, record) => {
-        return firstName + " " + (record.lastName || "");
+   const columns = [
+      {
+         title: "លេខអត្តសញ្ញាណប័ណ្ណ",
+         dataIndex: "nationalityIDNum",
+         key: "nationalityIDNum",
       },
-    },
-    {
-      title: "ភេទ",
-      dataIndex: "gender",
-      key: "gender",
-    },
-    {
-      title: "ថ្ងៃខែឆ្នាំកំណើត",
-      dataIndex: "birthDate",
-      key: "birthDate",
-      render: (date) => {
-        return date ? new Date(date).toLocaleDateString("en-GB") : "";
+      {
+         title: "គោត្តនាមនិងនាម",
+         dataIndex: "firstName",
+         key: "firstName",
+         render: (firstName, record) => {
+            return firstName + " " + (record.lastName || "");
+         },
       },
-    },
-    {
-      title: "មុខតំណែង",
-      dataIndex: ["officerStatus", "position"],
-      key: "position",
-    },
-    {
-      title: "អង្គភាព",
-      dataIndex: "officerStatus",
-      key: "department",
-      render: (officerStatus) => {
-        return officerStatus.department || officerStatus.unit;
+      {
+         title: "ភេទ",
+         dataIndex: "gender",
+         key: "gender",
       },
-    },
-    {
-      title: "ឋានន្តរស័ក្កិនិងថ្នាក់",
-      dataIndex: "rank",
-      key: "rank",
-      render: (rank) => {
-        return rank.framework && rank.rankType && rank.level
-          ? `${rank.framework} - ${rank.rankType} - ${rank.level}`
-          : "";
+      {
+         title: "ថ្ងៃខែឆ្នាំកំណើត",
+         dataIndex: "birthDate",
+         key: "birthDate",
+         render: (date) => {
+            return date ? new Date(date).toLocaleDateString("en-GB") : "";
+         },
       },
-    },
-    {
-      title: "ស្ថានភាពមន្ត្រី",
-      dataIndex: "approval",
-      key: "approvalStatus",
-      render: (approval, record) => {
-        console.log(approval);
-        let color = "red";
-        let title = "កំពុងពិនិត្យ";
-        if (approval) {
-          title = "អនុម័ត្ត";
-          color = "green";
-        }
-        return (
-          <>
-            <Tag color={color} key={approval}>
-              {title}
-            </Tag>{" "}
-            {record.suspended && (
-              <Tag color={"red"} key={"ផ្អាក"}>
-                ផ្អាក
-              </Tag>
-            )}
-          </>
-        );
+      {
+         title: "មុខតំណែង",
+         dataIndex: ["officerStatus", "position"],
+         key: "position",
       },
-    },
-    {
-      title: "កែប្រែ",
-      key: "action",
-      render: (text, record) => {
-        if (session?.user.role === "moderator") {
-          return (
-            <a
-              onClick={() => {
-                router.push(`/employee/${record._id}`);
-              }}
-            >
-              View
-            </a>
-          );
-        }
-        return (
-          <Dropdown overlay={() => actionMenu(record)}>
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              ផ្សេងៗ <DownOutlined />
-            </a>
-          </Dropdown>
-        );
+      {
+         title: "អង្គភាព",
+         dataIndex: "officerStatus",
+         key: "department",
+         render: (officerStatus) => {
+            return officerStatus.department || officerStatus.unit;
+         },
       },
-    },
-  ];
-
-  if (["admin", "editor"].includes(session?.user.role)) {
-    columns.splice(columns.length - 1, 0, {
-      title: "ផ្ទៀង​ផ្ទាត់",
-      dataIndex: "approval",
-      render: (verified, record) => {
-        if (verified) {
-          return null;
-        }
-        return (
-          <>
-            <span
-              style={{ cursor: "pointer" }}
-              onClick={async () => {
-                console.log("/api/users/" + record.id);
-                await api.put("/api/users/" + record.id, {
-                  approval: true,
-                });
-                fetchEmployees();
-              }}
-            >
-              <CheckOutlined style={{ color: "green" }} />
-            </span>{" "}
-            |{" "}
-            <span style={{ cursor: "pointer" }}>
-              <CloseOutlined style={{ color: "red" }} />
-            </span>
-          </>
-        );
+      {
+         title: "ឋានន្តរស័ក្កិនិងថ្នាក់",
+         dataIndex: "rank",
+         key: "rank",
+         render: (rank) => {
+            return rank.framework && rank.rankType && rank.level
+               ? `${rank.framework} - ${rank.rankType} - ${rank.level}`
+               : "";
+         },
       },
-    });
-  }
-
-  return (
-    <div className={styles.employeeListContainer}>
-      <Search></Search>
-
-      <div style={{ marginTop: 20 }}>
-        <Table columns={columns} dataSource={employees}></Table>
-      </div>
-
-      {/* Modal Edit */}
-      <Modal
-        title="ផ្លាស់ប្តូរពាក្យសម្ងាត់"
-        visible={modalChangePassword}
-        footer={null}
-        onCancel={toggleModalChangePassword}
-      >
-        <Form form={formChangePassword} layout="vertical">
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                style={{ marginBottom: 10 }}
-                label="New Password"
-                name="password"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Input placeholder="ពាក្យសម្ងាត់" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Button
-            style={{ marginRight: 8 }}
-            onClick={() => {
-              const data = formChangePassword.getFieldsValue();
-              onSubmitChangePassword(data.password);
-            }}
-          >
-            Save
-          </Button>
-        </Form>
-      </Modal>
-      <Modal
-        title="Edit Role"
-        visible={modalEdit}
-        onCancel={toggleModalEdit}
-        footer={null}
-      >
-        <Form form={formEditRole} layout="vertical">
-          <Row gutter={16}>
-            <Col span={24}>
-              <Form.Item
-                style={{ marginBottom: 10 }}
-                label="Role"
-                name="role"
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              >
-                <Select
-                  placeholder="ជ្រើសរើស"
-                  onChange={(v) => {
-                    console.log(v);
-                    if (v == "moderator") {
-                      setRoleChoice(v);
-                    } else {
-                      setRoleChoice("");
-                    }
-                  }}
-                >
-                  {session?.user.role === "admin" && (
-                    <Option value="editor">Editor</Option>
+      {
+         title: "ស្ថានភាពមន្ត្រី",
+         dataIndex: "approval",
+         key: "approvalStatus",
+         render: (approval, record) => {
+            console.log(approval);
+            let color = "red";
+            let title = "កំពុងពិនិត្យ";
+            if (approval) {
+               title = "អនុម័ត្ត";
+               color = "green";
+            }
+            return (
+               <>
+                  <Tag color={color} key={approval}>
+                     {title}
+                  </Tag>{" "}
+                  {record.suspended && (
+                     <Tag color={"red"} key={"ផ្អាក"}>
+                        ផ្អាក
+                     </Tag>
                   )}
-                  <Option value="moderator">Moderator</Option>
-                  <Option value="user">User</Option>
-                </Select>
-              </Form.Item>
-            </Col>
-          </Row>
-          {roleChoice === "moderator" && (
-            <Row gutter={16}>
-              <Col span={24}>
-                <Form.Item
-                  style={{ marginBottom: 10 }}
-                  label="Type"
-                  name="moderatorType"
-                  rules={[
-                    {
-                      required: true,
-                    },
-                  ]}
-                >
-                  <Radio.Group
-                    options={[
-                      { label: "នាយកដ្ឋាន", value: "department" },
-                      { label: "អគ្គនាយកដ្ឋាន", value: "generalDepartment" },
-                    ]}
-                  ></Radio.Group>
-                </Form.Item>
-              </Col>
-            </Row>
-          )}
-          {/* <Row gutter={16}>
+               </>
+            );
+         },
+      },
+      {
+         title: "កែប្រែ",
+         key: "action",
+         render: (text, record) => {
+            if (session?.user.role === "moderator") {
+               return (
+                  <a
+                     onClick={() => {
+                        router.push(`/employee/${record._id}`);
+                     }}
+                  >
+                     View
+                  </a>
+               );
+            }
+            return (
+               <Dropdown overlay={() => actionMenu(record)}>
+                  <a
+                     className="ant-dropdown-link"
+                     onClick={(e) => e.preventDefault()}
+                  >
+                     ផ្សេងៗ <DownOutlined />
+                  </a>
+               </Dropdown>
+            );
+         },
+      },
+   ];
+
+   if (["admin", "editor"].includes(session?.user.role)) {
+      columns.splice(columns.length - 1, 0, {
+         title: "ផ្ទៀង​ផ្ទាត់",
+         dataIndex: "approval",
+         render: (verified, record) => {
+            if (verified) {
+               return null;
+            }
+            return (
+               <>
+                  <span
+                     style={{ cursor: "pointer" }}
+                     onClick={async () => {
+                        console.log("/api/users/" + record.id);
+                        await api.put("/api/users/" + record.id, {
+                           approval: true,
+                        });
+                        fetchEmployees();
+                     }}
+                  >
+                     <CheckOutlined style={{ color: "green" }} />
+                  </span>{" "}
+                  |{" "}
+                  <span style={{ cursor: "pointer" }}>
+                     <CloseOutlined style={{ color: "red" }} />
+                  </span>
+               </>
+            );
+         },
+      });
+   }
+
+   return (
+      <div className={styles.employeeListContainer}>
+         <Search></Search>
+
+         <div style={{ marginTop: 20 }}>
+            <SortOption ministryStructure={structureMinistryData}></SortOption>
+         </div>
+
+         <div style={{ marginTop: 20 }}>
+            <Table columns={columns} dataSource={employees}></Table>
+         </div>
+
+         {/* Modal Edit */}
+         <Modal
+            title="ផ្លាស់ប្តូរពាក្យសម្ងាត់"
+            visible={modalChangePassword}
+            footer={null}
+            onCancel={toggleModalChangePassword}
+         >
+            <Form form={formChangePassword} layout="vertical">
+               <Row gutter={16}>
+                  <Col span={24}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        label="New Password"
+                        name="password"
+                        rules={[
+                           {
+                              required: true,
+                           },
+                        ]}
+                     >
+                        <Input placeholder="ពាក្យសម្ងាត់" />
+                     </Form.Item>
+                  </Col>
+               </Row>
+               <Button
+                  style={{ marginRight: 8 }}
+                  onClick={() => {
+                     const data = formChangePassword.getFieldsValue();
+                     onSubmitChangePassword(data.password);
+                  }}
+               >
+                  Save
+               </Button>
+            </Form>
+         </Modal>
+         <Modal
+            title="Edit Role"
+            visible={modalEdit}
+            onCancel={toggleModalEdit}
+            footer={null}
+         >
+            <Form form={formEditRole} layout="vertical">
+               <Row gutter={16}>
+                  <Col span={24}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        label="Role"
+                        name="role"
+                        rules={[
+                           {
+                              required: true,
+                           },
+                        ]}
+                     >
+                        <Select
+                           placeholder="ជ្រើសរើស"
+                           onChange={(v) => {
+                              console.log(v);
+                              if (v == "moderator") {
+                                 setRoleChoice(v);
+                              } else {
+                                 setRoleChoice("");
+                              }
+                           }}
+                        >
+                           {session?.user.role === "admin" && (
+                              <Option value="editor">Editor</Option>
+                           )}
+                           <Option value="moderator">Moderator</Option>
+                           <Option value="user">User</Option>
+                        </Select>
+                     </Form.Item>
+                  </Col>
+               </Row>
+               {roleChoice === "moderator" && (
+                  <Row gutter={16}>
+                     <Col span={24}>
+                        <Form.Item
+                           style={{ marginBottom: 10 }}
+                           label="Type"
+                           name="moderatorType"
+                           rules={[
+                              {
+                                 required: true,
+                              },
+                           ]}
+                        >
+                           <Radio.Group
+                              options={[
+                                 { label: "នាយកដ្ឋាន", value: "department" },
+                                 {
+                                    label: "អគ្គនាយកដ្ឋាន",
+                                    value: "generalDepartment",
+                                 },
+                              ]}
+                           ></Radio.Group>
+                        </Form.Item>
+                     </Col>
+                  </Row>
+               )}
+               {/* <Row gutter={16}>
             <Col span={24}>
               <Form.Item
                 style={{ marginBottom: 10 }}
@@ -563,7 +574,7 @@ const Index = () => {
               </Form.Item>
             </Col>
           </Row> */}
-          {/* <Row gutter={16}>
+               {/* <Row gutter={16}>
             <Col span={24}>
               <Form.Item
                 style={{ marginBottom: 10 }}
@@ -587,24 +598,24 @@ const Index = () => {
               </Form.Item>
             </Col>
           </Row> */}
-          <Button
-            style={{ marginRight: 8 }}
-            onClick={() => {
-              const data = formEditRole.getFieldsValue(true);
-              console.log(data);
-              updateUserRole({
-                role: data.role,
-                moderatorType: data.moderatorType,
-              });
-              // alert("Save");
-            }}
-          >
-            Save
-          </Button>
-        </Form>
-      </Modal>
-    </div>
-  );
+               <Button
+                  style={{ marginRight: 8 }}
+                  onClick={() => {
+                     const data = formEditRole.getFieldsValue(true);
+                     console.log(data);
+                     updateUserRole({
+                        role: data.role,
+                        moderatorType: data.moderatorType,
+                     });
+                     // alert("Save");
+                  }}
+               >
+                  Save
+               </Button>
+            </Form>
+         </Modal>
+      </div>
+   );
 };
 
 Index.allowed_roles = ["admin", "editor", "moderator"];
