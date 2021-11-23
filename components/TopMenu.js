@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 
 import Link from "next/link";
-import { Menu } from "antd";
+import { Menu, Modal, Upload, Button } from "antd";
 import { useSession } from "node_modules/next-auth/client";
 
 const { SubMenu } = Menu;
 
 const TopMenu = () => {
    const [current, setCurrent] = useState("home");
+   const [modalUpload, setModalUpload] = useState(false);
    const [session] = useSession();
 
    const onChange = (e) => {
       setCurrent(e.key);
+   };
+
+   const onUpload = () => {
+      alert("finsih");
    };
    const menuList = [
       {
@@ -36,6 +41,10 @@ const TopMenu = () => {
                link: "/print-card",
                title: "ការបោះពុម្ពកាតមន្រ្ដី",
             },
+            {
+               link: "/setting",
+               title: "កែប្រែលេខកាត",
+            },
          ],
       },
 
@@ -52,6 +61,7 @@ const TopMenu = () => {
    //     iconUrl: "/team.png",
    //   });
    // }
+
    if (["admin", "editor", "moderator"].includes(session?.user.role)) {
       let menu = [
          {
@@ -73,17 +83,30 @@ const TopMenu = () => {
                iconUrl: "/setting.png",
             }
             // {
-            //   link: "/announcement",
-            //   title: "សេចក្ដីជូនដំណឹង",
-            //   iconUrl: "/announcement.png",
+            //    link: "/setting",
+            //    title: "ការកំណត់",
+            //    iconUrl: "/setting.png",
             // }
          );
       }
 
       menuList.splice(2, 0, ...menu);
+   } else {
+      menuList.shift();
    }
    return (
       <>
+         <Modal
+            visible={modalUpload}
+            onCancel={() => setModalUpload(false)}
+            onOk={onUpload}
+            title="Upload Excel"
+         >
+            <h3>កែប្រែលេខកាតថ្មី</h3>
+            <Upload>
+               <Button>Click to Upload</Button>
+            </Upload>
+         </Modal>
          <Menu
             onClick={onChange}
             selectedKeys={[current]}
@@ -100,7 +123,16 @@ const TopMenu = () => {
                      >
                         {v.sub.map((val, i) => (
                            <Menu.Item key={i}>
-                              <Link href={val.link}>{val.title}</Link>
+                              {val.link === "/setting" ? (
+                                 <p
+                                    onClick={() => setModalUpload(true)}
+                                    style={{ color: "#fff" }}
+                                 >
+                                    {val.title}
+                                 </p>
+                              ) : (
+                                 <Link href={val.link}>{val.title}</Link>
+                              )}
                            </Menu.Item>
                         ))}
                      </SubMenu>

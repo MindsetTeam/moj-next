@@ -65,15 +65,18 @@ const Index = () => {
    const [generalDepartment, setGeneralDepartment] = useState(
       generalDepartmentData
    );
-   const [selectedGeneralDepartment, setSelectedGeneralDepartment] =
-      useState("");
+   const [selectedGeneralDepartment, setSelectedGeneralDepartment] = useState(
+      ""
+   );
    const [department, setDepartment] = useState([]);
 
    const [generalDepartmentEdit, setGeneralDepartmentEdit] = useState(
       generalDepartmentData
    );
-   const [selectedGeneralDepartmentEdit, setSelectedGeneralDepartmentEdit] =
-      useState("");
+   const [
+      selectedGeneralDepartmentEdit,
+      setSelectedGeneralDepartmentEdit,
+   ] = useState("");
    const [departmentEdit, setDepartmentEdit] = useState([]);
 
    useEffect(() => {
@@ -365,6 +368,7 @@ const Index = () => {
                   <Tag color={color} key={approval}>
                      {title}
                   </Tag>{" "}
+                  <Tag color="red">ជិតចូល</Tag>
                   {record.suspended && (
                      <Tag color={"red"} key={"ផ្អាក"}>
                         ផ្អាក
@@ -404,7 +408,7 @@ const Index = () => {
    ];
 
    if (["admin", "editor"].includes(session?.user.role)) {
-      columns.splice(columns.length - 1, 0, {
+      columns.splice(columns.length - 2, 0, {
          title: "ផ្ទៀង​ផ្ទាត់",
          dataIndex: "approval",
          render: (verified, record) => {

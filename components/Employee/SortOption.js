@@ -27,6 +27,7 @@ const SortOption = ({ ministryStructure }) => {
                >
                   <Select
                      placeholder="ជ្រើសរើស"
+                     allowClear
                      onChange={(v) => {
                         setChoiceGeneralDepartment(v);
                         form.resetFields(["department"]);
@@ -50,7 +51,7 @@ const SortOption = ({ ministryStructure }) => {
                   name="department"
                   label="នាយកដ្ឋាន"
                >
-                  <Select placeholder="ជ្រើសរើស">
+                  <Select placeholder="ជ្រើសរើស" allowClear>
                      {Object.keys(
                         ministryStructure["ក្រសួងយុត្តិធម៌"]["ថ្នាក់កណ្តាល"][
                            choiceGeneralDepartment
@@ -65,10 +66,12 @@ const SortOption = ({ ministryStructure }) => {
                   </Select>
                </Form.Item>
             </Col>
-            <Col span={3}>
+            <Col span={4} style={{ marginTop: 5 }}>
                <Checkbox onChange={nearRetired}>ជិតចូលនិវត្តន៏</Checkbox>
             </Col>
-            <Button onClick={onSearch}>ស្វែងរក</Button>
+            <Col span={4} style={{ marginTop: 5 }}>
+               <Checkbox onChange={null}>ចូលនិវត្តន៏</Checkbox>
+            </Col>
          </Row>
       </Form>
    );
