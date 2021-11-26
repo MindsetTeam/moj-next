@@ -112,7 +112,12 @@ const Index = (props) => {
                            </Col>
                            <Col
                               span={12}
-                              onClick={() => router.push(`/retired`)}
+                              onClick={() => router.push({
+                                 pathname: '/employee',
+                                 query: {
+                                    retired: true
+                                 }
+                              })}
                            >
                               <HomeCard
                                  number={
