@@ -13,6 +13,7 @@ handler.use(
       Providers.Credentials({
         name: "Credentials",
         async authorize(credentials, req) {
+          console.log(credentials);
           const user = await User.findOne({
             nationalityIDNum: credentials.username,
           });

@@ -202,7 +202,7 @@ export const getOverviewEmployees = async (req, res) => {
 };
 
 export const getEmployees = async (req, res) => {
-  const { searchTerm, select } = req.query;
+  const { searchTerm, select, retired, nearRetired } = req.query;
   let reqQuery;
   if (searchTerm) {
     let searchReg = new RegExp(searchTerm, "i");
@@ -218,6 +218,22 @@ export const getEmployees = async (req, res) => {
   // if (!["admin", "editor"].includes(req.user.role)) {
   //   reqQuery = { ...reqQuery, department: req.user.department };
   // }
+  if (retired) {
+    reqQuery = {
+      officerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+      ...reqQuery,
+    };
+  }
+  //#TODO: fix here;
+  if (nearRetired) {
+    reqQuery = {
+      birthDate: {
+        $lt: new Date(Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000),
+      },
+      // "officerStatus.rank": { $elemMatch: { $nin: "និវត្តន៍" } },
+      ...reqQuery,
+    };
+  }
   let searchQuery = User.find(reqQuery).sort("-createdAt");
   if (select) {
     searchQuery = searchQuery.select(select.split(",").join(" "));
