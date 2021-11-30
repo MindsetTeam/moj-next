@@ -141,6 +141,8 @@ const Index = () => {
             }
           }
         }
+
+        // todo: remove single officerstatus
         employee.officerStatus =
           employee.officerStatus[employee.officerStatus.length - 1] || {};
         employee.rank = employee.rank[employee.rank.length - 1] || {};
@@ -367,15 +369,17 @@ const Index = () => {
         //    title = "អនុម័ត្ត";
         //    color = "green";
         // }
+        console.log({officer:record.officerStatus});
+        console.log({status:[...record.officerStatus ]});
         return (
           <>
             {/* <Tag color={color} key={approval}>
                      {title}
                   </Tag>{" "} */}
-            {new Date(record.birthDate).getTime() <
+            {(new Date(record.birthDate).getTime() <
               new Date(
                 Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000
-              ).getTime() && <Tag color="red">ជិតចូល</Tag>}
+              ).getTime() && [...(record.officerStatus ||[])].findIndex(v=>v.rank=="និវត្តន៍")>-1) ? <Tag color="red">ជិតចូល</Tag>: <Tag color="red">ចូលនិវត្តន៏</Tag>}
             {record.suspended && (
               <Tag color={"red"} key={"ផ្អាក"}>
                 ផ្អាក

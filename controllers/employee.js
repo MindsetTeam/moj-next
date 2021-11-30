@@ -224,16 +224,20 @@ export const getEmployees = async (req, res) => {
       ...reqQuery,
     };
   }
-  //#TODO: fix here;
   if (nearRetired) {
     reqQuery = {
       birthDate: {
         $lt: new Date(Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000),
       },
-      // "officerStatus.rank": { $elemMatch: { $nin: "និវត្តន៍" } },
+      "officerStatus.rank": { $ne: "និវត្តន៍" },
       ...reqQuery,
     };
+    if (retired) {
+      delete reqQuery.officerStatus;
+      delete reqQuery["officerStatus.rank"];
+    }
   }
+
   let searchQuery = User.find(reqQuery).sort("-createdAt");
   if (select) {
     searchQuery = searchQuery.select(select.split(",").join(" "));
