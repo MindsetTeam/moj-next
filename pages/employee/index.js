@@ -112,7 +112,7 @@ const Index = () => {
     console.log({ router: router.query });
     fetchEmployees(router.query.s || "", router.query);
   }, [router]);
-  const fetchEmployees = async (search, query ="") => {
+  const fetchEmployees = async (search, query = "") => {
     let searchQuery = new URLSearchParams();
     if (query) {
       Object.keys(query).forEach((v) => {
@@ -124,7 +124,8 @@ const Index = () => {
         `/api/users${
           search
             ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
-            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role&"+searchQuery.toString()
+            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role&" +
+              searchQuery.toString()
         }`
       );
       const employees = data.data.map((employee) => {
@@ -141,7 +142,7 @@ const Index = () => {
             }
           }
         }
-
+        employee.oldStateOfficerStatus = [...employee.officerStatus];
         // todo: remove single officerstatus
         employee.officerStatus =
           employee.officerStatus[employee.officerStatus.length - 1] || {};
@@ -362,24 +363,23 @@ const Index = () => {
       dataIndex: "approval",
       key: "approvalStatus",
       render: (approval, record) => {
-        // console.log(approval);
-        let color = "red";
-        let title = "កំពុងពិនិត្យ";
-        // if (approval) {
-        //    title = "អនុម័ត្ត";
-        //    color = "green";
-        // }
-        console.log({officer:record.officerStatus});
-        console.log({status:[...record.officerStatus ]});
+        let title = "ជិតចូល";
+        if (
+          [...(record.oldStateOfficerStatus || [])].findIndex(
+            (v) => v.rank == "និវត្តន៍"
+          ) > -1
+        ) {
+          title = "និវត្តន៍";
+        }
         return (
           <>
             {/* <Tag color={color} key={approval}>
                      {title}
                   </Tag>{" "} */}
-            {(new Date(record.birthDate).getTime() <
+            {new Date(record.birthDate).getTime() <
               new Date(
                 Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000
-              ).getTime() && [...(record.officerStatus ||[])].findIndex(v=>v.rank=="និវត្តន៍")>-1) ? <Tag color="red">ជិតចូល</Tag>: <Tag color="red">ចូលនិវត្តន៏</Tag>}
+              ).getTime() && <Tag color="red">{title}</Tag>}
             {record.suspended && (
               <Tag color={"red"} key={"ផ្អាក"}>
                 ផ្អាក
