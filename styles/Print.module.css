@@ -1,9 +1,6 @@
-.printContainer {
-  background-color: #fff;
-  padding: 20px 10px;
-}
-
+.printContainer,
+.printReportContainer,
 .printCardContainer {
-  background-color: #fff;
-  padding: 20px 10px;
+   background-color: #fff;
+   padding: 20px 10px;
 }
