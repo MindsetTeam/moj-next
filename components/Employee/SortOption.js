@@ -26,6 +26,9 @@ const SortOption = ({ ministryStructure }) => {
       form={form}
       onValuesChange={(changed, allValues) => {
         let searchQuery = [];
+        if(changed.generalDepartment){
+          delete allValues.department
+        }
         Object.keys(allValues).forEach((v) => {
           if (allValues[v]) searchQuery.push([v] + "=" + allValues[v]);
         });

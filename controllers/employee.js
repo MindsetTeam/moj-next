@@ -202,7 +202,7 @@ export const getOverviewEmployees = async (req, res) => {
 };
 
 export const getEmployees = async (req, res) => {
-  const { searchTerm, select, retired, nearRetired } = req.query;
+  const { searchTerm, select, retired, nearRetired,generalDepartment, department } = req.query;
   let reqQuery;
   if (searchTerm) {
     let searchReg = new RegExp(searchTerm, "i");
@@ -235,6 +235,14 @@ export const getEmployees = async (req, res) => {
     if (retired) {
       delete reqQuery.officerStatus;
       delete reqQuery["officerStatus.rank"];
+    }
+  }
+  if(generalDepartment)
+  {
+    
+    reqQuery= {
+      generalDepartment,
+      ...reqQuery
     }
   }
 
