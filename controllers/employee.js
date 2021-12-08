@@ -4,6 +4,7 @@ import {
   deleteFileFromBucket,
   uploadFileToBucket,
 } from "api-lib/storageBucket";
+
 export const getOverviewEmployees = async (req, res) => {
   const { role } = req.user;
   let resData = {};
@@ -239,12 +240,18 @@ export const getEmployees = async (req, res) => {
   }
   if(generalDepartment)
   {
-    
     reqQuery= {
-      generalDepartment,
+      "latestOfficerStatus.generalDepartment": generalDepartment,
       ...reqQuery
     }
+    if(department){
+      reqQuery= {
+        "latestOfficerStatus.department": department,
+        ...reqQuery
+      }
+    }
   }
+
 
   let searchQuery = User.find(reqQuery).sort("-createdAt");
   if (select) {
@@ -296,7 +303,6 @@ export const getEmployees = async (req, res) => {
     ]);
   }
   const users = await searchQuery;
-
   res.status(200).json({
     success: true,
     msg: searchTerm ? `User with ${searchTerm}` : "Find all user",
@@ -308,18 +314,17 @@ export const getSingleEmployee = async (req, res, next) => {
   const { id } = req.query;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   const user = await User.findById(id);
-  if (user.experience) {
-    user.experience = user.experience.sort(
-      (a, b) =>
-        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
-    );
-    console.log(user.experience);
-  }
+  // if (user.experience) {
+  //   user.experience = user.experience.sort(
+  //     (a, b) =>
+  //       new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+  //   );
+  //   console.log(user.experience);
+  // }
   res.status(200).json(user);
 };
 
 export const updateEmployee = async (req, res, next) => {
-  console.log(req.body);
   const { id } = req.query;
   const dataUpdate = req.body;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);

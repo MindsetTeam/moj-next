@@ -109,7 +109,7 @@ const Index = () => {
 
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
-    console.log({ router: router.query });
+    // console.log({ router: router.query });
     fetchEmployees(router.query.s || "", router.query);
   }, [router]);
   const fetchEmployees = async (search, query = "") => {

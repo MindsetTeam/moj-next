@@ -24,7 +24,6 @@ import {
    DownOutlined,
 } from "@ant-design/icons";
 import { fetcher } from "@/lib/fetch";
-import { CircleGrid } from "@antv/g2/lib/dependents";
 
 const attachmentTypeName = {
    info: "ឯកសារផ្ទាល់ខ្លួន",

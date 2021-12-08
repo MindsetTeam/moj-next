@@ -24,6 +24,14 @@ const storage = multer.diskStorage({
           path.parse(file.originalname).ext
       );
     }
+    if (file.fieldname === "card-xlsx") {
+      return cb(
+        null,
+        path.parse(file.originalname).name +
+          `-${nanoid(7)}` +
+          path.parse(file.originalname).ext
+      );
+    }
   },
 });
 

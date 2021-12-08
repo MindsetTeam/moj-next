@@ -5,6 +5,7 @@ import structureMinistryData from "/data/Structure.json";
 import React, { useEffect, useState } from "react";
 import { Col, Row, Select, Form, Checkbox, Button } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
+import { fetcher } from "@/lib/fetch";
 
 const { Option } = Select;
 
@@ -12,14 +13,31 @@ const Report = () => {
    const [form] = Form.useForm();
 
    const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");
+   const [printEmployees, setPrintEmployees] = useState([])
 
-   const onPrint = (params) => {
+   const onPrint = () => {
       window.print();
    };
-
+   const fetchEmployees = async (query) => {
+      if(!query.generalDepartment){
+         return setPrintEmployees([]);
+      }
+      let searchQuery = new URLSearchParams();
+      Object.keys(query).forEach((v)=>{
+         searchQuery.append(v, query[v]);
+      })
+      const {data} = await fetcher('/api/users?'+ searchQuery.toString())
+      setPrintEmployees(data);
+   }
    return (
       <div className={styles.printReportContainer}>
-         <Form form={form}>
+         <Form form={form} onValuesChange={(changed, allValues) => {
+            console.log(changed)
+            if(changed.generalDepartment){
+               delete allValues.department
+            }
+             fetchEmployees(allValues);
+         }}>
             <Row gutter={16}>
                <Col span={6}>
                   <Form.Item
@@ -77,7 +95,7 @@ const Report = () => {
                </Col>
             </Row>
          </Form>
-         <PrintReport />
+         <PrintReport printEmployees={printEmployees} />
       </div>
    );
 };

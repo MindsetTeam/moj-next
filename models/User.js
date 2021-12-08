@@ -45,6 +45,7 @@ const UserSchema = new mongoose.Schema(
     vaccine: String,
     civilID: String,
     officerID: String,
+    cardID:String,
     department: String,
     generalDepartment: String,
     employmentDate: String,
@@ -74,12 +75,25 @@ const UserSchema = new mongoose.Schema(
         ministry: String,
         position: String,
         startDate: String,
-        generalDepartment:String,
-        department:String,
+        generalDepartment: String,
+        department: String,
         endDate: String,
         otherNote: String,
       },
     ],
+    latestOfficerStatus: {
+      refNum: String,
+      letterType: String,
+      rank: String,
+      status: String,
+      ministry: String,
+      position: String,
+      startDate: String,
+      generalDepartment: String,
+      department: String,
+      endDate: String,
+      otherNote: String,
+    },
     rank: [
       {
         refNum: String,
@@ -255,7 +269,9 @@ const UserSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
+    // toObject: { virtuals: true },
     toJSON: {
+      // virtuals: true,
       transform: function (doc, ret) {
         ret.id = ret._id;
         delete ret._id;
@@ -273,11 +289,34 @@ UserSchema.pre("save", async function (next) {
   next();
 });
 
+UserSchema.pre("findOneAndUpdate", function (next) {
+  // console.log(this);
+  const { officerStatus, experience } = this._update;
+  if (officerStatus) {
+    this._update.officerStatus = officerStatus.sort(
+      (a, b) =>
+        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    );
+    this._update.latestOfficerStatus = this._update.officerStatus[0]
+  }
+  if (experience) {
+    this._update.experience = experience.sort(
+      (a, b) =>
+        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    );
+  }
+  next();
+});
+
 UserSchema.post("save", function (error, doc, next) {
   if (error.code === 11000) {
     next(new Error("Nationality ID already being used"));
   }
   next();
 });
+
+// UserSchema.virtual("latestOfficerStatus").get(function () {
+//   return this.officerStatus[0] || {};
+// });
 
 export default mongoose.models.User || mongoose.model("User", UserSchema);

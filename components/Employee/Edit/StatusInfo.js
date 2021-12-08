@@ -517,12 +517,12 @@ const StatusInfo = ({
                         style={{ marginBottom: 10 }}
                         name="department"
                         label="នាយកដ្ឋាន"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញនាយកដ្ឋាន",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញនាយកដ្ឋាន",
+                        //    },
+                        // ]}
                      >
                         <Select placeholder="ជ្រើសរើស">
                            {Object.keys(
