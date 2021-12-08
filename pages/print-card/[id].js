@@ -118,9 +118,9 @@ const index = () => {
         .front-card-container .bottom-section .signature {
           flex: 1;
           text-align: center;
-          font-weight: bold;
           font-size: 1.2rem;
           color: rgb(34, 34, 185);
+          font-family: "Moul", serif;
         }
 
         /* Back Card */

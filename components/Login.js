@@ -68,10 +68,9 @@ const Login = () => {
           <h3 style={{ color: "white" }}>Ministry of Justice</h3>
         </div>
         <div className={styles.rightSection}>
-          <h1>Login</h1>
-          <Form form={form} {...layout}>
+          <h1>ចូលប្រើប្រាស់</h1>
+          <Form form={form} layout={"vertical"}>
             <Form.Item
-              style={{ marginBottom: 20 }}
               label="អត្តសញ្ញាណប័ណ្ណ"
               name="username"
               rules={[
@@ -84,7 +83,6 @@ const Login = () => {
             </Form.Item>
 
             <Form.Item
-              style={{ marginBottom: 10 }}
               label="ពាក្យសម្ងាត់"
               name="password"
               rules={[

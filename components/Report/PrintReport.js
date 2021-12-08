@@ -23,6 +23,7 @@ const PrintReport = ({ printEmployees }) => {
         .top-section {
           display: flex;
           justify-content: space-between;
+          font-family: "Moul";
         }
 
         .logo {
@@ -72,7 +73,7 @@ const PrintReport = ({ printEmployees }) => {
           </div>
           <div style={{ textAlign: "center", fontWeight: "bold" }}>
             <h1 style={{ fontWeight: "bold" }}>ព្រះរាជាណាចក្រកម្ពុជា</h1>
-            <h1 style={{ fontWeight: "bold" }}>ជាតិ សាសនា ព្រះមាហាក្សត្រ</h1>
+            <h1 style={{ fontWeight: "bold" }}>ជាតិ សាសនា ព្រះមហាក្សត្រ</h1>
             <h1 className="tacteng">3</h1>
           </div>
         </section>

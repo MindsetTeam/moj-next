@@ -66,7 +66,7 @@ const Add = () => {
   return (
     <div className={styles.addUserContainer}>
       <div>
-        <h1>បន្ថែមអ្នកប្រើប្រាស់ថ្មី</h1>
+        <h1 style={{ fontFamily: "Moul" }}>បន្ថែមអ្នកប្រើប្រាស់ថ្មី</h1>
         <Form layout="vertical" form={form}>
           <Row gutter={16}>
             <Col span={24}>

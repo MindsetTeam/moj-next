@@ -78,7 +78,7 @@ const TopMenu = () => {
         {
           link: "/report",
           title: "របាយការណ៌",
-          iconUrl: "/setting.png",
+          iconUrl: "/report.png",
         }
         // {
         //    link: "/setting",

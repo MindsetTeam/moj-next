@@ -18,16 +18,16 @@ const SortOption = ({ ministryStructure }) => {
   };
   const router = useRouter();
   useEffect(() => {
-     form.resetFields()
-     form.setFieldsValue(router.query)
-  }, [router.query])
+    form.resetFields();
+    form.setFieldsValue(router.query);
+  }, [router.query]);
   return (
     <Form
       form={form}
       onValuesChange={(changed, allValues) => {
         let searchQuery = [];
-        if(changed.generalDepartment){
-          delete allValues.department
+        if (changed.generalDepartment) {
+          delete allValues.department;
         }
         Object.keys(allValues).forEach((v) => {
           if (allValues[v]) searchQuery.push([v] + "=" + allValues[v]);
@@ -36,11 +36,12 @@ const SortOption = ({ ministryStructure }) => {
       }}
     >
       <Row gutter={16}>
+        <Col span={4}></Col>
         <Col span={6}>
           <Form.Item
             style={{ marginBottom: 10 }}
             name="generalDepartment"
-            label="អគ្គនាយកដ្ឋាន"
+            label="អង្គភាព ​/ ​អគ្គនាយកដ្ឋាន"
           >
             <Select
               placeholder="ជ្រើសរើស"
@@ -83,13 +84,13 @@ const SortOption = ({ ministryStructure }) => {
             </Select>
           </Form.Item>
         </Col>
-        <Col span={4} style={{ marginTop: 5 }}>
+        <Col span={2} style={{ marginTop: 5 }}>
           <Form.Item name="nearRetired" valuePropName="checked">
             <Checkbox>ជិតចូលនិវត្តន៏</Checkbox>
             {/* <Checkbox onChange={nearRetired}>ជិតចូលនិវត្តន៏</Checkbox> */}
           </Form.Item>
         </Col>
-        <Col span={4} style={{ marginTop: 5 }}>
+        <Col span={2} style={{ marginTop: 5 }}>
           <Form.Item name="retired" valuePropName="checked">
             <Checkbox onChange={null}>ចូលនិវត្តន៏</Checkbox>
           </Form.Item>
