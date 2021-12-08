@@ -2,8 +2,8 @@ import PrintReport from "@/components/Report/PrintReport";
 import styles from "@/styles/Print.module.css";
 import structureMinistryData from "/data/Structure.json";
 
-import React, { useEffect, useState } from "react";
-import { Col, Row, Select, Form, Checkbox, Button } from "antd";
+import React, { useState } from "react";
+import { Col, Row, Select, Form, Button } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { fetcher } from "@/lib/fetch";
 
@@ -32,7 +32,6 @@ const Report = () => {
    return (
       <div className={styles.printReportContainer}>
          <Form form={form} onValuesChange={(changed, allValues) => {
-            console.log(changed)
             if(changed.generalDepartment){
                delete allValues.department
             }
