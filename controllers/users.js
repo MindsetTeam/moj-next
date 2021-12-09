@@ -29,6 +29,7 @@ export const updateUsersCardID = async (req, res) => {
   const workbook = XLSX.readFile(file.path);
   const sheet_name_list = workbook.SheetNames;
   const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
+  console.log(data)
   const bulkOps = data.map((user) => ({
     updateOne: {
       filter: { nationalityIDNum: user.nationalityIDNum },

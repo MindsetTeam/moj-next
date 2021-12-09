@@ -102,7 +102,7 @@ const Index = (props) => {
                     <HomeCard
                       number={
                         overviewData?.data?.officerStatusList?.[
-                          "គ្មានក្រប​ខណ្ឌ"
+                          "មន្ត្រីកិច្ចសន្យា"
                         ] || 0
                       }
                       title="មន្ត្រីកិច្ចសន្យា"

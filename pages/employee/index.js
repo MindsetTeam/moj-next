@@ -112,7 +112,7 @@ const Index = () => {
     // console.log({ router: router.query });
     fetchEmployees(router.query.s || "", router.query);
   }, [router]);
-  const fetchEmployees = async (search ='', query = "") => {
+  const fetchEmployees = async (search = "", query = "") => {
     let searchQuery = new URLSearchParams();
     searchQuery.append("searchTerm", search);
     if (query) {
@@ -245,7 +245,7 @@ const Index = () => {
         <Menu.Item
           icon={<EditOutlined />}
           onClick={() => {
-            router.push(`/employee/${record.id}`);
+            router.push(`/employee/${record.id}/edit`);
           }}
         >
           <a>កែប្រែ</a>
@@ -353,7 +353,7 @@ const Index = () => {
       dataIndex: "officerStatus",
       key: "department",
       render: (officerStatus) => {
-        return officerStatus.department || officerStatus.unit;
+        return officerStatus.department || officerStatus.generalDepartment;
       },
     },
     {
@@ -384,10 +384,11 @@ const Index = () => {
             {/* <Tag color={color} key={approval}>
                      {title}
                   </Tag>{" "} */}
-            {new Date(record.birthDate).getTime() <
+            {(new Date(record.birthDate).getTime() <
               new Date(
                 Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000
-              ).getTime() && <Tag color="red">{title}</Tag>}
+              ).getTime() ||
+              title === "និវត្តន៍") && <Tag color="red">{title}</Tag>}
             {record.suspended && (
               <Tag color={"red"} key={"ផ្អាក"}>
                 ផ្អាក

@@ -36,6 +36,7 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
       type: "spider",
       labelHeight: 28,
       content: "{name}\n{percentage}",
+      style: { fontFamily: "Hanuman" },
     },
 
     colorField: "type", // or seriesField in some cases
@@ -53,7 +54,6 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
         },
         content: `
 មន្រ្ដីរាជការ
-
 ថ្នាក់់ជាតិ`,
       },
     },
