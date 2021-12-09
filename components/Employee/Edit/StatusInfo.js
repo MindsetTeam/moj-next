@@ -21,6 +21,8 @@ import {
    PlusOutlined,
    EditOutlined,
    DeleteOutlined,
+   SaveOutlined,
+   UserOutlined,
    DownOutlined,
 } from "@ant-design/icons";
 import api from "@/utils/api";
@@ -37,6 +39,7 @@ const StatusInfo = ({
    ministryStructure,
    userData,
 }) => {
+   const dispatch = useContext(AlertDispatch);
    const [formInfo] = Form.useForm();
    const [formStatus] = Form.useForm();
    const [visible, setVisible] = useState(false);
@@ -107,6 +110,15 @@ const StatusInfo = ({
          setVisible(false);
          setOfficerStatusList(res.data.data.officerStatus);
          formStatus.resetFields();
+
+         dispatch({
+            type: "SUCCESS",
+            payload: {
+               message: "បានរក្សាទុក",
+               // description: "Successfully",
+            },
+         });
+         onChangeTabKey("8");
       });
    };
 
@@ -128,7 +140,6 @@ const StatusInfo = ({
       });
       setOfficerStatusList(res.data.data.officerStatus);
    };
-   const dispatch = useContext(AlertDispatch);
    const onSave = () => {
       const data = formInfo.getFieldsValue(true);
       formInfo.validateFields().then(async () => {
@@ -167,58 +178,58 @@ const StatusInfo = ({
       );
    };
 
-   const columns = [
-      {
-         title: "លេខលិខិតយោង",
-         dataIndex: "refNum",
-         key: "refNum",
-      },
-      {
-         title: "ប្រភេទលិខិត",
-         dataIndex: "letterType",
-         key: "letterType",
-      },
-      {
-         title: "ប្រភេទមន្រ្ដី",
-         dataIndex: "rank",
-         key: "rank",
-      },
-      {
-         title: "ស្ថានភាព",
-         dataIndex: "status",
-         key: "status",
-      },
-      {
-         title: "ក្រសួង-ស្ថាប័ន",
-         dataIndex: "ministry",
-         key: "ministry",
-      },
-      {
-         title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
-         dataIndex: "startDate",
-         key: "startDate",
-         render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
-      },
-      {
-         title: "មុខតំណែង",
-         dataIndex: "position",
-         key: "position",
-      },
-      {
-         title: "ផ្សេងៗ",
-         key: "action",
-         render: (text, record) => (
-            <Dropdown overlay={() => actionMenu(record)}>
-               <a
-                  className="ant-dropdown-link"
-                  onClick={(e) => e.preventDefault()}
-               >
-                  ផ្សេងៗ <DownOutlined />
-               </a>
-            </Dropdown>
-         ),
-      },
-   ];
+   // const columns = [
+   //    {
+   //       title: "លេខលិខិតយោង",
+   //       dataIndex: "refNum",
+   //       key: "refNum",
+   //    },
+   //    {
+   //       title: "ប្រភេទលិខិត",
+   //       dataIndex: "letterType",
+   //       key: "letterType",
+   //    },
+   //    {
+   //       title: "ប្រភេទមន្រ្ដី",
+   //       dataIndex: "rank",
+   //       key: "rank",
+   //    },
+   //    {
+   //       title: "ស្ថានភាព",
+   //       dataIndex: "status",
+   //       key: "status",
+   //    },
+   //    {
+   //       title: "ក្រសួង-ស្ថាប័ន",
+   //       dataIndex: "ministry",
+   //       key: "ministry",
+   //    },
+   //    {
+   //       title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
+   //       dataIndex: "startDate",
+   //       key: "startDate",
+   //       render: (text) => moment(text).local(true).format("DD/MM/YYYY"),
+   //    },
+   //    {
+   //       title: "មុខតំណែង",
+   //       dataIndex: "position",
+   //       key: "position",
+   //    },
+   //    {
+   //       title: "ផ្សេងៗ",
+   //       key: "action",
+   //       render: (text, record) => (
+   //          <Dropdown overlay={() => actionMenu(record)}>
+   //             <a
+   //                className="ant-dropdown-link"
+   //                onClick={(e) => e.preventDefault()}
+   //             >
+   //                ផ្សេងៗ <DownOutlined />
+   //             </a>
+   //          </Dropdown>
+   //       ),
+   //    },
+   // ];
 
    const formInfoData = {
       ...userData,
@@ -241,7 +252,7 @@ const StatusInfo = ({
       <div className={styles.statusInfoContainer}>
          <Form layout="vertical" form={formInfo} initialValues={formInfoData}>
             <Row gutter={16}>
-               <Col span={6}>
+               {/* <Col span={6}>
                   <Form.Item
                      style={{ marginBottom: 10 }}
                      name="civilID"
@@ -255,7 +266,7 @@ const StatusInfo = ({
                   >
                      <Input placeholder="អត្តលេខមន្រ្ដីរាជការ" />
                   </Form.Item>
-               </Col>
+               </Col> */}
                <Col span={6}>
                   <Form.Item
                      style={{ marginBottom: 10 }}
@@ -309,27 +320,29 @@ const StatusInfo = ({
                      <Input placeholder="កំណត់សំគាល់ផ្សេងៗ" />
                   </Form.Item>
                </Col>
-               <Button
-                  type="primary"
-                  onClick={onSave}
-                  style={{ margin: "10px 8px 10px auto" }}
-               >
-                  រក្សាទុក
-               </Button>
+               <Col span={6} style={{ alignSelf: "center" }}>
+                  <Button
+                     type="primary"
+                     onClick={onSave}
+                     style={{ float: "right" }}
+                  >
+                     រក្សាទុក
+                  </Button>
+               </Col>
             </Row>
          </Form>
 
-         <div>
+         {/* <div>
             <Button icon={<PlusOutlined />} onClick={showDrawer}>
                បញ្ចូលស្ថានភាពមន្រ្ដី
             </Button>
             <div style={{ marginTop: 20 }}>
                <Table columns={columns} dataSource={officerStatusList}></Table>
             </div>
-         </div>
+         </div> */}
 
          {/* Modal */}
-         <Modal
+         {/* <Modal
             title="បញ្ចូលបំរែបំរួលស្ថានភាពមន្ត្រី"
             width={800}
             onCancel={onClose}
@@ -349,7 +362,12 @@ const StatusInfo = ({
                   </Button>
                </div>
             }
-         >
+         > */}
+
+         <div style={{ marginTop: 20 }}>
+            <h1 className={styles.title}>
+               <UserOutlined></UserOutlined> ស្ថានភាពមន្ត្រី
+            </h1>
             <Form
                layout="vertical"
                form={formStatus}
@@ -363,7 +381,7 @@ const StatusInfo = ({
                }}
             >
                <Row gutter={16}>
-                  <Col span={12}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={"refNum"}
@@ -378,7 +396,7 @@ const StatusInfo = ({
                         <Input placeholder="លេខលិខិតយោង" />
                      </Form.Item>
                   </Col>
-                  <Col span={12}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={"letterType"}
@@ -401,9 +419,7 @@ const StatusInfo = ({
                         </Select>
                      </Form.Item>
                   </Col>
-               </Row>
-               <Row gutter={16}>
-                  <Col span={24}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={"rank"}
@@ -426,9 +442,7 @@ const StatusInfo = ({
                         </Select>
                      </Form.Item>
                   </Col>
-               </Row>
-               <Row gutter={16}>
-                  <Col span={24}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={"status"}
@@ -453,12 +467,14 @@ const StatusInfo = ({
                      </Form.Item>
                   </Col>
                </Row>
+
                <Row gutter={16}>
-                  <Col span={24}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name={"ministry"}
-                        label="ក្រសួង-ស្ថាប័ន"
+                        // name={"ministry"}
+                        name={"unit"}
+                        label="អង្គភាព"
                         // rules={[
                         //   {
                         //     required: true,
@@ -468,21 +484,26 @@ const StatusInfo = ({
                      >
                         <Select
                            placeholder="ជ្រើសរើស"
-                           defaultValue={"ក្រសួងយុត្តិធម៌"}
+                           // defaultValue={"ក្រសួងយុត្តិធម៌"}
                         >
-                           <Option value="ក្រសួងយុត្តិធម៌">
-                              ក្រសួងយុត្តិធម៌
+                           <Option value="ទីស្ដីការក្រសួងយុត្តិធម៏">
+                              ទីស្ដីការក្រសួងយុត្តិធម៏
+                           </Option>
+                           <Option value="រាជបណ្ឌិតសភា">រាជបណ្ឌិតសភា</Option>
+                           <Option value="អគ្គលេខាធិការដ្ឋាន">
+                              អគ្គលេខាធិការដ្ឋាន
+                           </Option>
+                           <Option value="ក្រុមប្រឹក្សានីតិកម្ម និងយុត្តិធម៏">
+                              ក្រុមប្រឹក្សានីតិកម្ម និងយុត្តិធម៏
                            </Option>
                         </Select>
                      </Form.Item>
                   </Col>
-               </Row>
-               <Row gutter={16}>
-                  <Col span={12}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="generalDepartment"
-                        label="អគ្គនាយកដ្ឋាន"
+                        label="អគ្គលេខាធិការដ្ឋាន / អគ្គនាយកដ្ឋាន / អគ្គាធិការដ្ឋាន"
                         rules={[
                            {
                               required: true,
@@ -512,11 +533,11 @@ const StatusInfo = ({
                         </Select>
                      </Form.Item>
                   </Col>
-                  <Col span={12}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="department"
-                        label="នាយកដ្ឋាន"
+                        label="នាយកដ្ឋាន​ / លេខាធិការដ្ឋាន"
                         // rules={[
                         //    {
                         //       required: true,
@@ -540,9 +561,22 @@ const StatusInfo = ({
                         {/* <Input placeholder="អគ្គនាយកដ្ឋាន" /> */}
                      </Form.Item>
                   </Col>
+                  <Col span={6}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        // name={"ministry"}
+                        name={"office"}
+                        label="ការិយាល័យ"
+                     >
+                        <Select placeholder="ជ្រើសរើស">
+                           <Option value="១">១</Option>
+                           <Option value="២">២</Option>
+                        </Select>
+                     </Form.Item>
+                  </Col>
                </Row>
                <Row gutter={16}>
-                  <Col span={24}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={"position"}
@@ -566,9 +600,7 @@ const StatusInfo = ({
                         </Select>
                      </Form.Item>
                   </Col>
-               </Row>
-               <Row gutter={16}>
-                  <Col span={10}>
+                  <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name={"startDate"}
@@ -587,7 +619,7 @@ const StatusInfo = ({
                         />
                      </Form.Item>
                   </Col>
-                  <Col span={4}>
+                  <Col span={6}>
                      <Form.Item
                         label="បច្ចុប្បន្ន"
                         style={{ marginBottom: 10 }}
@@ -595,7 +627,7 @@ const StatusInfo = ({
                         <Switch defaultChecked onChange={onNowChange}></Switch>
                      </Form.Item>
                   </Col>
-                  <Col span={10}>
+                  <Col span={6}>
                      <Form.Item
                         name={"endDate"}
                         label="កាលបរិច្ឆេទបញ្ចប់"
@@ -628,7 +660,14 @@ const StatusInfo = ({
                   </Col>
                </Row>
             </Form>
-         </Modal>
+         </div>
+
+         <div className={styles.btnContainer}>
+            <Button icon={<SaveOutlined />} onClick={onSubmit}>
+               រក្សាទុក
+            </Button>
+         </div>
+         {/* </Modal> */}
       </div>
    );
 };

@@ -265,7 +265,7 @@ const workHistoryInfo = ({
          {/* Modal */}
          <Modal
             title="បញ្ចូលមុខតំណែង"
-            width={800}
+            width={1000}
             onCancel={onClose}
             visible={visible}
             bodyStyle={{ paddingBottom: 80 }}
@@ -345,7 +345,7 @@ const workHistoryInfo = ({
                               ព្រះរាជក្រឹត្យ
                            </Option>
                            <Option value="ព្រះរាជក្រម">ព្រះរាជក្រម</Option>
-                           <Option value="ដីការ">ដីការ</Option>
+                           <Option value="ដីកា">ដីកា</Option>
                            <Option value="លិខិតឧទ្ទេសនាម">
                               លិខិតឧទ្ទេសនាម
                            </Option>
@@ -362,47 +362,31 @@ const workHistoryInfo = ({
                   <Col span={6}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name="ministry"
-                        label="ក្រសួង-ស្ថាប័ន"
+                        // name="ministry"
+                        // label="ក្រសួង-ស្ថាប័ន"
+                        name={"unit"}
+                        label="អង្គភាព"
                         rules={[
                            {
                               required: true,
                               message: "សូមបំពេញក្រសួង-ស្ថាប័ន",
                            },
                         ]}
-                        initialValue={"ក្រសួងយុត្តិធម៌"}
+                        // initialValue={"ក្រសួងយុត្តិធម៌"}
                      >
-                        {/* <Input placeholder="ក្រសួង-ស្ថាប័ន" /> */}
-                        {/* <Select
-                           placeholder="ជ្រើសរើស"
-                           onChange={(v) => {
-                              // console.log(form.getFieldValue("ប្រភេទស្ថាប័ន"));
-                              form.resetFields([
-                                 "institution",
-                                 "unit",
-                                 "department",
-                                 "office",
-                                 "provinces",
-                              ]);
-                              setChoiceMinistry(v);
-                              setChoiceInstitution("");
-                              setChoiceUnit("");
-                              setChoiceDepartment("");
-                           }}
-                        >
-                           {Object.keys(ministryStructure).map((v, i) => {
-                              return (
-                                 <Option key={i} value={v}>
-                                    {v}
-                                 </Option>
-                              );
-                           })}
-                        </Select> */}
                         <Select
                            placeholder="ជ្រើសរើស"
+                           // defaultValue={"ក្រសួងយុត្តិធម៌"}
                         >
-                           <Option value="ក្រសួងយុត្តិធម៌">
-                              ក្រសួងយុត្តិធម៌
+                           <Option value="ទីស្ដីការក្រសួងយុត្តិធម៏">
+                              ទីស្ដីការក្រសួងយុត្តិធម៏
+                           </Option>
+                           <Option value="រាជបណ្ឌិតសភា">រាជបណ្ឌិតសភា</Option>
+                           <Option value="អគ្គលេខាធិការដ្ឋាន">
+                              អគ្គលេខាធិការដ្ឋាន
+                           </Option>
+                           <Option value="ក្រុមប្រឹក្សានីតិកម្ម និងយុត្តិធម៏">
+                              ក្រុមប្រឹក្សានីតិកម្ម និងយុត្តិធម៏
                            </Option>
                         </Select>
                      </Form.Item>
@@ -487,12 +471,12 @@ const workHistoryInfo = ({
                   <Col span={8}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name="unit"
-                        label="អង្គភាព"
+                        name="generalDepartment"
+                        label="អគ្គលេខាធិការដ្ឋាន / អគ្គនាយកដ្ឋាន / អគ្គាធិការដ្ឋាន"
                         rules={[
                            {
                               required: true,
-                              message: "សូមបំពេញអង្គភាព",
+                              message: "សូមបំពេញអគ្គនាយកដ្ឋាន",
                            },
                         ]}
                      >
@@ -522,7 +506,7 @@ const workHistoryInfo = ({
                      <Form.Item
                         style={{ marginBottom: 10 }}
                         name="department"
-                        label="នាយកដ្ឋាន"
+                        label="នាយកដ្ឋាន​ / លេខាធិការដ្ឋាន"
                         rules={[
                            {
                               required: false,

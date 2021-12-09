@@ -215,21 +215,6 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
                   <Col span={12}>
                      <Form.Item
                         style={{ marginBottom: 10 }}
-                        name={["partnerInfo", "workPlace"]}
-                        label="ទីកន្លែងបំពេញការងារ"
-                        // rules={[
-                        //    {
-                        //       required: true,
-                        //       message: "សូមបំពេញទីកន្លែងបំពេញការងារ",
-                        //    },
-                        // ]}
-                     >
-                        <Input placeholder="ទីកន្លែងបំពេញការងារ" />
-                     </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                     <Form.Item
-                        style={{ marginBottom: 10 }}
                         name={["partnerInfo", "occupation"]}
                         label="មុខរបរ"
                         rules={[
@@ -242,6 +227,22 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
                         <Input placeholder="មុខរបរ" />
                      </Form.Item>
                   </Col>
+                  <Col span={12}>
+                     <Form.Item
+                        style={{ marginBottom: 10 }}
+                        name={["partnerInfo", "workPlace"]}
+                        label="ទីកន្លែងបំពេញការងារ"
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញទីកន្លែងបំពេញការងារ",
+                        //    },
+                        // ]}
+                     >
+                        <Input placeholder="ទីកន្លែងបំពេញការងារ" />
+                     </Form.Item>
+                  </Col>
+
                   {/* <Col span={12}>
                      <div>
                         <p>File Name</p>

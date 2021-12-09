@@ -56,7 +56,7 @@ const EditInfo = ({
                ></SelfInfo>
             </TabPane>
             {familyStatusInfo !== "នៅលីវ" && (
-               <TabPane tab="ព័ត៌មានសហព័ទ្ធ" key="2">
+               <TabPane tab="អំពីសហព័ទ្ធ" key="2">
                   <SpouseInfo
                      userData={userData}
                      familyStatusInfo={familyStatusInfo}
@@ -68,19 +68,19 @@ const EditInfo = ({
             {/* <TabPane tab="ព័ត៌មានកូន" key="3">
                <ChildrenInfo userData={user}></ChildrenInfo>
             </TabPane> */}
-            <TabPane tab="ព័ត៌មានឪពុកម្តាយ" key="3">
+            <TabPane tab="អំពីឪពុកម្តាយ" key="3">
                <ParentInfo
                   userData={userData}
                   onChangeTabKey={onChangeTabKey}
                ></ParentInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានកម្រិតវប្បធម៌" key="4">
+            <TabPane tab="កម្រិតវប្បធម៌" key="4">
                <EducationInfo userData={userData}></EducationInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានឋានន្តរសកិ្ត និងថ្នាក់" key="5">
+            <TabPane tab="​​ក្របខណ្ឌ ឋានន្តរសកិ្ត និងថ្នាក់" key="5">
                <RankInfo userData={userData}></RankInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានប្រវត្តិការងារ" key="6">
+            <TabPane tab="ប្រវត្តិការងារ" key="6">
                <WorkHistoryInfo
                   userData={userData}
                   provincesList={provincesList}
@@ -88,7 +88,7 @@ const EditInfo = ({
                   positionList={positionList}
                ></WorkHistoryInfo>
             </TabPane>
-            <TabPane tab="ព័ត៌មានស្ថានភាពមន្រ្ដី" key="7">
+            <TabPane tab="ស្ថានភាពមន្រ្ដី" key="7">
                <StatusInfo
                   onChangeTabKey={onChangeTabKey}
                   userData={userData}
@@ -106,7 +106,7 @@ const EditInfo = ({
         <TabPane tab="ព័ត៌មានការលើកសសើរ" key="9">
           <PraiseInfo userData={userData}></PraiseInfo>
         </TabPane> */}
-            <TabPane tab="ឯកសារយោង" key="10">
+            <TabPane tab="ឯកសារយោង" key="8">
                <AttachmentInfo
                   userData={userData}
                   fileTypeName={fileTypeName}

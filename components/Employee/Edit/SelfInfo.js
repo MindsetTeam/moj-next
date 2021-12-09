@@ -35,6 +35,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
    const [selfInfo, setSelfInfo] = useState(null);
    const [imageUrl, setImageUrl] = useState(userData.photo);
    const [fileList, setFileList] = useState([]);
+   const [isDisabled, setIsDisabled] = useState(false);
 
    const onSave = () => {
       const dataInput = form.getFieldsValue(true);
@@ -379,7 +380,14 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                                  },
                               ]}
                            >
-                              <Select placeholder="ជ្រើសរើស">
+                              <Select
+                                 placeholder="ជ្រើសរើស"
+                                 onChange={(e) => {
+                                    e === "ពិការភាព"
+                                       ? setIsDisabled(true)
+                                       : setIsDisabled(false);
+                                 }}
+                              >
                                  <Option value="គ្រប់គ្រាន់">
                                     គ្រប់គ្រាន់
                                  </Option>
@@ -387,15 +395,23 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                               </Select>
                            </Form.Item>
                         </Col>
-                        <Col span={8}>
-                           <Form.Item
-                              style={{ marginBottom: 10 }}
-                              name="disabilityNum"
-                              label="បញ្ជាក់ពិការភាព"
-                           >
-                              <Input placeholder="កំណត់សំគាល់" />
-                           </Form.Item>
-                        </Col>
+                        {isDisabled && (
+                           <Col span={8}>
+                              <Form.Item
+                                 style={{ marginBottom: 10 }}
+                                 name="disabilityNum"
+                                 label="បញ្ជាក់ពិការភាព"
+                                 rules={[
+                                    {
+                                       required: true,
+                                       message: "សូមបំពេញបញ្ជាក់ពិការភាព",
+                                    },
+                                 ]}
+                              >
+                                 <Input placeholder="កំណត់សំគាល់" />
+                              </Form.Item>
+                           </Col>
+                        )}
                      </Row>
                   </div>
                </div>
