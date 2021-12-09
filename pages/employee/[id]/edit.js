@@ -14,7 +14,7 @@ import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
 import provincesList from "data/Province.json";
 import positionList from "data/Position.json";
-import fileTypeName from "data/fileTypeName.json";
+import fileTypeName from "data/FileTypeName.json";
 
 export async function getServerSideProps({ params }) {
    const res = await api.get("/api/users/" + params.id);
