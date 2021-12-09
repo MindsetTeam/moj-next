@@ -17,7 +17,7 @@ handler.use(
           const user = await User.findOne({
             nationalityIDNum: credentials.username,
           });
-         console.log(user);
+          console.log(user);
           if (!user) {
             throw new Error("No user found");
           }
@@ -29,8 +29,26 @@ handler.use(
           if (!isValid) {
             throw new Error("Password not match");
           }
-          const { id, firstNameLatin, lastNameLatin, role, department, photo,moderatorType } = user;
-          return { id, firstNameLatin, lastNameLatin, role, department, photo,moderatorType };
+          const {
+            id,
+            firstNameLatin,
+            lastNameLatin,
+            role,
+            department,
+            photo,
+            latestOfficerStatus,
+            moderatorType,
+          } = user;
+          return {
+            id,
+            firstNameLatin,
+            lastNameLatin,
+            role,
+            department,
+            latestOfficerStatus,
+            photo,
+            moderatorType,
+          };
         },
       }),
     ],
@@ -43,8 +61,29 @@ handler.use(
         return token;
       },
       session: async (session, user, sessionToken) => {
-        session.user = user.user;
+        const {
+          firstNameLatin,
+          lastNameLatin,
+          role,
+          department,
+          latestOfficerStatus,
+          photo,
+          moderatorType,
+        } = await User.findById(user.user.id);
+        session.user = {
+          ...user.user,
+          firstNameLatin,
+          lastNameLatin,
+          role,
+          department,
+          latestOfficerStatus,
+          photo,
+          moderatorType,
+        };
         return session;
+        // old solutions
+        // session.user = user.user;
+        // return session;
       },
     },
   })

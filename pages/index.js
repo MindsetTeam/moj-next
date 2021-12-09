@@ -19,7 +19,7 @@ const Index = (props) => {
     router.push("/me");
   }
   const { data: overviewData, error } = useSWR(
-    ["admin", "editor"].includes(session?.user?.role)
+    ["admin", "editor", 'moderator'].includes(session?.user?.role)
       ? "/api/users/overview"
       : null
   );

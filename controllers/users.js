@@ -25,21 +25,17 @@ export const createUser = async (req, res, next) => {
 };
 
 export const updateUsersCardID = async (req, res) => {
-  // read from excel file
   const { file } = req;
-  console.log(file);
   const workbook = XLSX.readFile(file.path);
   const sheet_name_list = workbook.SheetNames;
   const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-  //update multiple mongoose documents
   const bulkOps = data.map((user) => ({
     updateOne: {
       filter: { nationalityIDNum: user.nationalityIDNum },
-      update: { $set: { cardID: user.cardID } },
+      update: { $set: { officerID: user.officerID } },
     },
   }));
   const results = await User.bulkWrite(bulkOps, { ordered: false });
-  console.log("results", results);
   res
     .status(200)
     .json({

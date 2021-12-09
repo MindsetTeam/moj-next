@@ -39,10 +39,6 @@ const TopMenu = () => {
           link: "/print-card",
           title: "ការបោះពុម្ពកាតមន្រ្ដី",
         },
-        {
-          link: "/setting",
-          title: "កែប្រែលេខកាត",
-        },
       ],
     },
 
@@ -59,6 +55,16 @@ const TopMenu = () => {
   //     iconUrl: "/team.png",
   //   });
   // }
+  if (["admin", "editor"].includes(session?.user.role)) {
+    menuList[
+      menuList.findIndex((item) => {
+        return item.title === "ការបោះពុម្ព";
+      })
+    ].sub.push({
+      link: "/setting",
+      title: "កែប្រែលេខកាត",
+    });
+  }
 
   if (["admin", "editor", "moderator"].includes(session?.user.role)) {
     let menu = [

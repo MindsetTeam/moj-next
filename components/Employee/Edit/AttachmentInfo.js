@@ -26,11 +26,12 @@ import {
 import { fetcher } from "@/lib/fetch";
 
 const attachmentTypeName = {
-   info: "ឯកសារផ្ទាល់ខ្លួន",
-   rank: "ឋានន្តរសកិ្ត និងថ្នាក់",
-   education: "សញ្ញាបត្រ",
-   marriage: "សំបុត្រអាពាហ៍ពិពាហ៍",
-   child: "សំបុត្រកំណើតកូន",
+   info: "ព័ត៌មានផ្ទាល់ខ្លួន",
+   family: "ព័ត៌មានគ្រួសារ",
+   rank: "ក្របខណ្ឌ ឋាន្តរស័ក្តិ និងថ្នាក់",
+   work: "ប្រវត្តិការងារ",
+   education: "ប្រវត្តិការសិក្សា",
+   status: "ស្ថានភាពមន្រ្តី",
 };
 
 const attachmentInfo = ({ userData, fileTypeName }) => {
@@ -80,7 +81,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
          title: "ប្រភេទឯកសារ",
          dataIndex: "type",
          key: "type",
-         width: "15%",
+         width: "20%",
       },
       {
          title: "ឯកសារ",
@@ -222,6 +223,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
                            onChange={(v) => {
                               setSelectedFileType(v);
                               setFileNameList(fileTypeName[v]);
+                              form.resetFields(["description"])
                            }}
                         >
                            <Option value="info">ព័ត៌មានផ្ទាល់ខ្លួន</Option>

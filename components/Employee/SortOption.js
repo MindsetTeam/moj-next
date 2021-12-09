@@ -1,4 +1,5 @@
 import { Col, Row, Select, Form, Checkbox, Button } from "antd";
+import { route } from "next/dist/server/router";
 import router, { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -26,12 +27,16 @@ const SortOption = ({ ministryStructure }) => {
       form={form}
       onValuesChange={(changed, allValues) => {
         let searchQuery = [];
-        if (changed.generalDepartment) {
+        if (changed.generalDepartment || !allValues.generalDepartment) {
+          form.resetFields(["department"]);
           delete allValues.department;
         }
         Object.keys(allValues).forEach((v) => {
           if (allValues[v]) searchQuery.push([v] + "=" + allValues[v]);
         });
+        if (router?.query?.s) {
+          searchQuery.push("s=" + router.query.s);
+        }
         router.push("/employee?" + searchQuery.join("&"));
       }}
     >

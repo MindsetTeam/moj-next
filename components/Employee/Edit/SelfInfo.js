@@ -20,6 +20,7 @@ import {
 
 import { SaveOutlined } from "@ant-design/icons";
 import api from "@/utils/api";
+// import { getSession } from "next-auth/client";
 
 const genderOptions = [
    { label: "ប្រុស", value: "ប្រុស" },
@@ -56,6 +57,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                //  description: "បានរក្សាទុក",
             },
          });
+         // getSession();
          const { familyStatus } = res.data.data;
          setFamilyStatusInfo(familyStatus);
          onChangeTabKey(familyStatus === "នៅលីវ" ? "3" : "2");

@@ -112,8 +112,9 @@ const Index = () => {
     // console.log({ router: router.query });
     fetchEmployees(router.query.s || "", router.query);
   }, [router]);
-  const fetchEmployees = async (search, query = "") => {
+  const fetchEmployees = async (search ='', query = "") => {
     let searchQuery = new URLSearchParams();
+    searchQuery.append("searchTerm", search);
     if (query) {
       Object.keys(query).forEach((v) => {
         searchQuery.append(v, query[v]);
@@ -122,11 +123,16 @@ const Index = () => {
     try {
       const { data } = await api.get(
         `/api/users${
-          search
-            ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
-            : "?select=firstName,lastName,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role&" +
-              searchQuery.toString()
+          "?select=firstName,lastName,firstNameLatin,lastNameLatin,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role,moderatorType&" +
+          searchQuery.toString()
         }`
+        // const { data } = await api.get(
+        //   `/api/users${
+        //     search
+        //       ? `?searchTerm=${search}&select=firstName,lastName,nationalityIDNum`
+        //       : "?select=firstName,lastName,firstNameLatin,lastNameLatin,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role,moderatorType&" +
+        //         searchQuery.toString()
+        //   }`
       );
       const employees = data.data.map((employee) => {
         for (const key in employee) {
@@ -159,6 +165,13 @@ const Index = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const onEditRole = async (record) => {
     setSelectedUser(record);
+    setRoleChoice(record.role);
+    console.log(record);
+    console.log({
+      role: record.role,
+      moderatorType: record.moderatorType,
+    });
+    formEditRole.resetFields();
     formEditRole.setFieldsValue({
       role: record.role,
       moderatorType: record.moderatorType,
@@ -230,7 +243,6 @@ const Index = () => {
     return (
       <Menu>
         <Menu.Item
-          key="0"
           icon={<EditOutlined />}
           onClick={() => {
             router.push(`/employee/${record.id}`);
@@ -243,7 +255,6 @@ const Index = () => {
           record.role !== "admin" &&
           !(session?.user.role == "editor" && record.role == "editor") && (
             <Menu.Item
-              key="1"
               icon={<EditOutlined />}
               onClick={onEditRole.bind(this, record)}
             >
@@ -251,7 +262,6 @@ const Index = () => {
             </Menu.Item>
           )}
         <Menu.Item
-          key="2"
           icon={<PrinterOutlined />}
           onClick={() => {
             router.push(`/print/${record.id}`);
@@ -260,7 +270,6 @@ const Index = () => {
           <a>បោះពុម្ភ</a>
         </Menu.Item>
         <Menu.Item
-          key="2"
           icon={<PrinterOutlined />}
           onClick={() => {
             router.push(`/print-card/${record.id}`);
@@ -273,7 +282,6 @@ const Index = () => {
           record.role !== "admin" &&
           !(session?.user.role == "editor" && record.role == "editor") && (
             <Menu.Item
-              key="4"
               icon={<StopOutlined />}
               onClick={onSuspendUser.bind(this, record)}
             >
@@ -285,7 +293,6 @@ const Index = () => {
           record.role !== "admin" &&
           !(session?.user.role == "editor" && record.role == "editor") && (
             <Menu.Item
-              key="1"
               icon={<EditOutlined />}
               onClick={onEditChangePassword.bind(this, record)}
             >
@@ -297,7 +304,6 @@ const Index = () => {
           record.role !== "admin" &&
           !(session?.user.role == "editor" && record.role == "editor") && (
             <Menu.Item
-              key="5"
               icon={<DeleteOutlined />}
               onClick={onDeleteUser.bind(this, record)}
             >
@@ -319,7 +325,9 @@ const Index = () => {
       dataIndex: "firstName",
       key: "firstName",
       render: (firstName, record) => {
-        return firstName + " " + (record.lastName || "");
+        return firstName
+          ? firstName + " " + (record.lastName || "")
+          : (record.firstNameLatin || "") + " " + (record.lastNameLatin || "");
       },
     },
     {
@@ -404,16 +412,21 @@ const Index = () => {
             </a>
           );
         }
-        return (
-          <Dropdown overlay={() => actionMenu(record)}>
-            <a
-              className="ant-dropdown-link"
-              onClick={(e) => e.preventDefault()}
-            >
-              ផ្សេងៗ <DownOutlined />
-            </a>
-          </Dropdown>
-        );
+        return {
+          props: {
+            style: { background: "#96ac9a17" },
+          },
+          children: (
+            <Dropdown overlay={() => actionMenu(record)}>
+              <a
+                className="ant-dropdown-link"
+                onClick={(e) => e.preventDefault()}
+              >
+                ផ្សេងៗ <DownOutlined />
+              </a>
+            </Dropdown>
+          ),
+        };
       },
     },
   ];
@@ -555,11 +568,11 @@ const Index = () => {
                 >
                   <Radio.Group
                     options={[
-                      { label: "នាយកដ្ឋាន", value: "department" },
                       {
                         label: "អគ្គនាយកដ្ឋាន",
                         value: "generalDepartment",
                       },
+                      { label: "នាយកដ្ឋាន", value: "department" },
                     ]}
                   ></Radio.Group>
                 </Form.Item>

@@ -1,6 +1,6 @@
 import { placeFormat } from "@/utils/formalFormat";
 // import { Document, Page, pdfjs } from "react-pdf";
-import { Document, Page } from "react-pdf";
+// import { Document, Page } from "react-pdf";
 // import { SizeMe } from "react-sizeme";
 
 import moment from "moment";
@@ -396,7 +396,7 @@ const PrintInfo = ({
                 </tr>
                 <tr>
                   <th colSpan="2">វគ្គបណ្តុះបណ្តាល</th>
-                  <th>ទីកន្លែងកំណើត</th>
+                  <th>ទីកន្លែងសិក្សា</th>
                   <th>សញ្ញាបត្រទទួលបាន</th>
                   <th colSpan="2">ថ្ងៃខែឆ្នាំសិក្សា</th>
                 </tr>

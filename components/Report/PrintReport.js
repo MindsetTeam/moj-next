@@ -1,4 +1,7 @@
-const PrintReport = ({ printEmployees }) => {
+import moment from "moment";
+import "moment/locale/km";
+
+const PrintReport = ({ printEmployees, generalDepartment="", department =""}) => {
   return (
     <>
       <style jsx global>{`
@@ -11,6 +14,7 @@ const PrintReport = ({ printEmployees }) => {
           font-size: 18px;
           background-color: white;
           width: 100%;
+          min-height: 75vh;
           padding: 10px 50px;
         }
 
@@ -79,8 +83,8 @@ const PrintReport = ({ printEmployees }) => {
         </section>
         <section className="body-section">
           <div style={{ textAlign: "center" }}>
-            <p>របាយការណ៏</p>
-            <p>Department Name</p>
+            <p style={{fontWeight: "bold"}}>របាយការណ៏</p>
+            <p>{generalDepartment+" "+department}</p>
           </div>
           <table border="1">
             <tr>
@@ -95,17 +99,17 @@ const PrintReport = ({ printEmployees }) => {
             {printEmployees.map((v, i) => (
               <tr>
                 <td>{i + 1}</td>
-                <td>{v.firstName + v.lastName}</td>
+                <td>{v.firstName + " " + v.lastName}</td>
                 <td>{v.gender}</td>
-                <td>{v.birthDate}</td>
+                <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
                 <td>{v.latestOfficerStatus.position}</td>
                 <td>{v.latestOfficerStatus.generalDepartment}</td>
                 <td>{v.latestOfficerStatus.status}</td>
               </tr>
             ))}
           </table>
-          <div style={{ float: "right" }}>
-            <p>ថ្ងៃខែឆ្នាំ</p>
+          <div style={{ float: "right", marginTop: "10px"}}>
+            <p>{moment().format("ថ្ងៃDD ខែMMMM ឆ្នាំYYYY")}</p>
           </div>
         </section>
       </div>

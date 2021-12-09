@@ -12,7 +12,7 @@ const Search = () => {
   const handleSearch = async (value) => {
     setValueSearch(value);
     const { data: users } = await fetch(
-      "/api/users?select=firstName,lastName,nationalityIDNum&searchTerm=" +
+      "/api/users?select=firstName,lastName,lastNameLatin,firstNameLatin,nationalityIDNum&searchTerm=" +
         value.toLowerCase()
     ).then((res) => res.json());
     setDropdownSearchState(true);
@@ -26,6 +26,10 @@ const Search = () => {
                 <span>
                   <strong>firstName</strong>:{highlightJSX(reg, v.firstName)} |{" "}
                   <strong>lastName</strong>: {highlightJSX(reg, v.lastName)} |{" "}
+                  <strong>firstNameLatin</strong>:
+                  {highlightJSX(reg, v.firstNameLatin)} |{" "}
+                  <strong>lastNameLatin</strong>:{" "}
+                  {highlightJSX(reg, v.lastNameLatin)} |{" "}
                   <strong>nationalityIDNum</strong>:{" "}
                   {highlightJSX(reg, v.nationalityIDNum)}
                 </span>
@@ -48,7 +52,7 @@ const Search = () => {
       options={options}
       open={dropdownSearchState}
       className="search"
-      style={{ width: "70%", margin: "0 auto" }}
+      style={{ width: "70%", margin: "0 auto", display: "block" }}
       onSelect={onSelect}
       value={valueSearch}
       onSearch={handleSearch}
@@ -61,7 +65,11 @@ const Search = () => {
             style={{ fontSize: "1.35rem" }}
             onClick={() => {
               setDropdownSearchState(false);
-              router.push("/employee?s=" + valueSearch);
+              // router.push("/employee?s=" + valueSearch);
+              router.push({
+                pathname: "/employee",
+                query: { ...router.query, s: valueSearch },
+              });
             }}
           />
         }

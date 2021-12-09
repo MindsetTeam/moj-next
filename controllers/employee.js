@@ -8,6 +8,12 @@ import {
 export const getOverviewEmployees = async (req, res) => {
   const { role } = req.user;
   let resData = {};
+  let retiredEmployeeReq,
+    officerStatusListReq,
+    centerInstitutionRawDataReq,
+    totalEmployeeReq,
+    generalDepartmentResReq = "";
+
   // if (role === "editor") {
   //   const users = await User.aggregate([
   //     { $match: { department: req.user.department } },
@@ -27,7 +33,7 @@ export const getOverviewEmployees = async (req, res) => {
     //   approval: true,
     //   birthDate: { $lt: new Date(Date.now() - 60 * 365 * 24 * 60 * 60 * 1000) },
     // }).countDocuments();
-    const retiredEmployeeReq = User.aggregate([
+    retiredEmployeeReq = User.aggregate([
       {
         $match: {
           approval: true,
@@ -38,7 +44,7 @@ export const getOverviewEmployees = async (req, res) => {
         $count: "total",
       },
     ]);
-    const officerStatusListReq = User.aggregate([
+    officerStatusListReq = User.aggregate([
       {
         $project: {
           approval: 1,
@@ -58,7 +64,7 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
-    const centerInstitutionRawDataReq = User.aggregate([
+    centerInstitutionRawDataReq = User.aggregate([
       { $match: { approval: true } },
       {
         $group: {
@@ -67,8 +73,8 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
-    const totalEmployeeReq = User.countDocuments({ approval: true });
-    const generalDepartmentResReq = User.aggregate([
+    totalEmployeeReq = User.countDocuments({ approval: true });
+    generalDepartmentResReq = User.aggregate([
       {
         $project: {
           approval: 1,
@@ -88,113 +94,194 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
-    // const generalDepartmentResReq = User.aggregate([
-    //   { $match: { approval: true } },
-    //   {
-    //     $group: {
-    //       _id: "$generalDepartment",
-    //       total: { $sum: 1 },
-    //     },
-    //   },
-    // ]);
-    const [
-      retiredEmployee,
-      officerStatusListRes,
-      centerInstitutionRawData,
-      totalEmployee,
-      generalDepartmentRes,
-    ] = await Promise.all([
-      retiredEmployeeReq,
-      officerStatusListReq,
-      centerInstitutionRawDataReq,
-      totalEmployeeReq,
-      generalDepartmentResReq,
-    ]);
-    console.log(retiredEmployee);
-    // const retiredEmployee = await
-    // const officerStatusListRes = await
-    const officerStatusList = {};
-    officerStatusListRes.forEach((v) => {
-      officerStatusList[v._id] = v.total;
-    });
-    // console.log(officerStatusList);
-
-    // const provinceInstitutionRawData = await User.aggregate([
-    //   {
-    //     $project: {
-    //       gender: 1,
-    //       approval: 1,
-    //       experience: { $slice: ["$experience", -1] },
-    //     },
-    //   },
-    //   {
-    //     $match: { "experience.institution": "ថ្នាក់ក្រោមជាតិ", approval: true },
-    //   },
-    //   {
-    //     $group: {
-    //       _id: "$gender",
-    //       total: { $sum: 1 },
-    //     },
-    //   },
-    // ]);
-    // const centerInstitutionRawData = await
-    // const centerInstitutionRawData = await User.aggregate([
-    //   {
-    //     $project: {
-    //       gender: 1,
-    //       approval: 1,
-    //       experience: { $slice: ["$experience", -1] },
-    //     },
-    //   },
-    //   { $match: { "experience.institution": "ថ្នាក់កណ្តាល", approval: true } },
-    //   {
-    //     $group: {
-    //       _id: "$gender",
-    //       total: { $sum: 1 },
-    //     },
-    //   },
-    // ]);
-    const centerInstitution = {
-      ប្រុស: 0,
-      ស្រី: 0,
-      total: 0,
-    };
-
-    // const totalEmployee = await User.countDocuments({ approval: true });
-    // const generalDepartmentRes = await User.aggregate([
-    //   { $match: { approval: true } },
-    //   {
-    //     $group: {
-    //       _id: "$generalDepartment",
-    //       total: { $sum: 1 },
-    //     },
-    //   },
-    // ]);
-    const generalDepartmentList = {};
-    generalDepartmentRes.forEach((v) => {
-      generalDepartmentList[v._id] = v.total;
-    });
-
-    // const provinceInstitution = { ...centerInstitution };
-    centerInstitutionRawData.forEach((v) => {
-      centerInstitution[v._id] = v.total;
-      centerInstitution.total += v.total;
-    });
-    // provinceInstitutionRawData.forEach((v) => {
-    //   provinceInstitution[v._id] = v.total;
-    //   provinceInstitution.total += v.total;
-    // });
-    // console.log({ provinceInstitution, centerInstitution });
-    resData = {
-      totalEmployee,
-      generalDepartmentList,
-      centerInstitution,
-      // provinceInstitution,
-      retiredEmployee:
-        retiredEmployee.length > 0 ? retiredEmployee[0].total : 0,
-      officerStatusList,
-    };
   }
+  if (role == "moderator") {
+    let queryModerator = {};
+    queryModerator["latestOfficerStatus.generalDepartment"] =
+      req.user.latestOfficerStatus.generalDepartment;
+
+    if (req.user.moderatorType === "department") {
+      queryModerator["latestOfficerStatus.department"] =
+        req.user.latestOfficerStatus.department;
+    }
+
+    console.log(queryModerator);
+    retiredEmployeeReq = User.aggregate([
+      {
+        $match: {
+          approval: true,
+          officerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+          ...queryModerator,
+        },
+      },
+      {
+        $count: "total",
+      },
+    ]);
+    officerStatusListReq = User.aggregate([
+      {
+        $project: {
+          approval: 1,
+          latestOfficerStatus: 1,
+          officerStatus: { $slice: ["$officerStatus", -1] },
+        },
+      },
+      {
+        $match: {
+          approval: true,
+          officerStatus: { $elemMatch: { $exists: true } },
+          ...queryModerator,
+        },
+      },
+      {
+        $group: {
+          _id: "$latestOfficerStatus.rank",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    centerInstitutionRawDataReq = User.aggregate([
+      { $match: { approval: true, ...queryModerator } },
+      {
+        $group: {
+          _id: "$gender",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+    totalEmployeeReq = User.countDocuments({
+      approval: true,
+      ...queryModerator,
+    });
+    generalDepartmentResReq = User.aggregate([
+      {
+        $project: {
+          approval: 1,
+          latestOfficerStatus: 1,
+          officerStatus: { $slice: ["$officerStatus", -1] },
+        },
+      },
+      {
+        $match: {
+          approval: true,
+          officerStatus: { $elemMatch: { $exists: true } },
+          ...queryModerator,
+        },
+      },
+      {
+        $group: {
+          _id: "$latestOfficerStatus.department",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+  }
+  // const generalDepartmentResReq = User.aggregate([
+  //   { $match: { approval: true } },
+  //   {
+  //     $group: {
+  //       _id: "$generalDepartment",
+  //       total: { $sum: 1 },
+  //     },
+  //   },
+  // ]);
+  const [
+    retiredEmployee,
+    officerStatusListRes,
+    centerInstitutionRawData,
+    totalEmployee,
+    generalDepartmentRes,
+  ] = await Promise.all([
+    retiredEmployeeReq,
+    officerStatusListReq,
+    centerInstitutionRawDataReq,
+    totalEmployeeReq,
+    generalDepartmentResReq,
+  ]);
+  console.log(retiredEmployee);
+  // const retiredEmployee = await
+  // const officerStatusListRes = await
+  const officerStatusList = {};
+  officerStatusListRes.forEach((v) => {
+    officerStatusList[v._id] = v.total;
+  });
+  // console.log(officerStatusList);
+
+  // const provinceInstitutionRawData = await User.aggregate([
+  //   {
+  //     $project: {
+  //       gender: 1,
+  //       approval: 1,
+  //       experience: { $slice: ["$experience", -1] },
+  //     },
+  //   },
+  //   {
+  //     $match: { "experience.institution": "ថ្នាក់ក្រោមជាតិ", approval: true },
+  //   },
+  //   {
+  //     $group: {
+  //       _id: "$gender",
+  //       total: { $sum: 1 },
+  //     },
+  //   },
+  // ]);
+  // const centerInstitutionRawData = await
+  // const centerInstitutionRawData = await User.aggregate([
+  //   {
+  //     $project: {
+  //       gender: 1,
+  //       approval: 1,
+  //       experience: { $slice: ["$experience", -1] },
+  //     },
+  //   },
+  //   { $match: { "experience.institution": "ថ្នាក់កណ្តាល", approval: true } },
+  //   {
+  //     $group: {
+  //       _id: "$gender",
+  //       total: { $sum: 1 },
+  //     },
+  //   },
+  // ]);
+  const centerInstitution = {
+    ប្រុស: 0,
+    ស្រី: 0,
+    total: 0,
+  };
+
+  // const totalEmployee = await User.countDocuments({ approval: true });
+  // const generalDepartmentRes = await User.aggregate([
+  //   { $match: { approval: true } },
+  //   {
+  //     $group: {
+  //       _id: "$generalDepartment",
+  //       total: { $sum: 1 },
+  //     },
+  //   },
+  // ]);
+  const generalDepartmentList = {};
+  generalDepartmentRes.forEach((v) => {
+    generalDepartmentList[v._id] = v.total;
+  });
+
+  // const provinceInstitution = { ...centerInstitution };
+  centerInstitutionRawData.forEach((v) => {
+    centerInstitution[v._id] = v.total;
+    centerInstitution.total += v.total;
+  });
+  // provinceInstitutionRawData.forEach((v) => {
+  //   provinceInstitution[v._id] = v.total;
+  //   provinceInstitution.total += v.total;
+  // });
+  // console.log({ provinceInstitution, centerInstitution });
+  resData = {
+    totalEmployee,
+    generalDepartmentList,
+    centerInstitution,
+    // provinceInstitution,
+    retiredEmployee: retiredEmployee.length > 0 ? retiredEmployee[0].total : 0,
+    officerStatusList,
+  };
+
   res.status(200).json({
     success: true,
     msg: "Employees overview",
@@ -203,16 +290,26 @@ export const getOverviewEmployees = async (req, res) => {
 };
 
 export const getEmployees = async (req, res) => {
-  const { searchTerm, select, retired, nearRetired,generalDepartment, department } = req.query;
+  const {
+    searchTerm,
+    select,
+    retired,
+    nearRetired,
+    generalDepartment,
+    department,
+  } = req.query;
   let reqQuery;
   if (searchTerm) {
     let searchReg = new RegExp(searchTerm, "i");
     reqQuery = {
       $or: [
-        // { civilID: searchReg },
         { nationalityIDNum: searchReg },
         { firstName: searchReg },
         { lastName: searchReg },
+        { firstNameLatin: searchReg },
+        { lastNameLatin: searchReg },
+        // { officerID: searchReg },
+        // { civilID: searchReg },
       ],
     };
   }
@@ -238,70 +335,84 @@ export const getEmployees = async (req, res) => {
       delete reqQuery["officerStatus.rank"];
     }
   }
-  if(generalDepartment)
-  {
-    reqQuery= {
+  if (["admin", "editor"].includes(req.user.role) && generalDepartment) {
+    reqQuery = {
       "latestOfficerStatus.generalDepartment": generalDepartment,
-      ...reqQuery
-    }
-    if(department){
-      reqQuery= {
+      ...reqQuery,
+    };
+    if (department) {
+      reqQuery = {
         "latestOfficerStatus.department": department,
-        ...reqQuery
-      }
+        ...reqQuery,
+      };
     }
   }
-
+  if (req.user.role === "moderator") {
+    let queryModerator = {};
+    queryModerator["latestOfficerStatus.generalDepartment"] =
+      req.user.latestOfficerStatus.generalDepartment;
+    if (req.user.moderatorType === "department") {
+      queryModerator["latestOfficerStatus.department"] =
+        req.user.latestOfficerStatus.department;
+    }else if(department){
+      queryModerator["latestOfficerStatus.department"] = department;
+    }
+    reqQuery = {
+      ...reqQuery,
+      ...queryModerator,
+    }
+  }
 
   let searchQuery = User.find(reqQuery).sort("-createdAt");
   if (select) {
     searchQuery = searchQuery.select(select.split(",").join(" "));
   }
-  if (req.user.role === "moderator") {
-    const userModerator = await User.findById(req.user.id);
-    const statusModerator =
-      userModerator.officerStatus[userModerator.officerStatus.length - 1];
-    let matchQueryMo;
-    if (userModerator.moderatorType === "generalDepartment") {
-      matchQueryMo = {
-        $elemMatch: {
-          generalDepartment: statusModerator.generalDepartment,
-        },
-      };
-    } else {
-      matchQueryMo = {
-        $elemMatch: {
-          department: statusModerator.department,
-        },
-      };
-    }
-    searchQuery = User.aggregate([
-      {
-        $project: {
-          firstName: 1,
-          lastName: 1,
-          nationalityIDNum: 1,
-          gender: 1,
-          birthDate: 1,
-          rank: 1,
-          role: 1,
-          suspended: 1,
-          approval: 1,
-          createdAt: 1,
-          officerStatus: { $slice: ["$officerStatus", -1] },
-        },
-      },
-      {
-        $match: {
-          approval: true,
-          officerStatus: { ...matchQueryMo },
-          ...reqQuery,
-          // officerStatus: { $elemMatch: { $exists: true } },
-        },
-      },
-      { $sort: { createdAt: -1 } },
-    ]);
-  }
+
+  // if (req.user.role === "moderator") {
+  //   const userModerator = await User.findById(req.user.id);
+  //   const statusModerator =
+  //     userModerator.officerStatus[userModerator.officerStatus.length - 1];
+  //   let matchQueryMo;
+  //   if (userModerator.moderatorType === "generalDepartment") {
+  //     matchQueryMo = {
+  //       $elemMatch: {
+  //         generalDepartment: statusModerator.generalDepartment,
+  //       },
+  //     };
+  //   } else {
+  //     matchQueryMo = {
+  //       $elemMatch: {
+  //         department: statusModerator.department,
+  //       },
+  //     };
+  //   }
+  //   searchQuery = User.aggregate([
+  //     {
+  //       $project: {
+  //         firstName: 1,
+  //         lastName: 1,
+  //         nationalityIDNum: 1,
+  //         gender: 1,
+  //         birthDate: 1,
+  //         rank: 1,
+  //         role: 1,
+  //         suspended: 1,
+  //         approval: 1,
+  //         createdAt: 1,
+  //         officerStatus: { $slice: ["$officerStatus", -1] },
+  //       },
+  //     },
+  //     {
+  //       $match: {
+  //         approval: true,
+  //         officerStatus: { ...matchQueryMo },
+  //         ...reqQuery,
+  //         // officerStatus: { $elemMatch: { $exists: true } },
+  //       },
+  //     },
+  //     { $sort: { createdAt: -1 } },
+  //   ]);
+  // }
   const users = await searchQuery;
   res.status(200).json({
     success: true,

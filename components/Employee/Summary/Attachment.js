@@ -5,12 +5,14 @@ import { Table, Button } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 
 const attachmentTypeName = {
-  info: "ឯកសារផ្ទាល់ខ្លួន",
-  rank: "ឋានន្តរសកិ្ត និងថ្នាក់",
-  education: "សញ្ញាបត្រ",
-  marriage: "សំបុត្រអាពាហ៍ពិពាហ៍",
-  child: "សំបុត្រកំណើតកូន",
+  info: "ព័ត៌មានផ្ទាល់ខ្លួន",
+  family: "ព័ត៌មានគ្រួសារ",
+  rank: "ក្របខណ្ឌ ឋាន្តរស័ក្តិ និងថ្នាក់",
+  work: "ប្រវត្តិការងារ",
+  education: "ប្រវត្តិការសិក្សា",
+  status: "ស្ថានភាពមន្រ្តី",
 };
+
 const Attachment = ({ userData }) => {
   const [selectedRows, setSelectedRows] = useState(null);
   const [attachmentList, setAttachmentList] = useState(() => {
@@ -34,7 +36,7 @@ const Attachment = ({ userData }) => {
       title: "ប្រភេទឯកសារ",
       dataIndex: "type",
       key: "type",
-      width: '15%',
+      width: "20%",
     },
     {
       title: "ឯកសារ",
@@ -85,8 +87,8 @@ const Attachment = ({ userData }) => {
         columns={columns}
         dataSource={attachmentList}
         expandable={{
-         defaultExpandAllRows: true,
-       }}
+          defaultExpandAllRows: true,
+        }}
         //   rowSelection={{
         //     type: "checkbox",
         //      checkStrictly: false,

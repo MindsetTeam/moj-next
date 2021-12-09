@@ -370,6 +370,7 @@ const workHistoryInfo = ({
                               message: "សូមបំពេញក្រសួង-ស្ថាប័ន",
                            },
                         ]}
+                        initialValue={"ក្រសួងយុត្តិធម៌"}
                      >
                         {/* <Input placeholder="ក្រសួង-ស្ថាប័ន" /> */}
                         {/* <Select
@@ -399,7 +400,6 @@ const workHistoryInfo = ({
                         </Select> */}
                         <Select
                            placeholder="ជ្រើសរើស"
-                           defaultValue={"ក្រសួងយុត្តិធម៌"}
                         >
                            <Option value="ក្រសួងយុត្តិធម៌">
                               ក្រសួងយុត្តិធម៌

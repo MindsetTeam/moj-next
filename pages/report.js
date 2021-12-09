@@ -13,6 +13,7 @@ const Report = () => {
    const [form] = Form.useForm();
 
    const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");
+   const [choiceDepartment, setChoiceDepartment] = useState("")
    const [printEmployees, setPrintEmployees] = useState([])
 
    const onPrint = () => {
@@ -32,6 +33,7 @@ const Report = () => {
    return (
       <div className={styles.printReportContainer}>
          <Form form={form} onValuesChange={(changed, allValues) => {
+            setChoiceDepartment(allValues.department);
             if(changed.generalDepartment){
                delete allValues.department
             }
@@ -94,7 +96,7 @@ const Report = () => {
                </Col>
             </Row>
          </Form>
-         <PrintReport printEmployees={printEmployees} />
+         <PrintReport printEmployees={printEmployees} generalDepartment={choiceGeneralDepartment} department={choiceDepartment}/>
       </div>
    );
 };

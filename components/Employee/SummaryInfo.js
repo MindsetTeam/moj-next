@@ -27,7 +27,7 @@ const SummaryInfo = ({
         <Col span={6}>
           <div className={styles.leftSection}>
             <div className={styles.userImg}>
-              <img src={userData?.photo} alt="" width="230" height="250" />
+              <img src={userData?.photo} style={{objectFit: 'contain'}} alt="" width="230" height="250" />
             </div>
             <div>
               <table>
@@ -40,7 +40,9 @@ const SummaryInfo = ({
                 <tr>
                   <td>គោត្តនាម និង​នាម</td>
                   <td className={styles.greyText}>
-                    {userData.firstName + " " + (userData.lastName || "")}
+                    {(userData.firstName || "") +
+                      " " +
+                      (userData.lastName || "")}
                   </td>
                 </tr>
                 <tr>

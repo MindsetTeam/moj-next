@@ -75,7 +75,8 @@ const index = () => {
 
         .front-card-container {
           width: 550px;
-          height: 400px;
+          /* height: 400px; */
+          font-size: 0.9em;
           padding: 20px;
           border: 1px solid #000;
           border-radius: 15px;
@@ -108,13 +109,18 @@ const index = () => {
 
         .front-card-container .bottom-section .card-info {
           flex: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row;
+          margin-top: 12px;
           font-size: 0.8rem;
           font-style: italic;
           color: rgb(34, 34, 185);
         }
 
         .front-card-container .bottom-section .card-info .qrcode img {
-          padding-left: 30px;
+          /* padding-left: 30px; */
           width: 90px;
         }
 
@@ -131,7 +137,7 @@ const index = () => {
         .back-card-container {
           font-family: "Moul", serif;
           width: 550px;
-          height: 400px;
+          height: 325px;
           padding: 20px;
           text-align: center;
           display: flex;
@@ -163,7 +169,7 @@ const index = () => {
           <div className="front-card-container">
             <div className="top-section">
               <div className="profile">
-                <img src={user?.photo || "/card/user.png"} alt="" />
+                <img src={user?.photo || "/card/user.png"} alt=""  style={{objectFit: 'contain'}}/>
               </div>
               <table>
                 <tr>
@@ -207,7 +213,7 @@ const index = () => {
                   <td>អត្តលេខ </td>
                   <td>:</td>
 
-                  <td>{user?.civilID}</td>
+                  <td>{user?.officerID}</td>
                 </tr>
               </table>
             </div>
@@ -221,7 +227,7 @@ const index = () => {
                     <tr>
                       <td>លេខរៀងប័ណ្ណ</td>
                       <td>:</td>
-                      <td>{user?.cardID || ""}</td>
+                      <td>លេខរៀងប័ណ្ណ	</td>
                     </tr>
                     <tr>
                       <td>ថ្ងៃចេញប័ណ្ណ</td>

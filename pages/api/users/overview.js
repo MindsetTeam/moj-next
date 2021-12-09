@@ -9,7 +9,7 @@ const { getOverviewEmployees } = require("controllers/employee");
 const handler = nc(ncOpts);
 handler.use(database);
 
-handler.use(protect, role("admin", "editor"));
+handler.use(protect, role("admin", "editor", 'moderator'));
 handler.get(getOverviewEmployees);
 
 export default handler;
