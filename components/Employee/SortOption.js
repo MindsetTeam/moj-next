@@ -1,12 +1,13 @@
 import { Col, Row, Select, Form, Checkbox, Button } from "antd";
-import { route } from "next/dist/server/router";
+import { useSession } from "next-auth/client";
 import router, { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const { Option } = Select;
 
-const SortOption = ({ ministryStructure, moderatorType, role }) => {
+const SortOption = ({ ministryStructure }) => {
   const [form] = Form.useForm();
+  const [session, loading] = useSession();
 
   const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");
 
@@ -22,6 +23,21 @@ const SortOption = ({ ministryStructure, moderatorType, role }) => {
     form.resetFields();
     form.setFieldsValue(router.query);
   }, [router.query]);
+  let initialValues = {};
+  if (session?.user?.role == "moderator") {
+    initialValues.generalDepartment =
+      session?.user?.latestOfficerStatus?.generalDepartment;
+    if (session?.user?.moderatorType == "department") {
+      initialValues.department = session?.user?.latestOfficerStatus?.department;
+    }
+  }
+  useEffect(() => {
+    if (session?.user?.role == "moderator") {
+      setChoiceGeneralDepartment(
+        session?.user?.latestOfficerStatus?.generalDepartment
+      );
+    }
+  }, [session]);
   return (
     <Form
       form={form}
@@ -39,6 +55,7 @@ const SortOption = ({ ministryStructure, moderatorType, role }) => {
         }
         router.push("/employee?" + searchQuery.join("&"));
       }}
+      initialValues={initialValues}
     >
       <Row gutter={16}>
         <Col span={4}></Col>
@@ -55,6 +72,7 @@ const SortOption = ({ ministryStructure, moderatorType, role }) => {
                 setChoiceGeneralDepartment(v);
                 form.resetFields(["department"]);
               }}
+              disabled={session?.user?.role == "moderator"}
             >
               {Object.keys(
                 ministryStructure["ក្រសួងយុត្តិធម៌"]["ថ្នាក់កណ្តាល"]
@@ -74,7 +92,14 @@ const SortOption = ({ ministryStructure, moderatorType, role }) => {
             name="department"
             label="នាយកដ្ឋាន"
           >
-            <Select placeholder="ជ្រើសរើស" allowClear>
+            <Select
+              placeholder="ជ្រើសរើស"
+              allowClear
+              disabled={
+                session?.user?.role == "moderator" &&
+                session?.user?.moderatorType == "department"
+              }
+            >
               {Object.keys(
                 ministryStructure["ក្រសួងយុត្តិធម៌"]["ថ្នាក់កណ្តាល"][
                   choiceGeneralDepartment

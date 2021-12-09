@@ -12,6 +12,8 @@ import {
 import structureMinistryData from "/data/Structure.json";
 
 import { useRouter } from "next/router";
+import Link from 'next/link'
+
 
 import {
   EditOutlined,
@@ -123,7 +125,7 @@ const Index = () => {
     try {
       const { data } = await api.get(
         `/api/users${
-          "?select=firstName,lastName,firstNameLatin,lastNameLatin,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role,moderatorType&" +
+          "?select=firstName,lastName,firstNameLatin,lastNameLatin,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role,moderatorType,latestOfficerStatus&" +
           searchQuery.toString()
         }`
         // const { data } = await api.get(
@@ -142,14 +144,14 @@ const Index = () => {
               typeof employee[key] != "boolean" &&
               key != "experience" &&
               key != "rank" &&
-              key !== "officerStatus"
+              key !== "officerStatus" &&
+              key !== "latestOfficerStatus"
             ) {
               delete employee[key];
             }
           }
         }
         employee.oldStateOfficerStatus = [...employee.officerStatus];
-        // todo: remove single officerstatus
         employee.officerStatus =
           employee.officerStatus[employee.officerStatus.length - 1] || {};
         employee.rank = employee.rank[employee.rank.length - 1] || {};
@@ -325,9 +327,15 @@ const Index = () => {
       dataIndex: "firstName",
       key: "firstName",
       render: (firstName, record) => {
-        return firstName
-          ? firstName + " " + (record.lastName || "")
-          : (record.firstNameLatin || "") + " " + (record.lastNameLatin || "");
+        return (
+          <Link href={"/employee/" + record.id}>
+            {firstName
+              ? firstName + " " + (record.lastName || "")
+              : (record.firstNameLatin || "") +
+                " " +
+                (record.lastNameLatin || "")}
+          </Link>
+        );
       },
     },
     {
@@ -350,10 +358,13 @@ const Index = () => {
     },
     {
       title: "អង្គភាព",
-      dataIndex: "officerStatus",
+      dataIndex: "latestOfficerStatus",
       key: "department",
-      render: (officerStatus) => {
-        return officerStatus.department || officerStatus.generalDepartment;
+      render: (latestOfficerStatus) => {
+        return (
+          latestOfficerStatus?.department ||
+          latestOfficerStatus?.generalDepartment
+        );
       },
     },
     {
@@ -406,10 +417,10 @@ const Index = () => {
           return (
             <a
               onClick={() => {
-                router.push(`/employee/${record._id}`);
+                router.push(`/employee/${record._id || record.id}`);
               }}
             >
-              View
+              ពិនិត្យ
             </a>
           );
         }
@@ -473,12 +484,7 @@ const Index = () => {
       <Search></Search>
 
       <div style={{ marginTop: 20 }}>
-        {/* TODO: disable sort */}
-        <SortOption
-          ministryStructure={structureMinistryData}
-          role={session.user.role}
-          moderatorType={session.user.moderatorType}
-        ></SortOption>
+        <SortOption ministryStructure={structureMinistryData}></SortOption>
       </div>
 
       <div style={{ marginTop: 20 }}>
