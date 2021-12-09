@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 const { Option } = Select;
 
-const SortOption = ({ ministryStructure }) => {
+const SortOption = ({ ministryStructure, moderatorType, role }) => {
   const [form] = Form.useForm();
 
   const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");

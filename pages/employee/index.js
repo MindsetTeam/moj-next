@@ -473,7 +473,12 @@ const Index = () => {
       <Search></Search>
 
       <div style={{ marginTop: 20 }}>
-        <SortOption ministryStructure={structureMinistryData}></SortOption>
+        {/* TODO: disable sort */}
+        <SortOption
+          ministryStructure={structureMinistryData}
+          role={session.user.role}
+          moderatorType={session.user.moderatorType}
+        ></SortOption>
       </div>
 
       <div style={{ marginTop: 20 }}>
