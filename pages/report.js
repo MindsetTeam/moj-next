@@ -13,34 +13,49 @@ const Report = () => {
    const [form] = Form.useForm();
 
    const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");
-   const [choiceDepartment, setChoiceDepartment] = useState("")
-   const [printEmployees, setPrintEmployees] = useState([])
+   const [choiceDepartment, setChoiceDepartment] = useState("");
+   const [printEmployees, setPrintEmployees] = useState([]);
 
    const onPrint = () => {
       window.print();
    };
    const fetchEmployees = async (query) => {
-      if(!query.generalDepartment){
+      if (!query.generalDepartment) {
          return setPrintEmployees([]);
       }
       let searchQuery = new URLSearchParams();
-      Object.keys(query).forEach((v)=>{
+      Object.keys(query).forEach((v) => {
          searchQuery.append(v, query[v]);
-      })
-      const {data} = await fetcher('/api/users?'+ searchQuery.toString())
+      });
+      const { data } = await fetcher("/api/users?" + searchQuery.toString());
       setPrintEmployees(data);
-   }
+   };
    return (
       <div className={styles.printReportContainer}>
-         <Form form={form} onValuesChange={(changed, allValues) => {
-            setChoiceDepartment(allValues.department);
-            if(changed.generalDepartment){
-               delete allValues.department
-            }
-             fetchEmployees(allValues);
-         }}>
+         <Form
+            form={form}
+            onValuesChange={(changed, allValues) => {
+               setChoiceDepartment(allValues.department);
+               if (changed.generalDepartment) {
+                  delete allValues.department;
+               }
+               fetchEmployees(allValues);
+            }}
+         >
             <Row gutter={16}>
-               <Col span={6}>
+               <Col span={5}>
+                  <Form.Item
+                     style={{ marginBottom: 10 }}
+                     name="unit"
+                     label="អង្គភាព"
+                  >
+                     <Select placeholder="ជ្រើសរើស">
+                        <Option value={1}>1</Option>
+                        <Option value={2}>2</Option>
+                     </Select>
+                  </Form.Item>
+               </Col>
+               <Col span={5}>
                   <Form.Item
                      style={{ marginBottom: 10 }}
                      name="generalDepartment"
@@ -68,7 +83,7 @@ const Report = () => {
                      </Select>
                   </Form.Item>
                </Col>
-               <Col span={6}>
+               <Col span={5}>
                   <Form.Item
                      style={{ marginBottom: 10 }}
                      name="department"
@@ -89,14 +104,30 @@ const Report = () => {
                      </Select>
                   </Form.Item>
                </Col>
-               <Col span={6}>
+               <Col span={5}>
+                  <Form.Item
+                     style={{ marginBottom: 10 }}
+                     name="office"
+                     label="ការិយាល័យ"
+                  >
+                     <Select placeholder="ជ្រើសរើស">
+                        <Option value={1}>1</Option>
+                        <Option value={2}>2</Option>
+                     </Select>
+                  </Form.Item>
+               </Col>
+               <Col span={4}>
                   <Button icon={<PrinterOutlined />} onClick={onPrint}>
                      បោះពុម្ព
                   </Button>
                </Col>
             </Row>
          </Form>
-         <PrintReport printEmployees={printEmployees} generalDepartment={choiceGeneralDepartment} department={choiceDepartment}/>
+         <PrintReport
+            printEmployees={printEmployees}
+            generalDepartment={choiceGeneralDepartment}
+            department={choiceDepartment}
+         />
       </div>
    );
 };
