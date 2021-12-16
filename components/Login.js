@@ -29,6 +29,7 @@ const Login = () => {
     router.push(`/`);
     return null;
   }
+
   const [form] = Form.useForm();
   const login = () => {
     const dataInput = form.getFieldsValue(true);
@@ -49,6 +50,10 @@ const Login = () => {
       }
       if (!result.error) {
         router.replace(decodeURIComponent(referer || "") || "/");
+        window.localStorage.setItem(
+          "activeSession",
+          dataInput.remember ? "yes" : ""
+        );
         Cookies.set("authorization", "yep", { expires: 30 });
       }
     });
@@ -94,9 +99,12 @@ const Login = () => {
               <Input placeholder="ពាក្យសម្ងាត់" />
             </Form.Item>
 
-            <Checkbox onChange={null} style={{ marginBottom: 10 }}>
-              Remember me for a month
-            </Checkbox>
+            <Form.Item name="remember" valuePropName="checked">
+              <Checkbox style={{ marginBottom: 10 }}>
+                Remember me for a month
+              </Checkbox>
+            </Form.Item>
+
             <Button
               htmlType="submit"
               onClick={login}
