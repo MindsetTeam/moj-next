@@ -35,10 +35,6 @@ const TopMenu = () => {
           link: "/print",
           title: "ការបោះពុម្ពប្រវត្តិរូប",
         },
-        {
-          link: "/print-card",
-          title: "ការបោះពុម្ពកាតមន្រ្ដី",
-        },
       ],
     },
 
@@ -60,10 +56,16 @@ const TopMenu = () => {
       menuList.findIndex((item) => {
         return item.title === "ការបោះពុម្ព";
       })
-    ].sub.push({
-      link: "/setting",
-      title: "កែប្រែលេខកាត",
-    });
+    ].sub.push(
+      {
+        link: "/setting",
+        title: "កែប្រែលេខកាត",
+      },
+      {
+        link: "/print-card",
+        title: "ការបោះពុម្ពកាតមន្រ្ដី",
+      }
+    );
   }
 
   if (["admin", "editor", "moderator"].includes(session?.user.role)) {
