@@ -4,14 +4,32 @@ import "antd/dist/antd.css";
 import ProtectedLayout from "../components/ProtectedLayout";
 import { AlertProvider } from "contexts/alert.context";
 
-import { Provider } from "next-auth/client";
+import { Provider, signOut, useSession } from "next-auth/client";
 import GlobalLayout from "@/components/GlobalLayout";
 import { SWRConfig } from "swr";
 import Script from "next/script";
 import Head from "next/head";
 import { fetcher } from "@/lib/fetch";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
+  // const [session] = useSession();
+
+  // console.log(session);
+  useEffect(() => {
+    //detect when user close browser or tab is closed
+    //TODO: Add "Remember me" feature for login page
+    if (typeof window !== "undefined") {
+      window.addEventListener("beforeunload", function (e) {
+        e.preventDefault();
+        signOut({ redirect: false }).then(() => {
+          Cookies.remove("authorization");
+        });
+        e.returnValue = "";
+      });
+    }
+  }, []);
   return (
     <>
       <Head>

@@ -125,7 +125,7 @@ const Index = (props) => {
                                  color="lightblue"
                               ></HomeCard>
                            </Col>
-                           <Col
+                           {/* <Col
                               span={12}
                               onClick={() =>
                                  router.push({
@@ -143,7 +143,7 @@ const Index = (props) => {
                                  title="មន្ត្រីចូលនិវត្តន៍"
                                  color="teal"
                               ></HomeCard>
-                           </Col>
+                           </Col> */}
                         </Row>
                      </Col>
                   </Row>
