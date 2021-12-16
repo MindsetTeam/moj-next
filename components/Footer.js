@@ -1,15 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 
 import styles from "@/styles/Footer.module.css";
-import { useAnnouncements } from "@/lib/announcement/hooks";
+// import { useAnnouncements } from "@/lib/announcement/hooks";
 import { useSession } from "next-auth/client";
 
 const Footer = () => {
    const [temp, setTemp] = useState("Something Went Wrong");
-   const { data = [] } = useAnnouncements();
-   const [session, loading] = useSession();
+   // const { data = [] } = useAnnouncements();
+   // const [session, loading] = useSession();
 
-   const marqueeRef = useRef(null);
+   // const marqueeRef = useRef(null);
 
    useEffect(async () => {
       const { cod, main } = await fetch(
