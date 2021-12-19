@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "@/styles/Employee.module.css";
 
 import {
@@ -41,17 +41,38 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
    const [visible, setVisible] = useState(false);
    const [form] = Form.useForm();
    const [attachmentList, setAttachmentList] = useState(() => {
-      return Object.keys(userData.attachment || {}).map((v, i) => {
+      // return Object.keys(userData.attachment || {}).map((v, i) => {
+      //    return {
+      //       key: i,
+      //       type: attachmentTypeName[v],
+      //       children: userData.attachment[v].map((val) => ({
+      //          ...val,
+      //          parent: v,
+      //       })),
+      //    };
+      // });
+      return Object.keys(fileTypeName).map((v, i) => {
          return {
             key: i,
             type: attachmentTypeName[v],
-            children: userData.attachment[v].map((val) => ({
-               ...val,
-               parent: v,
-            })),
+            children: fileTypeName[v].map((val, i) => {
+               return {
+                  // ...val,
+                  name: val,
+                  parent: val,
+                  description: userData.attachment[v][i]
+                     ? userData.attachment[v][i].description
+                     : "អត់",
+                  url: userData.attachment[v][i]
+                     ? userData.attachment[v][i].url
+                     : "/404",
+               };
+            }),
          };
       });
    });
+
+   // console.log("123", attachmentList);
 
    const actionMenu = (record) => {
       return (
@@ -82,6 +103,24 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
          dataIndex: "type",
          key: "type",
          width: "20%",
+      },
+      {
+         title: "name",
+         dataIndex: "name",
+         key: "name",
+         width: "40%",
+         render: (text, record, index) => {
+            if (!record.children) {
+               return (
+                  <div>
+                     <div>{text}</div>
+                     <Upload accept="image/*,.pdf" maxCount={1}>
+                        <Button icon={<UploadOutlined />}>ផ្ទុកឡើង</Button>
+                     </Upload>
+                  </div>
+               );
+            }
+         },
       },
       {
          title: "ឯកសារ",
@@ -223,7 +262,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
                            onChange={(v) => {
                               setSelectedFileType(v);
                               setFileNameList(fileTypeName[v]);
-                              form.resetFields(["description"])
+                              form.resetFields(["description"]);
                            }}
                         >
                            <Option value="info">ព័ត៌មានផ្ទាល់ខ្លួន</Option>

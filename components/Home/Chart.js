@@ -20,7 +20,7 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
    const config = {
       appendPadding: 10,
       data: data,
-      height: 250,
+      // height: "100%",
       angleField: "value",
       colorField: "type",
       radius: 1,
