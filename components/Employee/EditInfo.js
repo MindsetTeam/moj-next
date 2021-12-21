@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { Tabs } from "antd";
 
-import styles from "@/styles/Employee.module.css";
+// import styles from "@/styles/Employee.module.css";
 
 import SelfInfo from "@/components/Employee/Edit/SelfInfo";
 import ParentInfo from "@/components/Employee/Edit/ParentInfo";
@@ -11,8 +11,8 @@ import EducationInfo from "@/components/Employee/Edit/EducationInfo";
 import WorkHistoryInfo from "@/components/Employee/Edit/WorkHistoryInfo";
 import RankInfo from "@/components/Employee/Edit/RankInfo";
 import StatusInfo from "@/components/Employee/Edit/StatusInfo";
-import PraiseInfo from "@/components/Employee/Edit/PraiseInfo";
-import PenaltyInfo from "@/components/Employee/Edit/PenaltyInfo";
+// import PraiseInfo from "@/components/Employee/Edit/PraiseInfo";
+// import PenaltyInfo from "@/components/Employee/Edit/PenaltyInfo";
 import AttachmentInfo from "@/components/Employee/Edit/AttachmentInfo";
 
 const { TabPane } = Tabs;
@@ -26,6 +26,7 @@ const EditInfo = ({
    provincesList,
    positionList,
    fileTypeName,
+   structureMOJ,
    rankList,
 }) => {
    const [activeTabKey, setActiveTabKey] = useState("1");
@@ -96,6 +97,7 @@ const EditInfo = ({
                   letterTypes={letterTypes}
                   positionList={positionList}
                   ministryList={ministryList}
+                  structureMOJ={structureMOJ}
                   statusOfficer={statusOfficer}
                   ministryStructure={ministryStructure}
                ></StatusInfo>

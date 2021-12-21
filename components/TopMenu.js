@@ -58,12 +58,12 @@ const TopMenu = () => {
       })
     ].sub.push(
       {
-        link: "/setting",
-        title: "កែប្រែលេខកាត",
-      },
-      {
         link: "/print-card",
         title: "ការបោះពុម្ពកាតមន្រ្ដី",
+      },
+      {
+        link: "/setting",
+        title: "កែប្រែលេខកាត",
       }
     );
   }
@@ -174,7 +174,7 @@ const TopMenu = () => {
             );
           }
           return (
-            <Menu.Item key={i}>
+            <Menu.Item key={v.title}>
               <span>
                 <img src={v.iconUrl} width="20" height="20" />
               </span>

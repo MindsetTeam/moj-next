@@ -74,7 +74,15 @@ const Index = (props) => {
               </Col>
               <Col span={12}>
                 <Row gutter={50} style={{ marginBottom: 15 }}>
-                  <Col span={12}>
+                  <Col span={12}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/employee",
+                      query: {
+                        rank: "មន្ត្រីពេញសិទ្ធ/មន្រ្តីក្រប​ខណ្ឌ",
+                      },
+                    })
+                  }>
                     <HomeCard
                       number={
                         overviewData?.data?.officerStatusList?.[
@@ -90,6 +98,9 @@ const Index = (props) => {
                     onClick={() =>
                       router.push({
                         pathname: "/employee",
+                        query: {
+                          rank: "មន្រ្តីកម្មសិក្សា",
+                        },
                       })
                     }
                   >
@@ -110,6 +121,9 @@ const Index = (props) => {
                     onClick={() =>
                       router.push({
                         pathname: "/employee",
+                        query: {
+                          rank: "មន្ត្រីកិច្ចសន្យា",
+                        },
                       })
                     }
                   >

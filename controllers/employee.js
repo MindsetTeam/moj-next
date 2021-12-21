@@ -29,6 +29,10 @@ export const getOverviewEmployees = async (req, res) => {
   //   );
   // }
   if (["admin", "editor"].includes(role)) {
+    const overviewQuery = {
+      approval: true,
+      "latestOfficerStatus.rank": { $ne: "និវត្តន៍" },
+    };
     // const retiredEmployeeReq = User.find({
     //   approval: true,
     //   birthDate: { $lt: new Date(Date.now() - 60 * 365 * 24 * 60 * 60 * 1000) },
@@ -37,7 +41,8 @@ export const getOverviewEmployees = async (req, res) => {
       {
         $match: {
           approval: true,
-          officerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+          // officerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+          "latestOfficerStatus.rank": "និវត្តន៍",
         },
       },
       {
@@ -45,27 +50,24 @@ export const getOverviewEmployees = async (req, res) => {
       },
     ]);
     officerStatusListReq = User.aggregate([
+      // {
+      //   $project: {
+      //     approval: 1,
+      //     officerStatus: { $slice: ["$officerStatus", -1] },
+      //   },
+      // },
       {
-        $project: {
-          approval: 1,
-          officerStatus: { $slice: ["$officerStatus", -1] },
-        },
-      },
-      {
-        $match: {
-          approval: true,
-          officerStatus: { $elemMatch: { $exists: true } },
-        },
+        $match: overviewQuery,
       },
       {
         $group: {
-          _id: "$officerStatus.rank",
+          _id: "$latestOfficerStatus.rank",
           total: { $sum: 1 },
         },
       },
     ]);
     centerInstitutionRawDataReq = User.aggregate([
-      { $match: { approval: true } },
+      { $match: overviewQuery },
       {
         $group: {
           _id: "$gender",
@@ -73,24 +75,26 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
-    totalEmployeeReq = User.countDocuments({ approval: true });
+    totalEmployeeReq = User.countDocuments(overviewQuery);
     generalDepartmentResReq = User.aggregate([
+      // {
+      //   $project: {
+      //     approval: 1,
+      //     officerStatus: { $slice: ["$officerStatus", -1] },
+      //   },
+      // },
       {
-        $project: {
-          approval: 1,
-          officerStatus: { $slice: ["$officerStatus", -1] },
-        },
-      },
-      {
-        $match: {
-          approval: true,
-          officerStatus: { $elemMatch: { $exists: true } },
-        },
+        $match: overviewQuery,
       },
       {
         $group: {
-          _id: "$officerStatus.generalDepartment",
+          _id: "$latestOfficerStatus.unit",
           total: { $sum: 1 },
+        },
+      },
+      {
+        $sort: {
+          total: -1,
         },
       },
     ]);
@@ -295,8 +299,11 @@ export const getEmployees = async (req, res) => {
     select,
     retired,
     nearRetired,
+    unit,
+    office,
     generalDepartment,
     department,
+    rank,
   } = req.query;
   let reqQuery;
   if (searchTerm) {
@@ -318,31 +325,64 @@ export const getEmployees = async (req, res) => {
   // }
   if (retired) {
     reqQuery = {
-      officerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+      // latestOfficerStatus: { $elemMatch: { rank: "និវត្តន៍" } },
+      "latestOfficerStatus.rank": "និវត្តន៍",
       ...reqQuery,
     };
   }
   if (nearRetired) {
-    reqQuery = {
-      birthDate: {
-        $lt: new Date(Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000),
-      },
-      "officerStatus.rank": { $ne: "និវត្តន៍" },
-      ...reqQuery,
-    };
     if (retired) {
-      delete reqQuery.officerStatus;
-      delete reqQuery["officerStatus.rank"];
+      delete reqQuery["latestOfficerStatus.rank"];
+      reqQuery = {
+        $or: [
+          {
+            birthDate: {
+              $lt: new Date(Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000),
+            },
+          },
+          // "latestOfficerStatus.rank": { $ne: "និវត្តន៍" },
+          { "latestOfficerStatus.rank": "និវត្តន៍" },
+        ],
+        ...reqQuery,
+      };
+    } else {
+      reqQuery = {
+        birthDate: {
+          $lt: new Date(Date.now() - 59.5 * 365 * 24 * 60 * 60 * 1000),
+        },
+        // "latestOfficerStatus.rank": { $ne: "និវត្តន៍" },
+        // "latestOfficerStatus.rank": { $ne: "និវត្តន៍" },
+        ...reqQuery,
+      };
     }
   }
-  if (["admin", "editor"].includes(req.user.role) && generalDepartment) {
+  console.log(reqQuery);
+  if (rank) {
     reqQuery = {
-      "latestOfficerStatus.generalDepartment": generalDepartment,
+      "latestOfficerStatus.rank": rank,
       ...reqQuery,
     };
+  }
+  if (["admin", "editor"].includes(req.user.role) && unit) {
+    reqQuery = {
+      "latestOfficerStatus.unit": unit,
+      ...reqQuery,
+    };
+    if (generalDepartment) {
+      reqQuery = {
+        "latestOfficerStatus.generalDepartment": generalDepartment,
+        ...reqQuery,
+      };
+    }
     if (department) {
       reqQuery = {
         "latestOfficerStatus.department": department,
+        ...reqQuery,
+      };
+    }
+    if (office) {
+      reqQuery = {
+        "latestOfficerStatus.office": office,
         ...reqQuery,
       };
     }
@@ -354,13 +394,13 @@ export const getEmployees = async (req, res) => {
     if (req.user.moderatorType === "department") {
       queryModerator["latestOfficerStatus.department"] =
         req.user.latestOfficerStatus.department;
-    }else if(department){
+    } else if (department) {
       queryModerator["latestOfficerStatus.department"] = department;
     }
     reqQuery = {
       ...reqQuery,
       ...queryModerator,
-    }
+    };
   }
 
   let searchQuery = User.find(reqQuery).sort("-createdAt");
@@ -478,7 +518,7 @@ export const updateRole = async (req, res, next) => {
 
 export const addAttachment = async (req, res, next) => {
   const { id } = req.query;
-  const { description, type } = req.body;
+  const { description, type } = req.query;
   if (!req.file) {
     throw new ErrorResponse("Missing attachment", 400);
   }
@@ -487,16 +527,36 @@ export const addAttachment = async (req, res, next) => {
     folderName: "user-attachment/" + id,
   });
   const attachmentType = "attachment." + type;
-  const user = await User.findByIdAndUpdate(
-    id,
-    {
-      $push: { [attachmentType]: { description, url: publicUrl } },
-    },
-    { new: true }
+  const user = await User.findById(id);
+  const existedFile = user.attachment[type].findIndex(
+    (v) => v.description == description
   );
+  if (existedFile >= 0) {
+    console.log(user.attachment[type][existedFile].url);
+    deleteFileFromBucket(user.attachment[type][existedFile].url);
+    user.attachment[type][existedFile].url = publicUrl;
+    // console.log(user.attachment[type][existedFile].url);
+  } else {
+    user.attachment[type].push({
+      description,
+      url: publicUrl,
+    });
+  }
+  await user.save({ validateBeforeSave: false });
+  // const user = await User.findByIdAndUpdate(
+  //   id,
+  //   {
+  //     $push: { [attachmentType]: { description, url: publicUrl } },
+  //   }
+  //   // { new: true }
+  // );
+
+  // console.log(indexDeleteFile);
+
   res.status(200).json({
     success: true,
     msg: "Successfully added",
+    // url: publicUrl,
     data: {
       id: user.id,
       attachment: user.attachment,

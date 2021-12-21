@@ -122,8 +122,11 @@ const Status = ({ userData }) => {
       formInfo.resetFields();
       formInfo.setFieldsValue({ formInfoData });
       setOfficerStatusList(
-         userData.officerStatus ? [...userData.officerStatus] : []
+         [{...userData.latestOfficerStatus}]
       );
+      // setOfficerStatusList(
+      //    userData.officerStatus ? [...userData.officerStatus] : []
+      // );
    }, [userData]);
 
    return (

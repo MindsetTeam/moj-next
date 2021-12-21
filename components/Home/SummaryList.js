@@ -1,5 +1,6 @@
 import Dot from "@/components/Home/Dot";
 import { useSession } from "next-auth/client";
+import router from "next/router";
 import React from "react";
 
 const SummaryList = ({ overviewData }) => {
@@ -118,7 +119,18 @@ const SummaryList = ({ overviewData }) => {
     <table>
       {Object.keys(overviewData?.data?.generalDepartmentList || {}).map(
         (item, index) => (
-          <tr key={index}>
+          <tr
+            key={index}
+            onClick={() =>
+              router.push({
+                pathname: "/employee",
+                query: {
+                  unit: item,
+                },
+              })
+            }
+            style={{ cursor: "pointer" }}
+          >
             <td>
               <Dot color={getRandomColor()}></Dot>
               {item}

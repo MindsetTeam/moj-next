@@ -1,12 +1,11 @@
 import api from "@/utils/api";
-import Link from "next/link";
-
-import { Button } from "antd";
-
+// import Link from "next/link";
+// import { Button } from "antd";
 import styles from "@/styles/Employee.module.css";
 
 import EditInfo from "@/components/Employee/EditInfo";
 
+import structureMOJ from "data/FullStructureMOJ.json";
 import ministryStructure from "data/Structure.json";
 import statusOfficer from "data/StatusOfficer.json";
 import ministryList from "data/Ministry.json";
@@ -19,7 +18,6 @@ import fileTypeName from "data/FileTypeName.json";
 export async function getServerSideProps({ params }) {
    const res = await api.get("/api/users/" + params.id);
    console.log(res.data);
-
    return {
       props: {
          ministryStructure,
@@ -29,6 +27,7 @@ export async function getServerSideProps({ params }) {
          ministryList,
          provincesList,
          positionList,
+         structureMOJ,
          fileTypeName,
          user: res.data,
       },
@@ -44,6 +43,7 @@ const Edit = ({
    provincesList,
    positionList,
    fileTypeName,
+   structureMOJ,
    user,
 }) => {
    console.log(user);
@@ -68,8 +68,15 @@ const Edit = ({
                positionList={positionList}
                ministryList={ministryList}
                fileTypeName={fileTypeName}
+               structureMOJ={structureMOJ}
             ></EditInfo>
          </div>
+         <style jsx global>{`
+        .ant-table-cell > span {
+          display: flex;
+          gap: 1.5em
+        }
+      `}</style>
       </div>
    );
 };

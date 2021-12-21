@@ -10,6 +10,8 @@ import {
   // SearchOutlined,
 } from "@ant-design/icons";
 import structureMinistryData from "/data/Structure.json";
+import structureMOJData from "/data/FullStructureMOJ.json";
+import rankListData from "/data/Rank.json";
 
 import { useRouter } from "next/router";
 import Link from 'next/link'
@@ -484,7 +486,7 @@ const Index = () => {
       <Search></Search>
 
       <div style={{ marginTop: 20 }}>
-        <SortOption ministryStructure={structureMinistryData}></SortOption>
+        <SortOption structureMOJ={structureMOJData} rankListData={rankListData} ministryStructure={structureMinistryData}></SortOption>
       </div>
 
       <div style={{ marginTop: 20 }}>

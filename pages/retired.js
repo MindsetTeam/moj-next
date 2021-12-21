@@ -43,7 +43,7 @@ const retired = () => {
       return (
          <Menu>
             <Menu.Item
-               key="0"
+               // key="0"
                icon={<EditOutlined />}
                onClick={() => {
                   router.push(`/employee/${record.id}`);
@@ -52,7 +52,7 @@ const retired = () => {
                <a>កែប្រែ</a>
             </Menu.Item>
             <Menu.Item
-               key="1"
+               // key="1"
                icon={<PrinterOutlined />}
                onClick={() => {
                   router.push(`/print/${record.id}`);
@@ -61,7 +61,7 @@ const retired = () => {
                <a>បោះពុម្ភ</a>
             </Menu.Item>
             <Menu.Item
-               key="2"
+               // key="2"
                icon={<PrinterOutlined />}
                onClick={() => {
                   router.push(`/print-card/${record.id}`);
