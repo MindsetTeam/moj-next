@@ -177,7 +177,7 @@ const StatusInfo = ({
         // Object.keys(dataInfo).forEach((key) => {
         //   if (!dataInfo[key]) delete dataInfo[key];
         // });
-        console.log(dataStatus, dataInfo);
+        // console.log(dataStatus, dataInfo);
 
         const updateData = {
           ...dataInfo,
@@ -310,9 +310,12 @@ const StatusInfo = ({
     let resetFields = {};
     if (changedValue.unit) {
       setSelectedUnit(changedValue.unit);
+      console.log(structureMOJ[changedValue.unit][""])
       if (structureMOJ[changedValue.unit][""]) {
         setSelectedGeneralDepartment("");
         resetFields.generalDepartment = "";
+      }else{
+        resetFields.generalDepartment = null;
       }
       formStatus.setFieldsValue({
         ...resetFields,

@@ -24,12 +24,15 @@ const Report = () => {
     // if (!query.generalDepartment) {
     //   return setPrintEmployees([]);
     // }
+    console.log({query});
     let searchQuery = new URLSearchParams();
     Object.keys(query).forEach((v) => {
-      if (query[v] !== undefined) {
+      console.log(query[v]);
+      if (query[v]) {
         searchQuery.append(v, query[v]);
       }
     });
+    console.log(searchQuery.toString());
     const { data } = await fetcher("/api/users?" + searchQuery.toString());
     setPrintEmployees(data);
   };
@@ -96,7 +99,66 @@ const Report = () => {
           // if (changed.generalDepartment) {
           //   delete allValues.department;
           // }
-          fetchEmployees(allValues);
+          let resetFields = {};
+          if (changed.unit) {
+            setSelectedUnit(changed.unit);
+            if (structureMOJ[changed.unit][""]) {
+              setSelectedGeneralDepartment("");
+              resetFields.generalDepartment = "";
+              //   allValues.generalDepartment = "";
+            } else {
+              resetFields.generalDepartment = null;
+            }
+            form.setFieldsValue({
+              ...resetFields,
+              department: null,
+              office: null,
+            });
+          }
+          if (Object.keys(changed)[0] == "unit" && changed.unit === undefined) {
+            form.setFieldsValue({
+              generalDepartment: null,
+              department: null,
+              office: null,
+            });
+          }
+          if (changed.generalDepartment) {
+            setSelectedGeneralDepartment(changed.generalDepartment);
+            if (structureMOJ[selectedUnit][changed.generalDepartment][""]) {
+              setSelectedDepartment("");
+              resetFields.department = "";
+            }
+            form.setFieldsValue({
+              ...resetFields,
+              office: null,
+            });
+          }
+          if (
+            Object.keys(changed)[0] == "generalDepartment" &&
+            changed.generalDepartment === undefined
+          ) {
+            form.setFieldsValue({
+              department: null,
+              office: null,
+            });
+          }
+          if (changed.department) {
+            setSelectedDepartment(changed.department);
+            form.setFieldsValue({
+              office: null,
+            });
+          }
+          if (
+            Object.keys(changed)[0] == "department" &&
+            changed.department === undefined
+          ) {
+            form.setFieldsValue({
+              office: null,
+            });
+          }
+          const queryValue = form.getFieldsValue();
+
+          fetchEmployees(queryValue);
         }}
       >
         <Row gutter={16}>
@@ -118,9 +180,13 @@ const Report = () => {
               <Select
                 placeholder="ជ្រើសរើស"
                 allowClear
+                // disabled={
+                //   isDisabledGeneralDepartment ||
+                //   session?.user?.role == "moderator"
+                // }
                 disabled={
-                  isDisabledGeneralDepartment ||
-                  session?.user?.role == "moderator"
+                  isDisabledGeneralDepartment
+                  // session?.user?.role == "moderator"
                 }
               >
                 {Object.keys(structureMOJ[selectedUnit] || {}).map((v, i) => {
@@ -142,11 +208,12 @@ const Report = () => {
               <Select
                 placeholder="ជ្រើសរើស"
                 allowClear
-                disabled={
-                  isDisabledDepartment ||
-                  (session?.user?.role == "moderator" &&
-                    session?.user?.moderatorType == "department")
-                }
+                disabled={isDisabledDepartment}
+                // disabled={
+                //   isDisabledDepartment ||
+                //   (session?.user?.role == "moderator" &&
+                //     session?.user?.moderatorType == "department")
+                // }
               >
                 {Object.keys(
                   structureMOJ[selectedUnit]?.[selectedGeneralDepartment] || {}
