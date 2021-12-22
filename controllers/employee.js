@@ -552,11 +552,12 @@ export const addAttachment = async (req, res, next) => {
   // );
 
   // console.log(indexDeleteFile);
-
+console.log(user.attachment)
   res.status(200).json({
     success: true,
     msg: "Successfully added",
-    // url: publicUrl,
+    url: publicUrl,
+    
     data: {
       id: user.id,
       attachment: user.attachment,

@@ -602,12 +602,12 @@ const StatusInfo = ({
                 style={{ marginBottom: 10 }}
                 name="generalDepartment"
                 label="អគ្គលេខាធិការដ្ឋាន / អគ្គនាយកដ្ឋាន / អគ្គាធិការដ្ឋាន"
-                rules={[
-                  {
-                    required: !isDisabledGeneralDepartment,
-                    message: "សូមបំពេញអគ្គនាយកដ្ឋាន",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: !isDisabledGeneralDepartment,
+                //     message: "សូមបំពេញអគ្គនាយកដ្ឋាន",
+                //   },
+                // ]}
               >
                 {/* <Input placeholder="អគ្គនាយកដ្ឋាន" /> */}
                 <Select

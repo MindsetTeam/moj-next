@@ -2,6 +2,7 @@ import moment from "moment";
 import "moment/locale/km";
 
 const PrintReport = ({
+  checkedList,
   printEmployees,
   generalDepartment = "",
   department = "",
@@ -96,23 +97,39 @@ const PrintReport = ({
           </div>
           <table border="1">
             <tr>
-              <th>លរ</th>
-              <th>ឈ្មោះ</th>
+              {checkedList.indexOf("no") >= 0 && <th>ល.រ</th>}
+              {checkedList.indexOf("name") >= 0 && <th>ឈ្មោះ</th>}
+              {checkedList.indexOf("sex") >= 0 && <th>ភេទ</th>}
+              {checkedList.indexOf("birthDate") >= 0 && (
+                <th>ថ្ងៃខែឆ្នាំកំណើត</th>
+              )}
+              {checkedList.indexOf("position") >= 0 && <th>មុខតំណែង</th>}
+              {checkedList.indexOf("status") >= 0 && <th>ស្ថានភាព</th>}
+              {/* <th>ឈ្មោះ</th>
               <th>ភេទ</th>
               <th>ថ្ងៃខែឆ្នាំកំណើត</th>
               <th>មុខតំណែង</th>
+              <th>ស្ថានភាព</th> */}
               {/* <th>អង្គភាព</th> */}
-              <th>ស្ថានភាព</th>
             </tr>
             {printEmployees.map((v, i) => (
               <tr>
-                <td>{i + 1}</td>
-                <td>{(v.firstName || "") + " " + (v.lastName || "")}</td>
-                <td>{v.gender}</td>
-                <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
-                <td>{v.latestOfficerStatus.position}</td>
+                {checkedList.indexOf("no") >= 0 && <td>{i + 1}</td>}
+                {checkedList.indexOf("name") >= 0 && (
+                  <td>{(v.firstName || "") + " " + (v.lastName || "")}</td>
+                )}
+                {checkedList.indexOf("sex") >= 0 && <td>{v.gender}</td>}
+                {checkedList.indexOf("birthDate") >= 0 && (
+                  <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
+                )}
+                {checkedList.indexOf("position") >= 0 && (
+                  <td>{v.latestOfficerStatus.position}</td>
+                )}
+                {checkedList.indexOf("status") >= 0 && (
+                  <td>{v.latestOfficerStatus.status}</td>
+                )}
+
                 {/* <td>{v.latestOfficerStatus.generalDepartment}</td> */}
-                <td>{v.latestOfficerStatus.status}</td>
               </tr>
             ))}
           </table>

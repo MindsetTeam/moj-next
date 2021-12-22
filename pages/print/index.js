@@ -141,7 +141,7 @@ const index = () => {
             >
                ទាំងអស់
             </Checkbox>
-            <Divider />
+            {/* <Divider /> */}
             <Checkbox.Group
                style={{ marginBottom: "20px", display: "flex" }}
                options={options}

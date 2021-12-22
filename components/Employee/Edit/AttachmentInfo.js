@@ -59,16 +59,17 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
           const fileUser =
             userData.attachment[v][
               userData.attachment?.[v].findIndex((data) => {
-                 console.log(data,val);
+                //   console.log(data,val);
                 return data.description == val;
               })
             ] || {};
-            // console.log(fileUser);
+          // console.log(fileUser);
           return {
             // ...val,
             description: val,
             parent: v,
             url: fileUser.url,
+            _id: fileUser._id,
             // description: userData.attachment[v][i]
             //   ? userData.attachment[v][i].description
             //   : "អត់",
@@ -123,6 +124,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       // width: "30%",
       render: (text, record, index) => {
         if (!record.children) {
+          console.log(record.url);
           return (
             <>
               <div>{text}</div>
@@ -139,13 +141,46 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
                 headers={{
                   method: "POST",
                 }}
+                showUploadList={{
+                  showRemoveIcon: false,
+                }}
                 accept="image/*,.pdf"
                 maxCount={1}
                 style={{ display: "flex" }}
-                //  onChange={(file) => {
-                //    console.log(file);
-                //  }}
-                defaultFileList={
+                onChange={({ file }) => {
+                  if (file.status === "done") {
+                    const { response } = file;
+                    //   updateProfile(response.payload.file);
+                    notification.success({ message: response.msg });
+                    setAttachmentList(() => {
+                      return Object.keys(fileTypeName).map((v, i) => {
+                        return {
+                          key: i,
+                          type: attachmentTypeName[v],
+                          children: fileTypeName[v].map((val, i) => {
+                            const fileUser =
+                              response.data.attachment[v][
+                                response.data.attachment?.[v].findIndex(
+                                  (data) => {
+                                    //   console.log(data,val);
+                                    return data.description == val;
+                                  }
+                                )
+                              ] || {};
+
+                            return {
+                              description: val,
+                              parent: v,
+                              url: fileUser.url,
+                              _id: fileUser._id,
+                            };
+                          }),
+                        };
+                      });
+                    });
+                  }
+                }}
+                fileList={
                   record.url?.length
                     ? [
                         {
@@ -173,7 +208,8 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       key: "action",
       align: "center",
       render: (text, record, index) => {
-        if (!record.children) {
+        if (!record.children && record.url) {
+          console.log(record);
           return (
             <Dropdown overlay={() => actionMenu(record)}>
               <a
@@ -199,14 +235,26 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       );
       notification.success({ message: res.msg });
       setAttachmentList(() => {
-        return Object.keys(res.data.attachment).map((v, i) => {
+        return Object.keys(fileTypeName).map((v, i) => {
           return {
             key: i,
             type: attachmentTypeName[v],
-            children: res.data.attachment[v].map((val) => ({
-              ...val,
-              parent: v,
-            })),
+            children: fileTypeName[v].map((val, i) => {
+              const fileUser =
+                res.data.attachment[v][
+                  res.data.attachment?.[v].findIndex((data) => {
+                    //   console.log(data,val);
+                    return data.description == val;
+                  })
+                ] || {};
+
+              return {
+                description: val,
+                parent: v,
+                url: fileUser.url,
+                _id: fileUser._id,
+              };
+            }),
           };
         });
       });
