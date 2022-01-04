@@ -24,7 +24,7 @@ const Report = () => {
     // if (!query.generalDepartment) {
     //   return setPrintEmployees([]);
     // }
-    console.log({query});
+    console.log({ query });
     let searchQuery = new URLSearchParams();
     Object.keys(query).forEach((v) => {
       console.log(query[v]);
@@ -38,11 +38,16 @@ const Report = () => {
   };
   const options = [
     { label: "លរ", value: "no" },
+    { label: "អត្តលេខមន្រ្តីរាជការ", value: "no" },
     { label: "ឈ្មោះ", value: "name" },
     { label: "ភេទ", value: "sex" },
     { label: "ថ្ងៃខែឆ្នាំកំណើត", value: "birthDate" },
+    { label: "កាលបរិច្ឆេទតែងតាំង", value: "no" },
     { label: "មុខតំណែង", value: "position" },
+    { label: "កម្មប្រាក់", value: "position" },
+    { label: "ឥស្សរិយយស", value: "position" },
     { label: "ស្ថានភាព", value: "status" },
+    { label: "ពិការភាព", value: "status" },
   ];
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -257,6 +262,9 @@ const Report = () => {
               បោះពុម្ព
             </Button>
           </Col>
+          <Button icon={<PrinterOutlined />} onClick={onPrint}>
+            Excel
+          </Button>
         </Row>
       </Form>
       <PrintReport

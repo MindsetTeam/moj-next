@@ -41,6 +41,7 @@ const UserSchema = new mongoose.Schema(
       work: [{ description: String, url: String }],
       education: [{ description: String, url: String }],
       status: [{ description: String, url: String }],
+      medal: [{ description: String, url: String }],
       // education: [{ description: String, url: String }],
       // child: [{ description: String, url: String }],
     },

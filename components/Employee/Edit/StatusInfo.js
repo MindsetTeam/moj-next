@@ -45,7 +45,9 @@ const StatusInfo = ({
   const [formInfo] = Form.useForm();
   const [formStatus] = Form.useForm();
   const [visible, setVisible] = useState(false);
-  const [nowOption, setNowOption] = useState(!Boolean(userData?.latestOfficerStatus?.endDate));
+  const [nowOption, setNowOption] = useState(
+    !Boolean(userData?.latestOfficerStatus?.endDate)
+  );
   const [officerStatusList, setOfficerStatusList] = useState([]);
   const [editData, setEditData] = useState(null);
   const [selectedGeneralDepartment, setSelectedGeneralDepartment] = useState(
@@ -306,15 +308,15 @@ const StatusInfo = ({
     );
   }, [userData]);
   const onFormStatusChange = (changedValue, allValues) => {
-    console.log(changedValue)
+    console.log(changedValue);
     let resetFields = {};
     if (changedValue.unit) {
       setSelectedUnit(changedValue.unit);
-      console.log(structureMOJ[changedValue.unit][""])
+      console.log(structureMOJ[changedValue.unit][""]);
       if (structureMOJ[changedValue.unit][""]) {
         setSelectedGeneralDepartment("");
         resetFields.generalDepartment = "";
-      }else{
+      } else {
         resetFields.generalDepartment = null;
       }
       formStatus.setFieldsValue({
@@ -566,7 +568,7 @@ const StatusInfo = ({
                 //   },
                 // ]}
               >
-                <Select placeholder="ជ្រើសរើស">
+                <Select placeholder="ជ្រើសរើស" allowClear>
                   {statusOfficer.map((v) => {
                     return (
                       <Option key={v} value={v}>
@@ -692,7 +694,7 @@ const StatusInfo = ({
                 ]}
               >
                 {/* <Input placeholder="មុខតំណែង" /> */}
-                <Select placeholder="ជ្រើសរើស">
+                <Select placeholder="ជ្រើសរើស" showSearch>
                   {positionList.map((v, i) => {
                     return (
                       <Option key={i} value={v}>
@@ -731,7 +733,12 @@ const StatusInfo = ({
                   display: "block",
                 }}
               >
-                <Switch onChange={onNowChange} defaultChecked={userData.latestOfficerStatus?.endDate?false:true} ></Switch>
+                <Switch
+                  onChange={onNowChange}
+                  defaultChecked={
+                    userData.latestOfficerStatus?.endDate ? false : true
+                  }
+                ></Switch>
               </Form.Item>
             </Col>
             <Col span={7}>

@@ -34,10 +34,10 @@ const Header = () => {
   const [session, loading] = useSession();
   return (
     <div className={styles.header}>
-      <div className={styles.logo}>
-        <div>
+      <div className={styles.logo} style={{ cursor: "pointer" }}>
+        <Link href="/">
           <Image src="/logo.png" width={40} height={40} />
-        </div>
+        </Link>
         <p className={styles.logoName}>ប្រព័ន្ធគ្រប់គ្រងមន្រ្ដីរាជការស៊ីវិល</p>
       </div>
       <div className={styles.topMenu}>

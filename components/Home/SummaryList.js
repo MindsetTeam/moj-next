@@ -2,6 +2,7 @@ import Dot from "@/components/Home/Dot";
 import { useSession } from "next-auth/client";
 import router from "next/router";
 import React from "react";
+import FullStructureMOJ from "/data/FullStructureMOJ.json";
 
 const SummaryList = ({ overviewData }) => {
   // generate random color
@@ -117,7 +118,27 @@ const SummaryList = ({ overviewData }) => {
   // );
   return (
     <table>
-      {Object.keys(overviewData?.data?.generalDepartmentList || {}).map(
+      {Object.keys(FullStructureMOJ).map((item, index) => (
+        <tr
+          key={index}
+          onClick={() =>
+            router.push({
+              pathname: "/employee",
+              query: {
+                unit: item,
+              },
+            })
+          }
+          style={{ cursor: "pointer" }}
+        >
+          <td>
+            <Dot color={getRandomColor()}></Dot>
+            {item}
+          </td>
+          <td>{overviewData?.data?.generalDepartmentList?.[item] || 0} នាក់</td>
+        </tr>
+      ))}
+      {/* {Object.keys(overviewData?.data?.generalDepartmentList || {}).map(
         (item, index) => (
           <tr
             key={index}
@@ -140,7 +161,7 @@ const SummaryList = ({ overviewData }) => {
             </td>
           </tr>
         )
-      )}
+      )} */}
     </table>
   );
 };

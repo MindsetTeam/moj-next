@@ -160,7 +160,7 @@ const Index = (props) => {
           </div>
           <div className={styles.bottomSection}>
             <Row gutter={50}>
-              <Col span={12}>
+              {/* <Col span={12}>
                 <div style={{ height: 300, backgroundColor: "#FEE5D1" }}>
                   <iframe
                     width="100%"
@@ -172,7 +172,7 @@ const Index = (props) => {
                     allowfullscreen
                   ></iframe>
                 </div>
-              </Col>
+              </Col> */}
               <Col span={12}>
                 <div className={styles.summaryContainer}>
                   <SummaryList overviewData={overviewData}></SummaryList>

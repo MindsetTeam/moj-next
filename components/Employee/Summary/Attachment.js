@@ -11,6 +11,7 @@ const attachmentTypeName = {
   work: "ប្រវត្តិការងារ",
   education: "ប្រវត្តិការសិក្សា",
   status: "ស្ថានភាពមន្រ្តី",
+  medal: "ឯកសារគ្រឿងឥស្សរិយយស",
 };
 
 const Attachment = ({ userData }) => {

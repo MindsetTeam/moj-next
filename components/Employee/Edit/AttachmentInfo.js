@@ -32,6 +32,7 @@ const attachmentTypeName = {
   work: "ប្រវត្តិការងារ",
   education: "ប្រវត្តិការសិក្សា",
   status: "ស្ថានភាពមន្រ្តី",
+  medal: "ឯកសារគ្រឿងឥស្សរិយយស",
 };
 
 const attachmentInfo = ({ userData, fileTypeName }) => {
@@ -57,8 +58,8 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
         type: attachmentTypeName[v],
         children: fileTypeName[v].map((val, i) => {
           const fileUser =
-            userData.attachment[v][
-              userData.attachment?.[v].findIndex((data) => {
+            userData.attachment[v]?.[
+              userData.attachment?.[v]?.findIndex((data) => {
                 //   console.log(data,val);
                 return data.description == val;
               })
@@ -110,7 +111,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       title: "ប្រភេទឯកសារ",
       dataIndex: "type",
       key: "type",
-      width: "14%",
+      width: "16%",
     },
     //  {
     //    title: "ឯកសារ",
