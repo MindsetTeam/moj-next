@@ -14,6 +14,7 @@ import rankList from "data/Rank.json";
 import provincesList from "data/Province.json";
 import positionList from "data/Position.json";
 import fileTypeName from "data/FileTypeName.json";
+import roleMOJ from "data/RoleMOJ.json";
 
 export async function getServerSideProps({ params }) {
    const res = await api.get("/api/users/" + params.id);
@@ -29,6 +30,7 @@ export async function getServerSideProps({ params }) {
          positionList,
          structureMOJ,
          fileTypeName,
+         roleMOJ,
          user: res.data,
       },
    };
@@ -44,6 +46,7 @@ const Edit = ({
    positionList,
    fileTypeName,
    structureMOJ,
+   roleMOJ,
    user,
 }) => {
    console.log(user);
@@ -69,6 +72,7 @@ const Edit = ({
                ministryList={ministryList}
                fileTypeName={fileTypeName}
                structureMOJ={structureMOJ}
+               roleMOJ={roleMOJ}
             ></EditInfo>
          </div>
          <style jsx global>{`

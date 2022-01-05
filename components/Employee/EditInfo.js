@@ -27,6 +27,7 @@ const EditInfo = ({
    positionList,
    fileTypeName,
    structureMOJ,
+   roleMOJ,
    rankList,
 }) => {
    const [activeTabKey, setActiveTabKey] = useState("1");
@@ -98,6 +99,7 @@ const EditInfo = ({
                   positionList={positionList}
                   ministryList={ministryList}
                   structureMOJ={structureMOJ}
+                  roleMOJ={roleMOJ}
                   statusOfficer={statusOfficer}
                   ministryStructure={ministryStructure}
                ></StatusInfo>

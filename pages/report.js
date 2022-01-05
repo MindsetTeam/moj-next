@@ -2,6 +2,7 @@ import PrintReport from "@/components/Report/PrintReport";
 import styles from "@/styles/Print.module.css";
 import structureMinistryData from "/data/Structure.json";
 import structureMOJ from "/data/FullStructureMOJ.json";
+import sortedRole from "/data/SortedRole.json";
 
 import React, { useState } from "react";
 import { Col, Row, Select, Form, Button, Checkbox, Divider } from "antd";
@@ -34,6 +35,24 @@ const Report = () => {
     });
     console.log(searchQuery.toString());
     const { data } = await fetcher("/api/users?" + searchQuery.toString());
+    console.log(data);
+    data.sort((a, b) => {
+      const roleArr = Object.keys(sortedRole);
+      const unitIndexA = roleArr.indexOf(a.latestOfficerStatus.unit);
+      const unitIndexB = roleArr.indexOf(b.latestOfficerStatus.unit);
+      if (unitIndexA !== unitIndexB) {
+        return unitIndexA - unitIndexB;
+      }
+      console.log(unitIndexA, unitIndexB);
+      return (
+        sortedRole[a.latestOfficerStatus.unit].indexOf(
+          a.latestOfficerStatus.position
+        )-sortedRole[b.latestOfficerStatus.unit].indexOf(
+          b.latestOfficerStatus.position
+        ) 
+        
+      );
+    });
     setPrintEmployees(data);
   };
   const options = [

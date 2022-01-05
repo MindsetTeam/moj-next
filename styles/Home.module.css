@@ -22,11 +22,11 @@
    margin: 25px 0px;
 }
 
-.pieChart {
+ .pieChart {
    background-color: #fff;
-   padding: 20px;
+   /* padding: 20px; */
    height: 100%;
-}
+} 
 
 /* Bottom section */
 .summaryContainer {

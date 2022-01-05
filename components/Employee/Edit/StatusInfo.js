@@ -38,6 +38,7 @@ const StatusInfo = ({
   rankList,
   positionList,
   onChangeTabKey,
+  roleMOJ,
   ministryStructure,
   userData,
 }) => {
@@ -59,6 +60,19 @@ const StatusInfo = ({
   const [selectedDepartment, setSelectedDepartment] = useState(
     userData?.latestOfficerStatus?.department
   );
+  const [displayRole, setDisplayRole] = useState(() => {
+    const returnData = [];
+    if (userData?.latestOfficerStatus?.unit) {
+      returnData = roleMOJ[userData?.latestOfficerStatus?.unit + ".unit"];
+    }
+    if (userData?.latestOfficerStatus?.department) {
+      returnData = roleMOJ[userData?.latestOfficerStatus?.unit + ".department"];
+    }
+    if (userData?.latestOfficerStatus?.office) {
+      returnData = roleMOJ[userData?.latestOfficerStatus?.unit + ".office"];
+    }
+    return returnData;
+  });
 
   const [startDate, setStartDate] = useState();
   const [endDate, setEndDate] = useState();
@@ -311,6 +325,7 @@ const StatusInfo = ({
     console.log(changedValue);
     let resetFields = {};
     if (changedValue.unit) {
+      setDisplayRole(roleMOJ[changedValue.unit]);
       setSelectedUnit(changedValue.unit);
       console.log(structureMOJ[changedValue.unit][""]);
       if (structureMOJ[changedValue.unit][""]) {
@@ -323,6 +338,7 @@ const StatusInfo = ({
         ...resetFields,
         department: null,
         office: null,
+        position: null,
       });
     }
     if (changedValue.generalDepartment) {
@@ -334,12 +350,21 @@ const StatusInfo = ({
       formStatus.setFieldsValue({
         ...resetFields,
         office: null,
+        position: null,
       });
     }
     if (changedValue.department) {
+      setDisplayRole(roleMOJ[`${selectedUnit}.department`]);
       setSelectedDepartment(changedValue.department);
       formStatus.setFieldsValue({
         office: null,
+        position: null,
+      });
+    }
+    if (changedValue.office) {
+      setDisplayRole(roleMOJ[`${selectedUnit}.office`]);
+      formStatus.setFieldsValue({
+        position: null,
       });
     }
   };
@@ -695,7 +720,14 @@ const StatusInfo = ({
               >
                 {/* <Input placeholder="មុខតំណែង" /> */}
                 <Select placeholder="ជ្រើសរើស" showSearch>
-                  {positionList.map((v, i) => {
+                  {/* {positionList.map((v, i) => {
+                    return (
+                      <Option key={i} value={v}>
+                        {v}
+                      </Option>
+                    );
+                  })} */}
+                  {[...(displayRole || [])].map((v, i) => {
                     return (
                       <Option key={i} value={v}>
                         {v}

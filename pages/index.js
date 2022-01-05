@@ -55,6 +55,114 @@ const Index = (props) => {
       {/* {!overviewData && !error && <p>loading</p>} */}
       {/* {!["admin", "editor"].includes(session?.user?.role) && <p>Home Page</p>} */}
       {["admin", "editor", "moderator"].includes(session?.user?.role) && (
+        <Row gutter={23}>
+          <Col span={12}>
+            <Col>{statusOfficer}</Col>
+            <Col style={{ marginTop: 5 , marginBottom: 20}}>
+              <div className={styles.pieChart}>
+                {/* <p>1</p> */}
+                <Chart
+                  centerInstitution={overviewData?.data?.centerInstitution}
+                ></Chart>
+              </div>
+            </Col>
+            <Col span={24}>
+              {civilOfficer}
+              <Row gutter={25} style={{ marginTop: 5}}>
+                <Col
+                  span={12}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/employee",
+                      query: {
+                        rank: "មន្ត្រីពេញសិទ្ធ/មន្រ្តីក្រប​ខណ្ឌ",
+                      },
+                    })
+                  }
+                >
+                  <HomeCard
+                    number={
+                      overviewData?.data?.officerStatusList?.[
+                        "មន្ត្រីពេញសិទ្ធ/មន្រ្តីក្រប​ខណ្ឌ"
+                      ] || 0
+                    }
+                    title="ថ្នាក់ដឹកនាំ​ និងមន្រ្ដីរាជការ"
+                    color="red"
+                  ></HomeCard>
+                </Col>
+                <Col
+                  span={12}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/employee",
+                      query: {
+                        rank: "មន្រ្តីកម្មសិក្សា",
+                      },
+                    })
+                  }
+                >
+                  <HomeCard
+                    number={
+                      overviewData?.data?.officerStatusList?.[
+                        "មន្រ្តីកម្មសិក្សា"
+                      ] || 0
+                    }
+                    title="មន្ត្រីកម្មសិក្សា"
+                    color="green"
+                  ></HomeCard>
+                </Col>
+              </Row>
+              <Row gutter={25}>
+                <Col
+                  span={12}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/employee",
+                      query: {
+                        rank: "មន្ត្រីកិច្ចសន្យា",
+                      },
+                    })
+                  }
+                >
+                  <HomeCard
+                    number={
+                      overviewData?.data?.officerStatusList?.[
+                        "មន្ត្រីកិច្ចសន្យា"
+                      ] || 0
+                    }
+                    title="មន្ត្រីកិច្ចសន្យា"
+                    color="lightblue"
+                  ></HomeCard>
+                </Col>
+                <Col
+                  span={12}
+                  onClick={() =>
+                    router.push({
+                      pathname: "/employee",
+                      query: {
+                        retired: true,
+                      },
+                    })
+                  }
+                >
+                  <HomeCard
+                    number={overviewData?.data?.retiredEmployee || 0}
+                    title="មន្ត្រីចូលនិវត្តន៍"
+                    color="teal"
+                  ></HomeCard>
+                </Col>
+              </Row>
+            </Col>
+          </Col>
+          <Col span={12}>
+            <div className={styles.summaryContainer}>
+              <SummaryList overviewData={overviewData}></SummaryList>
+            </div>
+          </Col>
+        </Row>
+      )}
+
+      {/* {["admin", "editor", "moderator"].includes(session?.user?.role) && (
         <>
           <div className={styles.topSection}>
             <Row gutter={50}>
@@ -66,7 +174,6 @@ const Index = (props) => {
             <Row gutter={50}>
               <Col span={12}>
                 <div className={styles.pieChart}>
-                  {/* <p>1</p> */}
                   <Chart
                     centerInstitution={overviewData?.data?.centerInstitution}
                   ></Chart>
@@ -74,15 +181,17 @@ const Index = (props) => {
               </Col>
               <Col span={12}>
                 <Row gutter={50} style={{ marginBottom: 15 }}>
-                  <Col span={12}
-                  onClick={() =>
-                    router.push({
-                      pathname: "/employee",
-                      query: {
-                        rank: "មន្ត្រីពេញសិទ្ធ/មន្រ្តីក្រប​ខណ្ឌ",
-                      },
-                    })
-                  }>
+                  <Col
+                    span={12}
+                    onClick={() =>
+                      router.push({
+                        pathname: "/employee",
+                        query: {
+                          rank: "មន្ត្រីពេញសិទ្ធ/មន្រ្តីក្រប​ខណ្ឌ",
+                        },
+                      })
+                    }
+                  >
                     <HomeCard
                       number={
                         overviewData?.data?.officerStatusList?.[
@@ -160,7 +269,7 @@ const Index = (props) => {
           </div>
           <div className={styles.bottomSection}>
             <Row gutter={50}>
-              {/* <Col span={12}>
+              <Col span={12}>
                 <div style={{ height: 300, backgroundColor: "#FEE5D1" }}>
                   <iframe
                     width="100%"
@@ -172,7 +281,7 @@ const Index = (props) => {
                     allowfullscreen
                   ></iframe>
                 </div>
-              </Col> */}
+              </Col>
               <Col span={12}>
                 <div className={styles.summaryContainer}>
                   <SummaryList overviewData={overviewData}></SummaryList>
@@ -190,7 +299,7 @@ const Index = (props) => {
             }
           `}</style>
         </>
-      )}
+      )} */}
     </div>
   );
 };
