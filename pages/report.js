@@ -64,7 +64,7 @@ const Report = () => {
     { label: "កាលបរិច្ឆេទតែងតាំង", value: "no" },
     { label: "មុខតំណែង", value: "position" },
     { label: "កម្មប្រាក់", value: "position" },
-    { label: "ឥស្សរិយយស", value: "position" },
+    // { label: "ឥស្សរិយយស", value: "position" },
     { label: "ស្ថានភាព", value: "status" },
     { label: "ពិការភាព", value: "status" },
   ];

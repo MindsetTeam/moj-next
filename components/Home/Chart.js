@@ -24,6 +24,7 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
       angleField: "value",
       colorField: "type",
       radius: 1,
+      legend: false,
       innerRadius: 0.6,
       label: {
          // type: "inner",
