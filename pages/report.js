@@ -5,6 +5,8 @@ import structureMOJ from "/data/FullStructureMOJ.json";
 import sortedRole from "/data/SortedRole.json";
 
 import React, { useState } from "react";
+import XLSX from "xlsx";
+import moment from "moment";
 import { Col, Row, Select, Form, Button, Checkbox, Divider } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { fetcher } from "@/lib/fetch";
@@ -13,19 +15,87 @@ const { Option } = Select;
 
 const Report = () => {
   const [form] = Form.useForm();
-
-  const [choiceGeneralDepartment, setChoiceGeneralDepartment] = useState("");
-  const [choiceDepartment, setChoiceDepartment] = useState("");
   const [printEmployees, setPrintEmployees] = useState([]);
 
   const onPrint = () => {
     window.print();
   };
+  const onExportExcel = () => {
+    const header = options.map((v) => v.value);
+    let compatibleData;
+    if (Array.isArray(printEmployees)) {
+      compatibleData = [
+        // ...options.map((v) => v.label),
+        ...printEmployees.map((v, i) => {
+          const rank = v.rank[v.rank?.length - 1] || [];
+          return {
+            no: i + 1,
+            officerID: v.officerID,
+            name: `${v.firstName} ${v.lastName}`,
+            sex: v.gender,
+            birthDate: moment(v.birthDate).format("DD/MMMM/YYYY"),
+            officerStatusStartDate: moment(
+              v.latestOfficerStatus.startDate
+            ).format("DD/MMMM/YYYY"),
+            position: v.latestOfficerStatus.position,
+            salary: rank.framework
+              ? `${rank.framework} ${rank.rankType} ${rank.level}`
+              : "",
+            status: v.latestOfficerStatus.status,
+            disability: v.disabilityNum,
+          };
+        }),
+      ];
+    } else {
+      compatibleData = [];
+      Object.keys(printEmployees).forEach((unit) => {
+        compatibleData.push(
+          {
+            no: unit,
+          },
+          ...printEmployees[unit].map((v, i) => {
+            const rank = v.rank[v.rank?.length - 1] || [];
+            return {
+              no: i + 1,
+              officerID: v.officerID,
+              name: `${v.firstName} ${v.lastName}`,
+              sex: v.gender,
+              birthDate: moment(v.birthDate).format("DD/MMMM/YYYY"),
+              officerStatusStartDate: moment(
+                v.latestOfficerStatus.startDate
+              ).format("DD/MMMM/YYYY"),
+              position: v.latestOfficerStatus.position,
+              salary: rank.framework
+                ? `${rank.framework} ${rank.rankType} ${rank.level}`
+                : "",
+              status: v.latestOfficerStatus.status,
+              disability: v.disabilityNum,
+            };
+          })
+        );
+      });
+    }
+    console.log(compatibleData);
+    const headerKhmer = {};
+    options.forEach((v) => {
+      headerKhmer[v.value] = v.label;
+    });
+    compatibleData.unshift({
+      ...headerKhmer,
+    });
+    let wb = XLSX.utils.book_new();
+    let ws1 = XLSX.utils.json_to_sheet(compatibleData, { header });
+    XLSX.utils.book_append_sheet(wb, ws1, "Employees");
+    XLSX.writeFile(
+      wb,
+      new Date().toISOString().slice(0, 10) + "ReportEmployee.xlsx"
+    );
+  };
   const fetchEmployees = async (query) => {
     // if (!query.generalDepartment) {
     //   return setPrintEmployees([]);
     // }
-    console.log({ query });
+    // console.log({ query });
     let searchQuery = new URLSearchParams();
     Object.keys(query).forEach((v) => {
       console.log(query[v]);
@@ -33,40 +103,70 @@ const Report = () => {
         searchQuery.append(v, query[v]);
       }
     });
-    console.log(searchQuery.toString());
+    // console.log(searchQuery.toString());
     const { data } = await fetcher("/api/users?" + searchQuery.toString());
-    console.log(data);
-    data.sort((a, b) => {
-      const roleArr = Object.keys(sortedRole);
-      const unitIndexA = roleArr.indexOf(a.latestOfficerStatus.unit);
-      const unitIndexB = roleArr.indexOf(b.latestOfficerStatus.unit);
-      if (unitIndexA !== unitIndexB) {
-        return unitIndexA - unitIndexB;
-      }
-      console.log(unitIndexA, unitIndexB);
-      return (
-        sortedRole[a.latestOfficerStatus.unit].indexOf(
-          a.latestOfficerStatus.position
-        )-sortedRole[b.latestOfficerStatus.unit].indexOf(
-          b.latestOfficerStatus.position
-        ) 
-        
-      );
-    });
+    if (query.unit) {
+      data.sort((a, b) => {
+        const roleArr = Object.keys(sortedRole);
+        const unitIndexA = roleArr.indexOf(a.latestOfficerStatus.unit);
+        const unitIndexB = roleArr.indexOf(b.latestOfficerStatus.unit);
+        if (unitIndexA !== unitIndexB) {
+          return unitIndexA - unitIndexB;
+        }
+        return (
+          sortedRole[a.latestOfficerStatus.unit].indexOf(
+            a.latestOfficerStatus.position
+          ) -
+          sortedRole[b.latestOfficerStatus.unit].indexOf(
+            b.latestOfficerStatus.position
+          )
+        );
+      });
+    } else {
+      // console.log("object");
+      let displayData = {};
+      data.forEach((v) => {
+        if (displayData[v.latestOfficerStatus.unit]) {
+          displayData[v.latestOfficerStatus.unit].push(v);
+        } else {
+          displayData[v.latestOfficerStatus.unit] = [v];
+        }
+      });
+      Object.keys(displayData).forEach((v) => {
+        displayData[v].sort((a, b) => {
+          const roleArr = Object.keys(sortedRole);
+          const unitIndexA = roleArr.indexOf(a.latestOfficerStatus.unit);
+          const unitIndexB = roleArr.indexOf(b.latestOfficerStatus.unit);
+          if (unitIndexA !== unitIndexB) {
+            return unitIndexA - unitIndexB;
+          }
+          return (
+            sortedRole[a.latestOfficerStatus.unit].indexOf(
+              a.latestOfficerStatus.position
+            ) -
+            sortedRole[b.latestOfficerStatus.unit].indexOf(
+              b.latestOfficerStatus.position
+            )
+          );
+        });
+      });
+      data = displayData;
+    }
+
     setPrintEmployees(data);
   };
   const options = [
     { label: "លរ", value: "no" },
-    { label: "អត្តលេខមន្រ្តីរាជការ", value: "no" },
+    { label: "អត្តលេខមន្រ្តីរាជការ", value: "officerID" },
     { label: "ឈ្មោះ", value: "name" },
     { label: "ភេទ", value: "sex" },
     { label: "ថ្ងៃខែឆ្នាំកំណើត", value: "birthDate" },
-    { label: "កាលបរិច្ឆេទតែងតាំង", value: "no" },
+    { label: "កាលបរិច្ឆេទតែងតាំង", value: "officerStatusStartDate" },
     { label: "មុខតំណែង", value: "position" },
-    { label: "កម្មប្រាក់", value: "position" },
+    { label: "កម្មប្រាក់", value: "salary" },
     // { label: "ឥស្សរិយយស", value: "position" },
     { label: "ស្ថានភាព", value: "status" },
-    { label: "ពិការភាព", value: "status" },
+    { label: "ពិការភាព", value: "disability" },
   ];
   const [checkedList, setCheckedList] = useState([]);
   const [indeterminate, setIndeterminate] = useState(false);
@@ -181,7 +281,6 @@ const Report = () => {
             });
           }
           const queryValue = form.getFieldsValue();
-
           fetchEmployees(queryValue);
         }}
       >
@@ -281,7 +380,7 @@ const Report = () => {
               បោះពុម្ព
             </Button>
           </Col>
-          <Button icon={<PrinterOutlined />} onClick={onPrint}>
+          <Button icon={<PrinterOutlined />} onClick={onExportExcel}>
             Excel
           </Button>
         </Row>
@@ -289,8 +388,9 @@ const Report = () => {
       <PrintReport
         checkedList={checkedList}
         printEmployees={printEmployees}
-        generalDepartment={choiceGeneralDepartment}
-        department={choiceDepartment}
+        generalDepartment={selectedGeneralDepartment}
+        department={selectedDepartment}
+        unit={selectedUnit}
       />
     </div>
   );

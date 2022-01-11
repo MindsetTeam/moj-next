@@ -4,9 +4,12 @@ import "moment/locale/km";
 const PrintReport = ({
   checkedList,
   printEmployees,
-  generalDepartment = "",
-  department = "",
+  generalDepartment,
+  unit,
+  department,
 }) => {
+  // console.log("dfasdfasd", department, generalDepartment);
+  // if(generalDepartment)
   return (
     <>
       <style jsx global>{`
@@ -92,19 +95,31 @@ const PrintReport = ({
               របាយការណ៏បញ្ជីរាយនាម
             </p>
             <p style={{ fontWeight: "bold", fontFamily: "Moul" }}>
-              {department + (department ? " នៃ" : "") + generalDepartment}
+              {department +
+              (department ? " នៃ" : "") +
+              (generalDepartment && generalDepartment !== "")
+                ? generalDepartment
+                : unit}
             </p>
           </div>
           <table border="1">
             <tr>
               {checkedList.indexOf("no") >= 0 && <th>ល.រ</th>}
+              {checkedList.indexOf("officerID") >= 0 && (
+                <th>អត្តលេខមន្រ្តីរាជការ</th>
+              )}
               {checkedList.indexOf("name") >= 0 && <th>ឈ្មោះ</th>}
               {checkedList.indexOf("sex") >= 0 && <th>ភេទ</th>}
               {checkedList.indexOf("birthDate") >= 0 && (
                 <th>ថ្ងៃខែឆ្នាំកំណើត</th>
               )}
+              {checkedList.indexOf("officerStatusStartDate") >= 0 && (
+                <th>កាលបរិច្ឆេទតែងតាំង</th>
+              )}
               {checkedList.indexOf("position") >= 0 && <th>មុខតំណែង</th>}
+              {checkedList.indexOf("salary") >= 0 && <th>កម្មប្រាក់</th>}
               {checkedList.indexOf("status") >= 0 && <th>ស្ថានភាព</th>}
+              {checkedList.indexOf("disability") >= 0 && <th>ពិការភាព</th>}
               {/* <th>ឈ្មោះ</th>
               <th>ភេទ</th>
               <th>ថ្ងៃខែឆ្នាំកំណើត</th>
@@ -112,26 +127,100 @@ const PrintReport = ({
               <th>ស្ថានភាព</th> */}
               {/* <th>អង្គភាព</th> */}
             </tr>
-            {printEmployees.map((v, i) => (
-              <tr>
-                {checkedList.indexOf("no") >= 0 && <td>{i + 1}</td>}
-                {checkedList.indexOf("name") >= 0 && (
-                  <td>{(v.firstName || "") + " " + (v.lastName || "")}</td>
-                )}
-                {checkedList.indexOf("sex") >= 0 && <td>{v.gender}</td>}
-                {checkedList.indexOf("birthDate") >= 0 && (
-                  <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
-                )}
-                {checkedList.indexOf("position") >= 0 && (
-                  <td>{v.latestOfficerStatus.position}</td>
-                )}
-                {checkedList.indexOf("status") >= 0 && (
-                  <td>{v.latestOfficerStatus.status}</td>
-                )}
-
-                {/* <td>{v.latestOfficerStatus.generalDepartment}</td> */}
-              </tr>
-            ))}
+            {Array.isArray(printEmployees)
+              ? printEmployees.map((v, i) => (
+                  <tr>
+                    {checkedList.indexOf("no") >= 0 && <td>{i + 1}</td>}
+                    {checkedList.indexOf("officerID") >= 0 && (
+                      <td>{v.officerID}</td>
+                    )}
+                    {checkedList.indexOf("name") >= 0 && (
+                      <td>{(v.firstName || "") + " " + (v.lastName || "")}</td>
+                    )}
+                    {checkedList.indexOf("sex") >= 0 && <td>{v.gender}</td>}
+                    {checkedList.indexOf("birthDate") >= 0 && (
+                      <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
+                    )}
+                    {checkedList.indexOf("officerStatusStartDate") >= 0 && (
+                      <td>
+                        {moment(v.latestOfficerStatus.startDate).format(
+                          "DD/MM/YYYY"
+                        )}
+                      </td>
+                    )}
+                    {checkedList.indexOf("position") >= 0 && (
+                      <td>{v.latestOfficerStatus.position}</td>
+                    )}
+                    {checkedList.indexOf("salary") >= 0 && (
+                      <td>
+                        {v.rank.length > 0
+                          ? v.rank[0].framework +
+                            " " +
+                            v.rank[0].rankType +
+                            " " +
+                            v.rank[0].level
+                          : ""}
+                      </td>
+                    )}
+                    {checkedList.indexOf("status") >= 0 && (
+                      <td>{v.latestOfficerStatus.status}</td>
+                    )}
+                    {checkedList.indexOf("disability") >= 0 && (
+                      <td>{v.disabilityNum}</td>
+                    )}
+                  </tr>
+                ))
+              : Object.keys(printEmployees).map((unit) => (
+                  <>
+                    <tr style={{textAlign: "left"}}>
+                      <th colSpan={checkedList.length} style={{paddingLeft: "20px"}}>{unit}</th>
+                    </tr>
+                    {printEmployees[unit].map((v, i) => (
+                      <tr>
+                        {checkedList.indexOf("no") >= 0 && <td>{i + 1}</td>}
+                        {checkedList.indexOf("officerID") >= 0 && (
+                          <td>{v.officerID}</td>
+                        )}
+                        {checkedList.indexOf("name") >= 0 && (
+                          <td>
+                            {(v.firstName || "") + " " + (v.lastName || "")}
+                          </td>
+                        )}
+                        {checkedList.indexOf("sex") >= 0 && <td>{v.gender}</td>}
+                        {checkedList.indexOf("birthDate") >= 0 && (
+                          <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
+                        )}
+                        {checkedList.indexOf("officerStatusStartDate") >= 0 && (
+                          <td>
+                            {moment(v.latestOfficerStatus.startDate).format(
+                              "DD/MM/YYYY"
+                            )}
+                          </td>
+                        )}
+                        {checkedList.indexOf("position") >= 0 && (
+                          <td>{v.latestOfficerStatus.position}</td>
+                        )}
+                        {checkedList.indexOf("salary") >= 0 && (
+                          <td>
+                            {v.rank.length > 0
+                              ? v.rank[0].framework +
+                                " " +
+                                v.rank[0].rankType +
+                                " " +
+                                v.rank[0].level
+                              : ""}
+                          </td>
+                        )}
+                        {checkedList.indexOf("status") >= 0 && (
+                          <td>{v.latestOfficerStatus.status}</td>
+                        )}
+                        {checkedList.indexOf("disability") >= 0 && (
+                          <th>{v.disabilityNum}</th>
+                        )}
+                      </tr>
+                    ))}
+                  </>
+                ))}
           </table>
           <div style={{ float: "right", marginTop: "10px" }}>
             <p>{moment().format("ថ្ងៃDD ខែMMMM ឆ្នាំYYYY")}</p>

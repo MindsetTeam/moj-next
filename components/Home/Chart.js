@@ -27,7 +27,7 @@ const Chart = ({ centerInstitution = { ប្រុស: 0, ស្រី: 0 } }) 
       legend: false,
       innerRadius: 0.6,
       label: {
-         // type: "inner",
+         // type: "innjer",
          // offset: "-50%",
          // content: "{value}",
          // style: {

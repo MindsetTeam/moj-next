@@ -484,6 +484,7 @@ export const updateEmployee = async (req, res, next) => {
       currentResidence: { ...dataUpdate.currentResidence },
     };
   }
+  console.log(dataUpdate)
   const user = await User.findByIdAndUpdate(id, dataUpdate, {
     new: true,
     runValidators: true,
