@@ -126,25 +126,25 @@ const Report = () => {
       // console.log("object");
       let displayData = {};
       data.forEach((v) => {
-        if (displayData[v.latestOfficerStatus.unit]) {
-          displayData[v.latestOfficerStatus.unit].push(v);
+        if (displayData[v.latestOfficerStatus?.unit]) {
+          displayData[v.latestOfficerStatus?.unit].push(v);
         } else {
-          displayData[v.latestOfficerStatus.unit] = [v];
+          displayData[v.latestOfficerStatus?.unit] = [v];
         }
       });
       Object.keys(displayData).forEach((v) => {
         displayData[v].sort((a, b) => {
           const roleArr = Object.keys(sortedRole);
-          const unitIndexA = roleArr.indexOf(a.latestOfficerStatus.unit);
-          const unitIndexB = roleArr.indexOf(b.latestOfficerStatus.unit);
+          const unitIndexA = roleArr.indexOf(a.latestOfficerStatus?.unit);
+          const unitIndexB = roleArr.indexOf(b.latestOfficerStatus?.unit);
           if (unitIndexA !== unitIndexB) {
             return unitIndexA - unitIndexB;
           }
           return (
-            sortedRole[a.latestOfficerStatus.unit].indexOf(
+            sortedRole[a.latestOfficerStatus?.unit]?.indexOf(
               a.latestOfficerStatus.position
             ) -
-            sortedRole[b.latestOfficerStatus.unit].indexOf(
+            sortedRole[b.latestOfficerStatus?.unit]?.indexOf(
               b.latestOfficerStatus.position
             )
           );
