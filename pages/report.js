@@ -104,7 +104,7 @@ const Report = () => {
       }
     });
     // console.log(searchQuery.toString());
-    const { data } = await fetcher("/api/users?" + searchQuery.toString());
+    let { data } = await fetcher("/api/users?" + searchQuery.toString());
     if (query.unit) {
       data.sort((a, b) => {
         const roleArr = Object.keys(sortedRole);
