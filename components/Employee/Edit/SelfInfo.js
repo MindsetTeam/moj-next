@@ -98,7 +98,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                 justifyItems: "center",
               }}
             >
-              <img src={imageUrl} alt="" width="160" height="180" />
+              <img src={imageUrl} alt="" width="160" height="200" />
               <div className="">
                 <Upload
                   name="img-profile"

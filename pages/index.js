@@ -55,20 +55,23 @@ const Index = (props) => {
       {/* {!overviewData && !error && <p>loading</p>} */}
       {/* {!["admin", "editor"].includes(session?.user?.role) && <p>Home Page</p>} */}
       {["admin", "editor", "moderator"].includes(session?.user?.role) && (
-        <Row gutter={23}>
-          <Col span={12}>
-            <Col>{statusOfficer}</Col>
-            <Col style={{ marginTop: 5 , marginBottom: 20}}>
-              <div className={styles.pieChart}>
+        <Row gutter={10} align="middle" justify="center">
+          <Col span="12" height="100%" style={{height: '100%'}} >
+            <Col>
+              {statusOfficer}
+              <div
+                className={styles.pieChart}
+                style={{ marginTop: 5,height: 227 }}
+              >
                 {/* <p>1</p> */}
                 <Chart
                   centerInstitution={overviewData?.data?.centerInstitution}
                 ></Chart>
               </div>
             </Col>
-            <Col span={24}>
+            <Col style={{height: '100%',marginTop: 15, }}>
               {civilOfficer}
-              <Row gutter={25} style={{ marginTop: 5}}>
+              <Row gutter={[10,10]}style={{ marginTop: 5 }}>
                 <Col
                   span={12}
                   onClick={() =>
@@ -111,8 +114,7 @@ const Index = (props) => {
                     color="green"
                   ></HomeCard>
                 </Col>
-              </Row>
-              <Row gutter={25}>
+                
                 <Col
                   span={12}
                   onClick={() =>
@@ -151,10 +153,12 @@ const Index = (props) => {
                     color="teal"
                   ></HomeCard>
                 </Col>
+              
               </Row>
+              <Row gutter={[10]}></Row>
             </Col>
           </Col>
-          <Col span={12}>
+          <Col span="12">
             <div className={styles.summaryContainer}>
               <SummaryList overviewData={overviewData}></SummaryList>
             </div>

@@ -144,7 +144,7 @@ const PrintReport = ({
                     {checkedList.indexOf("officerStatusStartDate") >= 0 && (
                       <td>
                         {moment(v.latestOfficerStatus.startDate).format(
-                          "DD/MM/YYYY"
+                          "DD/MMMM/YYYY"
                         )}
                       </td>
                     )}

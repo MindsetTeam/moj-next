@@ -64,7 +64,7 @@ const Layout = ({ children, roles = [] }) => {
       {/* <Slider /> */}
       <LayoutAnt className="site-layout">
         <Header></Header>
-        <Content style={{ paddingTop: 25 }}>{children}</Content>
+        <Content>{children}</Content>
         <Footer></Footer>
       </LayoutAnt>
     </>

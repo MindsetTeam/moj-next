@@ -75,7 +75,7 @@ const Report = () => {
         );
       });
     }
-    console.log(compatibleData);
+    // console.log(compatibleData);
     const headerKhmer = {};
     options.forEach((v) => {
       headerKhmer[v.value] = v.label;
@@ -168,8 +168,8 @@ const Report = () => {
     { label: "ស្ថានភាព", value: "status" },
     { label: "ពិការភាព", value: "disability" },
   ];
-  const [checkedList, setCheckedList] = useState([]);
-  const [indeterminate, setIndeterminate] = useState(false);
+  const [checkedList, setCheckedList] = useState(['no', 'officerID', 'name','sex']);
+  const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
   const [selectedGeneralDepartment, setSelectedGeneralDepartment] =
     useState("");
