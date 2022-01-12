@@ -61,7 +61,7 @@ const StatusInfo = ({
     userData?.latestOfficerStatus?.department
   );
   const [displayRole, setDisplayRole] = useState(() => {
-    const returnData = [];
+    let returnData = [];
     if (userData?.latestOfficerStatus?.unit) {
       returnData = roleMOJ[userData?.latestOfficerStatus?.unit + ".unit"];
     }
