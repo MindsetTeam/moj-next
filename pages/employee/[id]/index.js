@@ -59,6 +59,7 @@ export default function Home({
             </Button>
           )}
         </div>
+
         <SummaryInfo
           userData={user}
           ministryStructure={ministryStructure}

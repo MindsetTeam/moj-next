@@ -32,11 +32,11 @@ const Status = ({ userData }) => {
          dataIndex: "status",
          key: "status",
       },
-      {
-         title: "ក្រសួង-ស្ថាប័ន",
-         dataIndex: "ministry",
-         key: "ministry",
-      },
+      // {
+      //    title: "ក្រសួង-ស្ថាប័ន",
+      //    dataIndex: "ministry",
+      //    key: "ministry",
+      // },
       {
          title: "ថ្ងៃខែឆ្នាំចុះហត្ថលេខា",
          dataIndex: "startDate",
@@ -143,16 +143,17 @@ const Status = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name="civilID"
                         label="អត្តលេខមន្រ្ដីរាជការ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញអត្តលេខមន្រ្ដីរាជការ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញអត្តលេខមន្រ្ដីរាជការ",
+                        //    },
+                        // ]}
                      >
                         <Input
                            placeholder="អត្តលេខមន្រ្ដីរាជការ"
                            disabled={true}
+                           style={{backgroundColor: '#fffbfb'}}
                         />
                      </Form.Item>
                   </Col>
@@ -161,15 +162,15 @@ const Status = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name="employmentDate"
                         label="ថ្ងៃខែឆ្នាំចូលបម្រើការងារ"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញថ្ងៃខែឆ្នាំចូលបម្រើការងារ",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញថ្ងៃខែឆ្នាំចូលបម្រើការងារ",
+                        //    },
+                        // ]}
                      >
                         <DatePicker
-                           style={{ width: "100%" }}
+                           style={{ width: "100%", backgroundColor: '#fffbfb' }}
                            format="DD/MM/YYYY"
                            disabled={true}
                         />
@@ -180,15 +181,15 @@ const Status = ({ userData }) => {
                         style={{ marginBottom: 10 }}
                         name="fullyEmploymentDate"
                         label="កាលបរិច្ឆេទតាំងស៊ប់"
-                        rules={[
-                           {
-                              required: true,
-                              message: "សូមបំពេញកាលបរិច្ឆេទតាំងស៊ប់",
-                           },
-                        ]}
+                        // rules={[
+                        //    {
+                        //       required: true,
+                        //       message: "សូមបំពេញកាលបរិច្ឆេទតាំងស៊ប់",
+                        //    },
+                        // ]}
                      >
                         <DatePicker
-                           style={{ width: "100%" }}
+                           style={{ width: "100%" ,backgroundColor: '#fffbfb'}}
                            format="DD/MM/YYYY"
                            disabled={true}
                         />

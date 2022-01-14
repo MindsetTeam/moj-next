@@ -45,6 +45,7 @@ import {
 
 import api from "@/utils/api";
 import { useSession } from "next-auth/client";
+import { formalKhmerDate } from "@/lib/formatDate";
 
 const { Option } = Select;
 const { confirm } = Modal;
@@ -350,12 +351,13 @@ const Index = () => {
       dataIndex: "birthDate",
       key: "birthDate",
       render: (date) => {
-        return date ? new Date(date).toLocaleDateString("en-GB") : "";
+        return formalKhmerDate(date)
+        // return date ? new Date(date).toLocaleDateString("en-GB") : "";
       },
     },
     {
       title: "មុខតំណែង",
-      dataIndex: ["officerStatus", "position"],
+      dataIndex: ["latestOfficerStatus", "position"],
       key: "position",
     },
     {

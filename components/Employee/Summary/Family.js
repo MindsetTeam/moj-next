@@ -41,7 +41,7 @@ const Family = ({ userData }) => {
   // Parent
   const motherInfo = {
     ...userData?.motherInfo,
-    birthPlaceOther: userData.motherInfo?.birthPlace.other,
+    birthPlaceOther: userData.motherInfo?.birthPlace?.other,
   };
   const motherInfoBirthPlace = [];
   for (const key in motherInfo?.birthPlace) {
@@ -56,7 +56,7 @@ const Family = ({ userData }) => {
 
   const fatherInfo = {
     ...userData?.fatherInfo,
-    birthPlaceOther: userData.fatherInfo?.birthPlace.other,
+    birthPlaceOther: userData.fatherInfo?.birthPlace?.other,
   };
   const fatherInfoBirthPlace = [];
   for (const key in fatherInfo.birthPlace) {
