@@ -49,7 +49,7 @@ const UserSchema = new mongoose.Schema(
     vaccine: String,
     civilID: String,
     officerID: String,
-    cardID:String,
+    cardID: String,
     department: String,
     generalDepartment: String,
     employmentDate: String,
@@ -89,8 +89,8 @@ const UserSchema = new mongoose.Schema(
       refNum: String,
       letterType: String,
       rank: String,
-      unit:String,
-      office:String,
+      unit: String,
+      office: String,
       status: String,
       ministry: String,
       position: String,
@@ -297,16 +297,22 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.pre("findOneAndUpdate", function (next) {
   // console.log(this);
-  const { officerStatus, experience } = this._update;
+  const { officerStatus, experience, education } = this._update;
   if (officerStatus) {
     this._update.officerStatus = officerStatus.sort(
       (a, b) =>
         new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
     );
-    this._update.latestOfficerStatus = this._update.officerStatus[0]
+    this._update.latestOfficerStatus = this._update.officerStatus[0];
   }
   if (experience) {
     this._update.experience = experience.sort(
+      (a, b) =>
+        new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+    );
+  }
+  if (education) {
+    this._update.education = education.sort(
       (a, b) =>
         new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
     );
