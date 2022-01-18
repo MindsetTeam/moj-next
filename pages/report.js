@@ -34,14 +34,14 @@ const Report = () => {
             name: `${v.firstName} ${v.lastName}`,
             sex: v.gender,
             birthDate: moment(v.birthDate).format("DD/MMMM/YYYY"),
-            officerStatusStartDate: moment(
-              v.latestOfficerStatus.startDate
-            ).format("DD/MMMM/YYYY"),
-            position: v.latestOfficerStatus.position,
+            officerStatusStartDate: v.latestOfficerStatus?.startDate
+              ? moment(v.latestOfficerStatus?.startDate).format("DD/MMMM/YYYY")
+              : "",
+            position: v.latestOfficerStatus?.position,
             salary: rank.framework
               ? `${rank.framework} ${rank.rankType} ${rank.level}`
               : "",
-            status: v.latestOfficerStatus.status,
+            status: v.latestOfficerStatus?.status,
             disability: v.disabilityNum,
           };
         }),
@@ -61,14 +61,16 @@ const Report = () => {
               name: `${v.firstName} ${v.lastName}`,
               sex: v.gender,
               birthDate: moment(v.birthDate).format("DD/MMMM/YYYY"),
-              officerStatusStartDate: moment(
-                v.latestOfficerStatus.startDate
-              ).format("DD/MMMM/YYYY"),
-              position: v.latestOfficerStatus.position,
+              officerStatusStartDate: v.latestOfficerStatus?.startDate
+                ? moment(v.latestOfficerStatus?.startDate).format(
+                    "DD/MMMM/YYYY"
+                  )
+                : "",
+              position: v.latestOfficerStatus?.position,
               salary: rank.framework
                 ? `${rank.framework} ${rank.rankType} ${rank.level}`
                 : "",
-              status: v.latestOfficerStatus.status,
+              status: v.latestOfficerStatus?.status,
               disability: v.disabilityNum,
             };
           })
@@ -131,6 +133,7 @@ const Report = () => {
           displayData[v.latestOfficerStatus?.unit] = [v];
         }
       });
+      console.log(displayData.undefined);
       Object.keys(displayData).forEach((v) => {
         displayData[v].sort((a, b) => {
           const roleArr = Object.keys(sortedRole);

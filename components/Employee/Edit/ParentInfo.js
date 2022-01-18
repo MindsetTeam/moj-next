@@ -22,8 +22,8 @@ const ParentInfo = ({ userData, onChangeTabKey }) => {
    const onSave = () => {
       const dadDataInput = dadForm.getFieldsValue(true);
       const momDataInput = momForm.getFieldsValue(true);
-      dadForm.validateFields();
-      momForm.validateFields();
+      // dadForm.validateFields();
+      // momForm.validateFields();
       Promise.all([dadForm.validateFields(), momForm.validateFields()]).then(
          async () => {
             const res = await api.put(`/api/users/${userData.id}`, {

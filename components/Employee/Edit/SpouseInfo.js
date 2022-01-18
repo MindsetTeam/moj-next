@@ -34,10 +34,8 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
    // const [isSingle, setIsSingle] = useState(familyStatusInfo ==="នៅលីវ");
 
    const onSave = () => {
-      const dataInput = form.getFieldsValue(true);
-      form.validateFields().then(async () => {
-         const res = await api.put(`/api/users/${userData.id}`, dataInput);
-
+      form.validateFields().then(async (values) => {
+         const res = await api.put(`/api/users/${userData.id}`, values);
          dispatch({
             type: "SUCCESS",
             payload: {

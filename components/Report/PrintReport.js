@@ -139,17 +139,23 @@ const PrintReport = ({
                     )}
                     {checkedList.indexOf("sex") >= 0 && <td>{v.gender}</td>}
                     {checkedList.indexOf("birthDate") >= 0 && (
-                      <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
+                      <td>
+                        {v.birthDate
+                          ? moment(v.birthDate).format("DD/MMMM/YYYY")
+                          : ""}
+                      </td>
                     )}
                     {checkedList.indexOf("officerStatusStartDate") >= 0 && (
                       <td>
-                        {moment(v.latestOfficerStatus.startDate).format(
-                          "DD/MMMM/YYYY"
-                        )}
+                        {v.latestOfficerStatus?.startDate
+                          ? moment(v.latestOfficerStatus?.startDate).format(
+                              "DD/MMMM/YYYY"
+                            )
+                          : ""}
                       </td>
                     )}
                     {checkedList.indexOf("position") >= 0 && (
-                      <td>{v.latestOfficerStatus.position}</td>
+                      <td>{v.latestOfficerStatus?.position}</td>
                     )}
                     {checkedList.indexOf("salary") >= 0 && (
                       <td>
@@ -163,7 +169,7 @@ const PrintReport = ({
                       </td>
                     )}
                     {checkedList.indexOf("status") >= 0 && (
-                      <td>{v.latestOfficerStatus.status}</td>
+                      <td>{v.latestOfficerStatus?.status}</td>
                     )}
                     {checkedList.indexOf("disability") >= 0 && (
                       <td>{v.disabilityNum}</td>
@@ -177,7 +183,7 @@ const PrintReport = ({
                         colSpan={checkedList.length}
                         style={{ paddingLeft: "20px" }}
                       >
-                        {unit}
+                        {unit != "undefined" ? unit : "គ្មានអង្គភាព"}
                       </th>
                     </tr>
                     {printEmployees[unit].map((v, i) => (
@@ -193,17 +199,23 @@ const PrintReport = ({
                         )}
                         {checkedList.indexOf("sex") >= 0 && <td>{v.gender}</td>}
                         {checkedList.indexOf("birthDate") >= 0 && (
-                          <td>{moment(v.birthDate).format("DD/MMMM/YYYY")}</td>
+                          <td>
+                            {v.birthDate
+                              ? moment(v.birthDate).format("DD/MMMM/YYYY")
+                              : ""}
+                          </td>
                         )}
                         {checkedList.indexOf("officerStatusStartDate") >= 0 && (
                           <td>
-                            {moment(v.latestOfficerStatus.startDate).format(
-                              "DD/MM/YYYY"
-                            )}
+                            {v.latestOfficerStatus?.startDate
+                              ? moment(v.latestOfficerStatus?.startDate).format(
+                                  "DD/MM/YYYY"
+                                )
+                              : ""}
                           </td>
                         )}
                         {checkedList.indexOf("position") >= 0 && (
-                          <td>{v.latestOfficerStatus.position}</td>
+                          <td>{v.latestOfficerStatus?.position}</td>
                         )}
                         {checkedList.indexOf("salary") >= 0 && (
                           <td>
@@ -217,10 +229,10 @@ const PrintReport = ({
                           </td>
                         )}
                         {checkedList.indexOf("status") >= 0 && (
-                          <td>{v.latestOfficerStatus.status}</td>
+                          <td>{v.latestOfficerStatus?.status}</td>
                         )}
                         {checkedList.indexOf("disability") >= 0 && (
-                          <th>{v.disabilityNum}</th>
+                          <td>{v.disabilityNum}</td>
                         )}
                       </tr>
                     ))}
