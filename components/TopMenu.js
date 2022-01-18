@@ -104,7 +104,7 @@ const TopMenu = () => {
   const onUpload = () => {
     formXlsx.validateFields().then(async () => {
       const { cardXlsx } = await formXlsx.getFieldsValue();
-      console.log(cardXlsx);
+
       const formData = new FormData();
       if (cardXlsx?.fileList?.length > 0) {
         formData.append("card-xlsx", cardXlsx?.fileList?.[0]?.originFileObj);

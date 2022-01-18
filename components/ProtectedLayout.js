@@ -19,7 +19,6 @@ NProgress.configure({
   showSpinner: false,
 });
 Router.events.on("routeChangeStart", (url) => {
-  console.log(`Loading: ${url}`);
   NProgress.start();
 });
 Router.events.on("routeChangeComplete", () => NProgress.done());
@@ -40,7 +39,7 @@ const Layout = ({ children, roles = [] }) => {
     router.push(`/`);
     return null;
   }
-  // console.log(roles,session)
+  //
   //   useEffect(() => {
   //     if (loading) {
   //       return null;

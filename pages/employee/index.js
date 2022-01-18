@@ -114,7 +114,7 @@ const Index = () => {
 
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
-    // console.log({ router: router.query });
+    //  
     fetchEmployees(router.query.s || "", router.query);
   }, [router]);
   const fetchEmployees = async (search = "", query = "") => {
@@ -163,7 +163,7 @@ const Index = () => {
       });
       setEmployees(employees);
     } catch (error) {
-      console.log(error);
+       
     }
   };
 
@@ -171,8 +171,8 @@ const Index = () => {
   const onEditRole = async (record) => {
     setSelectedUser(record);
     setRoleChoice(record.role);
-    console.log(record);
-    console.log({
+     
+     
       role: record.role,
       moderatorType: record.moderatorType,
     });
@@ -206,9 +206,9 @@ const Index = () => {
     fetchEmployees();
   };
   const updateSuspendUser = async ({ suspended, userId }) => {
-    console.log(`api/users/${userId}`, { suspended });
+     
     const { data } = await api.put(`api/users/${userId}`, { suspended });
-    console.log(data);
+     
     fetchEmployees();
   };
 
@@ -225,7 +225,7 @@ const Index = () => {
         });
       },
       onCancel() {
-        console.log("Cancel");
+         
       },
     });
   };
@@ -239,7 +239,7 @@ const Index = () => {
         fetchEmployees(router.query.s || "");
       },
       onCancel() {
-        // console.log("Cancel");
+        //  
       },
     });
   };
@@ -464,7 +464,7 @@ const Index = () => {
             <span
               style={{ cursor: "pointer" }}
               onClick={async () => {
-                console.log("/api/users/" + record.id);
+                 
                 await api.put("/api/users/" + record.id, {
                   approval: true,
                 });
@@ -552,7 +552,7 @@ const Index = () => {
                 <Select
                   placeholder="ជ្រើសរើស"
                   onChange={(v) => {
-                    console.log(v);
+                     
                     if (v == "moderator") {
                       setRoleChoice(v);
                     } else {
@@ -654,7 +654,7 @@ const Index = () => {
             style={{ marginRight: 8 }}
             onClick={() => {
               const data = formEditRole.getFieldsValue(true);
-              console.log(data);
+               
               updateUserRole({
                 role: data.role,
                 moderatorType: data.moderatorType,

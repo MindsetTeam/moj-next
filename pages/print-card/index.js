@@ -227,7 +227,7 @@ const index = () => {
                     <tr>
                       <td>លេខរៀងប័ណ្ណ</td>
                       <td>:</td>
-                      <td>លេខរៀងប័ណ្ណ	</td>
+                      <td>{user?.officerID}</td>
                     </tr>
                     <tr>
                       <td>ថ្ងៃចេញប័ណ្ណ</td>

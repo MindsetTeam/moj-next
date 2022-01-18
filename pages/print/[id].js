@@ -17,13 +17,13 @@ const options = [
 
 const index = () => {
   const [printData, setPrintData] = useState({});
-  const router =useRouter()
+  const router = useRouter();
   const [user, setUser] = useState(null);
 
   useEffect(async () => {
-     const user = await fetch(`/api/users/${router.query.id}`).then((res) =>
-         res.json()
-      );
+    const user = await fetch(`/api/users/${router.query.id}`).then((res) =>
+      res.json()
+    );
     setPrintData({
       defaultInfo: {
         photo: user?.photo,
@@ -33,7 +33,6 @@ const index = () => {
     setUser(user);
   }, [router]);
   const onChange = (checkedValues) => {
-    console.log(checkedValues);
     if (user) {
       const printDataBySelection = {};
       checkedValues.forEach((v) => {

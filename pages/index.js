@@ -14,7 +14,7 @@ import useSWR from "swr";
 const Index = (props) => {
   const [session, loading] = useSession();
   const router = useRouter();
-  console.log(session);
+
   if (session.user && session.user.role == "user") {
     router.push("/me");
   }
@@ -56,12 +56,12 @@ const Index = (props) => {
       {/* {!["admin", "editor"].includes(session?.user?.role) && <p>Home Page</p>} */}
       {["admin", "editor", "moderator"].includes(session?.user?.role) && (
         <Row gutter={10} align="middle" justify="center">
-          <Col span="12" height="100%" style={{height: '100%'}} >
+          <Col span="12" height="100%" style={{ height: "100%" }}>
             <Col>
               {statusOfficer}
               <div
                 className={styles.pieChart}
-                style={{ marginTop: 5,height: 227 }}
+                style={{ marginTop: 5, height: 227 }}
               >
                 {/* <p>1</p> */}
                 <Chart
@@ -69,9 +69,9 @@ const Index = (props) => {
                 ></Chart>
               </div>
             </Col>
-            <Col style={{height: '100%',marginTop: 15, }}>
+            <Col style={{ height: "100%", marginTop: 15 }}>
               {civilOfficer}
-              <Row gutter={[10,10]}style={{ marginTop: 5 }}>
+              <Row gutter={[10, 10]} style={{ marginTop: 5 }}>
                 <Col
                   span={12}
                   onClick={() =>
@@ -114,7 +114,7 @@ const Index = (props) => {
                     color="green"
                   ></HomeCard>
                 </Col>
-                
+
                 <Col
                   span={12}
                   onClick={() =>
@@ -153,7 +153,6 @@ const Index = (props) => {
                     color="teal"
                   ></HomeCard>
                 </Col>
-              
               </Row>
               <Row gutter={[10]}></Row>
             </Col>

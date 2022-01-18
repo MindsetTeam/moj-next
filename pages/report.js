@@ -75,7 +75,7 @@ const Report = () => {
         );
       });
     }
-    // console.log(compatibleData);
+    //
     const headerKhmer = {};
     options.forEach((v) => {
       headerKhmer[v.value] = v.label;
@@ -95,15 +95,14 @@ const Report = () => {
     // if (!query.generalDepartment) {
     //   return setPrintEmployees([]);
     // }
-    // console.log({ query });
+    //
     let searchQuery = new URLSearchParams();
     Object.keys(query).forEach((v) => {
-      console.log(query[v]);
       if (query[v]) {
         searchQuery.append(v, query[v]);
       }
     });
-    // console.log(searchQuery.toString());
+    //
     let { data } = await fetcher("/api/users?" + searchQuery.toString());
     if (query.unit) {
       data.sort((a, b) => {
@@ -123,7 +122,7 @@ const Report = () => {
         );
       });
     } else {
-      // console.log("object");
+      //
       let displayData = {};
       data.forEach((v) => {
         if (displayData[v.latestOfficerStatus?.unit]) {
@@ -168,7 +167,12 @@ const Report = () => {
     { label: "ស្ថានភាព", value: "status" },
     { label: "ពិការភាព", value: "disability" },
   ];
-  const [checkedList, setCheckedList] = useState(['no', 'officerID', 'name','sex']);
+  const [checkedList, setCheckedList] = useState([
+    "no",
+    "officerID",
+    "name",
+    "sex",
+  ]);
   const [indeterminate, setIndeterminate] = useState(true);
   const [checkAll, setCheckAll] = useState(false);
   const [selectedGeneralDepartment, setSelectedGeneralDepartment] =

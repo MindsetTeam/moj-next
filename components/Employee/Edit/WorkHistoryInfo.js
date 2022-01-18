@@ -47,18 +47,16 @@ const workHistoryInfo = ({
   const [choiceUnit, setChoiceUnit] = useState("");
   const [choiceDepartment, setChoiceDepartment] = useState("");
 
-  //   console.log(experiencesList);
+  //
 
   const onStartDateChange = (date, dateString) => {
-    //  console.log(date);
+    //
     setStartDate(dateString);
-    console.log(dateString);
   };
 
   const onEndDateChange = (date, dateString) => {
-    //  console.log(date);
+    //
     setEndDate(dateString);
-    console.log(dateString);
   };
 
   const onNowChange = (checked) => {
@@ -107,7 +105,7 @@ const workHistoryInfo = ({
     //  e.preventDefault();
     setEditData(record);
     setVisible(true);
-    //  console.log("Edit " + id);
+    //
   };
 
   const onDelete = async (record) => {
@@ -326,13 +324,13 @@ const workHistoryInfo = ({
                 style={{ marginBottom: 10 }}
                 name="refType"
                 label="ប្រភេទលិខិត"
-                
-               //  rules={[
-               //    {
-               //      required: true,
-               //      message: "សូមជ្រើសរើសប្រភេទលិខិត",
-               //    },
-               //  ]}
+
+                //  rules={[
+                //    {
+                //      required: true,
+                //      message: "សូមជ្រើសរើសប្រភេទលិខិត",
+                //    },
+                //  ]}
               >
                 <Select placeholder="ជ្រើសរើស" allowClear>
                   <Option value="ព្រះរាជក្រឹត្យ">ព្រះរាជក្រឹត្យ</Option>

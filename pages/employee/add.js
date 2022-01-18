@@ -46,7 +46,7 @@ const Add = () => {
 
   const saveEmployee = async () => {
     const dataInput = form.getFieldsValue(true);
-    // console.log(dataInput);
+    //
     form.validateFields().then(async () => {
       try {
         const { data } = await api.post("/api/auth/register", dataInput);
@@ -57,9 +57,7 @@ const Add = () => {
           },
         });
         router.push("/employee/" + data.data.id);
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     });
   };
 

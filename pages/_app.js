@@ -17,7 +17,6 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     if (typeof window !== "undefined" && window) {
       if (!window.localStorage.getItem("activeSession")) {
-        console.log("logout");
         signOut({ redirect: false }).then(() => {
           Cookies.remove("authorization");
         });

@@ -29,7 +29,7 @@ export const updateUsersCardID = async (req, res) => {
   const workbook = XLSX.readFile(file.path);
   const sheet_name_list = workbook.SheetNames;
   const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet_name_list[0]]);
-  console.log(data)
+
   const bulkOps = data.map((user) => ({
     updateOne: {
       filter: { nationalityIDNum: user.nationalityIDNum },
@@ -37,17 +37,15 @@ export const updateUsersCardID = async (req, res) => {
     },
   }));
   const results = await User.bulkWrite(bulkOps, { ordered: false });
-  res
-    .status(200)
-    .json({
-      success: true,
-      msg: "Matched: " + results.nMatched + " Updated: " + results.nModified,
-    });
+  res.status(200).json({
+    success: true,
+    msg: "Matched: " + results.nMatched + " Updated: " + results.nModified,
+  });
 };
 
 export const updatePassword = async (req, res, next) => {
   const { oldPassword, newPassword } = req.body;
-  console.log({ oldPassword, newPassword });
+
   const user = await User.findById(req.user.id);
   if (!user) {
     throw new ErrorResponse("User not found", 404);

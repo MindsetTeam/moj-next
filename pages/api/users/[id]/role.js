@@ -5,12 +5,12 @@ import { all } from "@/middlewares/index";
 import {
   getSingleEmployee,
   updateEmployee,
-  updateRole
+  updateRole,
 } from "controllers/employee";
 import ErrorResponse from "@/utils/errorResponse";
 import User from "@/models/User";
 
-const handler = nc({...errorHandle, attachParams: true});
+const handler = nc({ ...errorHandle, attachParams: true });
 
 handler.use(all);
 
@@ -19,7 +19,6 @@ handler.use(all);
 // handler.put(updateEmployee);
 handler.get(
   async (req, res, next) => {
-    console.log("object");
     // const session = getSession();
     // if (!session.user) {
     //   throw new ErrorResponse("Not Authorized", 401);
@@ -31,8 +30,8 @@ handler.get(
     // req.user = { id: req.user._id, role: req.user.role };
     // next();
   },
-  async(req,res,next)=>{
-    if(req.role!=='admin'){
+  async (req, res, next) => {
+    if (req.role !== "admin") {
       throw new ErrorResponse("Not Authorized", 401);
     }
     next();

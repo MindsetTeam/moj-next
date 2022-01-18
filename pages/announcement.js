@@ -80,7 +80,7 @@ const Announcement = () => {
   const onSubmit = () => {
     form.validateFields().then(async () => {
       const values = form.getFieldsValue();
-      console.log(values);
+
       const formData = new FormData();
       if (values.attachment?.fileList?.length) {
         formData.append(
@@ -208,10 +208,7 @@ const Announcement = () => {
           </div>
         }
       >
-        <Form
-          form={form}
-          initialValues={{ isActive: false, ...editData }}
-        >
+        <Form form={form} initialValues={{ isActive: false, ...editData }}>
           <Form.Item
             style={{ marginBottom: 10 }}
             name="title"

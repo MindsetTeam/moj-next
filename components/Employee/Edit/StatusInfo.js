@@ -171,7 +171,7 @@ const StatusInfo = ({
   //   formInfo.validateFields().then(async () => {
   //     const res = await api.put(`/api/users/${userData.id}`, data);
 
-  //     console.log(res);
+  //
   //     dispatch({
   //       type: "SUCCESS",
   //       payload: {
@@ -193,7 +193,7 @@ const StatusInfo = ({
         // Object.keys(dataInfo).forEach((key) => {
         //   if (!dataInfo[key]) delete dataInfo[key];
         // });
-        // console.log(dataStatus, dataInfo);
+        //
 
         const updateData = {
           ...dataInfo,
@@ -212,7 +212,7 @@ const StatusInfo = ({
               // description: "Successfully",
             },
           });
-          console.log(res);
+
           onChangeTabKey("8");
         } catch (error) {
           dispatch({
@@ -304,7 +304,7 @@ const StatusInfo = ({
   //       ),
   //    },
   // ];
-  //   console.log(...userData.latestOfficerStatus);
+  //
   const formInfoData = {
     ...userData,
     employmentDate: userData.employmentDate
@@ -322,12 +322,11 @@ const StatusInfo = ({
     );
   }, [userData]);
   const onFormStatusChange = (changedValue, allValues) => {
-    console.log(changedValue);
     let resetFields = {};
     if (changedValue.unit) {
       setDisplayRole(roleMOJ[changedValue.unit]);
       setSelectedUnit(changedValue.unit);
-      console.log(structureMOJ[changedValue.unit][""]);
+
       if (structureMOJ[changedValue.unit][""]) {
         setSelectedGeneralDepartment("");
         resetFields.generalDepartment = "";

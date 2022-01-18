@@ -30,7 +30,7 @@ const Print = () => {
    };
 
    const onPrint = () => {
-      console.log(printOptions, user, "print page");
+       
       const printWindow = window.frames["printContainer"];
       printWindow.document.write(`
    <body onload="window.print()" >

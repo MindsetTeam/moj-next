@@ -8,7 +8,7 @@ const PrintReport = ({
   unit,
   department,
 }) => {
-  // console.log("dfasdfasd", department, generalDepartment);
+  //
   // if(generalDepartment)
   return (
     <>
@@ -172,8 +172,13 @@ const PrintReport = ({
                 ))
               : Object.keys(printEmployees).map((unit) => (
                   <>
-                    <tr style={{textAlign: "left"}}>
-                      <th colSpan={checkedList.length} style={{paddingLeft: "20px"}}>{unit}</th>
+                    <tr style={{ textAlign: "left" }}>
+                      <th
+                        colSpan={checkedList.length}
+                        style={{ paddingLeft: "20px" }}
+                      >
+                        {unit}
+                      </th>
                     </tr>
                     {printEmployees[unit].map((v, i) => (
                       <tr>

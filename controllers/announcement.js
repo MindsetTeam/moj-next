@@ -7,7 +7,7 @@ import {
 
 export const getAnnouncements = async (req, res, next) => {
   const reqQuery = {};
-  if (!["admin", 'editor'].includes(req.user.role)) {
+  if (!["admin", "editor"].includes(req.user.role)) {
     reqQuery.isActive = true;
   }
   const announcements = await Announcement.find(reqQuery).sort("-createdAt");
@@ -35,7 +35,7 @@ export const createAnnouncement = async (req, res, next) => {
 
 export const deleteAnnouncement = async (req, res, next) => {
   const { id } = req.query;
-  console.log(req.query);
+
   if (!id) {
     throw new ErrorResponse("ID not found", 400);
   }

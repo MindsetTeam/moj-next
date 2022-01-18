@@ -18,7 +18,7 @@ const Attachment = ({ userData }) => {
   const [selectedRows, setSelectedRows] = useState(null);
   const [attachmentList, setAttachmentList] = useState(() => {
     return Object.keys(userData.attachment || {}).map((v, i) => {
-      console.log(i);
+       
       const returnObject = {
         key: i,
         type: attachmentTypeName[v],
@@ -63,7 +63,7 @@ const Attachment = ({ userData }) => {
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRows(selectedRows);
-      console.log(
+       
         `selectedRowKeys: ${selectedRowKeys}`,
         "selectedRows: ",
         selectedRows
@@ -72,7 +72,7 @@ const Attachment = ({ userData }) => {
   };
 
   const download = () => {
-    console.log(selectedRows);
+     
   };
 
   return (

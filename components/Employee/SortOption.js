@@ -60,7 +60,6 @@ const SortOption = ({ ministryStructure, structureMOJ, rankListData }) => {
     <Form
       form={form}
       onValuesChange={(changed, allValues) => {
-        console.log(changed, allValues);
         let searchQuery = [];
         //   if (changed.generalDepartment || !allValues.generalDepartment) {
         //     form.resetFields(["department"]);
@@ -205,7 +204,11 @@ const SortOption = ({ ministryStructure, structureMOJ, rankListData }) => {
             name="office"
             label="ការិយាល័យ"
           >
-            <Select placeholder="ជ្រើសរើស" disabled={isDisabledOffice} allowClear>
+            <Select
+              placeholder="ជ្រើសរើស"
+              disabled={isDisabledOffice}
+              allowClear
+            >
               {[
                 ...(structureMOJ[selectedUnit]?.[selectedGeneralDepartment]?.[
                   selectedDepartment

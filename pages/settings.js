@@ -36,7 +36,6 @@ const Personal = () => {
           message: res.msg,
         });
       } catch (err) {
-         console.log(err);
         return notification.error({
           message: err,
         });

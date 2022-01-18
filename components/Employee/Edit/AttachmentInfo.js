@@ -60,11 +60,11 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
           const fileUser =
             userData.attachment[v]?.[
               userData.attachment?.[v]?.findIndex((data) => {
-                //   console.log(data,val);
+                //
                 return data.description == val;
               })
             ] || {};
-          // console.log(fileUser);
+          //
           return {
             // ...val,
             description: val,
@@ -82,7 +82,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       };
     });
   });
-  console.log(attachmentList);
+
   const actionMenu = (record) => {
     return (
       <Menu>
@@ -125,7 +125,6 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       // width: "30%",
       render: (text, record, index) => {
         if (!record.children) {
-          console.log(record.url);
           return (
             <>
               <div>{text}</div>
@@ -163,7 +162,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
                               response.data.attachment[v][
                                 response.data.attachment?.[v].findIndex(
                                   (data) => {
-                                    //   console.log(data,val);
+                                    //
                                     return data.description == val;
                                   }
                                 )
@@ -210,7 +209,6 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
       align: "center",
       render: (text, record, index) => {
         if (!record.children && record.url) {
-          console.log(record);
           return (
             <Dropdown overlay={() => actionMenu(record)}>
               <a
@@ -244,7 +242,7 @@ const attachmentInfo = ({ userData, fileTypeName }) => {
               const fileUser =
                 res.data.attachment[v][
                   res.data.attachment?.[v].findIndex((data) => {
-                    //   console.log(data,val);
+                    //
                     return data.description == val;
                   })
                 ] || {};

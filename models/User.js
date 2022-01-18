@@ -296,7 +296,7 @@ UserSchema.pre("save", async function (next) {
 });
 
 UserSchema.pre("findOneAndUpdate", function (next) {
-  // console.log(this);
+  //
   const { officerStatus, experience, education } = this._update;
   if (officerStatus) {
     this._update.officerStatus = officerStatus.sort(

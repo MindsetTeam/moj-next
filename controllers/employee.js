@@ -109,7 +109,6 @@ export const getOverviewEmployees = async (req, res) => {
         req.user.latestOfficerStatus.department;
     }
 
-    console.log(queryModerator);
     retiredEmployeeReq = User.aggregate([
       {
         $match: {
@@ -202,14 +201,14 @@ export const getOverviewEmployees = async (req, res) => {
     totalEmployeeReq,
     generalDepartmentResReq,
   ]);
-  console.log(retiredEmployee);
+
   // const retiredEmployee = await
   // const officerStatusListRes = await
   const officerStatusList = {};
   officerStatusListRes.forEach((v) => {
     officerStatusList[v._id] = v.total;
   });
-  // console.log(officerStatusList);
+  //
 
   // const provinceInstitutionRawData = await User.aggregate([
   //   {
@@ -276,7 +275,7 @@ export const getOverviewEmployees = async (req, res) => {
   //   provinceInstitution[v._id] = v.total;
   //   provinceInstitution.total += v.total;
   // });
-  // console.log({ provinceInstitution, centerInstitution });
+  //
   resData = {
     totalEmployee,
     generalDepartmentList,
@@ -356,7 +355,7 @@ export const getEmployees = async (req, res) => {
       };
     }
   }
-  console.log(reqQuery);
+
   if (rank) {
     reqQuery = {
       "latestOfficerStatus.rank": rank,
@@ -470,7 +469,7 @@ export const getSingleEmployee = async (req, res, next) => {
   //     (a, b) =>
   //       new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
   //   );
-  //   console.log(user.experience);
+  //
   // }
   res.status(200).json(user);
 };
@@ -478,13 +477,14 @@ export const getSingleEmployee = async (req, res, next) => {
 export const updateEmployee = async (req, res, next) => {
   const { id } = req.query;
   const dataUpdate = req.body;
+
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   if (dataUpdate.currentResidence) {
     dataUpdate.partnerInfo = {
       currentResidence: { ...dataUpdate.currentResidence },
     };
   }
-  console.log(dataUpdate)
+
   const user = await User.findByIdAndUpdate(id, dataUpdate, {
     new: true,
     runValidators: true,
@@ -497,7 +497,7 @@ export const updateEmployee = async (req, res, next) => {
 export const deleteEmployee = async (req, res) => {
   const { id } = req.query;
   const resData = await User.findByIdAndDelete(id);
-  console.log(resData);
+
   res
     .status(200)
     .json({ success: true, data: {}, msg: "User deleted successfully" });
@@ -533,10 +533,9 @@ export const addAttachment = async (req, res, next) => {
     (v) => v.description == description
   );
   if (existedFile >= 0) {
-    console.log(user.attachment[type][existedFile].url);
     deleteFileFromBucket(user.attachment[type][existedFile].url);
     user.attachment[type][existedFile].url = publicUrl;
-    // console.log(user.attachment[type][existedFile].url);
+    //
   } else {
     user.attachment[type].push({
       description,
@@ -552,13 +551,13 @@ export const addAttachment = async (req, res, next) => {
   //   // { new: true }
   // );
 
-  // console.log(indexDeleteFile);
-console.log(user.attachment)
+  //
+
   res.status(200).json({
     success: true,
     msg: "Successfully added",
     url: publicUrl,
-    
+
     data: {
       id: user.id,
       attachment: user.attachment,

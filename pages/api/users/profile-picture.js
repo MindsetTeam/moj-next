@@ -34,19 +34,16 @@ handler.post(
     const user = await User.findById(req.user.id);
     if (user.photo !== "/noImg.jpg") {
       const oldFilename = extractFileName(user.photo);
-      console.log(oldFilename);
+
       try {
         await userUploadBucket.file(oldFilename).delete();
-      } catch (error) {
-        console.log(error);
-      }
+      } catch (error) {}
     }
     // const userUploadBucket = storage.bucket("user_file_upload");
     const resUpload = await userUploadBucket.upload(
       path.join(process.env.uploadFilePath, req.file.filename),
       { destination: "img-profile/" + req.file.filename }
     );
-    console.log(resUpload);
 
     user.photo = (
       "https://storage.googleapis.com/users_upload_files/img-profile/" +
