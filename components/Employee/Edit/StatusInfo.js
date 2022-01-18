@@ -688,7 +688,7 @@ const StatusInfo = ({
                 name={"office"}
                 label="ការិយាល័យ"
               >
-                <Select placeholder="ជ្រើសរើស" disabled={isDisabledOffice}>
+                <Select placeholder="ជ្រើសរើស" disabled={isDisabledOffice} >
                   {[
                     ...(structureMOJ[selectedUnit]?.[
                       selectedGeneralDepartment

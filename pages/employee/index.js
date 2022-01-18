@@ -171,11 +171,6 @@ const Index = () => {
   const onEditRole = async (record) => {
     setSelectedUser(record);
     setRoleChoice(record.role);
-     
-     
-      role: record.role,
-      moderatorType: record.moderatorType,
-    });
     formEditRole.resetFields();
     formEditRole.setFieldsValue({
       role: record.role,

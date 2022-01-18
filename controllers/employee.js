@@ -477,7 +477,6 @@ export const getSingleEmployee = async (req, res, next) => {
 export const updateEmployee = async (req, res, next) => {
   const { id } = req.query;
   const dataUpdate = req.body;
-
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   if (dataUpdate.currentResidence) {
     dataUpdate.partnerInfo = {

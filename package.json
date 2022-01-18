@@ -9,6 +9,7 @@
     "build": "rm -rf ./build && NODE_ENV=production next build",
     "testing-build": "next build",
     "dev": "next dev",
+    "dev-debug": "cross-env NODE_OPTIONS='--inspect' next dev",
     "start": "next start"
   },
   "dependencies": {

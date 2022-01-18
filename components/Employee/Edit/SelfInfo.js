@@ -1,7 +1,7 @@
 import styles from "@/styles/Employee.module.css";
 import { AlertDispatch } from "contexts/alert.context";
 import Image from "next/image";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserOutlined, PhoneOutlined, UploadOutlined } from "@ant-design/icons";
 import moment from "moment";
 
@@ -40,8 +40,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
   );
 
   const onSave = () => {
-    const dataInput = form.getFieldsValue(true);
-    form.validateFields().then(async () => {
+    form.validateFields().then(async (values) => {
       if (fileList.length > 0) {
         const formData = new FormData();
         formData.append("img-profile", fileList[0]);
@@ -49,10 +48,10 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
           `/api/users/profile-picture?employeeId=${userData.id}`,
           formData
         );
-        dataInput.photo = data.data.photo;
+        values.photo = data.data.photo;
       }
 
-      const res = await api.put(`/api/users/${userData.id}`, dataInput);
+      const res = await api.put(`/api/users/${userData.id}`, values);
       dispatch({
         type: "SUCCESS",
         payload: {
