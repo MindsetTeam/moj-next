@@ -11,13 +11,17 @@ import {
 import ErrorResponse from "@/utils/errorResponse";
 import User from "@/models/User";
 import { protect, role } from "@/middlewares/auth";
+import { ncOpts } from "api-lib/nc";
+import database from "@/middlewares/database";
 
 const handler = nc({...errorHandle, attachParams: true});
 
 handler.use(all);
+// const handler = nc(ncOpts);
+// handler.use(database);
+// handler.use(protect)
 
 handler.get(getSingleEmployee);
-
 handler.put(updateEmployee);
 handler.get(
   "/role",

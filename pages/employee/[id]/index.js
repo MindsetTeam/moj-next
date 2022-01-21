@@ -13,10 +13,23 @@ import statusOfficer from "data/StatusOfficer.json";
 import ministryList from "data/Ministry.json";
 import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
-import { useSession } from "next-auth/client";
+import { useSession,getSession } from "next-auth/client";
 
-export async function getServerSideProps({ params }) {
+import { fetchSingleEmployee } from "api/Employee";
+
+export async function getServerSideProps({ params, req }) {
+  const session = await getSession({ req })
+  console.log(session);
+  
+  // try {
+  //   const res1 = await fetchSingleEmployee(params.id, req.cookies);
+  //   console.log(res1);
+  // } catch (error) {
+  //   console.log(error);
+  // }
   const res = await api.get("/api/users/" + params.id);
+  console.log(res);
+
   return {
     props: {
       ministryStructure,

@@ -8,7 +8,6 @@ import uploadFile from "@/middlewares/uploadFile";
 const handler = nc(ncOpts);
 handler.use(database);
 
-//
 handler.post(
   protect,
   role("admin", "editor"),

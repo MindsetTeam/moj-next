@@ -1,7 +1,6 @@
 import styles from "@/styles/Employee.module.css";
 import { AlertDispatch } from "contexts/alert.context";
-import Image from "next/image";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { UserOutlined, PhoneOutlined, UploadOutlined } from "@ant-design/icons";
 import moment from "moment";
 

@@ -6,7 +6,7 @@ import {
 } from "api-lib/storageBucket";
 
 export const getOverviewEmployees = async (req, res) => {
-  const { role } = req.user;
+  const { role, latestOfficerStatus, moderatorType } = req.user;
   let resData = {};
   let retiredEmployeeReq,
     officerStatusListReq,
@@ -99,14 +99,26 @@ export const getOverviewEmployees = async (req, res) => {
       },
     ]);
   }
-  if (role == "moderator") {
+  if (
+    role == "moderator" &&
+    moderatorType != "" &&
+    latestOfficerStatus.unit !== ""
+  ) {
     let queryModerator = {};
-    queryModerator["latestOfficerStatus.generalDepartment"] =
-      req.user.latestOfficerStatus.generalDepartment;
-
+    const { user } = req;
+    user
+    queryModerator["latestOfficerStatus.unit"] =
+      req.user.latestOfficerStatus.unit || "";
+    if (
+      user.moderatorType == "generalDepartment" ||
+      user.moderatorType == "department"
+    ) {
+      queryModerator["latestOfficerStatus.generalDepartment"] =
+        req.user.latestOfficerStatus.generalDepartment ||'';
+    }
     if (req.user.moderatorType === "department") {
       queryModerator["latestOfficerStatus.department"] =
-        req.user.latestOfficerStatus.department;
+        req.user.latestOfficerStatus.department || '';
     }
 
     retiredEmployeeReq = User.aggregate([
@@ -152,6 +164,7 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
+    console.log(queryModerator);
     totalEmployeeReq = User.countDocuments({
       approval: true,
       ...queryModerator,
@@ -284,7 +297,8 @@ export const getOverviewEmployees = async (req, res) => {
     retiredEmployee: retiredEmployee.length > 0 ? retiredEmployee[0].total : 0,
     officerStatusList,
   };
-
+  console.log(totalEmployeeReq);
+  console.log(resData);
   res.status(200).json({
     success: true,
     msg: "Employees overview",

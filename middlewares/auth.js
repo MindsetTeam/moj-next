@@ -3,12 +3,17 @@ const { getSession } = require("next-auth/client");
 
 const protect = async (req, res, next) => {
   const session = await getSession({ req });
+  // console.log({session});
   if (!session) {
     throw new ErrorResponse("You are not authorized to access this page", 401);
   }
   req.user = session.user;
   next();
 };
+
+// const permissionRole = async (req, res, next) => {
+
+// }
 
 const role =
   (...rest) =>

@@ -1,20 +1,19 @@
-import { all } from "@/middlewares/index";
+// import { all } from "@/middlewares/index";
 import User from "@/models/User";
 import ErrorResponse from "@/utils/errorResponse";
 import upload from "@/middlewares/uploadFile";
+import database from "@/middlewares/database";
+
 import nc from "next-connect";
 // import { Storage } from "@google-cloud/storage";
 import path from "path";
 import storageBucket, { extractFileName } from "api-lib/storageBucket";
-const handler = nc();
+import { ncOpts } from "api-lib/nc";
+import { protect } from "@/middlewares/auth";
 
-// const storage = new Storage({
-//   keyFilename: "moj-hr-39b0f2e19dd4.json.example",
-//   // keyFilename: "moj-hr-39b0f2e19dd4.json",
-//   projectId: "moj-hr",
-// });
-
-handler.use(all);
+const handler = nc(ncOpts);
+handler.use(database);
+handler.use(protect);
 
 handler.post(
   async (req, res, next) => {
