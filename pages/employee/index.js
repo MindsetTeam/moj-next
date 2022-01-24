@@ -14,8 +14,7 @@ import structureMOJData from "/data/FullStructureMOJ.json";
 import rankListData from "/data/Rank.json";
 
 import { useRouter } from "next/router";
-import Link from 'next/link'
-
+import Link from "next/link";
 
 import {
   EditOutlined,
@@ -114,7 +113,7 @@ const Index = () => {
 
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
-    //  
+    //
     fetchEmployees(router.query.s || "", router.query);
   }, [router]);
   const fetchEmployees = async (search = "", query = "") => {
@@ -162,9 +161,7 @@ const Index = () => {
         return employee;
       });
       setEmployees(employees);
-    } catch (error) {
-       
-    }
+    } catch (error) {}
   };
 
   const [selectedUser, setSelectedUser] = useState(null);
@@ -201,9 +198,8 @@ const Index = () => {
     fetchEmployees();
   };
   const updateSuspendUser = async ({ suspended, userId }) => {
-     
     const { data } = await api.put(`api/users/${userId}`, { suspended });
-     
+
     fetchEmployees();
   };
 
@@ -219,9 +215,7 @@ const Index = () => {
           userId: record.id,
         });
       },
-      onCancel() {
-         
-      },
+      onCancel() {},
     });
   };
 
@@ -234,7 +228,7 @@ const Index = () => {
         fetchEmployees(router.query.s || "");
       },
       onCancel() {
-        //  
+        //
       },
     });
   };
@@ -346,7 +340,7 @@ const Index = () => {
       dataIndex: "birthDate",
       key: "birthDate",
       render: (date) => {
-        return formalKhmerDate(date)
+        return formalKhmerDate(date);
         // return date ? new Date(date).toLocaleDateString("en-GB") : "";
       },
     },
@@ -362,7 +356,10 @@ const Index = () => {
       render: (latestOfficerStatus) => {
         return (
           latestOfficerStatus?.department ||
-          latestOfficerStatus?.generalDepartment
+          (latestOfficerStatus?.generalDepartment &&
+          latestOfficerStatus?.generalDepartment != ""
+            ? latestOfficerStatus?.generalDepartment
+            : latestOfficerStatus?.unit)
         );
       },
     },
@@ -459,7 +456,6 @@ const Index = () => {
             <span
               style={{ cursor: "pointer" }}
               onClick={async () => {
-                 
                 await api.put("/api/users/" + record.id, {
                   approval: true,
                 });
@@ -483,7 +479,11 @@ const Index = () => {
       <Search></Search>
 
       <div style={{ marginTop: 20 }}>
-        <SortOption structureMOJ={structureMOJData} rankListData={rankListData} ministryStructure={structureMinistryData}></SortOption>
+        <SortOption
+          structureMOJ={structureMOJData}
+          rankListData={rankListData}
+          ministryStructure={structureMinistryData}
+        ></SortOption>
       </div>
 
       <div style={{ marginTop: 20 }}>
@@ -547,7 +547,6 @@ const Index = () => {
                 <Select
                   placeholder="ជ្រើសរើស"
                   onChange={(v) => {
-                     
                     if (v == "moderator") {
                       setRoleChoice(v);
                     } else {
@@ -649,7 +648,7 @@ const Index = () => {
             style={{ marginRight: 8 }}
             onClick={() => {
               const data = formEditRole.getFieldsValue(true);
-               
+
               updateUserRole({
                 role: data.role,
                 moderatorType: data.moderatorType,

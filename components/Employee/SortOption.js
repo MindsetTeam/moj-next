@@ -29,17 +29,32 @@ const SortOption = ({ ministryStructure, structureMOJ, rankListData }) => {
 
   let initialValues = {};
   if (session?.user?.role == "moderator") {
-    initialValues.generalDepartment =
-      session?.user?.latestOfficerStatus?.generalDepartment;
+    initialValues.unit = session?.user?.latestOfficerStatus?.unit;
+    if (
+      ["department", "generalDepartment"].includes(session?.user?.moderatorType)
+    ) {
+      initialValues.generalDepartment =
+        session?.user?.latestOfficerStatus?.generalDepartment;
+    }
     if (session?.user?.moderatorType == "department") {
       initialValues.department = session?.user?.latestOfficerStatus?.department;
     }
   }
   useEffect(() => {
     if (session?.user?.role == "moderator") {
-      setChoiceGeneralDepartment(
-        session?.user?.latestOfficerStatus?.generalDepartment
-      );
+      setSelectedUnit(session?.user?.latestOfficerStatus?.unit);
+      if (
+        ["generalDepartment", "department"].includes(
+          session?.users?.moderatorType
+        )
+      ) {
+        setSelectedGeneralDepartment(
+          session?.user?.latestOfficerStatus?.generalDepartment
+        );
+      }
+      if (session?.user?.moderatorType == "department") {
+        setSelectedDepartment(session?.user?.latestOfficerStatus?.department);
+      }
     }
   }, [session]);
 
@@ -136,7 +151,11 @@ const SortOption = ({ ministryStructure, structureMOJ, rankListData }) => {
       <Row gutter={16}>
         <Col span={4}>
           <Form.Item style={{ marginBottom: 10 }} name="unit" label="អង្គភាព">
-            <Select placeholder="ជ្រើសរើស" allowClear>
+            <Select
+              placeholder="ជ្រើសរើស"
+              allowClear
+              disabled={session?.user?.role == "moderator"}
+            >
               {Object.keys(structureMOJ).map((v) => (
                 <Option value={v}>{v}</Option>
               ))}

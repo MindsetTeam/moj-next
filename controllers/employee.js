@@ -106,21 +106,18 @@ export const getOverviewEmployees = async (req, res) => {
   ) {
     let queryModerator = {};
     const { user } = req;
-    user
+    // user;
     queryModerator["latestOfficerStatus.unit"] =
-      req.user.latestOfficerStatus.unit || "";
-    if (
-      user.moderatorType == "generalDepartment" ||
-      user.moderatorType == "department"
-    ) {
+      req.user.latestOfficerStatus.unit;
+    if (["generalDepartment", "department"].includes(req.user.moderatorType)) {
       queryModerator["latestOfficerStatus.generalDepartment"] =
-        req.user.latestOfficerStatus.generalDepartment ||'';
+        req.user.latestOfficerStatus.generalDepartment;
     }
     if (req.user.moderatorType === "department") {
       queryModerator["latestOfficerStatus.department"] =
-        req.user.latestOfficerStatus.department || '';
+        req.user.latestOfficerStatus.department;
     }
-
+    console.log({ queryModerator });
     retiredEmployeeReq = User.aggregate([
       {
         $match: {
@@ -138,13 +135,13 @@ export const getOverviewEmployees = async (req, res) => {
         $project: {
           approval: 1,
           latestOfficerStatus: 1,
-          officerStatus: { $slice: ["$officerStatus", -1] },
+          // officerStatus: { $slice: ["$officerStatus", -1] },
         },
       },
       {
         $match: {
           approval: true,
-          officerStatus: { $elemMatch: { $exists: true } },
+          // officerStatus: { $elemMatch: { $exists: true } },
           ...queryModerator,
         },
       },
@@ -164,7 +161,6 @@ export const getOverviewEmployees = async (req, res) => {
         },
       },
     ]);
-    console.log(queryModerator);
     totalEmployeeReq = User.countDocuments({
       approval: true,
       ...queryModerator,
@@ -174,13 +170,13 @@ export const getOverviewEmployees = async (req, res) => {
         $project: {
           approval: 1,
           latestOfficerStatus: 1,
-          officerStatus: { $slice: ["$officerStatus", -1] },
+          // officerStatus: { $slice: ["$officerStatus", -1] },
         },
       },
       {
         $match: {
           approval: true,
-          officerStatus: { $elemMatch: { $exists: true } },
+          // officerStatus: { $elemMatch: { $exists: true } },
           ...queryModerator,
         },
       },
@@ -297,7 +293,6 @@ export const getOverviewEmployees = async (req, res) => {
     retiredEmployee: retiredEmployee.length > 0 ? retiredEmployee[0].total : 0,
     officerStatusList,
   };
-  console.log(totalEmployeeReq);
   console.log(resData);
   res.status(200).json({
     success: true,
@@ -401,15 +396,36 @@ export const getEmployees = async (req, res) => {
     }
   }
   if (req.user.role === "moderator") {
+    if (generalDepartment) {
+      reqQuery = {
+        "latestOfficerStatus.generalDepartment": generalDepartment,
+        ...reqQuery,
+      };
+    }
+    if (department) {
+      reqQuery = {
+        "latestOfficerStatus.department": department,
+        ...reqQuery,
+      };
+    }
+    if (office) {
+      reqQuery = {
+        "latestOfficerStatus.office": office,
+        ...reqQuery,
+      };
+    }
     let queryModerator = {};
-    queryModerator["latestOfficerStatus.generalDepartment"] =
-      req.user.latestOfficerStatus.generalDepartment;
+    queryModerator["latestOfficerStatus.unit"] =
+      req.user.latestOfficerStatus.unit;
+    if (["generalDepartment", "department"].includes(req.user.moderatorType)) {
+      queryModerator["latestOfficerStatus.generalDepartment"] =
+        req.user.latestOfficerStatus.generalDepartment;
+    }
     if (req.user.moderatorType === "department") {
       queryModerator["latestOfficerStatus.department"] =
         req.user.latestOfficerStatus.department;
-    } else if (department) {
-      queryModerator["latestOfficerStatus.department"] = department;
     }
+    console.log(queryModerator);
     reqQuery = {
       ...reqQuery,
       ...queryModerator,
