@@ -240,7 +240,7 @@ const RankInfo = ({ userData }) => {
           }}
         >
           <Row gutter={16}>
-            <Col span={8}>
+            <Col span={12}>
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="refNum"
@@ -255,7 +255,7 @@ const RankInfo = ({ userData }) => {
                 <Input placeholder="លេខលិខិតបទដ្ឋានគតិយុត្ត" />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={12}>
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="startDate"
@@ -282,7 +282,7 @@ const RankInfo = ({ userData }) => {
                         <Switch defaultChecked onChange={onNowChange}></Switch>
                      </Form.Item>
                   </Col> */}
-            <Col span={8}>
+            {/* <Col span={8}>
               <Form.Item
                 name="endDate"
                 label="កាលបរិច្ឆេទដំឡើងឋាន្តរសក្តិ ថ្នាក់ចុងក្រោយ"
@@ -295,7 +295,7 @@ const RankInfo = ({ userData }) => {
                   onChange={onEndDateChange}
                 />
               </Form.Item>
-            </Col>
+            </Col> */}
           </Row>
           <Row gutter={16}>
             <Col span={8}>

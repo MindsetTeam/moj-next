@@ -71,6 +71,10 @@ const PrintInfo = ({
           display: inline-block;
           min-width: 180px;
         }
+        .frontLabel {
+          display: inline-block;
+          min-width: 310px;
+        }
         .labelSubInput {
           margin-left: 50px;
         }
@@ -100,7 +104,7 @@ const PrintInfo = ({
       <div id="section-to-print">
         <section style={{ textAlign: "center", fontWeight: "bold" }}>
           <h1 style={{ fontWeight: "bold" }}>ព្រះរាជាណាចក្រកម្ពុជា</h1>
-          <h1 style={{ fontWeight: "bold" }}>ជាតិ សាសនា ព្រះមាហាក្សត្រ</h1>
+          <h1 style={{ fontWeight: "bold" }}>ជាតិ សាសនា ព្រះមហាក្សត្រ</h1>
           <h1 className="tacteng">3</h1>
         </section>
         <section
@@ -112,7 +116,7 @@ const PrintInfo = ({
           }}
         >
           <div>
-            <h1 className="font-bold">ក្រសួងយុត្តិធម៍</h1>
+            <h1 className="font-bold">ក្រសួងយុត្តិធម៌</h1>
             <p>អង្គភាព អគ្គនាយកដ្ឋាន គោលនយោបាយ</p>
             <p>ក្រសួងយុត្តិធម៏</p>
           </div>
@@ -129,16 +133,28 @@ const PrintInfo = ({
             <h1>ក. ព័ត៌មានផ្ទាល់ខ្លួន</h1>
             <div style={{ marginLeft: 25 }}>
               <p>
-                - <span className="labelInput">គោត្តនាម និងនាម</span>{" "}
-                {General.firstName + General.lastName}{" "}
+                -{" "}
+                <span className="frontLabel">
+                  {" "}
+                  <span className="labelInput">គោត្តនាម និងនាម</span>{" "}
+                  {`${General.firstName} ${General.lastName}`}{" "}
+                </span>
                 <span className="labelSubInput">ភេទ :</span> {General.gender}{" "}
               </p>
               <p>
-                - <span className="labelInput">អក្សរឡាតាំង</span>{" "}
-                {General.firstNameLatin + General.lastNameLatin}
+                -{" "}
+                <span className="frontLabel">
+                  <span className="labelInput">អក្សរឡាតាំង</span>{" "}
+                  {General.firstNameLatin &&
+                    (
+                      General.firstNameLatin +
+                      " " +
+                      General.lastNameLatin
+                    ).toUpperCase()}
+                </span>
               </p>
               <p>
-                - <span className="labelInput">ថ្ថៃ ខែ ឆ្នាំកំណើត</span>{" "}
+                - <span className="labelInput">ថ្ងៃខែឆ្នាំកំណើត</span>{" "}
                 {moment(General.birthDate).format("DD/MMMM/YYYY")}
               </p>
               <p>
@@ -150,14 +166,17 @@ const PrintInfo = ({
                 {placeFormat(General.currentResidence)}
               </p>
               <p>
-                - <span className="labelInput">លេខទូរស័ព្ទ</span>{" "}
-                {[
-                  General.contactInfo?.phoneNumber1,
-                  General.contactInfo?.phoneNumber2,
-                ]
-                  .filter((v) => v)
-                  .join(" , ")}{" "}
-                <span className="labelSubInput">អ៊ីម៉ែល :</span>{" "}
+                -{" "}
+                <span className="frontLabel">
+                  <span className="labelInput">លេខទូរស័ព្ទ</span>{" "}
+                  {[
+                    General.contactInfo?.phoneNumber1,
+                    General.contactInfo?.phoneNumber2,
+                  ]
+                    .filter((v) => v)
+                    .join(" , ")}{" "}
+                </span>
+                <span className="labelSubInput">អុីម៉ែល :</span>{" "}
                 {General.contactInfo?.email}
               </p>
             </div>
@@ -336,14 +355,14 @@ const PrintInfo = ({
         {Education && (
           <section style={{ margin: "7px 0 7px" }}>
             <h1>
-              គ កម្រិតវប្បធម៍ទូទៅ ការបណ្តុះបណ្តាលវជ្ចាជីវៈ
+              គ កម្រិតវប្បធម៍ទូទៅ ការបណ្តុះបណ្តាលវិជ្ជាជីវៈ
               និងការបណ្តុះបណ្តាលបន្តៈ
             </h1>
             <table className="printTable">
               <thead>
                 <tr>
-                  <th>វគ្គឬ​កម្រិតការសិក្សា</th>
-                  <th>គ្រឺះស្ថានសិក្សាបណ្តុះបណ្តាល</th>
+                  <th>វគ្គឬកម្រិតការសិក្សា</th>
+                  <th>គ្រឹះស្ថានសិក្សាបណ្តុះបណ្តាល</th>
                   <th>ទីកន្លែងសិក្សា</th>
                   <th>សញ្ញាបត្រទទួលបាន</th>
                   <th>ឆ្នាំចូល</th>
@@ -370,7 +389,7 @@ const PrintInfo = ({
                   })}
                 <tr>
                   <th colSpan="6">
-                    ២-កម្រិតបណ្តុះបណ្តាលវិជ្ជាជីវៈមួលដ្ឋាន និងក្រោមូលដ្ឋាន
+                    ២-កម្រិតបណ្តុះបណ្តាលវិជ្ជាជីវៈមួលដ្ឋាន និងក្រោមមូលដ្ឋាន
                   </th>
                 </tr>
                 {Education?.education
@@ -502,13 +521,13 @@ const PrintInfo = ({
 
         <section className="text-center">
           <p>
-            ខ្ងុំសូមធានាទទួលខុសត្រូវចំពោះមុខច្បាប់ថា
+            ខ្ញុំសូមធានាទទួលខុសត្រូវចំពោះមុខច្បាប់ថា
             ព័ត៌មានបំពេញក្នុងជីវប្រវត្តិមន្ត្រីរាជការនេះ
             ពិតជាត្រឹមត្រូវប្រាកដមែន។
           </p>
           <div style={{ display: "flex" }}>
             <div style={{ width: "50%" }}>
-              <h1>បានឃើញ និងបញ្ចាក់ថា</h1>
+              <h1>បានឃើញ និងបញ្ជាក់ថា</h1>
               <p>ហត្ថលេខាខាងស្តាំ ពិតជាហត្ថលេខារបស់</p>
               <p>
                 លោកលោកស្រី <strong>{defaultInfo.fullName}</strong> ពិតប្រាកដមែន។

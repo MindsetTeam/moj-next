@@ -144,7 +144,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                       },
                     ]}
                   >
-                    <InputNumber
+                    <Input
                       placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
                       style={{ width: "100%" }}
                     />
@@ -175,12 +175,12 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                     style={{ marginBottom: 10 }}
                     name="civilID"
                     label="អត្តលេខមន្រ្ដីរាជការ"
-                    rules={[
-                      {
-                        required: true,
-                        message: "សូមបំពេញអត្តលេខមន្រ្ដីរាជការ",
-                      },
-                    ]}
+                    // rules={[
+                    //   {
+                    //     required: true,
+                    //     message: "សូមបំពេញអត្តលេខមន្រ្ដីរាជការ",
+                    //   },
+                    // ]}
                   >
                     <Input placeholder="អត្តលេខមន្រ្ដីរាជការ" />
                   </Form.Item>
