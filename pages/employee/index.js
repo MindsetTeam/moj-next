@@ -487,7 +487,20 @@ const Index = () => {
       </div>
 
       <div style={{ marginTop: 20 }}>
-        <Table columns={columns} dataSource={employees}></Table>
+        <Table
+          columns={columns}
+          dataSource={employees}
+          // rowsKey={(record) => record.id}
+          pagination={{
+            showTotal: (total, range) => {
+              console.log({ total, range });
+            },
+          }}
+          onChange={(pagination, filters, sorter) => {
+            console.log("first");
+            console.log({ pagination, filters, sorter });
+          }}
+        ></Table>
       </div>
 
       {/* Modal Edit */}
