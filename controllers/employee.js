@@ -312,6 +312,8 @@ export const getEmployees = async (req, res) => {
     generalDepartment,
     department,
     rank,
+    page,
+    size
   } = req.query;
   let reqQuery;
   if (searchTerm) {
@@ -482,11 +484,20 @@ export const getEmployees = async (req, res) => {
   //     { $sort: { createdAt: -1 } },
   //   ]);
   // }
+  
+  const totalUser = await User.countDocuments(reqQuery);
+  const pageSize = +size || 10;
+  const currentPage = +page || 1;
+  const skip = (currentPage - 1) * pageSize;
+ 
+  searchQuery.skip(skip).limit(pageSize);
   const users = await searchQuery;
+  console.log(totalUser);
   res.status(200).json({
     success: true,
     msg: searchTerm ? `User with ${searchTerm}` : "Find all user",
     data: users,
+    total: totalUser,
   });
 };
 

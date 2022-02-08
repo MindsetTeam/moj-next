@@ -63,6 +63,8 @@ const Index = () => {
   const [session, loading] = useSession();
   const [form] = Form.useForm();
   const [roleChoice, setRoleChoice] = useState("");
+  const [totalUsers, setTotalUsers] = useState(0);
+  const [pagination, setPagination] = useState({ currentPage: 1, size: 10 });
 
   const [nearlyRetired, setNearlyRetired] = useState(false);
 
@@ -110,12 +112,12 @@ const Index = () => {
   const toggleModalChangePassword = () => {
     setModalChangePassword(!modalChangePassword);
   };
+  useState;
 
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
-    //
     fetchEmployees(router.query.s || "", router.query);
-  }, [router]);
+  }, [router, pagination]);
   const fetchEmployees = async (search = "", query = "") => {
     let searchQuery = new URLSearchParams();
     searchQuery.append("searchTerm", search);
@@ -128,7 +130,8 @@ const Index = () => {
       const { data } = await api.get(
         `/api/users${
           "?select=firstName,lastName,firstNameLatin,lastNameLatin,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role,moderatorType,latestOfficerStatus&" +
-          searchQuery.toString()
+          searchQuery.toString() +
+          `&page=${pagination.currentPage}&size=${pagination.size}`
         }`
         // const { data } = await api.get(
         //   `/api/users${
@@ -160,6 +163,7 @@ const Index = () => {
 
         return employee;
       });
+      setTotalUsers(data.total);
       setEmployees(employees);
     } catch (error) {}
   };
@@ -492,13 +496,12 @@ const Index = () => {
           dataSource={employees}
           // rowsKey={(record) => record.id}
           pagination={{
-            showTotal: (total, range) => {
-              console.log({ total, range });
-            },
+            pageSize: pagination.size,
+            total: totalUsers,
           }}
-          onChange={(pagination, filters, sorter) => {
-            console.log("first");
-            console.log({ pagination, filters, sorter });
+          onChange={(pagination) => {
+            const { current, pageSize } = pagination;
+            setPagination({ currentPage: current, pageSize });
           }}
         ></Table>
       </div>
