@@ -1,11 +1,17 @@
 import { Col, Row, Select, Form, Checkbox, Button } from "antd";
 import { useSession } from "next-auth/client";
 import router, { useRouter } from "next/router";
+import { set } from "nprogress";
 import React, { useEffect, useState } from "react";
 
 const { Option } = Select;
 
-const SortOption = ({ ministryStructure, structureMOJ, rankListData }) => {
+const SortOption = ({
+  ministryStructure,
+  structureMOJ,
+  rankListData,
+  setPagination,
+}) => {
   const [form] = Form.useForm();
   const [session, loading] = useSession();
 
@@ -75,6 +81,7 @@ const SortOption = ({ ministryStructure, structureMOJ, rankListData }) => {
     <Form
       form={form}
       onValuesChange={(changed, allValues) => {
+        setPagination({ currentPage: 1, pageSize: 10 });
         let searchQuery = [];
         //   if (changed.generalDepartment || !allValues.generalDepartment) {
         //     form.resetFields(["department"]);

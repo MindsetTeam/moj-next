@@ -45,6 +45,7 @@ import {
 import api from "@/utils/api";
 import { useSession } from "next-auth/client";
 import { formalKhmerDate } from "@/lib/formatDate";
+import axios from "axios";
 
 const { Option } = Select;
 const { confirm } = Modal;
@@ -58,6 +59,7 @@ for (const key in data) {
     generalDepartmentData.push(...Object.keys(data[key]));
   }
 }
+
 const Index = () => {
   const router = useRouter();
   const [session, loading] = useSession();
@@ -65,6 +67,7 @@ const Index = () => {
   const [roleChoice, setRoleChoice] = useState("");
   const [totalUsers, setTotalUsers] = useState(0);
   const [pagination, setPagination] = useState({ currentPage: 1, size: 10 });
+  const [isLoading, setIsLoading] = useState(true);
 
   const [nearlyRetired, setNearlyRetired] = useState(false);
 
@@ -113,10 +116,14 @@ const Index = () => {
     setModalChangePassword(!modalChangePassword);
   };
   useState;
+  const cancelTokenSource = axios.CancelToken.source();
 
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
     fetchEmployees(router.query.s || "", router.query);
+    return ()=>{
+      cancelTokenSource.cancel()
+    }
   }, [router, pagination]);
   const fetchEmployees = async (search = "", query = "") => {
     let searchQuery = new URLSearchParams();
@@ -126,13 +133,16 @@ const Index = () => {
         searchQuery.append(v, query[v]);
       });
     }
+
+    setIsLoading(true);
     try {
       const { data } = await api.get(
         `/api/users${
           "?select=firstName,lastName,firstNameLatin,lastNameLatin,nationalityIDNum,gender,birthDate,rank,officerStatus,approval,suspended,role,moderatorType,latestOfficerStatus&" +
           searchQuery.toString() +
           `&page=${pagination.currentPage}&size=${pagination.size}`
-        }`
+        }`,
+        { cancelToken: cancelTokenSource.token }
         // const { data } = await api.get(
         //   `/api/users${
         //     search
@@ -163,9 +173,12 @@ const Index = () => {
 
         return employee;
       });
-      setTotalUsers(data.total);
       setEmployees(employees);
-    } catch (error) {}
+      setTotalUsers(data.total);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [selectedUser, setSelectedUser] = useState(null);
@@ -487,6 +500,7 @@ const Index = () => {
           structureMOJ={structureMOJData}
           rankListData={rankListData}
           ministryStructure={structureMinistryData}
+          setPagination={setPagination}
         ></SortOption>
       </div>
 
@@ -494,8 +508,10 @@ const Index = () => {
         <Table
           columns={columns}
           dataSource={employees}
+          loading={isLoading}
           // rowsKey={(record) => record.id}
           pagination={{
+            current: pagination.currentPage,
             pageSize: pagination.size,
             total: totalUsers,
           }}
