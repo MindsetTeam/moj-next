@@ -11,9 +11,6 @@ const protect = async (req, res, next) => {
   next();
 };
 
-// const permissionRole = async (req, res, next) => {
-
-// }
 
 const role =
   (...rest) =>

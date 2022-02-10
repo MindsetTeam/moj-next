@@ -133,7 +133,6 @@ const Report = () => {
           displayData[v.latestOfficerStatus?.unit] = [v];
         }
       });
-      console.log(displayData.undefined);
       Object.keys(displayData).forEach((v) => {
         displayData[v].sort((a, b) => {
           const roleArr = Object.keys(sortedRole);

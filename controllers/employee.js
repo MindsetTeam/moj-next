@@ -117,7 +117,6 @@ export const getOverviewEmployees = async (req, res) => {
       queryModerator["latestOfficerStatus.department"] =
         req.user.latestOfficerStatus.department;
     }
-    console.log({ queryModerator });
     retiredEmployeeReq = User.aggregate([
       {
         $match: {
@@ -427,7 +426,6 @@ export const getEmployees = async (req, res) => {
       queryModerator["latestOfficerStatus.department"] =
         req.user.latestOfficerStatus.department;
     }
-    console.log(queryModerator);
     reqQuery = {
       ...reqQuery,
       ...queryModerator,
@@ -492,7 +490,6 @@ export const getEmployees = async (req, res) => {
  
   searchQuery.skip(skip).limit(pageSize);
   const users = await searchQuery;
-  console.log(totalUser);
   res.status(200).json({
     success: true,
     msg: searchTerm ? `User with ${searchTerm}` : "Find all user",
@@ -505,6 +502,7 @@ export const getSingleEmployee = async (req, res, next) => {
   const { id } = req.query;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   const user = await User.findById(id);
+  console.log(user)
   // if (user.experience) {
   //   user.experience = user.experience.sort(
   //     (a, b) =>

@@ -20,7 +20,6 @@ import { fetchSingleEmployee } from "api/Employee";
 export async function getServerSideProps({ params, req }) {
   const session = await getSession({ req })
   console.log(session);
-  
   // try {
   //   const res1 = await fetchSingleEmployee(params.id, req.cookies);
   //   console.log(res1);
@@ -28,8 +27,6 @@ export async function getServerSideProps({ params, req }) {
   //   console.log(error);
   // }
   const res = await api.get("/api/users/" + params.id);
-  console.log(res);
-
   return {
     props: {
       ministryStructure,

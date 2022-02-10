@@ -121,9 +121,9 @@ const Index = () => {
   const [employees, setEmployees] = useState([]);
   useEffect(() => {
     fetchEmployees(router.query.s || "", router.query);
-    return ()=>{
-      cancelTokenSource.cancel()
-    }
+    return () => {
+      cancelTokenSource.cancel();
+    };
   }, [router, pagination]);
   const fetchEmployees = async (search = "", query = "") => {
     let searchQuery = new URLSearchParams();
@@ -510,10 +510,13 @@ const Index = () => {
           dataSource={employees}
           loading={isLoading}
           // rowsKey={(record) => record.id}
+
           pagination={{
             current: pagination.currentPage,
             pageSize: pagination.size,
             total: totalUsers,
+            showTotal: (total, range) =>
+              `${range[0]}-${range[1]} នៃ ${total} នាក់`,
           }}
           onChange={(pagination) => {
             const { current, pageSize } = pagination;
