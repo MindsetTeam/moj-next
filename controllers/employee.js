@@ -500,9 +500,10 @@ export const getEmployees = async (req, res) => {
 
 export const getSingleEmployee = async (req, res, next) => {
   const { id } = req.query;
+  console.log(id)
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   const user = await User.findById(id);
-  console.log(user)
+  // console.log(user)
   // if (user.experience) {
   //   user.experience = user.experience.sort(
   //     (a, b) =>

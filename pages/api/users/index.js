@@ -8,7 +8,6 @@ import nc from "next-connect";
 const { getEmployees } = require("controllers/employee");
 
 const handler = nc(ncOpts);
-
 handler.use(database);
 
 handler.get(protect, role("admin", "editor", "moderator"), getEmployees);

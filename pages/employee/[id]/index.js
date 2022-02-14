@@ -13,20 +13,77 @@ import statusOfficer from "data/StatusOfficer.json";
 import ministryList from "data/Ministry.json";
 import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
-import { useSession,getSession } from "next-auth/client";
+import { useSession, getSession } from "next-auth/client";
 
 import { fetchSingleEmployee } from "api/Employee";
 
 export async function getServerSideProps({ params, req }) {
-  const session = await getSession({ req })
+  const session = await getSession({ req });
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
   console.log(session);
+  const res = await api.get("/api/users/" + params.id);
+  console.log(res.data.latestOfficerStatus)
+  if (!res) {
+    return {
+      notFound: true,
+    };
+  }
+  if (!["admin", "editor", "moderator"].includes(session.user.role)) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  const { user } = session;
+  if (user.role == "moderator") {
+    const compareObj = {};
+    let isAllow;
+    if (user.moderatorType) {
+      if (
+        ['unit',"generalDepartment", "department"].includes(
+          user.moderatorType
+        )
+      ) {
+        compareObj.generalDepartment =
+          user.latestOfficerStatus.generalDepartment;
+      }
+      if (["generalDepartment","department"].includes(user.moderatorType)) {
+        compareObj.department = user.latestOfficerStatus.department;
+      }
+      if (user.moderatorType == "department") {
+        compareObj.office = user.latestOfficerStatus.office;
+      }
+      console.log(compareObj);
+      isAllow = Object.keys(compareObj).every((current) => {
+        return (
+          res.data.latestOfficerStatus[current] == user.latestOfficerStatus[current]
+        );
+      });
+    }
+    if (!user.moderatorType || !isAllow) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
   // try {
   //   const res1 = await fetchSingleEmployee(params.id, req.cookies);
   //   console.log(res1);
   // } catch (error) {
   //   console.log(error);
   // }
-  const res = await api.get("/api/users/" + params.id);
   return {
     props: {
       ministryStructure,

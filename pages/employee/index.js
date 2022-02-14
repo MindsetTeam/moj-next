@@ -509,8 +509,6 @@ const Index = () => {
           columns={columns}
           dataSource={employees}
           loading={isLoading}
-          // rowsKey={(record) => record.id}
-
           pagination={{
             current: pagination.currentPage,
             pageSize: pagination.size,
