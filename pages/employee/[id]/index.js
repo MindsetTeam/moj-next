@@ -1,10 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-
 import SummaryInfo from "@/components/Employee/SummaryInfo";
-
 import styles from "@/styles/Employee.module.css";
-
 import { Button } from "antd";
 
 import api from "@/utils/api";
@@ -14,8 +11,6 @@ import ministryList from "data/Ministry.json";
 import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
 import { useSession, getSession } from "next-auth/client";
-
-import { fetchSingleEmployee } from "api/Employee";
 
 export async function getServerSideProps({ params, req }) {
   const session = await getSession({ req });
@@ -27,15 +22,19 @@ export async function getServerSideProps({ params, req }) {
       },
     };
   }
-  console.log(session);
+  // await dbConnect();
+  // const user = await User.findById(id)
+  // if()
+  // console.log(session);
   const res = await api.get("/api/users/" + params.id);
-  console.log(res.data.latestOfficerStatus)
   if (!res) {
     return {
       notFound: true,
     };
   }
-  if (!["admin", "editor", "moderator"].includes(session.user.role)) {
+  const { user } = session;
+
+  if (user.role == "user" && session.user.id !== res.data.id) {
     return {
       redirect: {
         destination: "/",
@@ -43,20 +42,17 @@ export async function getServerSideProps({ params, req }) {
       },
     };
   }
-  const { user } = session;
   if (user.role == "moderator") {
     const compareObj = {};
-    let isAllow;
-    if (user.moderatorType) {
+    let isAllow = false;
+    if (user.moderatorType && res.data.latestOfficerStatus) {
       if (
-        ['unit',"generalDepartment", "department"].includes(
-          user.moderatorType
-        )
+        ["unit", "generalDepartment", "department"].includes(user.moderatorType)
       ) {
         compareObj.generalDepartment =
           user.latestOfficerStatus.generalDepartment;
       }
-      if (["generalDepartment","department"].includes(user.moderatorType)) {
+      if (["generalDepartment", "department"].includes(user.moderatorType)) {
         compareObj.department = user.latestOfficerStatus.department;
       }
       if (user.moderatorType == "department") {
@@ -65,7 +61,8 @@ export async function getServerSideProps({ params, req }) {
       console.log(compareObj);
       isAllow = Object.keys(compareObj).every((current) => {
         return (
-          res.data.latestOfficerStatus[current] == user.latestOfficerStatus[current]
+          res.data.latestOfficerStatus[current] ==
+          user.latestOfficerStatus[current]
         );
       });
     }

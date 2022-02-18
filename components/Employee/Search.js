@@ -24,15 +24,13 @@ const Search = () => {
                     value: v.id,
                     label: (
                        <span>
-                          <strong>firstName</strong>:
-                          {highlightJSX(reg, v.firstName)} |{" "}
-                          <strong>lastName</strong>:{" "}
+                          {/* <strong>firstName</strong>: */}
+                          {highlightJSX(reg, v.firstName)}{" "}
+                          {/* <strong>lastName</strong>:{" "} */}
                           {highlightJSX(reg, v.lastName)} |{" "}
-                          <strong>firstNameLatin</strong>:
-                          {highlightJSX(reg, v.firstNameLatin)} |{" "}
-                          <strong>lastNameLatin</strong>:{" "}
+                          {highlightJSX(reg, v.firstNameLatin)}{" "}
                           {highlightJSX(reg, v.lastNameLatin)} |{" "}
-                          <strong>nationalityIDNum</strong>:{" "}
+                          <strong>អត្តសញ្ញាណប័ណ្ណ</strong>:{" "}
                           {highlightJSX(reg, v.nationalityIDNum)}
                        </span>
                     ),
