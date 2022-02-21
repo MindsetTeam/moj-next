@@ -330,6 +330,25 @@ const Index = () => {
       title: "លេខអត្តសញ្ញាណប័ណ្ណ",
       dataIndex: "nationalityIDNum",
       key: "nationalityIDNum",
+      render(nationalityIDNum, record) {
+        const { role } = record;
+        return (
+          <span
+            style={{
+              color:
+                role == "admin"
+                  ? "red"
+                  : role == "editor"
+                  ? "teal"
+                  : role == "moderator"
+                  ? "blue"
+                  : "black",
+            }}
+          >
+            {nationalityIDNum}
+          </span>
+        );
+      },
     },
     {
       title: "គោត្តនាមនិងនាម",
