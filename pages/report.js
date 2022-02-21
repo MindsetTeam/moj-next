@@ -104,6 +104,7 @@ const Report = () => {
         searchQuery.append(v, query[v]);
       }
     });
+    searchQuery.append('remove-pagination', true)
     //
     let { data } = await fetcher("/api/users?" + searchQuery.toString());
     if (query.unit) {

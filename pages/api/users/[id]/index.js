@@ -20,32 +20,10 @@ import database from "@/middlewares/database";
 
 const handler = nc(ncOpts);
 handler.use(database);
-// handler.use(protect)
-
+handler.use(protect);
 handler.get(getSingleEmployee);
+handler.use(role("admin", "editor"));
 handler.put(updateEmployee);
-// handler.get(
-//   "/role",
-//   async (req, res, next) => {
-//     // const session = getSession();
-//     // if (!session.user) {
-//     //   throw new ErrorResponse("Not Authorized", 401);
-//     // }
-//     // const user = await User.findById(user.id);
-//     // if (!user) {
-//     //   throw new ErrorResponse("Not Authorized", 401);
-//     // }
-//     // req.user = { id: req.user._id, role: req.user.role };
-//     // next();
-//   },
-//   async(req,res,next)=>{
-//     if(req.role!=='admin'){
-//       throw new ErrorResponse("Not Authorized", 401);
-//     }
-//     next();
-//   },
-//   updateRole
-// );
-handler.delete(protect, role("admin", "editor"), deleteEmployee);
+handler.delete(deleteEmployee);
 
 export default handler;

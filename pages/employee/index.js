@@ -206,7 +206,7 @@ const Index = () => {
     toggleModalChangePassword();
   };
   const updateUserRole = async ({ role, moderatorType }) => {
-    const { data } = await api.put(`api/users/${selectedUser.id}`, {
+    const { data } = await api.put(`api/users/${selectedUser.id}/role`, {
       role,
       moderatorType,
     });

@@ -7,6 +7,7 @@ import { useSession } from "next-auth/client";
 
 import moment from "moment";
 import "moment/locale/km";
+import QRCode from "qrcode.react";
 
 const index = () => {
   const [session, loading] = useSession();
@@ -101,7 +102,9 @@ const index = () => {
         .front-card-container .top-section table tr td:nth-child(3n + 3) {
           color: rgb(34, 34, 185);
         }
-
+        table {
+          font-size: 11.5px
+        }
         /* Front Bottom */
         .front-card-container .bottom-section {
           display: flex;
@@ -220,11 +223,12 @@ const index = () => {
             <div className="bottom-section">
               <div className="card-info">
                 <div className="qrcode">
-                  <img src="/card/qrcode.png" alt="" />
+                  {/* <img src="/card/qrcode.png" alt="" /> */}
+                  <QRCode size="68" value={process.env.baseURL+"/employee/"+user.id}/>
                 </div>
                 <div>
                   <table>
-                    <tr>
+                     <tr>
                       <td>លេខរៀងប័ណ្ណ</td>
                       <td>:</td>
                       <td>{user?.officerID}</td>

@@ -312,7 +312,7 @@ export const getEmployees = async (req, res) => {
     department,
     rank,
     page,
-    size
+    size,
   } = req.query;
   let reqQuery;
   if (searchTerm) {
@@ -482,13 +482,15 @@ export const getEmployees = async (req, res) => {
   //     { $sort: { createdAt: -1 } },
   //   ]);
   // }
-  
+
   const totalUser = await User.countDocuments(reqQuery);
   const pageSize = +size || 10;
   const currentPage = +page || 1;
   const skip = (currentPage - 1) * pageSize;
- 
-  searchQuery.skip(skip).limit(pageSize);
+  if (["remove-pagination"].includes(req.query)) {
+    searchQuery.skip(skip).limit(pageSize);
+  }
+
   const users = await searchQuery;
   res.status(200).json({
     success: true,
@@ -500,7 +502,7 @@ export const getEmployees = async (req, res) => {
 
 export const getSingleEmployee = async (req, res, next) => {
   const { id } = req.query;
-  console.log(id)
+  console.log(id);
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   const user = await User.findById(id);
   // console.log(user)
@@ -517,6 +519,8 @@ export const getSingleEmployee = async (req, res, next) => {
 export const updateEmployee = async (req, res, next) => {
   const { id } = req.query;
   const dataUpdate = req.body;
+  delete dataUpdate.role;
+  delete dataUpdate.moderatorType;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
   if (dataUpdate.currentResidence) {
     dataUpdate.partnerInfo = {
@@ -544,12 +548,13 @@ export const deleteEmployee = async (req, res) => {
 
 export const updateRole = async (req, res, next) => {
   const { id } = req.query;
-  const { role } = req.body;
+  const { role, moderatorType } = req.body;
   const user = await User.findById(id);
   if (!user) {
     throw new ErrorResponse("User not found", 404);
   }
   user.role = role;
+  user.moderatorType = moderatorType;
   await user.save();
   res
     .status(200)

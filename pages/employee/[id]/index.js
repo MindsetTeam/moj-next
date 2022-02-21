@@ -11,9 +11,13 @@ import ministryList from "data/Ministry.json";
 import letterTypes from "data/LetterTypes.json";
 import rankList from "data/Rank.json";
 import { useSession, getSession } from "next-auth/client";
+import dbConnect from "api-lib/dbConnect";
+import User from "@/models/User";
 
 export async function getServerSideProps({ params, req }) {
+  const { id } = params;
   const session = await getSession({ req });
+  const { user } = session;
   if (!session) {
     return {
       redirect: {
@@ -22,19 +26,8 @@ export async function getServerSideProps({ params, req }) {
       },
     };
   }
-  // await dbConnect();
-  // const user = await User.findById(id)
-  // if()
-  // console.log(session);
-  const res = await api.get("/api/users/" + params.id);
-  if (!res) {
-    return {
-      notFound: true,
-    };
-  }
-  const { user } = session;
 
-  if (user.role == "user" && session.user.id !== res.data.id) {
+  if (user.role == "user" && user.id !== id) {
     return {
       redirect: {
         destination: "/",
@@ -42,10 +35,17 @@ export async function getServerSideProps({ params, req }) {
       },
     };
   }
+  await dbConnect();
+  const resUser = await User.findById(id)
+  if (!resUser) {
+    return {
+      notFound: true,
+    };
+  }
   if (user.role == "moderator") {
     const compareObj = {};
     let isAllow = false;
-    if (user.moderatorType && res.data.latestOfficerStatus) {
+    if (user.moderatorType && resUser.latestOfficerStatus) {
       if (
         ["unit", "generalDepartment", "department"].includes(user.moderatorType)
       ) {
@@ -58,10 +58,10 @@ export async function getServerSideProps({ params, req }) {
       if (user.moderatorType == "department") {
         compareObj.office = user.latestOfficerStatus.office;
       }
-      console.log(compareObj);
+
       isAllow = Object.keys(compareObj).every((current) => {
         return (
-          res.data.latestOfficerStatus[current] ==
+         resUser.latestOfficerStatus[current] ==
           user.latestOfficerStatus[current]
         );
       });
@@ -88,7 +88,7 @@ export async function getServerSideProps({ params, req }) {
       letterTypes,
       rankList,
       ministryList,
-      user: res.data,
+      user: JSON.parse(JSON.stringify(resUser)),
     },
   };
 }

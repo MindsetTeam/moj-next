@@ -15,10 +15,71 @@ import provincesList from "data/Province.json";
 import positionList from "data/Position.json";
 import fileTypeName from "data/FileTypeName.json";
 import roleMOJ from "data/RoleMOJ.json";
+import dbConnect from "api-lib/dbConnect";
+import { getSession } from "next-auth/client";
+import User from "@/models/User";
 
-export async function getServerSideProps({ params }) {
-  const res = await api.get("/api/users/" + params.id);
+export async function getServerSideProps({ params, req }) {
+  const { id } = params;
+  const session = await getSession({ req });
+  const { user } = session;
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
+  if (user.role == "user" && user.id !== id) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  await dbConnect();
+  const resUser = await User.findById(id)
+  if (!resUser) {
+    return {
+      notFound: true,
+    };
+  }
+  if (user.role == "moderator") {
+    const compareObj = {};
+    let isAllow = false;
+    if (user.moderatorType && resUser.latestOfficerStatus) {
+      if (
+        ["unit", "generalDepartment", "department"].includes(user.moderatorType)
+      ) {
+        compareObj.generalDepartment =
+          user.latestOfficerStatus.generalDepartment;
+      }
+      if (["generalDepartment", "department"].includes(user.moderatorType)) {
+        compareObj.department = user.latestOfficerStatus.department;
+      }
+      if (user.moderatorType == "department") {
+        compareObj.office = user.latestOfficerStatus.office;
+      }
+
+      isAllow = Object.keys(compareObj).every((current) => {
+        return (
+         resUser.latestOfficerStatus[current] ==
+          user.latestOfficerStatus[current]
+        );
+      });
+    }
+    if (!user.moderatorType || !isAllow) {
+      return {
+        redirect: {
+          destination: "/",
+          permanent: false,
+        },
+      };
+    }
+  }
   return {
     props: {
       ministryStructure,
@@ -31,7 +92,7 @@ export async function getServerSideProps({ params }) {
       structureMOJ,
       fileTypeName,
       roleMOJ,
-      user: res.data,
+      user: JSON.parse(JSON.stringify(resUser)),
     },
   };
 }
