@@ -502,9 +502,43 @@ export const getEmployees = async (req, res) => {
 
 export const getSingleEmployee = async (req, res, next) => {
   const { id } = req.query;
-  console.log(id);
+  const { user } = req;
   if (!id) throw new ErrorResponse("Please provided employee ID", 400);
-  const user = await User.findById(id);
+  if (user.id !== id && user.role == "user")
+    throw new ErrorResponse("You are not authorized to access this user", 400);
+  const resUser = await User.findById(id);
+  if (!resUser) throw new ErrorResponse("User not found", 400);
+  if (user.role == "moderator") {
+    const compareObj = {};
+    let isAllow = false;
+    if (user.moderatorType && resUser.latestOfficerStatus) {
+      if (
+        ["unit", "generalDepartment", "department"].includes(user.moderatorType)
+      ) {
+        compareObj.generalDepartment =
+          user.latestOfficerStatus.generalDepartment;
+      }
+      if (["generalDepartment", "department"].includes(user.moderatorType)) {
+        compareObj.department = user.latestOfficerStatus.department;
+      }
+      if (user.moderatorType == "department") {
+        compareObj.office = user.latestOfficerStatus.office;
+      }
+
+      isAllow = Object.keys(compareObj).every((current) => {
+        return (
+          resUser.latestOfficerStatus[current] ==
+          user.latestOfficerStatus[current]
+        );
+      });
+    }
+    if (!user.moderatorType || !isAllow) {
+      throw new ErrorResponse(
+        "You are not authorized to access this user",
+        400
+      );
+    }
+  }
   // console.log(user)
   // if (user.experience) {
   //   user.experience = user.experience.sort(
@@ -513,7 +547,7 @@ export const getSingleEmployee = async (req, res, next) => {
   //   );
   //
   // }
-  res.status(200).json(user);
+  res.status(200).json(resUser);
 };
 
 export const updateEmployee = async (req, res, next) => {
