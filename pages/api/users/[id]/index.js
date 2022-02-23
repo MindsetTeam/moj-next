@@ -21,7 +21,7 @@ import database from "@/middlewares/database";
 const handler = nc(ncOpts);
 handler.use(database);
 handler.use(protect);
-handler.get(getSingleEmployee);
+handler.get(notifyTelegramBot, getSingleEmployee);
 handler.use(role("admin", "editor"));
 handler.put(updateEmployee);
 handler.delete(deleteEmployee);
