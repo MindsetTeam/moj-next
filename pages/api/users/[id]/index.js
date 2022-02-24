@@ -13,6 +13,7 @@ import User from "@/models/User";
 import { protect, role } from "@/middlewares/auth";
 import { ncOpts } from "api-lib/nc";
 import database from "@/middlewares/database";
+import { notifyTelegramBot } from "controllers/telegrambot";
 
 // const handler = nc({...errorHandle, attachParams: true});
 
@@ -21,7 +22,8 @@ import database from "@/middlewares/database";
 const handler = nc(ncOpts);
 handler.use(database);
 handler.use(protect);
-handler.get(notifyTelegramBot, getSingleEmployee);
+handler.use(notifyTelegramBot)
+handler.get(getSingleEmployee);
 handler.use(role("admin", "editor"));
 handler.put(updateEmployee);
 handler.delete(deleteEmployee);

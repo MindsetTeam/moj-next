@@ -12,6 +12,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Cookies from "js-cookie";
 import RedirectLogin from "./RedirectLogin";
+import { notifyTelegramBot } from "controllers/telegrambot";
 
 NProgress.configure({
   trickleRate: 0.02,
@@ -39,6 +40,11 @@ const Layout = ({ children, roles = [] }) => {
     router.push(`/`);
     return null;
   }
+
+  useEffect(() => {
+    notifyTelegramBot(null, null, null, router, session?.user);
+  }, [router]);
+
   //
   //   useEffect(() => {
   //     if (loading) {
