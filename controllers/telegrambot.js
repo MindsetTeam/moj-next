@@ -7,10 +7,15 @@ path:${route.asPath}
     `;
   } else {
     const { user } = req;
-    console.log(req);
-    // path: ${encodeURI(req.url)}
+    const ipAddress =
+      req.headers["x-forwarded-for"] ||
+      req.connection.remoteAddress ||
+      req.socket.remoteAddress ||
+      req.connection.socket.remoteAddress ||
+      null;
     messageText = `
 User: ${(user.firstName || "") + " " + (user.lastName || "")}
+IP: ${ipAddress}
 path: ${req.url}
 method: ${req.method}
 body:
