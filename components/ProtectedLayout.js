@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import Cookies from "js-cookie";
 import RedirectLogin from "./RedirectLogin";
 import { notifyTelegramBot } from "controllers/telegrambot";
+import Timer from "./Timer";
 
 NProgress.configure({
   trickleRate: 0.02,
@@ -68,6 +69,7 @@ const Layout = ({ children, roles = [] }) => {
     <>
       {/* <Slider /> */}
       <LayoutAnt className="site-layout">
+        <Timer />
         <Header></Header>
         <Content>{children}</Content>
         <Footer></Footer>

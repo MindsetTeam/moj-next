@@ -11,6 +11,7 @@ module.exports = (phase, { defaultConfig }) => {
         baseURL: "http://localhost:3000",
         uploadFilePath: "tmp",
         tokenTelegramBot: process.env.TOKEN_TELEGRAM_BOT,
+        MONGODB_URI: process.env.MONGODB_URI,
       },
     };
   }
@@ -29,6 +30,7 @@ module.exports = (phase, { defaultConfig }) => {
       baseURL: "https://test.khambodiahr.com",
       uploadFilePath: "/tmp",
       tokenTelegramBot: process.env.TOKEN_TELEGRAM_BOT,
+      MONGODB_URI: process.env.MONGODB_URI,
     },
   };
 };
