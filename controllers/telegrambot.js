@@ -34,6 +34,7 @@ ${Object.entries(req.body)
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         text: messageText,
+        disable_notification: false,
         chat_id: -1001506706460,
       }),
     }

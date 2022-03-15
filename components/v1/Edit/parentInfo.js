@@ -35,7 +35,6 @@ const ParentInfo = ({ userData ,onChangeTabKey}) => {
                type: "SUCCESS",
                payload: {
                   message: "បានរក្សាទុក",
-                  //  description: "បានរក្សាទុក",
                },
             });
             onChangeTabKey('4')
@@ -71,13 +70,6 @@ const ParentInfo = ({ userData ,onChangeTabKey}) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "nationalityIDNum"]}
                               label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
-                              // rules={[
-                              //    {
-                              //       required: true,
-                              //       message:
-                              //          "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                              //    },
-                              // ]}
                            >
                               <Input placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
                            </Form.Item>
@@ -89,12 +81,6 @@ const ParentInfo = ({ userData ,onChangeTabKey}) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "fullName"]}
                               label="គោត្តនាម និងនាម"
-                              // rules={[
-                              //    {
-                              //       required: true,
-                              //       message: "សូមបំពេញគោត្តនាម និងនាម",
-                              //    },
-                              // ]}
                            >
                               <Input placeholder="គោត្តនាម និងនាម" />
                            </Form.Item>
@@ -104,12 +90,6 @@ const ParentInfo = ({ userData ,onChangeTabKey}) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "fullNameLatin"]}
                               label="គោត្តនាម និងនាមឡាតាំង"
-                              // rules={[
-                              //    {
-                              //       required: true,
-                              //       message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
-                              //    },
-                              // ]}
                            >
                               <Input placeholder="គោត្តនាម និងនាមឡាតាំង" />
                            </Form.Item>
@@ -121,12 +101,6 @@ const ParentInfo = ({ userData ,onChangeTabKey}) => {
                               style={{ marginBottom: 10 }}
                               name={["fatherInfo", "birthDate"]}
                               label="ថ្ងៃខែឆ្នាំកំណើត"
-                              // rules={[
-                              //    {
-                              //       required: true,
-                              //       message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
-                              //    },
-                              // ]}
                            >
                               <DatePicker
                                  placeholder="ថ្ងៃខែឆ្នាំកំណើត"

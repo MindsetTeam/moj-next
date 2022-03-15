@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import ErrorResponse from "@/utils/errorResponse";
 
 const UserSchema = new mongoose.Schema(
   {
@@ -322,7 +323,7 @@ UserSchema.pre("findOneAndUpdate", function (next) {
 
 UserSchema.post("save", function (error, doc, next) {
   if (error.code === 11000) {
-    next(new Error("Nationality ID already being used"));
+    next(new ErrorResponse("Nationality ID already being used", 400));
   }
   next();
 });

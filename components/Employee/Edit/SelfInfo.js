@@ -321,7 +321,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                     style={{ marginBottom: 10 }}
                     name="vaccine"
                     label="ចំនួនចាក់វ៉ាក់សាំង"
-                    type="number"
+                    // type="number"
                     rules={[
                       {
                         required: true,
@@ -329,7 +329,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
                       },
                     ]}
                   >
-                    <InputNumber
+                    <Input
                       placeholder="ចំនួនចាក់វ៉ាក់សាំង"
                       style={{ width: "100%" }}
                     />

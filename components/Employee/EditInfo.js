@@ -66,7 +66,6 @@ const EditInfo = ({
                   ></SpouseInfo>
                </TabPane>
             )}
-
             {/* <TabPane tab="ព័ត៌មានកូន" key="3">
                <ChildrenInfo userData={user}></ChildrenInfo>
             </TabPane> */}

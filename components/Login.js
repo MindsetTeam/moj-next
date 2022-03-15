@@ -9,6 +9,7 @@ import Logo from "@/public/logo.png";
 // import Hello from "@/public/hello.png";
 import Cookies from "js-cookie";
 import { useSession } from "next-auth/client";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 
 const layout = {
   labelCol: {
@@ -96,7 +97,12 @@ const Login = () => {
                 },
               ]}
             >
-              <Input placeholder="ពាក្យសម្ងាត់" />
+              <Input.Password
+                placeholder="ពាក្យសម្ងាត់"
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
             </Form.Item>
 
             <Form.Item name="remember" valuePropName="checked">

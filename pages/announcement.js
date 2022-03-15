@@ -28,17 +28,6 @@ const { Option } = Select;
 
 const Announcement = () => {
   const { data: announcementList = [], mutate } = useAnnouncements();
-  // const [announcementList, setAnnouncementList] = useState([
-  //   {
-  //     title: "Do Lorem sit ad fugiat cillum eiusmod do.",
-  //     isActive: false,
-  //   },
-  //   {
-  //     title: "Do Lorem sit ad fugiat cillum eiusmod do.",
-  //     isActive: true,
-  //   },
-  // ]);
-
   const [visible, setVisible] = useState(false);
   const [form] = Form.useForm();
   const [editData, setEditData] = useState(null);

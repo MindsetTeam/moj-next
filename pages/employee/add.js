@@ -6,7 +6,7 @@ import { AlertDispatch } from "contexts/alert.context";
 
 import api from "@/utils/api";
 
-import { Button, Form, Col, Row, Input, Select } from "antd";
+import { Button, Form, Col, Row, Input, Select, notification } from "antd";
 
 import structureMinistryData from "/data/Structure.json";
 
@@ -50,6 +50,7 @@ const Add = () => {
     form.validateFields().then(async () => {
       try {
         const { data } = await api.post("/api/auth/register", dataInput);
+        console.log(data);
         dispatch({
           type: "SUCCESS",
           payload: {
@@ -57,7 +58,16 @@ const Add = () => {
           },
         });
         router.push("/employee/" + data.data.id);
-      } catch (error) {}
+      } catch (error) {
+        if (error.response) {
+          console.log('first')
+          notification.error({
+            message: error.response.data.msg,
+            // description: error.response.data.msg,
+          });
+        }
+        console.log(JSON.stringify(error.response.data.msg));
+      }
     });
   };
 
