@@ -28,7 +28,7 @@ const genderOptions = [
 
 const { Option } = Select;
 
-const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
+const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData }) => {
   const dispatch = useContext(AlertDispatch);
   const [form] = Form.useForm();
   const [selfInfo, setSelfInfo] = useState(null);
@@ -59,8 +59,10 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo }) => {
         },
       });
       // getSession();
+      console.log(res.data.data)
       const { familyStatus } = res.data.data;
-      setFamilyStatusInfo(familyStatus);
+      setUserData(res.data.data)
+      // setFamilyStatusInfo(familyStatus);
       onChangeTabKey(familyStatus === "នៅលីវ" ? "3" : "2");
     });
   };

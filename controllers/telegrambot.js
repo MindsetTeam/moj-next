@@ -1,4 +1,8 @@
+import DeviceDetector from "device-detector-js";
+
 export const notifyTelegramBot = (req, res, next, route, userInfo = {}) => {
+  const deviceDetector = new DeviceDetector();
+
   let messageText = " ";
   if (!req) {
     messageText = `
@@ -13,11 +17,15 @@ path:${route.asPath}
       req.socket.remoteAddress ||
       req.connection.socket.remoteAddress ||
       null;
+    const userAgent = req.headers["user-agent"];
+    const device = deviceDetector.parse(userAgent);
+    console.log(device);
     messageText = `
 User: ${(user.firstName || "") + " " + (user.lastName || "")}
 IP: ${ipAddress}
 path: ${req.url}
 method: ${req.method}
+device: ${Object.values(device?.os)}
 body:
 ${Object.entries(req.body)
   .join(

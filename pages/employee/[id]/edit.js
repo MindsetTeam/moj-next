@@ -18,6 +18,7 @@ import roleMOJ from "data/RoleMOJ.json";
 import dbConnect from "api-lib/dbConnect";
 import { getSession } from "next-auth/client";
 import User from "@/models/User";
+import { useState } from "react";
 
 export async function getServerSideProps({ params, req }) {
   const { id } = params;
@@ -41,7 +42,7 @@ export async function getServerSideProps({ params, req }) {
     };
   }
   await dbConnect();
-  const resUser = await User.findById(id)
+  const resUser = await User.findById(id);
   if (!resUser) {
     return {
       notFound: true,
@@ -66,7 +67,7 @@ export async function getServerSideProps({ params, req }) {
 
       isAllow = Object.keys(compareObj).every((current) => {
         return (
-         resUser.latestOfficerStatus[current] ==
+          resUser.latestOfficerStatus[current] ==
           user.latestOfficerStatus[current]
         );
       });
@@ -110,6 +111,7 @@ const Edit = ({
   roleMOJ,
   user,
 }) => {
+  const [userData, setUserData] = useState(user);
   return (
     <div style={{ padding: "25px 20px" }}>
       {/* <div style={{ marginBottom: 20 }}>
@@ -122,7 +124,8 @@ const Edit = ({
          </div> */}
       <div className={styles.editInfoContainer}>
         <EditInfo
-          userData={user}
+          userData={userData}
+          setUserData={setUserData}
           ministryStructure={ministryStructure}
           rankList={rankList}
           letterTypes={letterTypes}

@@ -19,6 +19,7 @@ const { TabPane } = Tabs;
 
 const EditInfo = ({
    userData,
+   setUserData,
    ministryStructure,
    statusOfficer,
    ministryList,
@@ -52,6 +53,7 @@ const EditInfo = ({
          >
             <TabPane tab="ព័ត៌មានផ្ទាល់ខ្លួន" key="1">
                <SelfInfo
+               setUserData={setUserData}
                   userData={userData}
                   onChangeTabKey={onChangeTabKey}
                   setFamilyStatusInfo={setFamilyStatusInfo}
