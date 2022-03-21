@@ -151,7 +151,6 @@ const Status = ({ userData }) => {
                         // ]}
                      >
                         <Input
-                           placeholder="អត្តលេខមន្រ្ដីរាជការ"
                            disabled={true}
                            style={{backgroundColor: '#fffbfb'}}
                         />
@@ -202,7 +201,6 @@ const Status = ({ userData }) => {
                         label="កំណត់សំគាល់ផ្សេងៗ"
                      >
                         <Input
-                           placeholder="កំណត់សំគាល់ផ្សេងៗ"
                            disabled={true}
                         />
                      </Form.Item>

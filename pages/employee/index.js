@@ -415,13 +415,14 @@ const Index = () => {
       key: "approvalStatus",
       render: (approval, record) => {
         let title = "ជិតចូល";
-        if (
-          [...(record.oldStateOfficerStatus || [])].findIndex(
-            (v) => v.rank == "និវត្តន៍"
-          ) > -1
-        ) {
-          title = "និវត្តន៍";
-        }
+        if(record.latestOfficerStatus?.rank=='និវត្តន៍') title = "និវត្តន៍";
+        // if (
+        //   [...(record.oldStateOfficerStatus || [])].findIndex(
+        //     (v) => v.rank == "និវត្តន៍"
+        //   ) > -1
+        // ) {
+        //   title = "និវត្តន៍";
+        // }
         return (
           <>
             {/* <Tag color={color} key={approval}>

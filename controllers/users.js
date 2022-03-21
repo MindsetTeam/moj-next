@@ -69,3 +69,19 @@ export const updatePasswordBelowLevel = async (req, res, next) => {
   await user.save();
   return res.status(200).json({ success: true, msg: "Password updated" });
 };
+
+export const updateUserBasicInfo = async (req, res, next) => {
+  const { phoneNumber1, email } = req.body;
+  const updateInfo = { phoneNumber1, email };
+  Object.keys(updateInfo).filter((key) => {
+    if (!updateInfo[key]) {
+      delete updateInfo[key];
+    }
+  });
+  if (phoneNumber1 || email) {
+    await User.findByIdAndUpdate(req.user.id, {
+      contactInfo: { ...updateInfo },
+    });
+  }
+  return res.status(200).json({ success: true, msg: "Success" });
+};

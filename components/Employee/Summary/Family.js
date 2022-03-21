@@ -136,14 +136,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="លេខសំបុត្រអាពាហ៍ពិពាហ៍"
               name="weddingCertificateNum"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញលេខសំបុត្រអាពាហ៍ពិពាហ៍",
-                },
-              ]}
             >
-              <Input disabled placeholder="លេខសំបុត្រអាពាហ៍ពិពាហ៍" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -151,14 +145,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
               name="nationalityIDNum"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                },
-              ]}
             >
-              <Input disabled placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
+              <Input bordered disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -166,14 +154,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="គោត្តនាម និងនាម"
               name="fullName"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញគោត្តនាម និងនាម",
-                },
-              ]}
             >
-              <Input disabled placeholder="គោត្តនាម និងនាម" />
+              <Input disabled />
             </Form.Item>
           </Col>
         </Row>
@@ -183,28 +165,12 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="គោត្តនាម និងនាមឡាតាំង"
               name="fullNameLatin"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
-                },
-              ]}
             >
-              <Input disabled placeholder="គោត្តនាម និងនាមឡាតាំង" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
-            <Form.Item
-              style={{ marginBottom: 10 }}
-              label="ភេទ"
-              name="gender"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមជ្រើសរើសភេទ",
-                },
-              ]}
-            >
+            <Form.Item style={{ marginBottom: 10 }} label="ភេទ" name="gender">
               <Radio.Group disabled options={genderOptions}></Radio.Group>
             </Form.Item>
           </Col>
@@ -213,12 +179,6 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ស្ថានភាព"
               name="statusLive"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមជ្រើសរើសស្ថានភាព",
-                },
-              ]}
             >
               <Radio.Group disabled options={statusOptions}></Radio.Group>
             </Form.Item>
@@ -230,14 +190,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="មុខរបរ"
               name="occupation"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញមុខរបរ",
-                },
-              ]}
             >
-              <Input disabled placeholder="មុខរបរ" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -245,14 +199,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ទីកន្លែងបំពេញការងារ"
               name="workPlace"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញទីកន្លែងបំពេញការងារ",
-                },
-              ]}
             >
-              <Input disabled placeholder="ទីកន្លែងបំពេញការងារ" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -260,14 +208,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ថ្ងៃខែឆ្នាំកំណើត"
               name="birthDate"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
-                },
-              ]}
             >
-              <Input disabled placeholder="ថ្ងៃខែឆ្នាំកំណើត" />
+              <Input disabled />
             </Form.Item>
           </Col>
         </Row>
@@ -294,14 +236,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
               name="nationalityIDNum"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                },
-              ]}
             >
-              <Input disabled placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -309,14 +245,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="គោត្តនាម និងនាម"
               name="fullName"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញគោត្តនាម និងនាម",
-                },
-              ]}
             >
-              <Input disabled placeholder="គោត្តនាម និងនាម" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -324,14 +254,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="គោត្តនាម និងនាមឡាតាំង"
               name="fullNameLatin"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
-                },
-              ]}
             >
-              <Input disabled placeholder="គោត្តនាម និងនាមឡាតាំង" />
+              <Input disabled />
             </Form.Item>
           </Col>
         </Row>
@@ -341,14 +265,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ថ្ងៃខែឆ្នាំកំណើត"
               name="birthDate"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
-                },
-              ]}
             >
-              <Input disabled placeholder="ថ្ងៃខែឆ្នាំកំណើត" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -356,14 +274,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="មុខរបរ"
               name="occupation"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញមុខរបរ",
-                },
-              ]}
             >
-              <Input disabled placeholder="មុខរបរ" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -371,12 +283,6 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ស្ថានភាព"
               name="livingStatus"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមជ្រើសរើសស្ថានភាព",
-                },
-              ]}
             >
               <Radio.Group disabled options={statusOptions}></Radio.Group>
             </Form.Item>
@@ -404,14 +310,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ"
               name="nationalityIDNum"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញលេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ",
-                },
-              ]}
             >
-              <Input disabled placeholder="លេខអត្តសញ្ញាណប័ណ្ណសញ្ជាតិខ្មែរ" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -419,14 +319,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="គោត្តនាម និងនាម"
               name="fullName"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញគោត្តនាម និងនាម",
-                },
-              ]}
             >
-              <Input disabled placeholder="គោត្តនាម និងនាម" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -434,14 +328,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="គោត្តនាម និងនាមឡាតាំង"
               name="fullNameLatin"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញគោត្តនាម និងនាមឡាតាំង",
-                },
-              ]}
             >
-              <Input disabled placeholder="គោត្តនាម និងនាមឡាតាំង" />
+              <Input disabled />
             </Form.Item>
           </Col>
         </Row>
@@ -451,14 +339,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ថ្ងៃខែឆ្នាំកំណើត"
               name="birthDate"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញថ្ងៃខែឆ្នាំកំណើត",
-                },
-              ]}
             >
-              <Input disabled placeholder="ថ្ងៃខែឆ្នាំកំណើត" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -466,14 +348,8 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="មុខរបរ"
               name="occupation"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមបំពេញមុខរបរ",
-                },
-              ]}
             >
-              <Input disabled placeholder="មុខរបរ" />
+              <Input disabled />
             </Form.Item>
           </Col>
           <Col span={8}>
@@ -481,12 +357,6 @@ const Family = ({ userData }) => {
               style={{ marginBottom: 10 }}
               label="ស្ថានភាព"
               name="livingStatus"
-              rules={[
-                {
-                  required: true,
-                  message: "សូមជ្រើសរើសស្ថានភាព",
-                },
-              ]}
             >
               <Radio.Group disabled options={statusOptions}></Radio.Group>
             </Form.Item>

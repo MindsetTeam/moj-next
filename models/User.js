@@ -86,6 +86,7 @@ const UserSchema = new mongoose.Schema(
         otherNote: String,
       },
     ],
+    retired: { type: Number, default: 0 },
     latestOfficerStatus: {
       refNum: String,
       letterType: String,
@@ -298,7 +299,12 @@ UserSchema.pre("save", async function (next) {
 
 UserSchema.pre("findOneAndUpdate", function (next) {
   //
-  const { officerStatus, experience, education } = this._update;
+  const { officerStatus, experience, education, latestOfficerStatus } =
+    this._update;
+  if (latestOfficerStatus) {
+    this._update.retired =
+      this._update.latestOfficerStatus.rank == "និវត្តន៍" ? 1 : 0;
+  }
   if (officerStatus) {
     this._update.officerStatus = officerStatus.sort(
       (a, b) =>

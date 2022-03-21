@@ -432,7 +432,7 @@ export const getEmployees = async (req, res) => {
     };
   }
 
-  let searchQuery = User.find(reqQuery).sort("-createdAt");
+  let searchQuery = User.find(reqQuery).sort({retired: 1, createdAt:-1});
   if (select) {
     searchQuery = searchQuery.select(select.split(",").join(" "));
   }
