@@ -69,7 +69,8 @@ const Layout = ({ children, roles = [] }) => {
     <>
       {/* <Slider /> */}
       <LayoutAnt className="site-layout">
-        <Timer />
+        {/* disable auto logout when inactive */}
+        {/* <Timer /> */}
         <Header></Header>
         <Content>{children}</Content>
         <Footer></Footer>
