@@ -34,11 +34,11 @@ const General = ({ userData }) => {
 
           <Col span={6}>អគ្គនាយកដ្ឋាន</Col>
           <Col span={6} className={styles.greyText}>
-            {userData.latestOfficerStatus?.unit || ""}
-            {!!userData.latestOfficerStatus?.generalDepartment
+            {/* {userData.latestOfficerStatus?.unit || ""} */}
+          {!!userData.latestOfficerStatus?.generalDepartment
               ? userData.latestOfficerStatus?.generalDepartment
               : userData.latestOfficerStatus?.unit}
-            {/* {userData.officerStatus?.[userData.officerStatus.length - 1]
+            {/* {userData.officerStatus?.[userData.office  rStatus.length - 1]
               ?.generalDepartment || ""} */}
           </Col>
         </Row>

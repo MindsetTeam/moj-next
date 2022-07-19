@@ -38,6 +38,7 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
   }, [userData]);
 
   const onSave = () => {
+    form.submit();
     form.validateFields().then(async (values) => {
       const res = await api.put(`/api/users/${userData.id}`, values);
       dispatch({
@@ -61,6 +62,7 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
         layout="vertical"
         // hideRequiredMark
         form={form}
+        scrollToFirstError={{behavior: 'smooth', block: 'center'}}
         initialValues={{
           partnerInfo: {
             ...userData?.partnerInfo,
@@ -482,7 +484,7 @@ const SpouseInfo = ({ userData, onChangeTabKey, familyStatusInfo }) => {
       <ChildrenInfo userData={userData}></ChildrenInfo>
 
       <div className={styles.btnContainer}>
-        <Button icon={<SaveOutlined />} onClick={onSave}>
+        <Button icon={<SaveOutlined />} onClick={onSave} type="primary">
           រក្សាទុក
         </Button>
       </div>

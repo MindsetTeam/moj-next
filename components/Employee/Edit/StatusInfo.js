@@ -183,6 +183,8 @@ const StatusInfo = ({
   //   });
   // };
   const onSubmit = () => {
+    formStatus.submit();
+    formInfo.submit();
     Promise.all([formStatus.validateFields(), formInfo.validateFields()]).then(
       async () => {
         const dataStatus = formStatus.getFieldsValue();
@@ -382,7 +384,12 @@ const StatusInfo = ({
     ).length <= 0;
   return (
     <div className={styles.statusInfoContainer}>
-      <Form layout="vertical" form={formInfo} initialValues={formInfoData}>
+      <Form
+        layout="vertical"
+        form={formInfo}
+        initialValues={formInfoData}
+        scrollToFirstError={{ behavior: "smooth", block: "center" }}
+      >
         <Row gutter={16}>
           {/* <Col span={6}>
                   <Form.Item
@@ -688,7 +695,7 @@ const StatusInfo = ({
                 name={"office"}
                 label="ការិយាល័យ"
               >
-                <Select placeholder="ជ្រើសរើស" disabled={isDisabledOffice} >
+                <Select placeholder="ជ្រើសរើស" disabled={isDisabledOffice}>
                   {[
                     ...(structureMOJ[selectedUnit]?.[
                       selectedGeneralDepartment

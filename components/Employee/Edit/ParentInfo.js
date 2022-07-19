@@ -527,7 +527,7 @@ const ParentInfo = ({ userData, onChangeTabKey }) => {
             </Col>
          </Row>
          <div className={styles.btnContainer}>
-            <Button icon={<SaveOutlined />} onClick={onSave}>
+            <Button icon={<SaveOutlined />} onClick={onSave} type="primary">
                រក្សាទុក
             </Button>
          </div>

@@ -28,7 +28,12 @@ const genderOptions = [
 
 const { Option } = Select;
 
-const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData }) => {
+const SelfInfo = ({
+  userData,
+  onChangeTabKey,
+  setFamilyStatusInfo,
+  setUserData,
+}) => {
   const dispatch = useContext(AlertDispatch);
   const [form] = Form.useForm();
   const [selfInfo, setSelfInfo] = useState(null);
@@ -39,6 +44,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData })
   );
 
   const onSave = () => {
+    form.submit();
     form.validateFields().then(async (values) => {
       if (fileList.length > 0) {
         const formData = new FormData();
@@ -59,9 +65,9 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData })
         },
       });
       // getSession();
-      console.log(res.data.data)
+      console.log(res.data.data);
       const { familyStatus } = res.data.data;
-      setUserData(res.data.data)
+      setUserData(res.data.data);
       // setFamilyStatusInfo(familyStatus);
       onChangeTabKey(familyStatus === "នៅលីវ" ? "3" : "2");
     });
@@ -77,6 +83,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData })
       <Form
         layout="vertical"
         form={form}
+        scrollToFirstError={{behavior: 'smooth', block: 'center'}}
         initialValues={{
           ...userData,
           birthDate: userData.birthDate ? moment(userData.birthDate) : null,
@@ -553,15 +560,15 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData })
                 <Form.Item
                   style={{ marginBottom: 10 }}
                   name={["contactInfo", "phoneNumber1"]}
-                  label="លេខទូរស័ព្ទទី១"
+                  label="លេខទូរស័ព្ទ (Telegram)"
                   rules={[
                     {
                       required: true,
-                      message: "សូមបំពេញលេខទូរស័ព្ទទី១",
+                      message: "សូមបំពេញលេខទូរស័ព្ទ",
                     },
                   ]}
                 >
-                  <Input placeholder="លេខទូរស័ព្ទទី១" />
+                  <Input placeholder="លេខទូរស័ព្ទមានក្នុងតេឡេក្រាម" />
                 </Form.Item>
               </Col>
               <Col span={6}>
@@ -602,7 +609,7 @@ const SelfInfo = ({ userData, onChangeTabKey, setFamilyStatusInfo,setUserData })
         </div>
       </Form>
       <div className={styles.btnContainer}>
-        <Button icon={<SaveOutlined />} onClick={onSave}>
+        <Button icon={<SaveOutlined />} onClick={onSave} type="primary">
           រក្សាទុក
         </Button>
       </div>
