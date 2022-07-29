@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import React, { useState, useEffect, useContext } from "react";
 import moment from "moment";
+import EducationData from 'data/Education.json'
 
 import {
    Col,
@@ -239,7 +240,14 @@ const EducationInfo = ({ userData }) => {
                         ]}
                      >
                         <Select placeholder="ជ្រើសរើស">
-                           <Option value="កម្រិតវប្បធម៌ទូទៅ">
+                           {EducationData.map((v,i)=>{
+                              const name = Object.keys(v)[0]
+                             
+                              return <Option value={name} key={i}>
+                              {name}
+                           </Option>
+                           })}
+                           {/* <Option value="កម្រិតវប្បធម៌ទូទៅ">
                               កម្រិតវប្បធម៌ទូទៅ
                            </Option>
                            <Option value="ឧត្តមសិក្សា">ឧត្តមសិក្សា</Option>
@@ -251,7 +259,7 @@ const EducationInfo = ({ userData }) => {
                            </Option>
                            <Option value="កំរិតបណ្ដុះបណ្ដាលមុខវិជ្ជាជីវៈមូលដ្ឋាននិងក្រោយមូលដ្ឋាន">
                               កំរិតបណ្ដុះបណ្ដាលមុខវិជ្ជាជីវៈមូលដ្ឋាននិងក្រោយមូលដ្ឋាន
-                           </Option>
+                           </Option> */}
                         </Select>
                      </Form.Item>
                   </Col>

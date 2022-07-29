@@ -52,11 +52,15 @@ const RankInfo = ({ userData }) => {
   const [nowOption, setNowOption] = useState(true);
   const [rankList, setRankList] = useState([...userData.rank]);
   const [editData, setEditData] = useState(null);
+  const [isRankTypeDisable, setIsRankTypeDisable] = useState(false);
 
   const onStartDateChange = (date, dateString) => {
     setStartDate(dateString);
     //
   };
+  const onFormChange = (form)=>{
+    console.log(form);
+  }
 
   const onEndDateChange = (date, dateString) => {
     setEndDate(dateString);
@@ -369,7 +373,10 @@ const RankInfo = ({ userData }) => {
                   },
                 ]}
               >
-                <Select placeholder="ជ្រើសរើស">
+                <Select placeholder="ជ្រើសរើស" onChange={e=>{
+                  form.resetFields(['rankType', 'level']);
+                  setIsRankTypeDisable(e==="គ")
+                }}>
                   {["ក", "ខ", "គ"].map((e, i) => {
                     return <Option value={e}>{e}</Option>;
                   })}
@@ -388,7 +395,9 @@ const RankInfo = ({ userData }) => {
                   },
                 ]}
               >
-                <Select placeholder="ជ្រើសរើស">
+                <Select placeholder="ជ្រើសរើស" disabled={isRankTypeDisable} onChange={(e)=>{
+                  form.resetFields(['level'])
+                }}>
                   {[...Array(3)].map((e, i) => {
                     return (
                       <Option value={khmerNum[i + 1]}>{khmerNum[i + 1]}</Option>

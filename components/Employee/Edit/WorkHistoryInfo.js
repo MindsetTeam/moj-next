@@ -345,7 +345,27 @@ const workHistoryInfo = ({
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={8}>
+              <Form.Item
+                style={{ marginBottom: 10 }}
+                name="ministry"
+                label="ក្រសួង-ស្ថាប័ន"
+                rules={[
+                  {
+                    required: true,
+                    message: "សូមបំពេញក្រសួង-ស្ថាប័ន",
+                  },
+                ]}
+              >
+                <Input placeholder="ក្រសួង-ស្ថាប័ន" />
+                {/* <Select placeholder="ជ្រើសរើស">
+                  {positionList.map((v) => (
+                    <Option value={v}>{v}</Option>
+                  ))}
+                </Select> */}
+              </Form.Item>
+            </Col>
+            <Col span={8}>
               <Form.Item
                 style={{ marginBottom: 10 }}
                 // name="ministry"
@@ -355,7 +375,7 @@ const workHistoryInfo = ({
                 rules={[
                   {
                     required: true,
-                    message: "សូមបំពេញក្រសួង-ស្ថាប័ន",
+                    message: "សូមបំពេញអង្គភាព",
                   },
                 ]}
                 // initialValue={"ក្រសួងយុត្តិធម៌"}
@@ -417,7 +437,7 @@ const workHistoryInfo = ({
                         </Select>
                      </Form.Item>
                   </Col> */}
-            <Col span={12}>
+            <Col span={8}>
               <Form.Item
                 style={{ marginBottom: 10 }}
                 name="position"
@@ -444,12 +464,12 @@ const workHistoryInfo = ({
                 style={{ marginBottom: 10 }}
                 name="generalDepartment"
                 label="អគ្គលេខាធិការដ្ឋាន / អគ្គនាយកដ្ឋាន / អគ្គាធិការដ្ឋាន"
-                rules={[
-                  {
-                    required: true,
-                    message: "សូមបំពេញអគ្គនាយកដ្ឋាន",
-                  },
-                ]}
+                // rules={[
+                //   {
+                //     required: true,
+                //     message: "សូមបំពេញអគ្គនាយកដ្ឋាន",
+                //   },
+                // ]}
               >
                 <Input placeholder="អគ្គលេខាធិការដ្ឋាន / អគ្គនាយកដ្ឋាន / អគ្គាធិការដ្ឋាន" />
                 {/* <Select
