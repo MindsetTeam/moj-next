@@ -18,6 +18,7 @@ import {
 } from "antd";
 
 import { SaveOutlined } from "@ant-design/icons";
+import ProvincesData from "data/Provinces.json";
 import api from "@/utils/api";
 // import { getSession } from "next-auth/client";
 
@@ -41,6 +42,12 @@ const SelfInfo = ({
   const [fileList, setFileList] = useState([]);
   const [isDisabled, setIsDisabled] = useState(
     userData?.physical === "ពិការភាព" || false
+  );
+  const [provinceSelected, setProvinceSelected] = useState(
+    userData?.currentResidence?.province
+  );
+  const [communeSelected, setCommuneSelected] = useState(
+    userData?.currentResidence?.commune
   );
 
   const onSave = () => {
@@ -83,7 +90,7 @@ const SelfInfo = ({
       <Form
         layout="vertical"
         form={form}
-        scrollToFirstError={{behavior: 'smooth', block: 'center'}}
+        scrollToFirstError={{ behavior: "smooth", block: "center" }}
         initialValues={{
           ...userData,
           birthDate: userData.birthDate ? moment(userData.birthDate) : null,
@@ -497,6 +504,75 @@ const SelfInfo = ({
                   <Input placeholder="ផ្លូវលេខ" />
                 </Form.Item>
               </Col>
+              <Col span={6}>
+                <Form.Item
+                  style={{ marginBottom: 10 }}
+                  name={["currentResidence", "province"]}
+                  label="រាជធានី/ខេត្ត"
+                >
+                  <Select
+                    placeholder="ជ្រើសរើស"
+                    onChange={(e) => {
+                      setProvinceSelected(e);
+                      form.resetFields([
+                        ["currentResidence", "district"],
+                        ["currentResidence", "commune"],
+                      ]);
+                    }}
+                  >
+                    {Object.keys(ProvincesData).map((v, i) => (
+                      <Option value={v} key={i}>
+                        {v}
+                      </Option>
+                    ))}
+                  </Select>
+                  {/* <Input placeholder="រាជធានី/ខេត្ត" /> */}
+                </Form.Item>
+              </Col>
+              <Col span={6}>
+                <Form.Item
+                  style={{ marginBottom: 10 }}
+                  name={["currentResidence", "district"]}
+                  label="ក្រុង/ស្រុក/ខណ្ឌ"
+                >
+                  <Select
+                    placeholder="ជ្រើសរើស"
+                    onChange={(e) => {
+                      setCommuneSelected(e);
+                      form.resetFields([["currentResidence", "commune"]]);
+                    }}
+                  >
+                    {Object.keys(ProvincesData[provinceSelected] || {}).map(
+                      (v, i) => (
+                        <Option value={v} key={i}>
+                          {v}
+                        </Option>
+                      )
+                    )}
+                  </Select>
+                  {/* <Input placeholder="ក្រុង/ស្រុក/ខណ្ឌ" /> */}
+                </Form.Item>
+              </Col>
+            </Row>
+            <Row gutter={16}>
+              <Col span={6}>
+                <Form.Item
+                  style={{ marginBottom: 10 }}
+                  name={["currentResidence", "commune"]}
+                  label="ឃុំ/សង្កាត់"
+                >
+                  <Select placeholder="ជ្រើសរើស">
+                    {(
+                      ProvincesData[provinceSelected]?.[communeSelected] || []
+                    ).map((v, i) => (
+                      <Option value={v} key={i}>
+                        {v}
+                      </Option>
+                    ))}
+                  </Select>
+                  {/* <Input placeholder="ឃុំ/សង្កាត់" /> */}
+                </Form.Item>
+              </Col>
 
               <Col span={6}>
                 <Form.Item
@@ -507,35 +583,7 @@ const SelfInfo = ({
                   <Input placeholder="ភូមិ" />
                 </Form.Item>
               </Col>
-              <Col span={6}>
-                <Form.Item
-                  style={{ marginBottom: 10 }}
-                  name={["currentResidence", "commune"]}
-                  label="ឃុំ/សង្កាត់"
-                >
-                  <Input placeholder="ឃុំ/សង្កាត់" />
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={6}>
-                <Form.Item
-                  style={{ marginBottom: 10 }}
-                  name={["currentResidence", "district"]}
-                  label="ក្រុង/ស្រុក/ខណ្ឌ"
-                >
-                  <Input placeholder="ក្រុង/ស្រុក/ខណ្ឌ" />
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item
-                  style={{ marginBottom: 10 }}
-                  name={["currentResidence", "province"]}
-                  label="រាជធានី/ខេត្ត"
-                >
-                  <Input placeholder="រាជធានី/ខេត្ត" />
-                </Form.Item>
-              </Col>
+
               <Col span={12}>
                 <Form.Item
                   style={{ marginBottom: 10 }}

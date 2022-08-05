@@ -390,7 +390,7 @@ const RankInfo = ({ userData }) => {
                 label="ឋានន្តរស័ក្តិ"
                 rules={[
                   {
-                    required: true,
+                    required: !isRankTypeDisable,
                     message: "សូមជ្រើសរើសឋានន្តរស័ក្តិ",
                   },
                 ]}
