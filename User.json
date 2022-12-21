@@ -1,0 +1,303 @@
+{
+  "_id": "60526a89fad4f524788e5fb4",
+  "firstName": "លឹម",
+  "children": [
+    {
+      "_id": "605298a240314361f00468fe",
+      "birthCertificateNum": "asdfasdfasd",
+      "nationalityIDNum": "as",
+      "fullNameLatin": "asdf",
+      "fullName": "asdf",
+      "birthDate": "2021-03-26T00:02:38.902Z",
+      "gender": "ស្រី",
+      "occupation": "aasdf",
+      "livingStatus": "រស់"
+    },
+    {
+      "_id": "6069abe88cf1cb108883f661",
+      "birthDate": "2021-04-14T12:06:59.066Z",
+      "birthCertificateNum": "12342dfdsvsf",
+      "nationalityIDNum": "werqwer",
+      "fullName": "q314534",
+      "fullNameLatin": "cvbcvb",
+      "gender": "ប្រុស",
+      "livingStatus": "រស់",
+      "occupation": "dfasdf"
+    }
+  ],
+  "education": [
+    {
+      "_id": "60529ac440314361f0046904",
+      "course": "ក្រោយឧត្តមសិក្សា",
+      "level": "បរិញ្ញប័ត្រ",
+      "degreeType": "asdf",
+      "institution": "asdf",
+      "other": "",
+      "place": "asdf",
+      "startDate": "2021-10-12T15:37:25.282Z",
+      "endDate": "2021-10-26T15:37:28.504Z"
+    },
+    {
+      "_id": "60529ae740314361f0046906",
+      "course": "ឧត្តមសិក្សា",
+      "level": "បរិញ្ញប័ត្រ",
+      "degreeType": "asdf",
+      "institution": "asdf",
+      "other": "asdf",
+      "place": "asdf",
+      "startDate": "2021-10-03T16:03:58.925Z",
+      "endDate": null
+    },
+    {
+      "_id": "61b17d352f7a9621dccdb999",
+      "startDate": "2020-12-01T03:46:21.533Z",
+      "endDate": "2021-09-01T03:46:26.520Z",
+      "course": "វគ្គបណ្ដុះបណ្ដាលផ្សេងៗ",
+      "level": "វគ្គបណ្ដុះបណ្ដាលរយះពេលខ្លី",
+      "other": "ជួសជុលម៉ាស៊ីនត្រជាក់",
+      "place": "ភ្នំពេញ",
+      "institution": "វិទ្យាស្ថានសហគ្រិនឥណ្ឌា",
+      "degreeType": ""
+    }
+  ],
+  "createdAt": { "$date": { "$numberLong": "1616013961545" } },
+  "updatedAt": { "$date": { "$numberLong": "1659931149451" } },
+  "__v": { "$numberInt": "14" },
+  "birthCertificateNum": "1d2124",
+  "birthDate": { "$date": { "$numberLong": "895078800000" } },
+  "birthPlace": {
+    "village": "ឈើទាល",
+    "commune": "កំពង់ចិនត្បូង",
+    "district": "ស្ទោង",
+    "province": "កំពង់ធំ",
+    "other": ""
+  },
+  "bloodType": "A+",
+  "contactInfo": { "phoneNumber1": "023245466", "email": "s@g.com" },
+  "currentResidence": {
+    "houseNum": "៥៨",
+    "streetNum": "១២៣",
+    "province": "រាជធានីភ្នំពេញ",
+    "district": "ខណ្ឌ ចំការមន",
+    "commune": "សង្កាត់ ទន្លេបាសាក់",
+    "village": "ស្ទឹងមានជ័យ",
+    "other": ""
+  },
+  "disabilityNum": " ",
+  "ethnicity": "ខ្មែរ",
+  "familyStatus": "រៀបការ",
+  "firstNameLatin": "Lim",
+  "gender": "ប្រុស",
+  "lastName": "ស៊ឺមិញ",
+  "lastNameLatin": "Seuminh",
+  "nationality": "ខ្មែរ",
+  "nationalityIDNum": "12345678",
+  "otherNum": "cvzcz123",
+  "passportNumber": "87654321",
+  "physical": "គ្រប់គ្រាន់",
+  "fatherInfo": {
+    "birthPlace": {
+      "province": "",
+      "district": "",
+      "village": "",
+      "commune": "",
+      "other": "asdf"
+    },
+    "nationalityIDNum": "sdfasdf",
+    "fullName": "socheat chhun",
+    "fullNameLatin": "socheat chhun",
+    "ethnicity": "phnom penh",
+    "nationality": "sdf",
+    "birthDate": "2021-03-01T23:18:58.252Z",
+    "livingStatus": "រស់",
+    "occupation": "asdfasdf",
+    "phoneNumber": ""
+  },
+  "motherInfo": {
+    "birthPlace": {
+      "other": "asdf",
+      "commune": "",
+      "province": "",
+      "village": "",
+      "district": ""
+    },
+    "phoneNumber": "",
+    "nationalityIDNum": "asdfasd",
+    "fullName": "hi hi",
+    "fullNameLatin": "socheat chhun",
+    "ethnicity": "phnom penh",
+    "nationality": "asdfasd",
+    "livingStatus": "ស្លាប់",
+    "occupation": "asdfasd",
+    "birthDate": "2021-03-23T23:19:23.321Z"
+  },
+  "partnerInfo": {
+    "currentResidence": {
+      "houseNum": "៥៨",
+      "streetNum": "១២៣",
+      "province": "រាជធានីភ្នំពេញ",
+      "district": "ខណ្ឌ ចំការមន",
+      "commune": "សង្កាត់ ទន្លេបាសាក់",
+      "village": "ស្ទឹងមានជ័យ",
+      "other": ""
+    }
+  },
+  "experience": [
+    {
+      "_id": "616fc905a70bcf32a46ede8a",
+      "refNum": "te",
+      "ministry": "ក្រសួងយុត្តិធម៌",
+      "institution": "ថ្នាក់កណ្តាល",
+      "unit": "អគ្គនាយកដ្ឋានកិច្ចការរដ្ឋបាលតុលាការ",
+      "department": "នាយកដ្ឋានកិច្ចការហិរញ្ញវត្ថុនៃសាលាជម្រះក្ដី",
+      "startDate": "2021-10-21T07:44:52.492Z",
+      "position": "មន្រ្តីរាជការ",
+      "endDate": null,
+      "refType": "ព្រះរាជក្រម",
+      "provinces": "រាជធានី​ភ្នំពេញ",
+      "district": "d"
+    }
+  ],
+  "photo": "/uploads/img-profile/60526a89fad4f524788e5fb4.jpg",
+  "civilID": "123456789",
+  "employmentDate": "2021-04-13T04:02:35.565Z",
+  "fullyEmploymentDate": "2021-04-16T04:02:37.967Z",
+  "otherNote": "",
+  "penalty": [
+    {
+      "_id": "617996a1ec9b0b42d4fb1c78",
+      "date": "2021-10-22T18:12:43.087Z",
+      "refNum": "ds",
+      "letterType": "ដីការ",
+      "ministry": "ទំនាក់ទំនងជាមួយរដ្ឋសភា-ព្រឹទ្ធសភា និង អធិការកិច្ច",
+      "type": "ផ្លាស់ដោយបង្ខំតាមវិធានការខាងវិន័យ"
+    }
+  ],
+  "privateSector": [
+    {
+      "_id": "606d70ba97aa43300498aaa3",
+      "unit": "ad",
+      "role": "dsa",
+      "skill": "asd",
+      "startDate": "2021-04-14T08:43:35.591Z",
+      "endDate": "2021-04-15T08:43:37.625Z"
+    },
+    {
+      "_id": "606db33d8110e10600892028",
+      "unit": "asdf1234",
+      "role": "sdaf",
+      "skill": "qwe",
+      "startDate": "2021-04-29T13:27:22.465Z",
+      "endDate": "2021-04-12T13:27:23.929Z"
+    },
+    {
+      "_id": "606e67ce67a6c130244a7696",
+      "startDate": "2021-03-01T02:17:42.801Z",
+      "endDate": "2021-04-08T02:17:47.739Z",
+      "unit": "ឆសដាថងសដាថសា",
+      "role": "ដសាដថសាថ",
+      "skill": "សាថសដាថដសដាថសា"
+    }
+  ],
+  "rank": [],
+  "officerStatus": [
+    {
+      "_id": "61e62a94c2e87f2c1c8b1402",
+      "ministry": "ក្រសួងយុត្តិធម៌",
+      "startDate": "2017-12-12T17:56:08.992Z",
+      "endDate": null,
+      "refNum": "asdf22d2",
+      "letterType": "ព្រះរាជក្រម",
+      "rank": "គ្មានក្រប​ខណ្ឌ",
+      "status": "មរណភាព",
+      "generalDepartment": "ទីស្តីការក្រសួងយុត្តិធម៌",
+      "position": "ទីប្រឹក្សាអមក្រសួង"
+    },
+    {
+      "_id": "61c1783775b5f8372445e65f",
+      "ministry": "ក្រសួងយុត្តិធម៌",
+      "startDate": "2017-12-12T17:56:08.992Z",
+      "endDate": null,
+      "refNum": "asdf22d2",
+      "letterType": "ព្រះរាជក្រម",
+      "rank": "គ្មានក្រប​ខណ្ឌ",
+      "status": "មរណភាព",
+      "generalDepartment": null,
+      "position": "ទីប្រឹក្សាអមក្រសួង",
+      "department": "នាយកដ្ឋានកិច្ចការហិរញ្ញវត្ថុនៃសាលាជម្រះក្តី"
+    }
+  ],
+  "praised": [
+    {
+      "_id": "606db4ac8110e1060089202f",
+      "date": "2021-04-15T13:33:24.472Z",
+      "refNum": "adsf",
+      "letterType": "លិខិតឧទ្ទេសនាម",
+      "ministry": "អាកាសចរស៊ីវិល",
+      "type": "មេដាយរជ្ជកាល",
+      "photo": "zcvcx"
+    },
+    {
+      "_id": "606e67fe67a6c130244a7698",
+      "date": "2021-04-20T02:18:12.195Z",
+      "refNum": "៨៨៨",
+      "letterType": "ព្រះរាជក្រឹត្យ",
+      "ministry": "ក្រសួងពាណិជ្ជកម្ម",
+      "type": "មេដាយសេនាជ័យសិទ្ធ",
+      "photo": "ប្រចាំឆ្នាំ"
+    }
+  ],
+  "role": "admin",
+  "password": "$2a$10$nIiiEmz75GhVXfKuxe6oCutheo8GZ79vY3NZ3MyddAvWix4KMYj2C",
+  "approval": true,
+  "suspended": false,
+  "officerID": "987654321",
+  "vaccine": "៣",
+  "attachment": {
+    "info": [
+      {
+        "_id": "61b13fa113bc293438dd6b52",
+        "description": "សំបុត្រកំណើត",
+        "url": "https://storage.googleapis.com/users_upload_files/user-attachment/60526a89fad4f524788e5fb4/localhost_3000_en-ooEUlDN.pdf"
+      },
+      {
+        "_id": "61c1ebb2dd8eab32c0f21cdb",
+        "description": "អត្តសញ្ញាណបណ្ណ",
+        "url": "https://storage.googleapis.com/users_upload_files/user-attachment/60526a89fad4f524788e5fb4/photo_2021-08-20_11-47-25-yWYEAZa.jpg"
+      }
+    ],
+    "family": [
+      {
+        "_id": "61c1ec5086492b50b026c566",
+        "description": "សំបុត្រអាពាហ៍ពិពាហ៍",
+        "url": "https://storage.googleapis.com/users_upload_files/user-attachment/60526a89fad4f524788e5fb4/photo_2021-08-20_11-47-25-M6zsKLZ.jpg"
+      }
+    ],
+    "rank": [],
+    "work": [],
+    "education": [
+      {
+        "_id": "61c266f5189cfa4ee0fd4b4f",
+        "description": "បរិញ្ញាបត្រ",
+        "url": "https://storage.googleapis.com/users_upload_files/user-attachment/60526a89fad4f524788e5fb4/photo_2021-08-20_11-47-25-f462Iuj.jpg"
+      }
+    ],
+    "status": [],
+    "medal": []
+  },
+  "latestOfficerStatus": {
+    "refNum": "asdf22d2",
+    "letterType": "ព្រះរាជក្រម",
+    "rank": "និវត្តន៍",
+    "status": "ចូលនិវត្តន៍",
+    "unit": "អគ្គលេខាធិការដ្ឋាន",
+    "generalDepartment": "",
+    "department": "នាយកដ្ឋានបូកសរុប បណ្ណាសារ និងព័ត៌មានវិទ្យា",
+    "office": null,
+    "position": "មន្រ្តីជាប់កិច្ចសន្យា",
+    "startDate": "2017-12-12T17:56:08.992Z",
+    "endDate": null
+  },
+  "cardID": "testingid",
+  "retired":  "1" 
+}

@@ -8,7 +8,8 @@ module.exports = (phase, { defaultConfig }) => {
     return {
       swcMinify: true,
       env: {
-        baseURL: "http://localhost:3000",
+        NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+        baseURL: process.env.NEXTAUTH_URL,
         uploadFilePath: "tmp",
         tokenTelegramBot: process.env.TOKEN_TELEGRAM_BOT,
         MONGODB_URI: process.env.MONGODB_URI,

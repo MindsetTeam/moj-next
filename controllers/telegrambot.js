@@ -35,18 +35,18 @@ ${Object.entries(req.body)
   .replaceAll(",", ": ")}
 `;
   }
-  fetch(
-    `https://api.telegram.org/bot${process.env.tokenTelegramBot}/sendMessage`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        text: messageText,
-        disable_notification: false,
-        chat_id: -1001506706460,
-      }),
-    }
-  ).catch(console.log);  
+  // fetch(
+  //   `https://api.telegram.org/bot${process.env.tokenTelegramBot}/sendMessage`,
+  //   {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       text: messageText,
+  //       disable_notification: false,
+  //       chat_id: -1001506706460,
+  //     }),
+  //   }
+  // ).catch(console.log);  
 
   if (req) {
     next();
