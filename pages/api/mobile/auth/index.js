@@ -7,7 +7,6 @@ import jwt from "jsonwebtoken";
 import ErrorResponse from "@/utils/errorResponse";
 
 const login = async (req, res, next) => {
-  console.log('hiadfasd')
   const { username, password } = req.body;
   if (!username || !password) {
     return res.status(400).json({
@@ -40,7 +39,7 @@ const login = async (req, res, next) => {
   return res.status(200).json({
     success: true,
     token,
-    user
+    user,
   });
 };
 
